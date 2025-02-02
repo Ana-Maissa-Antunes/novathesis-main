@@ -60,8 +60,34 @@
 \subsection{Frontend Technologies}
 \label{sec:frontend}
 
+JavaScript is a programming language that is mostly used to control interactive behavior in web
+pages. To make a map interactive, most websites automatically send JavaScript code to the browser.~\cite{ajayi2024utilizing} In this project, JavaScript will be used for client-side web development and to integrate frameworks that enhance map interactivity.
+Leaflet.js is an open-source JavaScript library that facilitates the creation of mobile-friendly interactive maps. It offers a wide array of plugins that improve the usability and simplify application development.
+In this project, Leaflet.js\footnote{\url{https://leafletjs.com/}} will be used to integrate interactive map features and create an intuitive user interface.
+
+Other alternatives for web development frameworks include Turf.js\footnote{\url{https://turfjs.org/}} and OpenLayers\footnote{\url{https://openlayers.org/}}, which facilitate the integration of dynamic maps into web pages. It can display map tiles, vector data and markers loaded from any source.
+Additionally, Google Maps API and Mapbox\footnote{\url{https://www.mapbox.com/}} are widely used mapping platforms. Mapbox is an application that provides online maps. Mapbox is open source, providing greater flexibility and customization compared to other mapping platforms. The Google Maps API (Application Programming Interface)\footnote{\url{https://developers.google.com/maps}} is a powerful tool that allows developers to embed Google Maps functionalities directly into their web and mobile applications. 
+In this study, one of these tecnologies will be used for interactive map creation, despite of the disponibilization of an illustration of the map of the Tróia site area of the mausoleum in study that will complemented with an open map, possibly from \gls{OSM}\footnote{\url{https://www.openstreetmap.org/}}.
+
+%Some popular options include 
+%ArcGIS
+%QGIS
+%Other alternatives for web development
+%notable
 \subsection{Backend Technologies}
 \label{sec:backend} 
+
+
+\subsection{Database Repository}
+\label{sec:repos}
+
+There are several alternatives for a storage management, but that's not true for geographical database systems.
+or this project, organizing the data in a relational database makes the most sense due to its flexibility and consistency.
+The most common options for this type of application include PostGIS\footnote{\url{https://postgis.net/}}, extension for PostgreSQL\footnote{\url{https://www.postgresql.org/}}, as well as MySQL and Oracle.
+
+All geographic data, artifacts metadata, and excavation details will be stored in a PostgreSQL database with the PostGIS extension. PostGIS is widely used for spatial data storage, geometry processing, and efficient geospatial querying. This database was choosen for its high performance and flexibility in managing spatial data.
+
+
 
 \subsection{VR Tools}
 \label{sec:vr_tools} 
@@ -70,9 +96,13 @@
 \subsection{Photogrammetry Tools}
 \label{sec:photogrammetry_tool} 
 
-The software that will be used to process digital images and generate \gls{3D} object models is \textit{Agisoft Metashape}\footnote{https://www.agisoft.com/}.
+The software that will be used to process digital images and generate \gls{3D} object models is \textit{Agisoft Metashape}\footnote{\url{https://www.agisoft.com/}}.
 This software performs photogrammetric processing of digital images to generate \gls{3D} spatial data, which can be applied in various fields such as \gls{GIS} applications, \gls{CH} documentation, visual effects production, and indirect measurements of objects of diverse scales. 
 By stitching together photographs, \textit{Agisoft Metashape} captures the geometry, texture, and visual appearance of physical objects or environments.
+Other alternatives for photogrammetry softwares are Pix4D, RealityCapture and DroneDeploy
+
+There are some already built models of the artifacts provided by "Sérgio"???, there will be done a selection and evaluation of the greatest possibilities.
+
 \subsection{GIS Tools}
 \label{sec:gis} 
 
@@ -99,10 +129,11 @@ By stitching together photographs, \textit{Agisoft Metashape} captures the geome
 
 
 
+
 \section{Previous Work}
 \label{sec:previous_work}
 
-During my internship, I developed a platform using React and TailwindCSS for the web layer, with C\# and ASP.NET for the application layer, and MongoDB for data storage. Communication between these three components was handled through direct requests to the web server, which forwarded CRUD operations and interacted with the database.  
+During my internship, I developed a platform using React and TailwindCSS for the web layer, with C\# and ASP.NET for the application layer, and MongoDB for data storage. Communication between these three components was handled through direct requests to the web server, which forwarded \gls{CRUD} operations and interacted with the database.  
 Additionally, the Database Systems and Cloud Computation Systems master's course provided me with hands-on experience in various storage methodologies and introduced me to different technologies and alternative solutions for data management.
 
 \subsection{Geographic Information System}
@@ -110,15 +141,18 @@ Additionally, the Database Systems and Cloud Computation Systems master's course
 
 To deepen my expertise in \gls{GIS}, I enrolled in the master's course \textit{Web Geográfica}, taught by my thesis adviser, Armanda Rodrigues. During this course, I developed a Web \gls{3D} application designed to provide an interactive map for visualizing and analyzing demographic data, key infrastructure locations, and other notable European datasets. Although this project did not focus on archaeological data, it introduced me to and enriched my understanding of GIS concepts, map interaction, and geospatial analysis while exposing me to new technologies.
 
-The application leveraged PostGIS\footnote{https://postgis.net/}, a PostgreSQL extension, which is widely used for spatial data storage, geometry processing, and querying geospatial data efficiently.
-Additionally, used frameworks like Leaflet\footnote{https://leafletjs.com/}, an open-source JavaScript library that facilitates the creation of mobile-friendly interactive maps. Leaflet offers a wide array of plugins that improve the usability and simplicity of the application. For the base map, \gls{OSM}\footnote{https://www.openstreetmap.org/} was integrated, offering a customizable and versatile visualization. This project serves as a preparatory stage for my thesis, specifically for the \gls{GIS} component, in which I will develop an interactive map of the Tróia site.
+% The application leveraged PostGIS\footnote{https://postgis.net/}, a PostgreSQL extension, which is widely used for spatial data storage, geometry processing, and querying geospatial data efficiently.
+% Additionally, used frameworks like Leaflet\footnote{https://leafletjs.com/}, an open-source JavaScript library that facilitates the creation of mobile-friendly interactive maps. Leaflet offers a wide array of plugins that improve the usability and simplicity of the application. For the base map, \gls{OSM}\footnote{https://www.openstreetmap.org/} was integrated, offering a customizable and versatile visualization. This project serves as a preparatory stage for my thesis, specifically for the \gls{GIS} component, in which I will develop an interactive map of the Tróia site.
+
+The application leveraged PostGIS, a PostgreSQL extension to support spatial queries.
+Additionally, frameworks like Leaflet were used for map rendering, visualization and user interaction. For the base map, \gls{OSM} was integrated, offering a customizable and versatile visualization. This project serves as a preparatory stage for my thesis, specifically for the \gls{GIS} component, in which I will develop an interactive map of the Tróia site.
 
 \subsection{Photogrammetry}
 \label{sec:photogrammetry_previous} 
 
 A photogrammetric simulation was conducted using the \textit{Agisoft Metashape} environment. A total of 143 images were collected during the excavation campaign by the restoration department of NOVA, for analysis. 
-Based on these images, a \gls{3D} model was generated and subsequently imported into the \textit{Sketchfab} viewer for intuitive interaction, as shown in Figure~\ref{fig:model3}.
-
+Based on these images, a \gls{3D} model was generated and subsequently imported into the \textit{Sketchfab} viewer for intuitive interaction.
+Within the grave where the deceased was buried, three open triangular areas were identified, containing the precious artifacts of the defunct, as shown in Figure~\ref{fig:model3} below.
 
 \begin{figure}[h]
     \centering
@@ -131,6 +165,10 @@ Based on these images, a \gls{3D} model was generated and subsequently imported 
 \subsection{Unity}
 \label{sec:unity} 
 
+To reproduce the visualization of the \gls{3D} models on the map, a simulation was created in Unity, as presented in Figure \ref{fig:overlay}. The goal was to overlay the map with the \gls{3D} excavation model.
+To achieve this, the illustrated map was placed as the ground surface, with the excavation model positioned above it. The ultimate objective is to apply this approach to the artifacts found within the three triangular areas of the grave.
+
+This experiment simulates an intended interactive and dynamic experience, allowing users to explore the map and objects through interactive layers while using an \gls{HMD}.
 
 
 \begin{figure}[h]
