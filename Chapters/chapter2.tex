@@ -149,7 +149,7 @@ multiple uses.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\linewidth]{human_interaction}
-    \caption{\gls{VR} interface where a user is manipulating a \gls{3D} object. ~\cite{hale2014handbook}} %Interactors in a shape manipulation task.
+    \caption{\gls{VR} interface where a user is manipulating a \gls{3D} object.~\cite{hale2014handbook}} %Interactors in a shape manipulation task.
     \label{fig:human_interaction}
 \end{figure}
 \FloatBarrier
@@ -171,7 +171,7 @@ ray selector interactor, while the figure on the right is using a poking selecto
 \label{sec:input_devices}
 %\textbf{Input Devices}
 
-Common \gls{VE} input devices include \gls{6-DOF} trackers\footnote{\url{https://www.ar.rocks/glossary/6dof-tracking}}, continuous posture-recognition gloves, discrete 
+Common \gls{VE} input devices include \gls{6-DOF} trackers\footnote{\url{https://www.ar.rocks/glossary/6dof-tracking}} as exemplified in Figure \ref{fig:input_device}, continuous posture-recognition gloves, discrete 
 event gloves, pen-like devices, simple button devices, and special-purpose devices such as the 
 Spaceball or force-feedback joysticks. 
 
@@ -197,15 +197,89 @@ manipulation task. The categories of system control techniques include graphical
 menus, voice commands, gestures, and tools.~\cite{hale2014handbook}
 
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.60\linewidth]{input_device}
+    \caption{HTC Vive controllers(center) and Oculus Touch controllers(at the ends).~\cite{article_input_devices}}
+    \label{fig:input_device}
+\end{figure}
+
+
 \subsubsection{Output Devices}
 \label{sec:output_devices}
 %\textbf{Output Devices}
 
-The three common \gls{VE} display devices are \glspl{HMD}, \glspl{SID} (fully or 
-semisurrounding displays, such as the \gls{CAVE}\footnote{\url{https://steantycip.com/vr-cave/}}), and single-screen stereo displays, such as the Responsive Workbench\footnote{\url{https://graphics.stanford.edu/projects/RWB/}}. 
-These display types have very different characteristics, and interaction with these displays is likely to be extremely different as well. HMDs and fully surrounding \glspl{SID} provide the ability to view the entire \gls{VE} by physically turning. Semisurrounding \glspl{SID} require the use of virtual rotations, so applications intended for such 
+The three common \gls{VE} display devices are \glspl{HMD}, as illustrated in Figure \ref{fig:HMDs}, \glspl{SID} (fully or 
+semisurrounding displays, such as the \gls{CAVE}\footnote{\url{https://steantycip.com/vr-cave/}})(Figure \ref{fig:HMD1}), and single-screen stereo displays, such as the Responsive Workbench\footnote{\url{https://graphics.stanford.edu/projects/RWB/}}. 
+These display types have very different characteristics, and interaction with these displays is likely to be extremely different as well, as shown in Figure \ref{fig:display}. HMDs and fully surrounding \glspl{SID} provide the ability to view the entire \gls{VE} by physically turning. Semisurrounding \glspl{SID} require the use of virtual rotations, so applications intended for such 
 displays should be designed in a manner to minimize these less-desirable rotations. \glspl{HMD} that have a narrow \gls{FOV} require extensive head rotation in order for the user to see the entire environment. 
 
+%These active stereoscopic glasses are augmented with a constellation of reflective balls that clips onto the frame. The reflective balls work with video tracking that calculates the position of the glasses by triangulating on arrangement of the reflections.
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{HMD1}
+    \caption{Stereoscopic glasses augmented with a constellation of reflective balls.~\cite{SHERMAN2019258}} 
+    \label{fig:HMD1}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.25\linewidth]{display}
+    \caption{Dual-screen fishtank stereo-capable display.~\cite{SHERMAN2019258}} 
+    \label{fig:display}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=1.0\textwidth]{HMD2}
+        \caption{Microsoft HoloLens 2.~\cite{headset_article}}
+        \label{fig:HM}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=1.0\textwidth]{HMD3}
+        \caption{HTC Vive.~\cite{SHERMAN2019258}}
+        \label{fig:y}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=1.0\textwidth]{HMD4}
+        \caption{Meta Quest 3.~\cite{article}}
+        \label{fig:y}
+    \end{subfigure}
+       \caption{Examples of the most recent and advanced \glspl{HMD}.}
+       \label{fig:HMDs}
+  \end{figure}
+  \FloatBarrier
+  
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=0.45\linewidth]{HMD2}
+%     \caption{AR Headset – Microsoft HoloLens 2.~\cite{headset_article}} 
+%     \label{fig:hmd2}
+% \end{figure}
+% \FloatBarrier
+
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=0.4\linewidth]{HMD3}
+%     \caption{The dimples on the HTC Vive are part of the integrated tracking system. Each dimple has a light sensor used to measure the time differentials as infrared light scans pass across the surface.~\cite{SHERMAN2019258}} %Interactors in a shape manipulation task.
+%     \label{fig:hmd3}
+% \end{figure}
+% \FloatBarrier
+
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=0.4\linewidth]{HMD4}
+%     \caption{Meta Quest 3 glasses.~\cite{article}} 
+%     \label{fig:hmd4}
+% \end{figure}
+% \FloatBarrier
 
 
 \subsection{Augmented Reality}
@@ -479,104 +553,3 @@ While \gls{ICOM} Portugal and \gls{CRUSOE} represent the participants in Portuga
 \end{figure}
 \FloatBarrier
 
-
-%----------------------------------------------------------------------
-	  %   \midrule
-	  % \classoption{linkscolor}%
-	  %   {A color of your choice.}%
-	  %   {The color for all the hyperlinks in the PDF file.}%
-	  %   {\defaultopt{darkblue}
-	  %    The “\texttt{media=paper}” option (see below) will override this option to “\texttt{black}”}
-% %----------------------------------------------------------------------
-%     \midrule
-%   \classoption{media}%
-%     {screen, paper}%
-%     {The target of the PDF.}%
-%     {\defaultopt{screen}
-%      By default, PDF for screen has colored links and identical left and right margins, while PDF for paper (to print) has black links and may have different left and right margins.}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{print/index}%
-%     {true, false}%
-%     {Produce the document index.}%
-%     {\defaultopt{false}
-%      The index (\emph{índice remissivo}) is a keyword index typeset an the end of the document. WARNING: Should not be confused with the table of contents.}
-%     \midrule
-%
-%
-%
-%
-% %----------------------------------------------------------------------
-%   \classoption{fontstyle}%
-%     {bookman, charter, fourier, kpfonts(*), mathpazo1, mathpazo2, newcent}%
-%     {The font set to be used in the document.}{Please note that a font set include definitions for the main text, headings, maths, etc.}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{chapstyle}%
-%     {bianchi, bluebox, brotherton, dash, default, elegant(*), ell, ger, hansen, ist, jenor, lyhne, madsen, pedersen, veelo, vz14, vz34, vz43}%
-%     {The chapter style}{The look of the chapter beginning.}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{converlang}%
-%     {en, pt(*)}%
-%     {The language to be used when typesetting the cover page.}{}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{otherlistsat}%
-%     {front(*), back}%
-%     {Where to put the other lists besides the table of contents.}{The default is (\texttt{front}) before the main text.  But some scientific areas prefer them at the end of the document (\texttt{back}), just before the Appendixes.}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{statement}%
-%     {true, false(*)}%
-%     {Include or don't include the contents of the “\texttt{statement}” file.}{The default is for this file to be ignored (if it exists).}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{spine}%
-%     {true, false(*)}%
-%     {Generate the book spine and the last page in the PDF.}{}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{biblatex}%
-%     {OPT=\{list of options for \texttt{biblatex}\}}%
-%     {Customize \texttt{biblatex}, the bibliography management system used in this class.}{Probably you will want to change the value of the \texttt{biblatex} “\texttt{style}” option. For other customizations of \texttt{biblatex} check its manual.}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{memoir}%
-%     {OPT=\{list of options for \texttt{memoir}\}}%
-%     {Customize the base class \texttt{memoir}.}{The \texttt{memoir} manual should be the first document to be consulted when looking for “\textbf{how can I do this?}” You may what to change the base font size from 11pt to a smaller (10pt) or larger (12pt) size.  Also, remember to change the “\texttt{draft}” to final when your document is finished.}
-%     \midrule
-   % \bottomrule
-%\end{xltabular}
-%\egroup
-% \end{ctabular}
-
-
-
-% \todo[inline]{A a note in a line by itself.}
-%
-
-% Reference to Potassium \gls{chem:potassio} and Sodium \gls{chem:sodio} as well.
-
-%
-% Please note that
-% \begin{center}
-%   \textbf{\large this package and template are not official for FCT/NOVA}.
-% \end{center}
-
-
-
-% \printbibliography[heading=subbibliography, segment=\therefsegment, title={\bibname\ for chapter~\thechapter}]
-
-
-
-% section folder_structure (end)
-
-% ===================
-% = Package options =
-% ===================
-
-
-
-
-% \printbibliography[heading=subbibliography, segment=\therefsegment, title={\bibname\ for chapter~\thechapter}]

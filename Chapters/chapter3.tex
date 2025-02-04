@@ -58,8 +58,6 @@ The digitized archival materials are catalogued and linked to the geometries in 
 %\\•	Software Compatibility: Frequent software updates, so compatibilities across the employed software must be verified before updating the entire system.
 %\\•	Online vs. Enterprise GIS: ArcGIS Online presented limitations, such as the inability to directly link the webGIS to the geo-DB, which could be resolved in an Enterprise GIS setup.
 
-
-
 \subsection{Web-Based \gls{GIS} for \gls{CH} of Safranbolu, Turkey} 
 \label{sec:gis_safranbolu}
 
@@ -107,8 +105,6 @@ Through the interface (Figure \ref{fig:z}), users can visualize various types of
 \end{figure}
 
 
-
-
 % \begin{figure}[h!]
 %   \centering
 %   \includegraphics[width=0.8\linewidth]{turkey_thesis}
@@ -116,8 +112,6 @@ Through the interface (Figure \ref{fig:z}), users can visualize various types of
 %   \label{fig:turkey_thesis}
 % \end{figure}
 % \FloatBarrier
-
-
 
 % \begin{figure}[h!]
 %   \centering
@@ -201,7 +195,8 @@ Users can rotate and grab the \gls{3D} models using hand gestures, as shown in F
 % o	The future works involve the creation of an immersive "Path of the Dead" virtual environment where the models of the objects already processed will be inserted, integrated with other models. The level of information provided will be increased with other translation and description, to provide a better and deepened comprehension of the information.
 
 
-\section{Related Theses at NOVA}
+
+\section{Related Theses}
 \label{sec:thesis_nova}
 
 
@@ -260,6 +255,27 @@ Matterport technology was employed to create the visualization and interaction e
 To support these features, several technologies were used, including Matterport Pro3 Camera for the \gls{3D} scanning and 360º immersive views, along with frontend and backend frameworks, including Vue.js and Tailwind CSS for the interface, 
 while the backend relied on Node.js. In addition, it was implemented a database to store and manage the media content.
 
+\subsection{Developing support for digital representations of Heritage artefacts in cultural exhibitions – Márcia Campanha}
+\label{sec:marcia_thesis}
+
+This thesis~\cite{campanha2024heritage} pretended to extend the work of Tiago Nunes, by enhancing user interaction with 
+artifacts in the \gls{VE}. The functionalities focus on object interaction, such as the ability to apply different textures, the possibility to manipulate specific parts of the object independently, and access detailed information regarding each one.
+Users can manipulate objects through the three axes(X,Y,Z) by rotating, scaling, or translating them within the virtual space.
+To obtain detailed information of the antiquities, the user simply selects the desired component.
+Additionally, users can upload the pretended object to the virtual exhibition and view a gallery menu displaying multiple perspectives of the \gls{3D} models of the same artifact.
+The system allows users to apply different textures to individual object components and select specific parts, which are outlined with their associated descriptions.
+The full interface, including these interactive features, can be observed in Figure \ref{fig:marcia_image}.
+This project may be integrated into my thesis to support the \gls{3D} manipulation of object models and facilitate the archaeological analysis of the various components of each glass artifact.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\linewidth]{marcia_thesis}
+  \caption{Interface for interacting with heritage artifacts.}
+  \label{fig:marcia_image}
+\end{figure}
+\FloatBarrier
+
+
 \section{Discussion}
 \label{sec:discussion}
 
@@ -282,9 +298,10 @@ while the backend relied on Node.js. In addition, it was implemented a database 
   JoNI (PASEV)                                     & \cmark  & \cmark  & \cmark  & \cmark  & \cmark  \\
   Museu dos Coches Virtual Tour                    & \xmark  & \cmark  & \xmark  & \xmark  & \cmark  \\
   Academia das Ciências 3D View                    & \xmark  & \cmark  & \xmark  & \xmark  & \cmark  \\
+  Digital Representations of Heritage Artifacts    & \xmark  & \cmark  & \cmark  & \xmark  & \xmark  \\  
   \end{tblr}
   }
-  \caption{Comparison of Functionalities}
+  \caption{Comparison of Projects Functionalities}
   \label{tab:comparison2}
 \end{table}
 
