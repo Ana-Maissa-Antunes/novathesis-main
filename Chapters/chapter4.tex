@@ -18,16 +18,16 @@
 \begin{itemize}
     \item \textbf{Map Zoom \& Navigation:} Users can pan, zoom, and explore different locations.
     \item \textbf{Perspective Switching:} Toggle between top-down and profile views for better spatial understanding.
-    \item \textbf{Geospatial Data Integration:} Include \gls{GIS} layers combining excavation findings, a historical map, and overlay a \textit{.tif} map illustration.
-    \item \textbf{Layer Toggle:} Toggle visibility of layers, such as excavation campaigns or glass artifacts.
-    \item \textbf{Parallel Objects:} Link parallel excavation findings/museum(possibly in the object pop-up in the map).
+    \item \textbf{Geospatial Data Integration:} Include \gls{GIS} layers combining excavation findings, and overlay a \textit{.tif} map illustration with some immersive interaction.
+    \item \textbf{Layer Toggle:} Toggle visibility of layers, such as excavation campaigns or glass antiquities.
+    \item \textbf{Parallel Objects:} Link parallel excavation findings/museums, possibly integrating them in the object pop-up ion the map.
 \end{itemize}
 
 \subsection*{\gls{3D} Models \& Interaction}
 \begin{itemize}
-    \item \textbf{Artifact Interaction:} Allows users to virtually manipulate (rotate, zoom) the glass artifact models, as well as apply different textures.
+    \item \textbf{Artifact Interaction:} Allows users to virtually manipulate (rotate, zoom etc) the glass artifact models, as well as apply different textures.
     \item \textbf{Contextual Overlay:} Display descriptive metadata about the artifact, such as its origin, period, and historical usage.
-    \item \textbf{Reconstructed Models:} Showcase how artifacts would look originally(having in consideration characteristics such as: colourless glass, archeological drawings).
+    \item \textbf{Reconstructed Models:} Showcase how artifacts would look originally(having in consideration characteristics such as: colourless glass, archeological drawings and symmetry).
     \item \textbf{3D Models Integration:} The user can zoom the map to visualize the perspective of a specific \gls{3D} model.
     %select a position to visualize the perspective of their 3D model.
 \end{itemize}
@@ -36,13 +36,13 @@
 \begin{itemize}
     \item \textbf{Document Upload/Download:} Allow contributors to upload images, videos or excavation reports of the archeological intervention.
     \item \textbf{Search and Filter Features:} Users can search and filter based on some fields, such as time period, shape, and provenance.
-    \item \textbf{Digital Preservation:} Utilization of open, and standard formats to ensure a long-term resource access.
+    \item \textbf{Digital Preservation:} The usage of open, and standard formats to ensure a long-term resource access.
 \end{itemize}
 
 
 \subsection*{\gls{AR} Integration}
 \begin{itemize}
-    \item \textbf{Immersive Experience:} Augmented reality allows users to virtually augment a tomb visit, enabling interaction with glass artifacts.
+    \item \textbf{Immersive Experience:} \gls{AR} allows users to virtually augment a tomb visit, enabling interaction with glass relics.
     \item \textbf{Device Accessibility:} Primarily user-friendly and enabling haptic interaction, while supporting \gls{AR} glasses as an emerging display option.
     \item \textbf{Localization \& Wayfinding:} 
     \begin{itemize}
@@ -60,20 +60,25 @@
 \subsection{Frontend Technologies}
 \label{sec:frontend}
 
-JavaScript is a programming language that is mostly used to control interactive behavior in web
-pages. To make a map interactive, most websites automatically send JavaScript code to the browser.~\cite{ajayi2024utilizing} In this project, JavaScript will be used for client-side web development and to integrate frameworks that enhance map interactivity.
-Leaflet.js is an open-source JavaScript library that facilitates the creation of mobile-friendly interactive maps. It offers a wide array of plugins that improve the usability and simplify application development.
-In this project, Leaflet.js\footnote{\url{https://leafletjs.com/}} will be used to integrate interactive map features and create an intuitive user interface.
+JavaScript is a programming language mostly used to control interactive behavior in web
+pages. To make a map interactive, most websites automatically send JavaScript code to the browser.~\cite{ajayi2024utilizing} In this project, this language will be used for client-side web development and to integrate frameworks that enhance map interactivity.
 
-Other alternatives for web development frameworks include Turf.js\footnote{\url{https://turfjs.org/}} and OpenLayers\footnote{\url{https://openlayers.org/}}, which facilitate the integration of dynamic maps into web pages. It can display map tiles, vector data and markers loaded from any source.
-Additionally, Google Maps API and Mapbox\footnote{\url{https://www.mapbox.com/}} are widely used mapping platforms. Mapbox is an application that provides online maps. Mapbox is open source, providing greater flexibility and customization compared to other mapping platforms. The Google Maps API (Application Programming Interface)\footnote{\url{https://developers.google.com/maps}} is a powerful tool that allows developers to embed Google Maps functionalities directly into their web and mobile applications. 
-In this study, one of these tecnologies will be used for interactive map creation, despite of the disponibilization of an illustration of the map of the Tróia site area of the mausoleum in study that will complemented with an open map, possibly from \gls{OSM}\footnote{\url{https://www.openstreetmap.org/}}.
+Leaflet\footnote{\url{https://leafletjs.com/}} is an open-source JavaScript library that facilitates the creation of mobile-friendly interactive maps. It offers a wide array of plugins that improve usability and simplify application development.
+Leaflet will be employed in this thesis to integrate interactive map features and create an intuitive user interface.
 
+Other alternatives for web development frameworks used for map rendering and interaction include OpenLayers\footnote{\url{https://openlayers.org/}}, which enables the integration of dynamic maps into web pages and can display map tiles, vector data, and markers loaded from any source.
+Another powerful tool is the Google Maps API\footnote{\url{https://developers.google.com/maps}}, which allows developers to embed Google Maps functionalities directly into both web and mobile applications.
+Additionally, Mapbox\footnote{\url{https://www.mapbox.com/}} and \gls{OSM}\footnote{\url{https://www.openstreetmap.org/}} provide online mapping solutions. While \gls{OSM} is open-source, offering greater flexibility and customization, and is maintained and updated by the community, Mapbox and Google Maps API have usage-based pricing plans.
+For this dissertation, one of these technologies will be used to create an interactive map, complementing an existing illustration of the Tróia site area, that includes the mausoleum under study. This will be supplemented with an open map, potentially sourced from \gls{OSM}\footnote{\url{https://www.openstreetmap.org/}}.
+%REACT????
+
+%Turf\footnote{\url{https://turfjs.org/}}
 %Some popular options include 
 %ArcGIS
 %QGIS
 %Other alternatives for web development
 %notable
+%Google Maps API provides extensive features such as map layers, markers, street view, and geocoding.
 \subsection{Backend Technologies}
 \label{sec:backend} 
 
@@ -81,17 +86,23 @@ In this study, one of these tecnologies will be used for interactive map creatio
 \subsection{Database Repository}
 \label{sec:repos}
 
-There are several alternatives for a storage management, but that's not true for geographical database systems.
-or this project, organizing the data in a relational database makes the most sense due to its flexibility and consistency.
-The most common options for this type of application include PostGIS\footnote{\url{https://postgis.net/}}, extension for PostgreSQL\footnote{\url{https://www.postgresql.org/}}, as well as MySQL and Oracle.
+There are several alternatives for storage management systems, but the options are more limited when it comes to geographical
+database systems.
 
-All geographic data, artifacts metadata, and excavation details will be stored in a PostgreSQL database with the PostGIS extension. PostGIS is widely used for spatial data storage, geometry processing, and efficient geospatial querying. This database was choosen for its high performance and flexibility in managing spatial data.
+For this project, organizing the data in a relational database is more appropriate due to its flexibility and consistency.
+The most common databases for such applications include PostGIS\footnote{\url{https://postgis.net/}}, extension for PostgreSQL\footnote{\url{https://www.postgresql.org/}}, MySQL and Oracle.
+All three databases databases support spatial data types, allowing to store and manage geographic objects, representing them with points, lines, or polygons, and performing geospatial queries.
+Among these, PostGIS is widely used for spatial data storage, geometry processing, and efficient geospatial querying.
+Oracle supports advanced spatial features and 3D features but has a commercial license. On the other hand, MySQL is open-source and more suitable for small-to-medium-scale projects.
+
+PostgreSQL database was chosen for this thesis because of its high performance and flexibility in managing spatial data. All geographic data, artifacts metadata, and excavation details will be stored within this system.
 
 
-
-\subsection{VR Tools}
+\subsection{3D Engines}
 \label{sec:vr_tools} 
 
+\subsubsection{Unity}
+\label{sec:unity_description} 
 
 \subsection{Photogrammetry Tools}
 \label{sec:photogrammetry_tool} 

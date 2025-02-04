@@ -128,7 +128,7 @@ Through the interface (Figure \ref{fig:z}), users can visualize various types of
 % \FloatBarrier
 
 
-\section{\gls{3D} in \gls{CH} and \gls{VR}}
+\section{\gls{3D} in Cultural Heritage and Virtual Reality}
 \label{sec:3d_vr}
 
 \subsection{\gls{VR} Scenario with Funerary Artifacts from Ancient Egypt} 
@@ -210,7 +210,7 @@ of \gls{CH} objects, often incorporating interactive maps, an approach that will
 present a virtual tour of museums. The third one, developed by Joao Vilar, explored interactive games, with an emphasis on cultural artifacts from the Portuguese Évora site.
 
 
-\subsection{\textit{Sistema para criação e exploração de narrativas interativas e jogos, Pasev} – João Vilar}
+\subsection{\textit{Sistema para Criação e Exploração de Narrativas Interativas e Jogos} – João Vilar}
 \label{sec:thesis1_nova}
 
 
@@ -259,3 +259,52 @@ Designed with a user-friendly interface, the website offers an intuitive navigat
 Matterport technology was employed to create the visualization and interaction environments, providing \gls{3D} spatial mapping of the academy's rooms. Complementing this, \gls{3D} object models were created and displayed in a Sketchfab viewer. 
 To support these features, several technologies were used, including Matterport Pro3 Camera for the \gls{3D} scanning and 360º immersive views, along with frontend and backend frameworks, including Vue.js and Tailwind CSS for the interface, 
 while the backend relied on Node.js. In addition, it was implemented a database to store and manage the media content.
+
+\section{Discussion}
+\label{sec:discussion}
+
+\newcommand{\cmark}{\ding{51}} % Checkmark
+\newcommand{\xmark}{\ding{55}} % Cross
+
+\begin{table}
+  \resizebox{\textwidth}{!}{
+  \small
+  \centering
+  \begin{tblr}{
+    colspec={lccccc},
+    hlines
+  }
+  \textbf{Project Name}                            & {\textbf{Interactive} \\ \textbf{Map}} & {\textbf{3D Models} \\ \textbf{Interaction}} & {\textbf{AR/VR} \\ \textbf{Experience}} & {\textbf{Data} \\ \textbf{Repository}} & {\textbf{Virtual} \\ \textbf{Tour}} \\
+  \hline
+  Turin 1911 Project                               & \cmark  & \cmark  & \xmark  & \xmark  & \xmark  \\
+  Safranbolu GIS                                   & \cmark  & \xmark  & \xmark  & \xmark  & \xmark  \\
+  VR Funerary Artifacts                            & \xmark  & \cmark  & \cmark  & \xmark  & \xmark  \\
+  JoNI (PASEV)                                     & \cmark  & \cmark  & \cmark  & \cmark  & \cmark  \\
+  Museu dos Coches Virtual Tour                    & \xmark  & \cmark  & \xmark  & \xmark  & \cmark  \\
+  Academia das Ciências 3D View                    & \xmark  & \cmark  & \xmark  & \xmark  & \cmark  \\
+  \end{tblr}
+  }
+  \caption{Comparison of Functionalities}
+  \label{tab:comparison2}
+\end{table}
+
+
+% \begin{table}[h]
+%   \centering
+%   \scriptsize
+%   \begin{tabular}{lcccccc}
+%   \toprule
+%   \textbf{Project Name} & \textbf{Interactive Map} & \textbf{3D Models} & \textbf{AR/VR Experience} & \textbf{GIS Integration} & \textbf{Data Repository} & \textbf{Virtual Tour} \\
+%   \midrule
+%   Turin 1911 Project & \cmark & \cmark & \xmark & \cmark & \xmark & \xmark \\
+%   Safranbolu GIS (Turkey) & \cmark & \xmark & \xmark & \cmark & \xmark & \xmark \\
+%   VR Funerary Artifacts (Ancient Egypt) & \xmark & \cmark & \cmark & \xmark & \xmark & \xmark \\
+%   Criação de Narrativas Interativas e Jogos (PASEV) & \cmark & \cmark & \cmark & \xmark & \cmark & \cmark \\
+%   Museu dos Coches Virtual Tour & \xmark & \cmark & \xmark & \xmark & \xmark & \cmark \\
+%   Academia das Ciências 3D Visualization & \xmark & \cmark & \xmark & \xmark & \xmark & \cmark \\
+%   \bottomrule
+%   \end{tabular}
+%   \caption{Comparison of Functionalities}
+%   \label{tab:comparison}
+%   \end{table}
+
