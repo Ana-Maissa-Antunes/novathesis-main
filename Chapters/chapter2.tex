@@ -11,39 +11,41 @@
 \chapter{Fundamental Concepts}
 \label{cha:fundamental_concepts}
 
+This chapter explains the key concepts related to the theme of this thesis.
+
 \section{Digital Heritage Foundations}
 \label{sec:digital_heritage_foundation}
 
 \subsection{Digital Cultural Heritage}
 \label{sec:digital_heritage}
 
-\gls{CH} includes monuments, sites, landscapes, skills, practices, knowledge and expressions of human creativity. Collections conserved and managed by public and private bodies - such as museums, libraries and archives - and film heritage are also part of CH. It enriches the lives of people, while driving force for the cultural and creative sectors, and plays a role in creating and enhancing Europe's social capital.
+\gls{CH} includes monuments, sites, landscapes, skills, practices, knowledge and expressions of human creativity~\cite{eu_cultural_heritage}. Collections conserved and managed by public and private bodies - such as museums, libraries and archives - and film heritage are also part of CH. It enriches the lives of people, constitutes a driving force for the cultural and creative sectors, and plays a role in creating and enhancing Europe's social capital.
 \gls{CH} can be tangible (castles, museums, works of art), intangible (songs, traditions, etc.), or
 digital (born-digital and digitised). In this thesis we will reproduce tangible objects, and represent them in \gls{3D} models digitally.
-While policy-making in this area is primarily the responsibility of member states, regional and local authorities, the \gls{EU} is committed to safeguarding and enhancing Europe's \gls{CH}. It does so through a number of policy areas and programmes.~\cite{eu_cultural_heritage} 
+While policymaking in this area is primarily the responsibility of member states, regional and local authorities, the \gls{EU} is committed to safeguarding and enhancing Europe's \gls{CH}. It does so through a number of policy areas and programmes.
 
 
-Digital technologies provide new opportunities to preserve cultural content and to make \gls{CH} more accessible to all audiences. Museums and cultural organisations that embrace technology are able to offer innovative visitor experiences, as well as let the public access exhibitions remotely and see material that is not on display.
-\gls{EU} has an extensive list of projects combining tecnology and art.
-Europeana\footnote{\url{https://www.europeana.eu/}} is an Europe digital platform to empower \gls{CH} in its digital transformation. It supports thousands of European museums, archives and libraries to offer free access to digitalised versions of artworks, books and music.~\cite{eu_digital_heritage} 
+Digital technologies provide new opportunities to preserve cultural content and to make \gls{CH} more accessible to all audiences~\cite{eu_digital_heritage}. Museums and cultural organisations that embrace technology are able to offer innovative visitor experiences, as well as let the public access exhibitions remotely and view material that is not on display.
+The \gls{EU} funds an extensive list of projects combining tecnology and art.
+Europeana\footnote{\url{https://www.europeana.eu/}} is a European digital platform to empower \gls{CH} in its digital transformation. It supports thousands of European museums, archives and libraries to offer free access to digitalised versions of artworks, books and music.
 
 The visualization of \gls{CH} collections can involve two classes of data: the data constituting the digital cultural object, and
-the accompanying metadata, as exemplified bellow in the Figure \ref{fig:ch_data}. 
+the accompanying metadata, as exemplified below in the Figure \ref{fig:ch_data}~\cite{Windhager2019Visualization}.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1.0\linewidth]{ch_data}
-    \caption{Schematic lineup of a visualization system in the CH data. ~\cite{Windhager2019Visualization}}
+    \caption{Schematic lineup of a visualization system in the CH data domain~\cite{Windhager2019Visualization}.}
     \label{fig:ch_data}
 \end{figure}
 \FloatBarrier
 
 
 The metadata can describe a broad diversity of information associated
-with the \gls{CH} objects(Figure \ref{fig:ch_objects}), therefore, to classify appearances of metadata, we need to resort to a unified metadata model. 
-Among several standardization initiatives, the \gls{EDM} is one of the most mature efforts. 
-The \gls{EDM} reuses several existing Semantic Web vocabularies, such as the metadata set of the \gls{DCMI}, and the
-\gls{CIDOC-CRM} from the \gls{CIDOC} of the International Council of Museums. 
+with \gls{CH} objects (Figure \ref{fig:ch_objects}), therefore, to systematically classify different types of metadata, it is essential to adopt a unified metadata model. 
+Among several standardization initiatives, the \gls{EDM}\footnote{\url{https://pro.europeana.eu/page/edm-documentation}} is one of the most mature efforts. 
+The \gls{EDM} reuses several existing Semantic Web vocabularies, such as the metadata set of the \gls{DCMI}\footnote{\url{https://www.dublincore.org/}}, and the
+\gls{CIDOC-CRM}\footnote{\url{https://cidoc-crm.org/}} from the \gls{CIDOC} of the International Council of Museums\footnote{\url{https://icom.museum/}}. 
 Additionally, the target groups of digital CH collections are very diverse, from museum curators to humanities scholars and from
 highly interested enthusiasts to members of the general public— \gls{CH} collections can provide useful and interesting information for all of them. 
 %Consequently, many different categorizations of users exist with respect to domain expertise,
@@ -54,7 +56,7 @@ highly interested enthusiasts to members of the general public— \gls{CH} colle
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1.0\linewidth]{metadata_entries}
-    \caption{Types of cultural objects and related metadata entries. ~\cite{Windhager2019Visualization}}
+    \caption{Types of cultural objects and related metadata entries~\cite{Windhager2019Visualization}.}
     \label{fig:ch_objects}
 \end{figure}
 \FloatBarrier
@@ -63,48 +65,43 @@ highly interested enthusiasts to members of the general public— \gls{CH} colle
 \subsection{Virtual Heritage Environment}
 \label{sec:virtual_heritage}
 
-A \gls{VE} is a model of reality with which a human can interact, getting information 
-from the model by ordinary human senses such as sight, sound, and touch and/or controlling the model using ordinary human actions such as position and/or motion of body parts 
-and voice. Usually, \gls{VE} and \gls{VR} are used synonymously, but 
-some authors reserve the first one for an artificial environment that the user interacts with.  ~\cite{hale2014handbook}
+According to Hale and Stanney (2014), "\gls{VE} is a model of reality with which a human can interact, getting information 
+from the model by ordinary human senses such as sight, sound, and touch"~\cite{hale2014handbook}. 
+It also enables control of the model through typical citizen actions, such as the movement and positioning of body parts and voice. 
+Although the terms \gls{VE} and \gls{VR} are frequently used interchangeably, some authors reserve the \gls{VE} for an artificial environment which the user interacts with.
 
+Virtual heritage involves the use of interactive digital technologies to record, preserve, and recreate 
+culturally relevant artifacts and sites~\cite{848434}. It allows digitally preserved content to be shared globally, providing an educational experience that enables users to explore \gls{CH} through virtual manipulations of time and space. 
+Given the need for interactivity with virtual objects, we naturally will use a \gls{VE} to represent heritage artifacts 
+in \gls{3D} in this project, enabling users to explore and interact with \gls{CH} in an immersive and educational way.
 
-Virtual heritage involves the use of computer-based interactive technologies to record, preserve, or recreate 
-artifacts and sites of historical, artistic, religious, and cultural significance and to deliver 
-the results openly to a global audience in such a way as to provide a formative educational 
-experience through electronic manipulations of time and space. ~\cite{848434} Given the virtual objects interactivity of our project, we can derive from these definitions that we will use a \gls{VE} to represent heritage artifacts 
-in \gls{3D}, enabling users to explore and interact with \gls{CH} in an immersive and educational way.
+Since the 1990s, \gls{VR} was continuously used to recreate historical sites in a virtual immersive environment~\cite{hale2014handbook}. 
+This technology provides a way to protect fragile sites while simultaneously educating visitors on how to explore, comprehend, and appreciate significant heritage sites.
 
-Ever since the early 1990s, there has been a worldwide interest in the prospect of using \gls{VR} to 
-recreate historic sites and events for such purposes as education, special project commissions, 
-and showcase features at national and World Heritage visitor centers. \gls{VR} in \gls{CH} offers a means of protecting the fragile state of some sites and can help educate visitors in how to explore, interpret, and respect them. ~\cite{hale2014handbook}
-
-
-
-
-\subsection{Digital Twin}
+\subsection{Digital Twin in Cultural Heritage}
 \label{sec:digital_twin}
 
 
-The \gls{DT} can be understood as a probabilistic, multiscale,
+Generically, the \gls{DT} can be understood as a probabilistic, multiscale,
 multiphysics integrated simulation of a system that uses the best physical models,
-sensors, and history to mirror the life cycle of its corresponding twin. 
+sensors, and history to mirror the life cycle of its corresponding twin~\cite{dezen2020towards}.
 The \gls{DT} consists of three components: physical product in a real monitored
 space, data and information connections, and the corresponding virtual product
-in virtual space (Grieves and Vickers 2017).
+in virtual space~\cite{grieves2017digital}.
 
 
- The potential application of the \gls{DT} for heritage is its realistic
- representation in the form of an intelligent and semantically enriched \gls{3D} model
-\gls{HBIM}, becoming a tool capable of managing information collected and modeled,
- improving its availability and accessibility.
+The potential application of the \gls{DT} for heritage is its realistic
+representation in the form of an intelligent and semantically enriched \gls{3D} model \gls{HBIM}.
+First defined in 2009, HBIM is “a novel solution whereby interactive parametric objects representing architectural elements are constructed from historic data, these elements are accurately mapped onto a point cloud or image-based survey”~\cite{article_hbim}.
+This is a powerful tool capable of managing information collected and modeled,
+improving its availability and accessibility.
 %  According to Nagakura et al. (2015), having a digital model of historical
 %  heritage is a cheaper tool to allow building investigations because, unlike other
 %  areas of study, there is no way to take buildings to laboratories or store them in
 %  museums galleries like other historical artifacts.
- The use of digital scanning technologies to survey the current state of historic
- buildings, such as photogrammetry and laser scanning, expedites the process
- of generating a digital model.~\cite{dezen2020towards}
+Additionally, the use of digital scanning technologies to survey the current state of historic
+buildings, such as photogrammetry and laser scanning, expedites the process
+of generating a digital model.
 
 % Initially mostly applied in astronautics and aerospace area (Grieves and Vickers,
 % 2016), recent progress in IoT (Internet of Things) infrastructures and the development of low-cost
@@ -120,24 +117,22 @@ good understanding of the heritage site and its context, including the assessmen
 is necessary. In this regard, the complex management of information related to the documentation
 of heritage places involves critical reflection on the adoption of an appropriate \gls{HIS}. The need for \gls{3D} visualization in \gls{GIS} to enable better
 visualization and analysis of complex issues related to elements of significance has led researchers
-in the field to progressively consider \gls{HBIM} as a relevant alternative.
-~\cite{jouan2020digital}
-%This chapter explains the key concepts related to the theme of this thesis.
-% \gls
+in the field to progressively consider \gls{HBIM} as a relevant alternative~\cite{jouan2020digital}.
 
 
 \section{Interaction and Visualization Tecnologies}
 \label{sec:interaction_visualization}
 
+%INCLUIR DESCRICAO SECAO
 
 \subsection{Virtual Environment Interactors}
 \label{sec:interactors}
 
 
 A \gls{3D} interactor is generally a geometric object with a defined behavior when certain events 
-occur and certain properties of the environment and the objects in it change. 
+occur and certain properties of the environment and the objects in it change~\cite{hale2014handbook}.
 
- As is true of \gls{2D} graphical applications, a \gls{3D} environment may contain geometric objects that 
+As is true of \gls{2D} graphical applications, a \gls{3D} environment may contain geometric objects that 
 belong to a class that interact with the user and other objects in a well-defined way. In \gls{2D} interfaces, 
 these objects are called widgets, components, or interactors and include buttons, menus, scrollbars, 
 and pointers. Each class of object encapsulates an interactive behavior, parameterized to allow for 
@@ -148,7 +143,7 @@ multiple uses.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\linewidth]{human_interaction}
-    \caption{\gls{VR} interface where a user is manipulating a \gls{3D} object.~\cite{hale2014handbook}} %Interactors in a shape manipulation task.
+    \caption{\gls{VR} interface where a user is manipulating a \gls{3D} object~\cite{hale2014handbook}.} %Interactors in a shape manipulation task.
     \label{fig:human_interaction}
 \end{figure}
 \FloatBarrier
@@ -156,7 +151,7 @@ multiple uses.
 
 
 
-The Figure \ref{fig:human_interaction} above contains a set of \gls{SVIFT} interactors, including buttons, menus, and tabs
+Figure \ref{fig:human_interaction} above contains a set of \gls{SVIFT} interactors, including buttons, menus, and tabs
 that can be grabbed and moved (or bestow the grab and move ability to another object), constraint maintainers 
 (e.g., keeping the manipulated object on a particular plane), and selectors. The image on the left is using a 
 ray selector interactor, while the figure on the right is using a poking selector.
@@ -168,37 +163,43 @@ ray selector interactor, while the figure on the right is using a poking selecto
 
 \subsubsection{Input Devices}
 \label{sec:input_devices}
-%\textbf{Input Devices}
 
 Common \gls{VE} input devices include \gls{6-DOF} trackers\footnote{\url{https://www.ar.rocks/glossary/6dof-tracking}} as exemplified in Figure \ref{fig:input_device}, continuous posture-recognition gloves, discrete 
 event gloves, pen-like devices, simple button devices, and special-purpose devices such as the 
 Spaceball or force-feedback joysticks. 
 
-Selection is simply the task of specifying an object or set of objects for some action. 
-Most selection techniques can be categorized by their method of indicating of an object, whether 
-done by touching it with a virtual hand, pointing at it, occluding it, encapsulating it in a volume, or 
-indirectly selecting it. Manipulation goes hand in hand with selection. Manipulation refers broadly to the  modification of 
+In the next paragraphs, I will describe four common available VE task categories.
+
+Selection is the process of specifying an object or set of objects for a particular action. 
+Most selection techniques can be categorized based on how an object is indicated, whether
+by touching it with a virtual hand, pointing at it, occluding it, encapsulating it within a volume, or 
+selecting it indirectly.
+
+Manipulation refers broadly to the  modification of 
 attributes of the selected object. Attributes may include position, orientation, scale, shape, color, 
 or texture. For the most part, research has mainly considered the manipulation of the  position 
 and orientation of rigid objects, although some special-purpose applications include object deformation or scaling. Object manipulation tasks have importance in such applications as design, 
 prototyping, simulation, and entertainment, all of which may require environments that can be 
 modified by the user. The design space for manipulation techniques is quite large. To provide a simple overview of the 
 techniques already developed in the design space, three categories are presented in the following—
-virtual hand, proxy, and indirect. Travel, also called viewpoint motion control, is the most ubiquitous and common \gls{VE} interaction 
-task—simply the movement of the user within the environment. Travel and wayfinding make up the task of navigation. Because travel is so universal, a multitude of techniques have been proposed 
-(see Mine, 1995, for a survey of early techniques). Most travel techniques can be categorized as physical locomotion, 
-steering, automated, or manual manipulation. Many of the other interactions found in VE applications fall under the heading of system control. 
-This category includes commands, mode changes, and other modifications of system state. 
+virtual hand, proxy, and indirect. 
+
+Travel, also called viewpoint motion control, is the most ubiquitous and common \gls{VE} interaction 
+task—simply the movement of the user within the environment. Travel and wayfinding make up the task of navigation. 
+Most travel techniques can be categorized as physical locomotion, steering, automated, or manual manipulation. 
+Many of the other interactions found in VE applications fall under the heading of system control. 
+
+System Control includes commands, mode changes, and other modifications of system state. 
 Often, system control tasks are composites of the other universal tasks. For example, choosing
 a menu item is a selection task, whereas dragging an object to a trash can for deletion is a 
 manipulation task. The categories of system control techniques include graphical 
-menus, voice commands, gestures, and tools.~\cite{hale2014handbook}
+menus, voice commands, gestures, and tools.
 
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.60\linewidth]{input_device}
-    \caption{HTC Vive controllers(center) and Oculus Touch controllers(at the ends).~\cite{article_input_devices}}
+    \caption{HTC Vive controllers(center) and Oculus Touch controllers(at the ends)~\cite{article_input_devices}.}
     \label{fig:input_device}
 \end{figure}
 
@@ -208,77 +209,52 @@ menus, voice commands, gestures, and tools.~\cite{hale2014handbook}
 %\textbf{Output Devices}
 
 The three common \gls{VE} display devices are \glspl{HMD}, as illustrated in Figure \ref{fig:HMDs}, \glspl{SID} (fully or 
-semisurrounding displays, such as the \gls{CAVE}\footnote{\url{https://steantycip.com/vr-cave/}})(Figure \ref{fig:HMD1}), and single-screen stereo displays, such as the Responsive Workbench\footnote{\url{https://graphics.stanford.edu/projects/RWB/}}. 
+semisurrounding displays, such as the \gls{CAVE}\footnote{\url{https://steantycip.com/vr-cave/}}) (Figure \ref{fig:HMD1}), and single-screen stereo displays, such as the Responsive Workbench\footnote{\url{https://graphics.stanford.edu/projects/RWB/}}. 
 These display types have very different characteristics, and interaction with these displays is likely to be extremely different as well, as shown in Figure \ref{fig:display}. \glspl{HMD} and fully surrounding \glspl{SID} provide the ability to view the entire \gls{VE} by physically turning. Semisurrounding \glspl{SID} require the use of virtual rotations, so applications intended for such 
 displays should be designed in a manner to minimize these less-desirable rotations. \glspl{HMD} that have a narrow \gls{FOV} require extensive head rotation in order for the user to see the entire environment. 
 
 %These active stereoscopic glasses are augmented with a constellation of reflective balls that clips onto the frame. The reflective balls work with video tracking that calculates the position of the glasses by triangulating on arrangement of the reflections.
 
-
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\linewidth]{HMD1}
-    \caption{Stereoscopic glasses augmented with a constellation of reflective balls.~\cite{SHERMAN2019258}} 
+    \caption{Stereoscopic glasses augmented with a constellation of reflective balls~\cite{SHERMAN2019258}.} 
     \label{fig:HMD1}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.25\linewidth]{display}
-    \caption{Dual-screen fishtank stereo-capable display.~\cite{SHERMAN2019258}} 
+    \caption{Dual-screen fishtank stereo-capable display~\cite{SHERMAN2019258}.} 
     \label{fig:display}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h!]
     \centering
     \begin{subfigure}[b]{0.3\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth]{HMD2}
-        \caption{Microsoft HoloLens 2.~\cite{headset_article}}
+        \caption{Microsoft HoloLens 2~\cite{headset_article}.}
         \label{fig:HM}
     \end{subfigure}
     \begin{subfigure}[b]{0.3\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth]{HMD3}
-        \caption{HTC Vive.~\cite{SHERMAN2019258}}
-        \label{fig:y}
+        \caption{HTC Vive~\cite{SHERMAN2019258}.}
+        \label{fig:y1}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth]{HMD4}
-        \caption{Meta Quest 3.~\cite{article}}
-        \label{fig:y}
+        \caption{Meta Quest 3~\cite{article}.}
+        \label{fig:y2}
     \end{subfigure}
-       \caption{Examples of the most recent and advanced \glspl{HMD}.}
-       \label{fig:HMDs}
-  \end{figure}
-  \FloatBarrier
-  
-% \begin{figure}[h!]
-%     \centering
-%     \includegraphics[width=0.45\linewidth]{HMD2}
-%     \caption{AR Headset – Microsoft HoloLens 2.~\cite{headset_article}} 
-%     \label{fig:hmd2}
-% \end{figure}
-% \FloatBarrier
+    \caption{Examples of the most recent and advanced \glspl{HMD}.}
+    \label{fig:HMDs}
+\end{figure}
 
-% \begin{figure}[h!]
-%     \centering
-%     \includegraphics[width=0.4\linewidth]{HMD3}
-%     \caption{The dimples on the HTC Vive are part of the integrated tracking system. Each dimple has a light sensor used to measure the time differentials as infrared light scans pass across the surface.~\cite{SHERMAN2019258}} %Interactors in a shape manipulation task.
-%     \label{fig:hmd3}
-% \end{figure}
-% \FloatBarrier
-
-% \begin{figure}[h!]
-%     \centering
-%     \includegraphics[width=0.4\linewidth]{HMD4}
-%     \caption{Meta Quest 3 glasses.~\cite{article}} 
-%     \label{fig:hmd4}
-% \end{figure}
-% \FloatBarrier
-
+\FloatBarrier
 
 \subsection{Augmented Reality}
 \label{sec:augmented_reality}
@@ -299,16 +275,16 @@ methods to interpret the camera images.
 One of the most important aspects of augmented reality is to create appropriate techniques
 for intuitive interaction between the user and the virtual content of \gls{AR} applications. There
 are four main ways of interaction in \gls{AR} applications: tangible \gls{AR} interfaces, collaborative
-\gls{AR} interfaces, hybrid \gls{AR} interfaces, and the emerging multimodal interfaces. ~\cite{carmigniani2011augmented}
+\gls{AR} interfaces, hybrid \gls{AR} interfaces, and the emerging multimodal interfaces~\cite{carmigniani2011augmented}.
 Firstly, tangible interfaces support direct interaction with the real world by exploiting the use of
 real, physical objects and tools. Secondly, the collaborative \gls{AR} interfaces include the use of multiple displays to support remote and colocated activities.
 Following, the hybrid interfaces combine an assortment of different, but complementary interfaces as well
 as the possibility to interact through a wide range of interaction devices.
 Finally, multimodal interfaces combine real objects input with naturally occurring forms of language
 and behaviors such as speech, touch, natural hand gestures, or gaze. This project will use an "hybrid \gls{AR} interface", which integrates various elements to create an immersive and interactive experience.
-This includes the use of digital representations such as \gls{3D} models and an interactive map, alongside physical objects like the Tróia ruins and artifacts.
+This includes the use of digital representations such as \gls{3D} models and an interactive map, alongside physical objects like the Troia ruins and artifacts.
 Additionally, the project may incorporate other input methods, such as user gestures and touch, allowing for dynamic interactions with the content. 
-%By combining these diverse technologies—augmented reality (AR), digital repositories, and real-world artifacts—the project aims to provide a comprehensive platform that enhances the visitor’s experience while preserving and presenting the cultural heritage of Tróia.
+%By combining these diverse technologies—augmented reality (AR), digital repositories, and real-world artifacts—the project aims to provide a comprehensive platform that enhances the visitor’s experience while preserving and presenting the cultural heritage of Troia.
 
 
 \subsection{Augmented Reality vs Virtual Reality}
@@ -317,14 +293,14 @@ Additionally, the project may incorporate other input methods, such as user gest
 While \gls{VR} technology, or \gls{VE} as called by Milgram, completely immerses users in a synthetic world
 without seeing the real world, \gls{AR} technology augments the sense of reality by superimposing virtual objects and cues upon the real world in real time. 
 
-Virtuality Continuum is defined by Paul Milgram and Fumio Kishino as a continuum that spans between the real environment
+The Virtuality Continuum is defined by Paul Milgram and Fumio Kishino~\cite{milgram1994taxonomy} as a continuum that spans between the real environment
 and the virtual environment comprise \gls{AR} and \gls{AV}
 in between, where \gls{AR} is closer to the real world, and \gls{AV} is closer to a pure \gls{VE}, as seen in the Figure \ref{fig:mixed_reality}.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\linewidth]{mixed_reality}
-    \caption{Milgram and Kishino’s Virtuality Continuum. ~\cite{milgram1994taxonomy}}
+    \caption{Milgram and Kishino’s Virtuality Continuum~\cite{milgram1994taxonomy}.}
     \label{fig:mixed_reality} 
 \end{figure} 
 \FloatBarrier
@@ -337,19 +313,20 @@ in between, where \gls{AR} is closer to the real world, and \gls{AV} is closer t
 \label{sec:photogrammetry}
 
 Photogrammetry is a measurement technique that is used to extract the geometry, displacement, and deformation of a
-structure using photographs or digital images.~\cite{Baqersad2017Photogrammetry}
+structure using photographs or digital images~\cite{Baqersad2017Photogrammetry}.
 
 Concerning the object(s) of interest and the camera position(s), we distinguish
-between terrestrial and aerial photogrammetry.~\cite{linder2016digital}
+between terrestrial and aerial photogrammetry~\cite{linder2016digital}.
 In aerial photogrammetry, images are acquired via overhead shots from an aircraft, providing topographic maps and land use details. In terrestrial photogrammetry, images are obtained at locations near or on the surface of
 the earth and provide detailed dimensional information of an object. When the object size and the camera-to-object 
-distance are both less than 100 meters, terrestrial photogrammetry is further defined as close-range photogrammetry.
+distance are both less than 100 meters, terrestrial photogrammetry is further defined as close-range photogrammetry. A fundamental technique in photogrammetry for creating accurate \gls{3D} models is Stereoscopic Viewing. 
+By capturing two or more images photos of the same object but taken from different positions, it is possible to calculate the \gls{3D} coordinates of any point which is represented in both photos~\cite{linder2016digital}. 
+%This method is instrumental in reconstructing object geometries with high precision and is widely applied in topographic mapping, structural analysis, and cultural heritage documentation.  
 
-
-Stereoscopic Viewing is a crucial photogrammetic technique to create accurate \gls{3D} models, and consists in: If we have two (or more) photos
-from the same object but taken from different positions, we may easily calculate the
-\gls{3D} coordinates of any point which is represented in both photos.~\cite{linder2016digital}
-
+Multi-image photogrammetry is an advanced technique that combines large groups of images to create detailed \gls{3D} models~\cite{mccarthy2014multi}. The process begins with image acquisition, followed by importing 
+the images into specialized software that automatically detects and matches correlated features. This step can be highly time-consuming and demand computer power for large datasets. 
+Once matching points are identified, the software calculates their spatial relationships, producing a sparse \gls{3D} point cloud that outlines the subject’s shape, as shown in Figure \ref{fig:photo2}. 
+Finally, the software refines this sparse model by reanalyzing the images to generate a much denser point cloud, similar to those produced by laser scanners.
 % In photogrammetry the most used model is the central projection.
 %It is a geometric procedure that transforms a 3D entity into a 2D reality and it occurs when you have an object, 
 %a projection centre and a projection plane oriented in any way with respect to the projected object.
@@ -357,42 +334,34 @@ from the same object but taken from different positions, we may easily calculate
 %points of the object with the projection centre and, intersecting the projection plane, generate the image points, that are the points projections.
 %~\cite{aicardi2018recent}
 
-Multi-image photogrammetry combines large groups of images to create detailed 3D models. The process begins with image acquisition, followed by importing 
-the images into specialized software that automatically detects and matches correlated features. This step can be highly time-consuming and demand computer power for large datasets. 
-Once matching points are identified, the software calculates their spatial relationships, producing a sparse \gls{3D} point cloud that outlines the subject’s shape, as shown in Figure \ref{fig:photo2}. 
-Finally, the software refines this sparse model by reanalyzing the images to generate a much denser point cloud, similar to those produced by laser scanners.~\cite{mccarthy2014multi}
-
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.45\linewidth]{photogrammetry}
-    \caption{131 images of a \gls{3D} object in all-around configuration.~\cite{luhmann2016sensor}}
+    \caption{131 images of a \gls{3D} object in all-around configuration~\cite{luhmann2016sensor}.}
     \label{fig:photo2}
 \end{figure} 
 \FloatBarrier
 
- 
   
 The most valuable application of multi-image photogrammetry
-may yet prove to be in facilitating community involvement in
-archaeological recording, as well as allowing for the easy creation of
-interactive \gls{3D} models which allows the public to
-engage with their heritage sites in much more immersive way than
-that afforded by plans and sections. In the "Previous Work", a close-range photogrammetry technique was used to generate the \gls{3D} excavation model, as detailed in section \ref{sec:photogrammetry_previous}.
+may lie in its ability to facilitate community engagement in archaeological documentation.
+This approach enables the efficient creation of interactive \gls{3D} models, allowing the public to engage with heritage sites
+in a more immersive way than traditional static representations such as site plans and sectional drawings. In the "Previous Work", a close-range photogrammetry technique was used to generate the \gls{3D} excavation model, as detailed in section \ref{sec:photogrammetry_previous}.
 
 \subsection{LiDAR}
 \label{sec:lidar}
 
-\gls{LiDAR} sensors enable precise \gls{3D} sensing of objects and are widely used in metrology, environment monitoring, archaeology, and robotics.
+\gls{LiDAR} sensors enable precise \gls{3D} sensing of objects and are widely used in metrology, environment monitoring, archaeology, and robotics~\cite{li2022progress}.
 This technology allows for accurate determination of an object’s distance and velocity. 
 Similar to photogrammetry, \gls{LiDAR} scanning is classified into two main types: terrestrial and airborne.
 The three most significant approaches in \gls{LiDAR} technology are mechanical, nanophotonics-based, and solid-state.
-In traditional \gls{LiDAR} sensors, as shown in Figure \ref{fig:mechanical_LIDAR}, a mechanical rotator is used for optical beam scanning, which introduces limitations on their reliability, size, and cost.~\cite{li2022progress}
+In traditional \gls{LiDAR} sensors, as shown in Figure \ref{fig:mechanical_LIDAR}, a mechanical rotator is used for optical beam scanning, which introduces limitations on their reliability, size, and cost.
 
  
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.6\linewidth]{mechanical_LIDAR}
-    \caption{Mechanical Spinning \gls{LiDAR}.~\cite{inbook}}
+    \caption{Mechanical Spinning \gls{LiDAR}~\cite{inbook}.}
     \label{fig:mechanical_LIDAR}
 \end{figure} 
 \FloatBarrier
@@ -405,7 +374,7 @@ Different scanning techniques produce diverse types of scan outputs. For instanc
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.65\linewidth]{flash_based}
-    \caption{Flash-based \gls{LiDAR} sensor. \small{Left: \gls{2D} image of sensing target, Right: Captured \gls{3D} image.} ~\cite{li2022progress}}
+    \caption{Flash-based \gls{LiDAR} sensor. \small{Left: \gls{2D} image of sensing target, Right: Captured \gls{3D} image}~\cite{li2022progress}.}
     \label{fig:flash_based}
 \end{figure} 
 
@@ -414,7 +383,7 @@ Different scanning techniques produce diverse types of scan outputs. For instanc
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.45\linewidth]{sequential_ilumination}
-    \caption{A \gls{LiDAR} sensor based on sequential illumination.~\cite{li2022progress}}
+    \caption{A \gls{LiDAR} sensor based on sequential illumination~\cite{li2022progress}.}
     \label{fig:sequential_ilumination}
 \end{figure} 
 
@@ -423,44 +392,49 @@ Different scanning techniques produce diverse types of scan outputs. For instanc
 \subsection{Artifacts Reconstruction}
 \label{sec:reconstruction}
 
-Systems capable of automatically reconstructing objects from their fragments can greatly aid in the study of many civilizations.
+Systems capable of automatically reconstructing objects from their fragments can greatly aid in the study of many civilizations~\cite{willis2008computational}.
 Automated reconstruction systems working from large databases of digitized fragments could uncover numerous partial or
 complete reconstructions of artifacts that may have been excavated during different years of the same excavation, or possibly
 from different sites altogether. In this way, reconstruction systems not only save researchers time but, given a sufficient database 
-of fragments, also have the capacity to reconstruct artifacts that would have otherwise remained as an incoherent pile of disjoint fragments.
-~\cite{willis2008computational}
+of fragments, also have the capacity to reconstruct artifacts that would have otherwise remained as an incoherent pile of disjoint fragments~.
 
-A precise shape measurement can be achieved using advanced laser scanners or other commercially available shape measuing devices based on stereo 
-vision or structured light. A detailed triangulated \gls{3D} model of a corrupted shape is the prerequisite for its subsequent reconstruction. 
-Missing or scarred parts of a shape can be reconstructed only by exploiting information from similar parts either from the same
-object or on some other object. In the former case we can often utilize shape symmetries such as symmetrical parts on
-human or animal bodies. Scarred parts are removed using the surface spline patches.~\cite{7801178}
+Precise shape measurement can be achieved using advanced laser scanners or other commercially available shape measuring devices based on stereo 
+vision or structured light~\cite{7801178}. A detailed triangulated \gls{3D} model of a corrupted shape is the prerequisite for its subsequent reconstruction. 
+Missing or scarred parts of a shape can be reconstructed from similar parts either from the same
+object or by using a similar object as reference. If an object has symmetrical features, the missing or damaged part can be restored by copying the undamaged side.
+To fix scar parts or gaps, a mathematical technique called surface spline patches is used to smoothly fill in and blend the missing areas.
 
-
-
-\section{\gls{GIS}}
+\section{Geospatial Data and Systems}
 \label{sec:geographic_information_system}
 
-A \gls{GIS} is a computer system for capturing, storing, checking, and displaying data related to positions on Earth’s 
-surface. By relating seemingly unrelated data, \glspl{GIS} can help individuals and organizations better understand spatial patterns and relationships.
-~\cite{natgeo_2024}
+A \acrfull{GIS} is a computer system for capturing, storing, checking, and displaying data related to positions on Earth’s 
+surface~\cite{natgeo_2024}. By relating seemingly unrelated data integrated by geographical location, \glspl{GIS} can help individuals and organizations understand spatial patterns and relationships.
 
-In \gls{GIS} there are several key iniciatives, two of the most significant are the \gls{OGC}\footnote{\url{https://www.ogc.org/}} and the \gls{OSGeo}\footnote{\url{https://www.osgeo.org/}}.  
-The \gls{OGC} is an international voluntary consensus standards organization, constituting more than 450 strong united organizations(such as Esri, Nasa), they develop open standards that ensure interoperability between diverse \gls{GIS}.~\cite{ogc_who_we_are, ogcapi}
-The \gls{OSGeo} is an organization that promotes global adoption of open geospatial technology through an open philosophy and community driven development.~\cite{osgeo_about}
+In the context of \gls{GIS} and geospatial data, two of the most prominent community initiatives are the \gls{OGC}\footnote{\url{https://www.ogc.org/}} and the \gls{OSGeo}\footnote{\url{https://www.osgeo.org/}}.  
+The \gls{OGC} is an international voluntary consensus standards organization, constituting more than 450 strong united organizations (such as Esri\footnote{\url{https://www.esri.com/}}, Nasa\footnote{\url{https://www.nasa.gov/}}). The consortium publishes open standards that ensure interoperability between diverse \gls{GIS}.~\cite{ogc_who_we_are, ogcapi}
+The \gls{OSGeo} is an organization that promotes global adoption of open geospatial technology through an open philosophy and community driven development~\cite{osgeo_about}. 
+For this project, the standards established by the \gls{OGC} and the open resources provided by \gls{OSGeo} are particularly relevant. 
+These resources enable the creation of data from public geographic databases, supporting the development of interactive maps and ensuring the interoperability of geospatial data.
 
 \subsection{Geospatial Data} 
 \label{sub:geospatial_data}
 
-\gls{GIS} applications may include diverse spatial data types, such as cartographic data, photographic data, digital data, or data in spreadsheets. Once all the desired data have been entered into a \gls{GIS} system, 
-they can be combined to produce a wide variety of individual maps, depending on which data layers are included. 
-One of the most common uses of \gls{GIS} technology involves comparing natural features with human activity, as illustrated in the Figure \ref{fig:gis} below. 
+\gls{GIS} applications may include diverse spatial data types, such as cartographic data, photo-
+graphic data, digital data, or data in spreadsheets. Once all the desired data have been
+entered into a \gls{GIS} system, they can be combined to produce a wide variety of maps,
+that highlight different spatial relationships depending on the selected data layers. 
+One of the most common uses of
+\gls{GIS} technology involves comparing natural features with human activity, as illustrated in Figure \ref{fig:gis}.
 
-
+Maps help visualize relationships between spaces and objects in proximity, aiding spatial analysis to identify patterns and make informed decisions based on data.
+A classic example of this geographic method is Jon Snow's study during the cholera epidemic in London in 1854~\cite{inbook}. Jon Snow plotted the locations of cholera cases against the location of water pumps and noticed that the epidemic was concentrated in a certain neighborhood. 
+Through the causal linkages, it was proven that when the contaminated pump was closed, the epidemic quickly came to a halt. 
+A map of just the water pumps or incidences of cholera would have been of little value, but combining both revealed the contaminated source. 
+%A key example of spatial analysis using GIS principles
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.6\linewidth]{gis}
-    \caption{Visual representation of data layers integration in \gls{GIS}. ~\cite{gao_data_layers}}
+    \includegraphics[width=0.55\linewidth]{gis}
+    \caption{Visual Representation of Data Layers Integration in a \gls{GIS}~\cite{gao_data_layers}.}
     \label{fig:gis}
 \end{figure}
 \FloatBarrier
@@ -468,43 +442,40 @@ One of the most common uses of \gls{GIS} technology involves comparing natural f
 \subsection{GIS Applications in Archaeology}
 \label{sub:gis_archeology}
 
-The application of \gls{GIS} in archaeology has brought about a transformative shift, equipping archaeologists with powerful tools to gather, analyze, 
-and visualize geospatial data from archaeological sites. Since 2000, archaeologists began employing \gls{GIS} for more complex spatial analyses, including landscape analysis and site distribution 
+The application of \gls{GIS} in archaeology has brought about a transformative shift, equipping archaeologists with powerful tools to collect, analyze, 
+and visualize geospatial data from archaeological sites~\cite{yao2023overview}. Since 2000, archaeologists began employing \gls{GIS} for more complex spatial analyses, including landscape analysis and site distribution 
 patterns. Additionally, the development of \gls{3D} \gls{GIS} technology enabled archaeologists to reconstruct ancient sites in virtual environments, offering a 
-better understanding and visualization of archaeological site structures and layouts. ~\cite{yao2023overview}
+better understanding and visualization of archaeological site structures and layouts.
 
+A key technology that complements \gls{GIS} in archaeology is \gls{LiDAR}. 
+The application of \gls{LiDAR} has been successful as an archaeological prospection tool for locating and identifying
+sites, sometimes in very remote and difficult to access locations~\cite{article_lidar}. For example, the recent, and highly publicized, 
+discovery of what is believed to be the Mayan site of Ciudad Blanca in Honduras~\cite{Tolley2012}.
 
-\gls{GIS} serves as an invaluable platform for the comprehensive management of \gls{CH} resources. It excels in handling a wide array of
+\gls{GIS} also serves as an invaluable platform for the comprehensive management of \gls{CH} resources. It excels in handling a wide array of
 unstructured data related to \gls{CH}, allowing for a more organized and efficient approach to preservation efforts. One significant 
-application of \gls{GIS} is in the inventorying of \gls{CH} sites. This encompasses a diverse range of sites, from archaeological to 
-architectural and historical structures. Traditional recording methods often face limitations in terms of speed and accuracy when
-it comes to gathering and assessing current situation data. Moreover, these methods may not be well-suited for conducting quantitative 
-scientific management and in-depth analysis. 
+application of \gls{GIS} is the inventorying of \gls{CH} sites, including archaeological, architectural, and historical locations. Traditional recording methods often face limitations in terms of speed and accuracy when
+it comes to gathering and assessing current situation data.
 
-In tandem with the advent and maturation of technologies like \gls{3D} computer graphics, high-resolution rendering, artificial intelligence, 
-and \gls{3D} printing, these advanced methodologies have progressively found widespread application in the cultural relic preservation, 
-augmenting endeavors in the preventive protection and restoration of cultural artifacts. In archaeological research, one of the most fundamental applications of GIS lies in managing spatial data dedicated on archaeological sites.
-\glspl{GIS} often incorporate spatial databases, such as PostgreSQL/PostGIS or Oracle Spatial, to store and query spatial information efficiently. 
-Moreover, specialized computer software, such as ArcGIS Pro or QGIS is used to visualize, analyze, and interpret this data. These \glspl{GIS} process archaeological data in 
-accordance with specific data standards and protocols.
+With advancements in \gls{3D} graphics, high-resolution rendering, artificial intelligence, and \gls{3D} printing, those methodologies have progressively found widespread application in the preventive protection and restoration of cultural artifacts. 
+In archaeology, \gls{GIS} is essential for managing spatial data, often integrating spatial databases, such as PostgreSQL/PostGIS or Oracle Spatial for efficient data storage and querying.
+Moreover, software such as ArcGIS Pro or QGIS is used to visualize, analyze, and interpret this data. These \glspl{GIS} process archaeological data following specific data standards and protocols.
 
-\section{Standarts and Documentation} 
+\section{Heritage Metadata Standards and Documentation} 
 \label{sub:standart}
 
-Standards are critical for systematic and robust development of any emerging technology. 
+Standards are critical for systematic and robust development of any emerging technology~\cite{hale2014handbook}.
 Specification standards provide for practical descriptions of product characteristics and limitations, 
 critical to an end user. Interface standards allow for interchangeability of components developed by 
-different manufacturers, thus permitting specialization and robust competition in the marketplace. 
+different manufacturers, thus enabling specialization and robust competition in the marketplace. 
 Safety standards ensure the health and safety of product users. Finally, terminology standards ensure that 
 technical terminology is used in a consistent and rigorous manner, thus preventing confusion and 
 ambiguity in scientific and technical reports and specifications.
-~\cite{hale2014handbook}
 
 International standards and ontologies for data encoding are crucial
-to speed up interoperability and the process of integration. \gls{CIDOC-CRM}, which is created to capture the richness typical of CH
+to speed up interoperability and the process of integration~\cite{eide2008encoding}. \gls{CIDOC-CRM}, which is created to capture the richness typical of CH
 information, fully fits our needs: its classes and properties
 work perfectly to capture the concepts underlying database structures, providing a high level of data integration.
-~\cite{eide2008encoding}
 
 
 
@@ -512,23 +483,24 @@ work perfectly to capture the concepts underlying database structures, providing
 \label{sec:cidoc}
 
 
-The \gls{CIDOC-CRM}\footnote{\url{https://cidoc-crm.org/}} is a theoretical and practical tool for integrating \gls{CH} information. It provides formal definitions and a structured framework to describe concepts and relationships that support the organization and connection of information regarding \gls{CH} objects and their contexts(Figure \ref{fig:cidoc}).
+The \gls{CIDOC-CRM}\footnote{\url{https://cidoc-crm.org/}} is a theoretical and practical tool for integrating \gls{CH} information~\cite{eide2008encoding}. It provides formal definitions and a structured framework to describe concepts and relationships that support the organization and connection of information regarding \gls{CH} objects and their contexts (Figure \ref{fig:cidoc}).
 Since 2006, \gls{CIDOC-CRM} has been recognized as an official ISO standard (\texttt{ISO 21127:2023}). The most recent version establishes \gls{CIDOC-CRM} as a compatible interface for \gls{OGC} standards, enhancing its application in \gls{GIS} and facilitating geospatial and spatiotemporal reasoning.
 
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\linewidth]{CIDOC_ISO21127}
-    \caption{Fundamental concepts of \texttt{ISO 21127} ~\cite{doerr2007cidoc}}
+    \caption{Fundamental concepts of \texttt{ISO 21127}~\cite{doerr2007cidoc}}.
     \label{fig:cidoc}
 \end{figure}
 \FloatBarrier
 
+\newpage
+
 \noindent \textbf{From database to \gls{CIDOC-CRM}} \\
 The necessary information is extracted from different archaeological and museum collection data models (with various structured, as well as non-structured
 data, i.e. text description) to a common standard based on \gls{CIDOC-CRM} compliant structure.
-~\cite{eide2008encoding}
-
+Although the \gls{CIDOC-CRM} model provides a common, standardized framework for representing data from archaeological and museum collections, it has limitations in representing the characteristics of digital \gls{3D} artifacts.
 
 
 
@@ -540,13 +512,13 @@ to create a shared digital infrastructure that connects \gls{CH} institutions an
 The \gls{ECCCH} aims to add a digital dimension to \gls{CH} preservation, conservation, restoration, and enhancement 
 by providing cutting-edge technology for artefact digitisation and artwork research. 
 In Portugal, the \gls{ICOM}\footnote{\url{https://icom-portugal.org/}} is a beneficiary of the initiative, while \gls{CRUSOE}\footnote{\url{https://redcrusoe.com/}} is an \gls{ECCCH} association partner. \gls{CRUSOE} is a university association comprising institutions from both Portugal and Spain.
-While \gls{ICOM} Portugal and \gls{CRUSOE} represent the participants in Portugal, the \gls{ECCCH} also includes other 14 countries' beneficiaries, affiliated entities and/or associated partners across Europe that actively support those \gls{CH} sectors enumerated above.~\cite{ecchoes}
+While \gls{ICOM} Portugal and \gls{CRUSOE} represent the participants in Portugal, the \gls{ECCCH} also includes other 14 countries' beneficiaries, affiliated entities and/or associated partners across Europe that actively support those \gls{CH} sectors enumerated above~\cite{ecchoes}.
 
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\linewidth]{echoes}
-    \caption{\gls{ECHOES} goals. ~\cite{ecchoes}} 
+    \caption{\gls{ECHOES} goals~\cite{ecchoes}.} 
     \label{fig:echoes}
 \end{figure}
 \FloatBarrier
