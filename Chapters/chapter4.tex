@@ -11,8 +11,11 @@
 \chapter{Proposed Work}
 \label{cha:proposed_work}
 
-%\section{Requirements and Proposed Methodology}
+This chapter aims to outline the approach that will be used to achieve the project objectives defined in Chapter \ref{cha:introduction} while providing the prior work in the various areas relevant to this study.
+
 \section{Requirements}
+
+This section describes the requirements and functionalities to be developed during this dissertation. These are categorized into the following areas: Interactive Map, \gls{3D} Model Interaction, Repository, and \gls{VR} Integration.
 
 \subsection*{Interactive Map}
 \begin{itemize}
@@ -27,7 +30,7 @@
 \begin{itemize}
     \item \textbf{Artifact Interaction:} Allows users to virtually manipulate (rotate, zoom etc) the glass artifact models, as well as apply different textures.
     \item \textbf{Contextual Overlay:} Display descriptive metadata about the artifact, such as its origin, period, and historical usage.
-    \item \textbf{Reconstructed Models:} Showcase how artifacts would look originally(having in consideration characteristics such as: colourless glass, archeological drawings and symmetry).
+    \item \textbf{Reconstructed Models:} Showcase how artifacts would look originally(having in consideration characteristics such as: colourless glass, archeological drawings and symmetry). However, due to time constraints, the reconstruction funcionality may not be completed.
     \item \textbf{3D Models Integration:} The user can zoom the map to visualize the perspective of a specific \gls{3D} model.
     %select a position to visualize the perspective of their 3D model.
 \end{itemize}
@@ -40,9 +43,9 @@
 \end{itemize}
 
 
-\subsection*{\gls{AR} Integration}
+\subsection*{\gls{VR} Integration}
 \begin{itemize}
-    \item \textbf{Immersive Experience:} \gls{AR} allows users to virtually augment a tomb visit, enabling interaction with glass relics.
+    \item \textbf{Immersive Experience:} \gls{VR} allows users to immerse in a virtual tomb visit, enabling interaction with glass relics.
     \item \textbf{Device Accessibility:} Primarily user-friendly and enabling haptic interaction, while supporting \gls{AR} glasses as an emerging display option.
     \item \textbf{Localization \& Wayfinding:} 
     \begin{itemize}
@@ -56,6 +59,7 @@
 \section{Development Technologies and Tools}
 \label{sec:technologies}
 
+The following section focuses on the technologies and tools that will be used in the implementation of this project. These include frontend, backend, database, and \gls{3D} development tools.
 
 \subsection{Frontend Technologies}
 \label{sec:frontend}
@@ -69,7 +73,7 @@ Leaflet will be employed in this thesis to integrate interactive map features an
 Other alternatives for web development frameworks used for map rendering and interaction include OpenLayers\footnote{\url{https://openlayers.org/}}, which enables the integration of dynamic maps into web pages and can display map tiles, vector data, and markers loaded from any source.
 Another powerful tool is the Google Maps API\footnote{\url{https://developers.google.com/maps}}, which allows developers to embed Google Maps functionalities directly into both web and mobile applications.
 Additionally, Mapbox\footnote{\url{https://www.mapbox.com/}} and \gls{OSM}\footnote{\url{https://www.openstreetmap.org/}} provide online mapping solutions. While \gls{OSM} is open-source, offering greater flexibility and customization, and is maintained and updated by the community, Mapbox and Google Maps API have usage-based pricing plans.
-For this dissertation, one of these technologies will be used to create an interactive map, complementing an existing illustration of the Tróia site area, that includes the mausoleum under study. This will be supplemented with an open map, potentially sourced from \gls{OSM}\footnote{\url{https://www.openstreetmap.org/}}.
+For this dissertation, one of these technologies will be used to create an interactive map, complementing an existing illustration of the Troia site area, that includes the mausoleum under study. This will be supplemented with an open map, potentially sourced from \gls{OSM}\footnote{\url{https://www.openstreetmap.org/}}.
 %REACT????
 
 %Turf\footnote{\url{https://turfjs.org/}}
@@ -82,6 +86,10 @@ For this dissertation, one of these technologies will be used to create an inter
 \subsection{Backend Technologies}
 \label{sec:backend} 
 
+The backend tecnologies selected for this thesis include the C\# programming language integration in Unity for scene interactions in the \gls{VE}.
+Additionally, Node.js\footnote{\url{https://nodejs.org/}} software was choosen. Node.js is an open-source and cross-platform JavaScript runtime environment that enables developers to create servers, web applications, command-line tools, and automation programs.
+This tool will be use to support the web server and to improve performance and scalibility when managing with repository data.
+
 
 \subsection{Database Repository}
 \label{sec:repos}
@@ -90,7 +98,7 @@ There are several alternatives for storage management systems, but the options a
 database systems.
 
 For this project, organizing the data in a relational database is more appropriate due to its flexibility and consistency.
-The most common databases for such applications include PostGIS\footnote{\url{https://postgis.net/}}, extension for PostgreSQL\footnote{\url{https://www.postgresql.org/}}, MySQL and Oracle.
+The most common databases for such applications include PostGIS, extension for PostgreSQL, MySQL\footnote{\url{https://www.mysql.com/}} and Oracle.
 All three databases databases support spatial data types, allowing to store and manage geographic objects, representing them with points, lines, or polygons, and performing geospatial queries.
 Among these, PostGIS is widely used for spatial data storage, geometry processing, and efficient geospatial querying.
 Oracle supports advanced spatial features and 3D features but has a commercial license. On the other hand, MySQL is open-source and more suitable for small-to-medium-scale projects.
@@ -98,11 +106,16 @@ Oracle supports advanced spatial features and 3D features but has a commercial l
 PostgreSQL database was chosen for this thesis because of its high performance and flexibility in managing spatial data. All geographic data, artifacts metadata, and excavation details will be stored within this system.
 
 
-\subsection{3D Engines}
-\label{sec:vr_tools} 
-
-\subsubsection{Unity}
+\subsection{Unity Engine}
 \label{sec:unity_description} 
+
+Unity is a cross-platform engine that provides a robust environment for developing \gls{2D} and \gls{3D} applications. 
+Its component-based architecture simplifies \gls{3D} development by allowing developers to define object behaviors through scripts in \glspl{VE}.
+Despite not being open-source, Unity offers a community forum and repositories where developers can access resources, and adapt them for their projects.
+Additionally, the Unity Learn\footnote{\url{https://learn.unity.com/}} platform provides free tutorials, simplifying the learning process.
+
+Unity will be a fundamental technology for supporting the \gls{VR} development of this project. Its integration enables users an immersive experience by visualizing several \gls{3D} data types, including excavation and glass artifacts metadata. 
+
 
 \subsection{Photogrammetry Tools}
 \label{sec:photogrammetry_tool} 
@@ -112,15 +125,15 @@ This software performs photogrammetric processing of digital images to generate 
 By stitching together photographs, \textit{Agisoft Metashape} captures the geometry, texture, and visual appearance of physical objects or environments.
 Other alternatives for photogrammetry softwares are Pix4D, RealityCapture and DroneDeploy
 
-There are some already built models of the artifacts provided by "Sérgio"???, there will be done a selection and evaluation of the greatest possibilities.
-
-\subsection{GIS Tools}
-\label{sec:gis} 
+There are some already built models of the artifacts provided by Troia archaeologists, there will be done a selection and evaluation of the greatest possibilities.
 
 
 \section{System Architecture}
 \label{sec:architecture}
 
+This section includes an overview of the system architecture. The communication flow between the layers will be conducted by a REST \gls{API}.
+REST \glspl{API} connect components in microservices architectures\footnote{{https://www.ibm.com/think/topics/rest-apis}}.
+This service was selected due to its flexiblility and lightweight solution. 
 
 \begin{figure}[h!]
     \centering
@@ -129,10 +142,6 @@ There are some already built models of the artifacts provided by "Sérgio"???, t
     \label{fig:architecture}
   \end{figure}
   \FloatBarrier
-
-
-\section{Data Repository}
-\label{sec:data_repository}
 
 
 \section{Usability Tests}
@@ -144,8 +153,10 @@ Investigators from \gls{VICARTE} will participate in these tests with valuable f
 \section{Previous Work}
 \label{sec:previous_work}
 
-During my internship, I developed a platform using React and TailwindCSS for the web layer, with C\# and ASP.NET for the application layer, and MongoDB for data storage. Communication between these three components was handled through direct requests to the web server, which forwarded \gls{CRUD} operations and interacted with the database.  
+During my internship, I developed a platform using React and TailwindCSS for the web layer, with C\# and ASP.NET for the application layer, and MongoDB\footnote{\url{https://www.mongodb.com/}} for data storage. Communication between these three components was handled through direct requests to the web server, which forwarded \gls{CRUD} operations and interacted with the database.  
 Additionally, the Database Systems and Cloud Computation Systems master's course provided me with hands-on experience in various storage methodologies and introduced me to different technologies and alternative solutions for data management.
+
+This section explains the various experiments carried out during the preparation phase.
 
 \subsection{Geographic Information System}
 \label{sec:gis_previous} 
@@ -156,7 +167,22 @@ To deepen my expertise in \gls{GIS}, I enrolled in the master's course \textit{W
 % Additionally, used frameworks like Leaflet\footnote{https://leafletjs.com/}, an open-source JavaScript library that facilitates the creation of mobile-friendly interactive maps. Leaflet offers a wide array of plugins that improve the usability and simplicity of the application. For the base map, \gls{OSM}\footnote{https://www.openstreetmap.org/} was integrated, offering a customizable and versatile visualization. This project serves as a preparatory stage for my thesis, specifically for the \gls{GIS} component, in which I will develop an interactive map of the Tróia site.
 
 The application leveraged PostGIS, a PostgreSQL extension to support spatial queries.
-Additionally, frameworks like Leaflet were used for map rendering, visualization and user interaction. For the base map, \gls{OSM} was integrated, offering a customizable and versatile visualization. This project serves as a preparatory stage for my thesis, specifically for the \gls{GIS} component, in which I will develop an interactive map of the Tróia site.
+Additionally, frameworks like Leaflet were used for map rendering, visualization and user interaction. For the base map, \gls{OSM} was integrated, offering a customizable and versatile visualization. This project serves as a preparatory stage for my thesis, specifically for the \gls{GIS} component, in which I will develop an interactive map of the Troia site.
+
+\section{Data Structure Proposal}
+\label{sec:data_strucutre}
+
+A data structure has been proposed and analysed for artifacts storage management.  
+It incorporates the key characteristics of each object to ensure structured organization and availability.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{data_structure}
+    \caption{Proposed Data Structure for Managing Artifacts Data.}
+    \label{fig:data_strucutre}
+\end{figure}
+
 
 \subsection{Photogrammetry}
 \label{sec:photogrammetry_previous} 
@@ -168,7 +194,7 @@ Within the grave where the deceased was buried, three open triangular areas were
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{model3}
-    \caption{\gls{3D} model imported into Sketchfab for visualization.}
+    \caption{\gls{3D} Model Imported into Sketchfab for Visualization.}
     \label{fig:model3}
 \end{figure}
 
@@ -185,7 +211,7 @@ This experiment simulates an intended interactive and dynamic experience, allowi
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{overlay_test}
-    \caption{Overlay \gls{3D} excavation model with a map representation.}
+    \caption{Overlay \gls{3D} Excavation Model with a Map Representation.}
     \label{fig:overlay}
 \end{figure}
 

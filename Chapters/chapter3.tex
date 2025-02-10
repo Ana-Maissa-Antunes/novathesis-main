@@ -30,7 +30,7 @@ It integrates archival research, \gls{3D} reconstruction, and web\gls{GIS} techn
 The web\gls{GIS} and \gls{GIS}-\gls{BIM} web apps are interactive tools to digitally navigate and query the environment. Below, there are the seps made to achieve both.
 Three types of elements were used to create a \gls{3D} web\gls{GIS}: polygonal feature class, multi-patch feature class, or \gls{3D} object.
 
-The historical map of the \textit{Valentino Park Fairground} was georeferenced and digitized, and a \gls{2D}/\gls{3D} map interface was developed using ArcGIS Online, allowing users to switch between views seamlessly. 
+The historical map of the \textit{Valentino Park Fairground} was georeferenced and digitized, and a \gls{2D}/\gls{3D} map interface was developed using ArcGIS Online\footnote{\url{https://www.arcgis.com/index.html}}, allowing users to switch between views seamlessly. 
 To develop the \gls{3D} models in \gls{BIM}-\gls{GIS} Web App, not only, photographs of each object, but also, plans, elevations, and sections of some Built Environment Objects, were collected. Using technical drawings, \gls{3D} models were generated and compared with historical photographs.
 The final web\gls{GIS} application, for both dimensions, was created using ArcGIS Experience Builder configurable widgets(Figure \ref{fig:turin_study}).
 
@@ -38,7 +38,7 @@ The final web\gls{GIS} application, for both dimensions, was created using ArcGI
 
 Several tools were developed in the web\gls{GIS}, including a search bar, selection of \gls{2D} map/\gls{3D} scene, layer list, legend, navigation, filters, and pop-ups, allowing users to explore built environment objects. 
 \gls{BIM} was used for detailed \gls{3D} reconstruction of selected Fair pavilions (e.g., Pavilion of Siam), and to create an interactive \gls{3D} scene with those layers. 
-The actual shape of \textit{Valentino Park} was created from an aerial photogrammetric and processed in Agisoft Metashape. Applications like Experience Builder
+The actual shape of \textit{Valentino Park} was created from an aerial photogrammetric and processed in Agisoft Metashape\footnote{\url{https://www.agisoft.com/}}. Applications like Experience Builder
 enhanced interactivity, offering features like navigation and measurement tools, bookmarks, layer toggles, and camera orientation. The current geolocation enables users in the park to be located on the web\gls{GIS} and web app. 
 The digitized archival materials are catalogued and linked to the geometries in a dedicated Geospatial Database. 
  
@@ -71,7 +71,7 @@ This will be accomplished by compiling documentation and preservation of \gls{CH
 
 The development stages of this work started with digital photogrammetry, where the objects coordinate system was defined, and control points marked on the ancient artifacts, and photographs of the antique artifacts taken.
 
-Pictures then were transferred to computer and evaluated with photogrammetic software (\textit{Photomodeler}). Following this, the \gls{3D} modeling of the historical buildings was created.
+Pictures then were transferred to computer and evaluated with photogrammetic software (\textit{Photomodeler}\footnote{\url{https://www.photomodeler.com/}}). Following this, the \gls{3D} modeling of the historical buildings was created.
 \gls{3D} forms of the building were obtained using the photos form photogrammetry taken from different views, and the object models were covered with different surface and image textures.
 \gls{GIS} was used to analyze spatial objects, such as buildings constructed within parcels and roads. The parcels were represented as polygons, while roads with lines.
 The city map of Safranbolu was obtained in \gls{CAD} format, and then transferred to ArcGIS. This data was then evaluated in \gls{GIS} by building a topological infrastructure.
@@ -144,11 +144,11 @@ Aimed at exhibition renewal, the project creates an immersive \gls{VR} experienc
 
 \subsection*{Process Description}
 
-Firstly, the photogrammetry was built by moving the camera all around these objects to capture all angles. Subsequently, the software \textit{Agisoft Photoscan} was used for texture blending. Then, the output file was imported into \textit{Adobe Photoshop} for word delineation, outlining and identification. 
+Firstly, the photogrammetry was built by moving the camera all around these objects to capture all angles. Subsequently, the software \textit{Agisoft Metashape} was used for texture blending. Then, the output file was imported into \textit{Adobe Photoshop}\footnote{\url{https://www.adobe.com/pt/products/photoshop.html}} for word delineation, outlining and identification. 
 Finally, \textit{Polyworks} to simplify the model, and resolution/texture optimization.
 The \gls{VR} device Oculus Rift DK2 provided stereoscopic visualization, while Leap Motion tracked hand movements for object interaction (grabbing, rotating, and highlighting).
 
-The responsive \gls{POI} were exported in \textit{fbx} format, and the cut parts were then imported to Unity, for integration as \gls{3D} models.
+The responsive \gls{POI} were exported in \textit{fbx} format, and the cut parts were then imported to Unity\footnote{\url{https://unity.com/}}, for integration as \gls{3D} models.
 The \gls{POI} highlight cultural symbols and texts on artifacts (e.g., religious inscriptions). When selected, they provide detailed descriptions and explanations.
 The computer graphics program \textit{\gls{3D} Studio Max} was used to enhance specific elements of the models, to improve hieroglyphs readability.
 Touch-Triggered Transliteration and Translation allows users to interact with hieroglyphic symbols. If the user wants to know more about these words, it can touch the part, the word is automatically enhanced and the transliteration and the following translation appears as illustrated in Figure \ref{fig:vrGis_thesis2}. The data involved is the name of the deceased, and descriptions explaining images or drawings on the objects.
@@ -225,7 +225,7 @@ This implementation includes \gls{AR} and geolocation technologies to immerse us
 The solution was built on top of an existing base map. Afterward, the \gls{POI} of Évora were identified and represented with \gls{AR} markers. Additionally, GPS tracking was
   integrated to allow users to monitor their location.
 The solution integrates a native Android environment and Unity game engine for seamless communication. The main goal of this dissertation is the dissemination of the \gls{CH} 
-and soundscape of Évora, with the solution integrated into Museu Nacional Frei Manuel do Cenáculo (MNFMC) \footnote{\url{https://www.museusemonumentos.pt/pt/museus-e-monumentos/museu-nacional-frei-manuel-do-cenaculo-e-igreja-de-nossa-senhora-das-merces}}. 
+and soundscape of Évora, with the solution integrated into Museu Nacional Frei Manuel do Cenáculo (MNFMC)\footnote{\url{https://www.museusemonumentos.pt/pt/museus-e-monumentos/museu-nacional-frei-manuel-do-cenaculo-e-igreja-de-nossa-senhora-das-merces}}. 
 The database was extended using PostgreSQL and PostGIS technologies.
 This project intersects with my dissertation, which explores the digital representations of cultural artifacts, and the dissemination of historical studies related to a Portuguese site. 
 Both involve the creation of a digital map and \gls{3D} object representations with tactile/auditory interactions.
@@ -251,8 +251,8 @@ The project focuses on integrating \gls{CH} objects in \glspl{VE}. As part of th
 This website is available at the following URL: \url{https://visita3d.acad-ciencias.pt/} 
 Designed with a user-friendly interface, the website offers an intuitive navigation experience, including an audio guide with simulated narration, background music, a \gls{3D} viewer, and the user can explore the components and history behind each artifact.
 The project also incorporates an interactive itinerary map, displaying all the available rooms and buttons for instinctive control of the tour. This feature allows users to explore the academy's diverse spaces quickly and effectively.
-Matterport technology was employed to create the visualization and interaction environments, providing \gls{3D} spatial mapping of the academy's rooms. Complementing this, \gls{3D} object models were created and displayed in a Sketchfab viewer. 
-To support these features, several technologies were used, including Matterport Pro3 Camera for the \gls{3D} scanning and 360º immersive views, along with frontend and backend frameworks, including Vue.js and Tailwind CSS for the interface, 
+Matterport\footnote{\url{https://matterport.com/}} technology was employed to create the visualization and interaction environments, providing \gls{3D} spatial mapping of the academy's rooms. Complementing this, \gls{3D} object models were created and displayed in a Sketchfab\footnote{\url{https://sketchfab.com/}} viewer. 
+To support these features, several technologies were used, including Matterport Pro3 Camera\footnote{\url{https://matterport.com/pro3}} for the \gls{3D} scanning and 360º immersive views, along with frontend and backend frameworks, including Vue.js and Tailwind CSS for the interface, 
 while the backend relied on Node.js. In addition, it was implemented a database to store and manage the media content.
 
 \subsection{Developing support for digital representations of Heritage artefacts in cultural exhibitions – Márcia Campanha}
