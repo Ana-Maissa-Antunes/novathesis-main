@@ -11,10 +11,22 @@
 \chapter{Fundamental Concepts}
 \label{cha:fundamental_concepts}
 
-This chapter explains the key concepts related to the theme of this thesis.
+This chapter introduces key concepts related to this thesis. Section \ref{sec:digital_heritage_foundation}
+provides background of relevant digital aspects in \gls{CH}.
+Subsequently, Section \ref{sec:interaction_visualization} explores \glspl{VE}, focusing on user interaction and visualization. 
+Section \ref{sec:data} presents diverse \gls{3D} extracting methodologies.
+Section \ref{sec:geographic_information_system} examines the role of \glspl{GIS} in applications involving map integration, particularly in the context of archaeological sites. 
+The last two sections address important standards, and documentation principles (Section \ref{sub:standart}) to consider when developing heritage applications, as well as a significant European Union initiative (Section \ref{sec:ch_cloud}).
+%applications
+%concerns
+%focused on
+%immersive
+%covering
 
 \section{Digital Heritage Foundations}
 \label{sec:digital_heritage_foundation}
+
+This section covers the fundamental concepts for integrating digital tools to visualize and preserve artifacts during archaeological studies.
 
 \subsection{Digital Cultural Heritage}
 \label{sec:digital_heritage}
@@ -123,7 +135,10 @@ in the field to progressively consider \gls{HBIM} as a relevant alternative~\cit
 \section{Interaction and Visualization Tecnologies}
 \label{sec:interaction_visualization}
 
-%INCLUIR DESCRICAO SECAO
+This section analyses virtual interactions from a technical perspective, and on the technologies used to create them.
+The first subsection (Section \ref{sec:interactors}) lists the various user task interactors. 
+Section \ref{sec:hardware_interaction} explores alternative methods of interacting with displays. 
+Finally, the last section discusses how to create a virtual simulation environment and enhance immersive interactions.
 
 \subsection{Virtual Environment Interactors}
 \label{sec:interactors}
@@ -157,9 +172,10 @@ that can be grabbed and moved (or bestow the grab and move ability to another ob
 ray selector interactor, while the figure on the right is using a poking selector.
 
 
-%CONTINUAR DAQUI
 \subsection{Hardware Interaction}
 \label{sec:hardware_interaction}
+
+This section presents the possible user interactions with \glspl{VE}, achieved through user tasks using input controllers and output devices connected to physical displays.
 
 \subsubsection{Input Devices}
 \label{sec:input_devices}
@@ -206,7 +222,6 @@ menus, voice commands, gestures, and tools.
 
 \subsubsection{Output Devices}
 \label{sec:output_devices}
-%\textbf{Output Devices}
 
 The three common \gls{VE} display devices are \glspl{HMD}, as illustrated in Figure \ref{fig:HMDs}, \glspl{SID} (fully or 
 semisurrounding displays, such as the \gls{CAVE}\footnote{\url{https://steantycip.com/vr-cave/}}) (Figure \ref{fig:HMD1}), and single-screen stereo displays, such as the Responsive Workbench\footnote{\url{https://graphics.stanford.edu/projects/RWB/}}. 
@@ -308,6 +323,9 @@ in between, where \gls{AR} is closer to the real world, and \gls{AV} is closer t
 
 \section{\glsentryshort{3D} Data Acquisition and Visualization}
 \label{sec:data}
+
+This section describes various techniques used for data acquisition, such as digital cameras and scanners and visualization through 3D models created with advanced software and further enhanced. 
+The final subsection explores approaches for artifact reconstruction and the overall process.
 
 \subsection{Photogrammetry}
 \label{sec:photogrammetry}
@@ -416,6 +434,8 @@ The \gls{OSGeo} is an organization that promotes global adoption of open geospat
 For this project, the standards established by the \gls{OGC} and the open resources provided by \gls{OSGeo} are particularly relevant. 
 These resources enable the creation of data from public geographic databases, supporting the development of interactive maps and ensuring the interoperability of geospatial data.
 
+The first subsection provides an overview of geospatial data and its usage, while the following section explores its applications in archaeology.
+
 \subsection{Geospatial Data} 
 \label{sub:geospatial_data}
 
@@ -477,7 +497,7 @@ to speed up interoperability and the process of integration~\cite{eide2008encodi
 information, fully fits our needs: its classes and properties
 work perfectly to capture the concepts underlying database structures, providing a high level of data integration.
 
-
+In the subsections below, the first presents a commonly used model with aggregated standards, followed by a significant European organization in \gls{CH} preservation.
 
 \subsection{\glsentryshort{CIDOC} Conceptual Reference Model} 
 \label{sec:cidoc}
