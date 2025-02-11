@@ -138,7 +138,7 @@ in the field to progressively consider \gls{HBIM} as a relevant alternative~\cit
 This section analyses virtual interactions from a technical perspective, and on the technologies used to create them.
 The first subsection (Section \ref{sec:interactors}) lists the various user task interactors. 
 Section \ref{sec:hardware_interaction} explores alternative methods of interacting with displays. 
-Finally, the last section discusses how to create a virtual simulation environment and enhance immersive interactions.
+Finally, the last sections discuss how to create a virtual simulation environment and enhance immersive interactions (Section \ref{sec:virtual_reality} and Section  \ref{sec:mix_reality}).
 
 \subsection{Virtual Environment Interactors}
 \label{sec:interactors}
@@ -271,34 +271,16 @@ displays should be designed in a manner to minimize these less-desirable rotatio
 
 \FloatBarrier
 
-\subsection{Augmented Reality}
-\label{sec:augmented_reality}
+\subsection{Virtual Reality}
+\label{sec:virtual_reality}
 
-\gls{AR} aims at simplifying the user’s life by bringing virtual information not
-only to his immediate surroundings, but also to any indirect view of the real-world
-environment, such as live-video stream. \gls{AR} enhances the user’s perception of and
-interaction with the real world. 
+\gls{VR} is a sophisticated technology that enables users to engage with a computer-generated environment in an interactive and immersive way. Instead of relying on traditional screens or input commands, \gls{VR} provides users a multisensorial experience. Including move freely, view and navigate in digital spaces from multiple perspectives, and manipulate objects as if they were physically present. This is possible through \gls{VR} devices equipped with motion tracking and controllers, enhancing the sense of presence and realism.
 
-Computer vision renders \gls{3D} virtual objects from the same viewpoint from which the
-images of the real scene are being taken by tracking cameras. Augmented reality image
-registration uses different method of computer vision mostly related to video tracking.
-These methods usually consist of two stages: tracking and reconstructing/recognizing. First,
-fiducial markers, optical images, or interest points are detected in the camera images.
-Tracking can make use of feature detection, edge detection, or other image processing
-methods to interpret the camera images.
+The industry of \gls{VR} combines expertise from diverse disciplines, including engineering, cybernetics, database management, real-time computing, simulation, computer graphics, ergonomics, stereoscopic imaging, anatomy, and even artificial intelligence. Despite its continuously advancements, \gls{VR} still faces significant challenges, such as improving software performance, hardware capabilities, user interaction design, and high-speed network integration.
 
-One of the most important aspects of augmented reality is to create appropriate techniques
-for intuitive interaction between the user and the virtual content of \gls{AR} applications. There
-are four main ways of interaction in \gls{AR} applications: tangible \gls{AR} interfaces, collaborative
-\gls{AR} interfaces, hybrid \gls{AR} interfaces, and the emerging multimodal interfaces~\cite{carmigniani2011augmented}.
-Firstly, tangible interfaces support direct interaction with the real world by exploiting the use of
-real, physical objects and tools. Secondly, the collaborative \gls{AR} interfaces include the use of multiple displays to support remote and colocated activities.
-Following, the hybrid interfaces combine an assortment of different, but complementary interfaces as well
-as the possibility to interact through a wide range of interaction devices.
-Finally, multimodal interfaces combine real objects input with naturally occurring forms of language
-and behaviors such as speech, touch, natural hand gestures, or gaze. This project will use an "hybrid \gls{AR} interface", which integrates various elements to create an immersive and interactive experience.
-This includes the use of digital representations such as \gls{3D} models and an interactive map, alongside physical objects like the Troia ruins and artefacts.
-Additionally, the project may incorporate other input methods, such as user gestures and touch, allowing for dynamic interactions with the content. 
+This project will use an \gls{VR} environment, which integrates various elements to create an immersive and interactive experience.
+This includes the use of digital representations such as \gls{3D} models of glass artefacts and static images of the Troia ruins.
+Additionally, the project may incorporate input methods, such as user gestures and touch, allowing for dynamic interactions with the media. 
 %By combining these diverse technologies—augmented reality (AR), digital repositories, and real-world artefacts—the project aims to provide a comprehensive platform that enhances the visitor’s experience while preserving and presenting the cultural heritage of Troia.
 
 
@@ -387,7 +369,7 @@ In traditional \gls{LiDAR} sensors, as shown in Figure \ref{fig:mechanical_LIDAR
 
 Solid-state \gls{LiDAR} presents an alternative to traditional \gls{LiDAR} by eliminating the need for a bulky mechanical rotator. %, visualization example in Figure \ref{fig:flash_based}.
 Moreover, advancements in optical technology have led to the development of nanophotonics-based devices with high potential and superior advantages for \gls{LiDAR} sensors. %An example of its usage in Figure \ref{fig:sequential_ilumination}. 
-Different scanning techniques produce diverse types of scan outputs. For instance, flash-based LiDAR from solid-state approach captures a full-frame \gls{3D} image in a single snapshot, as shown in Figure \ref{fig:flash_based}, while sequential illumination-based LiDAR scans objects by sequentially illuminating small regions, producing the whole frame, as depicted in Figure \ref{fig:sequential_ilumination}.
+Different scanning techniques produce diverse types of scan outputs. For instance, flash-based LiDAR from solid-state approach captures a full-frame \gls{3D} image in a single snapshot, as shown in Figure \ref{fig:flash_based}, while sequential illumination-based LiDAR scans objects by sequentially illuminating small regions, producing the whole frame, as depicted in Figure \ref{fig:sequential_ilumination}. \\
 
 \begin{figure}[h!]
     \centering
@@ -395,8 +377,6 @@ Different scanning techniques produce diverse types of scan outputs. For instanc
     \caption{Flash-based \gls{LiDAR} sensor. \small{Left: \gls{2D} image of sensing target, Right: Captured \gls{3D} image}~\cite{li2022progress}.}
     \label{fig:flash_based}
 \end{figure} 
-
-
 
 \begin{figure}[h!]
     \centering
@@ -429,8 +409,8 @@ A \acrfull{GIS} is a computer system for capturing, storing, checking, and displ
 surface~\cite{natgeo_2024}. By relating seemingly unrelated data integrated by geographical location, \glspl{GIS} can help individuals and organizations understand spatial patterns and relationships.
 
 In the context of \gls{GIS} and geospatial data, two of the most prominent community initiatives are the \gls{OGC}\footnote{\url{https://www.ogc.org/}} and the \gls{OSGeo}\footnote{\url{https://www.osgeo.org/}}.  
-The \gls{OGC} is an international voluntary consensus standards organization, constituting more than 450 strong united organizations (such as Esri\footnote{\url{https://www.esri.com/}}, Nasa\footnote{\url{https://www.nasa.gov/}}). The consortium publishes open standards that ensure interoperability between diverse \gls{GIS}.~\cite{ogc_who_we_are, ogcapi}
-The \gls{OSGeo} is an organization that promotes global adoption of open geospatial technology through an open philosophy and community driven development~\cite{osgeo_about}. 
+The \gls{OGC} is an international voluntary consensus standards organization, constituting more than 450 strong united organizations (such as Esri\footnote{\url{https://www.esri.com/}}, Nasa\footnote{\url{https://www.nasa.gov/}}). The consortium publishes open standards that ensure interoperability between diverse \gls{GIS}\footnote{\url{https://ogcapi.ogc.org/}}.
+The \gls{OSGeo} is an organization that promotes global adoption of open geospatial technology through an open philosophy and community driven development. 
 For this project, the standards established by the \gls{OGC} and the open resources provided by \gls{OSGeo} are particularly relevant. 
 These resources enable the creation of data from public geographic databases, supporting the development of interactive maps and ensuring the interoperability of geospatial data.
 
@@ -450,14 +430,13 @@ Maps help visualize relationships between spaces and objects in proximity, aidin
 A classic example of this geographic method is Jon Snow's study during the cholera epidemic in London in 1854~\cite{inbook}. Jon Snow plotted the locations of cholera cases against the location of water pumps and noticed that the epidemic was concentrated in a certain neighborhood. 
 Through the causal linkages, it was proven that when the contaminated pump was closed, the epidemic quickly came to a halt. 
 A map of just the water pumps or incidences of cholera would have been of little value, but combining both revealed the contaminated source. 
-%A key example of spatial analysis using GIS principles
+
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.55\linewidth]{gis}
+    \includegraphics[width=0.50\linewidth]{gis}
     \caption{Visual Representation of Data Layers Integration in a \gls{GIS}~\cite{gao_data_layers}.}
     \label{fig:gis}
 \end{figure}
-\FloatBarrier
 
 \subsection{GIS Applications in Archaeology}
 \label{sub:gis_archeology}
@@ -468,7 +447,7 @@ patterns. Additionally, the development of \gls{3D} \gls{GIS} technology enabled
 better understanding and visualization of archaeological site structures and layouts.
 
 A key technology that complements \gls{GIS} in archaeology is \gls{LiDAR}. 
-The application of \gls{LiDAR} has been successful as an archaeological prospection tool for locating and identifying
+The employment of \gls{LiDAR} has been successful as an archaeological surveying tool for locating and identifying
 sites, sometimes in very remote and difficult to access locations~\cite{article_lidar}. For example, the recent, and highly publicized, 
 discovery of what is believed to be the Mayan site of Ciudad Blanca in Honduras~\cite{Tolley2012}.
 
@@ -527,19 +506,19 @@ Although the \gls{CIDOC-CRM} model provides a common, standardized framework for
 \section{Cultural Heritage Cloud}
 \label{sec:ch_cloud}
 
-The \gls{ECCCH}\footnote{\url{https://www.echoes-eccch.eu/}} is a European Union initiative 
+The \gls{ECCCH}\footnote{\label{myfootnote}https://www.echoes-eccch.eu/}   is a European Union initiative 
 to create a shared digital infrastructure that connects \gls{CH} institutions and professionals across the \gls{EU}.
 The \gls{ECCCH} aims to add a digital dimension to \gls{CH} preservation, conservation, restoration, and enhancement 
 by providing cutting-edge technology for artefact digitisation and artwork research. 
 In Portugal, the \gls{ICOM}\footnote{\url{https://icom-portugal.org/}} is a beneficiary of the initiative, while \gls{CRUSOE}\footnote{\url{https://redcrusoe.com/}} is an \gls{ECCCH} association partner. \gls{CRUSOE} is a university association comprising institutions from both Portugal and Spain.
-While \gls{ICOM} Portugal and \gls{CRUSOE} represent the participants in Portugal, the \gls{ECCCH} also includes other 14 countries' beneficiaries, affiliated entities and/or associated partners across Europe that actively support those \gls{CH} sectors enumerated above~\cite{ecchoes}.
+While \gls{ICOM} Portugal and \gls{CRUSOE} represent the participants in Portugal, the \gls{ECCCH} also includes other 14 countries' beneficiaries, affiliated entities and/or associated partners across Europe that actively support those \gls{CH} sectors enumerated above.
 
 
-% \begin{figure}[h!]
-%     \centering
-%     \includegraphics[width=0.7\linewidth]{echoes}
-%     \caption{\gls{ECHOES} goals~\cite{ecchoes}.} 
-%     \label{fig:echoes}
-% \end{figure}
-% \FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\linewidth]{echoes}
+    \caption{\gls{ECHOES} goals \ref{myfootnote}.} 
+    \label{fig:echoes}
+\end{figure}
+\FloatBarrier
 

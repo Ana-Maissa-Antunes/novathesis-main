@@ -137,7 +137,6 @@ Users can rotate and grab the \gls{3D} models using hand gestures, as shown in F
 \section{Related Work developed at NOVA LINCS}
 \label{sec:thesis_nova}
 
-
 At NOVA, recent research work has been consistently focused on developing digital tools for museums and cultural institutions, aiming to offer immersive experiences through \gls{VR} technology or \gls{3D} media visualizations 
 of \gls{CH} objects, often incorporating interactive maps, an approach to be implemented in this dissertation. Over the past year, two Master of Science theses~\cite{tese_tourCoimbra2024,tese_tourFaria2024}  have explored how to 
 present a virtual tour of museums. Vilar's thesis~\cite{tese_jogosVilar2022} explored interactive games and \gls{3D} models, with an emphasis on cultural artefacts from the Portuguese Évora site. 
@@ -147,14 +146,12 @@ The final thesis~\cite{campanha2024heritage} focuses on \gls{3D} object manipula
 \subsection{System for Creating and Exploring Interactive Narratives and Games}
 \label{sec:thesis1_nova}
 
-
 Vilar developed his research thesis work~\cite{tese_jogosVilar2022} as part of the PASEV\footnote{\url{https://pasev.hcommons.org/}} Project \gls{PASEV}. 
 The main objective of the project was to analyse new perspectives regarding the cultural manifestations in UNESCO patrimonial city, Évora,
 which has a significant historical context~\cite{vilar2024extended}. The project started by Rosário~\cite{rosario2021responsive} and was extended by Ferreira~\cite{FerreiraEtAl2022} which were mainly dedicated to the development of a historical soundscape's web platform\footnote{\url{https://pasev.uevora.pt/}}. 
 This work focused on the study of sound events that occurred from 1540 to 1910 with the aim of preserving the city's auditory heritage~\cite{rodrigues2021using}. The user can
 visualize and display audio and media(including, in some cases, 360º photos and videos) in the web platform.
 
-  
 Vilar expanded the existing \gls{PASEV} platform by introducing JoNI, an infrastructure designed to support the creation of interactive games, involving motivational techniques, such as interactive narratives, gamification structures and the use of \gls{AR}. In the end of this project, a mobile 
 application was developed incorporating games with a narrative and characters, including \gls{2D}/\gls{3D} models and auditory data, and object recognition via photos. Two 
 functional prototypes supported by the platform were developed. The first, an interactive card game that teaches children about historical music instruments available at the Evora Museum\footnote{\url{https://www.visitevora.net/en/evora-museum/}} using audio and visual elements. The second, a gamified app to promote the discovery 
@@ -165,10 +162,8 @@ This implementation includes \gls{AR} and geolocation technologies to immerse us
 The solution was built on top of an existing base map. Afterward, the \gls{POI} of Évora were identified and represented with \gls{AR} markers. Additionally, GPS tracking was
 integrated to allow users to monitor their location.
 The solution integrates a native Android environment and Unity game engine for seamless communication. The main goal of this dissertation is the dissemination of the \gls{CH} 
-and soundscape of Évora, with the solution integrated into Museu Nacional Frei Manuel do Cenáculo (MNFMC)\footnote{\url{https://www.museusemonumentos.pt/pt/museus-e-monumentos/museu-nacional-frei-manuel-do-cenaculo-e-igreja-de-nossa-senhora-das-merces}}. 
+and soundscape of Évora, with the solution integrated into Museu Nacional Frei Manuel do Cenáculo (MNFMC)\footnote{\url{https://www.cm-evora.pt/locais/museu-nacional-frei-manuel-do-cenaculo/}}. 
 The database was extended using PostgreSQL and PostGIS technologies.
-This project intersects with the work to be developed in the context of this dissertation, which explores digital representations of cultural artefacts, and the dissemination of historical studies related to a Portuguese site. 
-Both involve the creation of a digital map and \gls{3D} object representations with tactile/auditory interactions.
 
 \subsection{Designing and implementing a museum Virtual Tour, Museu dos Coches}
 \label{sec:thesis2_nova}
@@ -192,7 +187,7 @@ This website is available at the following\footnote{\url{https://visita3d.acad-c
 Designed with a user-friendly interface, the website offers an intuitive navigation experience, including an audio guide with simulated narration, background music, a \gls{3D} viewer, enabling the user to explore the components and history behind each artefact.
 The project also incorporates an interactive itinerary map, displaying all the available rooms and buttons for instinctive control of the tour. This feature allows users to explore the academy's diverse spaces quickly and effectively.
 Matterport\footnote{\url{https://matterport.com/}} technology was employed to create the visualization and interaction environments, providing \gls{3D} spatial mapping of the academy's rooms. Complementing this, \gls{3D} object models were created and displayed in a Sketchfab\footnote{\url{https://sketchfab.com/}} viewer. 
-To support these features, several technologies were used, including Matterport Pro3 Camera\footnote{\url{https://matterport.com/pro3}} for the \gls{3D} scanning and 360º immersive views, along with frontend and backend frameworks, including Vue.js\footnote{\url{https://vuejs.org/}} and Tailwind CSS for the interface, 
+To support these features, several technologies were used, including Matterport Pro3 Camera\footnote{\url{https://matterport.com/pro3}} for the \gls{3D} scanning and 360º immersive views, along with frontend and backend frameworks, including Vue.js\footnote{\url{https://vuejs.org/}} and Tailwind CSS\footnote{\url{https://tailwindcss.com/}} for the interface, 
 while the backend relied on Node.js\footnote{\url{https://nodejs.org/}}. In addition, a database to store and manage the media content was implemented.
 
 \subsection{Developing support for digital representations of Heritage artefacts in cultural exhibitions}
@@ -204,12 +199,11 @@ Users can manipulate objects through the three axes (X,Y,Z) by rotating, scaling
 To obtain detailed information of the antiquities, the user simply selects the desired component.
 Additionally, users can upload the digital \gls{3D} representation of the object to the virtual exhibition and view a gallery menu displaying multiple perspectives of the \gls{3D} models associated with the same artefact.
 The system allows users to apply different textures to individual object components and select specific parts, which are outlined with their associated descriptions.
-The full interface, including these interactive features, can be observed in Figure \ref{fig:marcia_image}.
-The results of this project may be integrated into the environment to be developed in the context of this thesis to support \gls{3D} manipulation of object models and facilitate the archaeological analysis of the various components of each glass artefact.
+The full interface, including these interactive features, can be observed below in Figure \ref{fig:marcia_image}.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.7\linewidth]{marcia_thesis}
+  \includegraphics[width=0.8\linewidth]{marcia_thesis}
   \caption{Interface for interacting with heritage artefacts.}
   \label{fig:marcia_image}
 \end{figure}
@@ -217,6 +211,22 @@ The results of this project may be integrated into the environment to be develop
 
 \section{Discussion}
 \label{sec:discussion}
+
+This section compares various recent research works and their relevance to this dissertation by analysing their components and contributions. Table \ref{tab:comparison2} provides an illustration of these comparisons.
+
+The "The Turin 1911 Project" integrates an interactive map with multiple functionalities, while incorporating \gls{3D} models and a spatial database. 
+
+Another significant research project focused on the preservation of an archaeological site is Safranbolou \gls{GIS}. This study used \gls{3D} modeling to map historical buildings and integrate \gls{CH} monuments as metadata relevant to the site.
+
+The following research, integrated \gls{VR} to provide an immersive environment, enabling users to interact with valuable artifacts from ancient Egypt. Features such as zooming, scaling, Egyptian writing translation, highlighting, and object manipulation were implemented to enhance the user experience.
+
+To include contemporary Portuguese projects relevant to this research, Section \ref{sec:thesis_nova} was added, exploring digital representations of cultural artefacts, and the dissemination of archeological sites and institutions.
+The following three projects integrate a virtual tour. Primarily, \gls{PASEV} project extends an existing historical soundscape web platform by integrating \gls{AR}. This work also incorporates 3D interactive models, a digital map and was selected due to its completeness and the use of technologies, such as PostgreSQL with the PostGIS extension and Unity, that will also be employed in this dissertation. 
+Another relevant project is the National Coach Museum Tour, chosen for its \gls{VR} development within a 3D environment.
+Similarly, the \textit{Academia das Ciências} virtual tour provides an interactive experience by presenting \gls{3D} object models and integrating a spatial database. Additionally, an itinerary map of the Evora site and academy rooms allows transitions between the map and the \gls{VE}, enabling users to virtually transport themselves to a specific academy room.
+
+Finally, the last thesis provided an intuitive way to interact with \gls{3D} artefacts. This research developed a user interaction approach, allowing the manipulation with object's individual components. The outcomes of this study may be integrated in this dissertation, to support the \gls{3D} artefacts environment.
+
 
 \newcommand{\cmark}{\ding{51}} % Checkmark
 \newcommand{\xmark}{\ding{55}} % Cross

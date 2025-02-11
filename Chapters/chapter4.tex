@@ -16,7 +16,9 @@ This chapter aims to outline the approach that will be used to achieve the proje
 \section{Requirements}
 \label{sec:requirements}
 
-This section describes the requirements and functionalities to be developed during this dissertation. These are categorized into the following areas: Interactive Map, \gls{3D} Model Interaction, Repository, and \gls{VR} Integration.
+This section describes the requirements and functionalities to be developed during this dissertation, categorized into the following areas: Interactive Map, \gls{3D} Model Interaction, Repository, and \gls{VR} environment.
+
+Given the diverse requirements of this project, the primary focus will be on developing an immersive \gls{VE}, prioritizing \gls{3D} models and \gls{VR} for exploring glass artifacts within the tomb. The interactive map features will be included but may be implemented with less detail.
 
 \subsection*{Interactive Map}
 A map of the Troia archaeological site under study will be incorporated into the project to offer interactive functionalities.
@@ -47,7 +49,7 @@ The repository will consist of a spatial database designed to store and manage d
 \end{itemize}
 
 
-\subsection*{\gls{VR} Integration}
+\subsection*{\gls{VR} Environment}
 \gls{VR} functionalities will provide an intuitive user experience, enabling interaction with the \gls{VE} through the use of \glspl{HMD}.
 \begin{itemize}
     \item \textbf{Immersive Experience:} \gls{VR} allows users to immerse in a virtual tomb visit, enabling interaction with glass relics.
@@ -130,17 +132,16 @@ There are some already built models of the artefacts provided by Troia archaeolo
 \label{sec:architecture}
 
 This section includes an overview of the system architecture. The communication flow between the layers will be conducted by a REST \gls{API}.
-REST \glspl{API} connect components in microservices architectures\footnote{\url{https://www.ibm.com/think/topics/rest-apis}}.
-This service was selected due to its flexiblility and lightweight solution. 
+REST \glspl{API} with Node.js connects components in microservices architectures\footnote{\url{https://www.ibm.com/think/topics/rest-apis}}.
+This service was selected due to its flexibility and lightweight solution. 
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=1.0\linewidth]{System Architecture-Photoroom_Right}
-    \caption{System Architecture Overview}
-    \label{fig:architecture}
-  \end{figure}
-  \FloatBarrier
-
+\centering
+\includegraphics[width=1.0\linewidth]{system_architecture2}
+\caption{System Architecture Overview}
+\label{fig:architecture}
+\end{figure}
+\FloatBarrier
 
 \section{Usability Tests}
 \label{sec:usability_tests}
@@ -151,7 +152,7 @@ Investigators from \gls{VICARTE} will participate in these tests with valuable f
 \section{Previous Work}
 \label{sec:previous_work}
 
-During the curricular internship, a platform was developed using React\footnote{\url{https://react.dev/}} and TailwindCSS\footnote{\url{https://tailwindcss.com/}} for the web layer, with C\# and ASP.NET for the application layer, and MongoDB\footnote{\url{https://www.mongodb.com/}} for data storage. Communication between these three components was handled through direct requests to the web server, which forwarded \gls{CRUD} operations and interacted with the database.  
+During the curricular internship, a platform was developed using React\footnote{\url{https://react.dev/}} and TailwindCSS for the web layer, with C\# and ASP.NET for the application layer, and MongoDB\footnote{\url{https://www.mongodb.com/}} for data storage. Communication between these three components was handled through direct requests to the web server, which forwarded \gls{CRUD} operations and interacted with the database.  
 Additionally, the Database Systems and Cloud Computation Systems master's course provided hands-on experience in various storage methodologies and introduced different technologies and alternative solutions for data management.
 
 This section explains the various experiments carried out during the preparation phase.
@@ -209,4 +210,45 @@ This experiment simulates an intended interactive and dynamic experience, allowi
 \end{figure}
 \FloatBarrier
 
-%Insights from the Research Unit VICARTE
+
+\section{Work Plan}
+\label{cha:work_plan}
+
+This section contains the planned progress, organized into distinct tasks, each with a description. Some tasks will be developed in parallel. 
+Additionally, a Gantt chart is presented in Figure \ref{fig:gantt_chart} to illustrate the timeline for each task.
+
+\begin{itemize}
+    \item \textbf{Mockup Development}: This task focuses on developing a mockup that includes map visualization within a \gls{VE}, along with the associated functionalities and \gls{3D} models visualization.
+    \item \textbf{\gls{VE} Development}: This phase involves creating an immersive environment where users can navigate, and select objects, followed by the implementation of interactive functionalities with \gls{3D} models of the artefacts. These interactions include applying filters, zooming, and scaling. Initially, the development will focus on a simulation with a single object.
+    \item \textbf{\gls{GIS} Implementation}: This task comprises the creation of a map that allows user interaction with \gls{POI} represented by markers, integrating layers, and providing functionalities as outlined in Section \ref{sec:requirements}. Although the \gls{GIS} and \gls{VR} tools are developed in parallel, it may be possible to transfer from the map to the immersive environment through user interaction (e.g., clicking on a location on the map to display its \gls{3D} model), or the other way around.
+    \item \textbf{Database Creation for Repository}: In this phase, a database will be established to store significant data, including artefact and excavation metadata. The structure will initially focus on a single object, as proposed in Section \ref{sec:data_strucutre}. The database will be continuously updated over several weeks to data loading and modifications.
+    \item \textbf{System Evaluation \& Testing}: This task involves testing functionalities, usability, and performance, with participation from VICARTE investigators. Following the conclusion of the testing phase, the system evaluation process will begin with user questionnaires, leading to potential improvements based on the feedback received.  
+    \item \textbf{Documentation}: The dissertation report will be developed during the whole process.
+\end{itemize}
+
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=1.0\linewidth]{Gantt_chart}
+%     \caption{Gantt Chart Representation of the Work Plan.}
+%     \label{fig:gantt_chart}
+%   \end{figure}
+%   \FloatBarrier
+
+
+%   \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=1.0\linewidth]{gantt_chartt}
+%     \caption{Gantt Chart Representation of the Work Plan.}
+%     \label{fig:gantt_chart}
+%   \end{figure}
+%   \FloatBarrier
+
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.0\linewidth]{gantt_chartt2}
+    \caption{Gantt Chart Representation of the Work Plan.}
+    \label{fig:gantt_chart}
+  \end{figure}
+  \FloatBarrier
+
+
