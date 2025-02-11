@@ -14,6 +14,7 @@
 This chapter aims to outline the approach that will be used to achieve the project objectives defined in Chapter \ref{cha:introduction} while providing the prior work in the various areas relevant to this study.
 
 \section{Requirements}
+\label{sec:requirements}
 
 This section describes the requirements and functionalities to be developed during this dissertation. These are categorized into the following areas: Interactive Map, \gls{3D} Model Interaction, Repository, and \gls{VR} Integration.
 
@@ -28,9 +29,9 @@ This section describes the requirements and functionalities to be developed duri
 
 \subsection*{\gls{3D} Models \& Interaction}
 \begin{itemize}
-    \item \textbf{Artifact Interaction:} Allows users to virtually manipulate (rotate, zoom etc) the glass artifact models, as well as apply different textures.
-    \item \textbf{Contextual Overlay:} Display descriptive metadata about the artifact, such as its origin, period, and historical usage.
-    \item \textbf{Reconstructed Models:} Showcase how artifacts would look originally(having in consideration characteristics such as: colourless glass, archeological drawings and symmetry). However, due to time constraints, the reconstruction funcionality may not be completed.
+    \item \textbf{Artifact Interaction:} Allows users to virtually manipulate (rotate, zoom etc) the glass artefact models, as well as apply different textures.
+    \item \textbf{Contextual Overlay:} Display descriptive metadata about the artefact, such as its origin, period, and historical usage.
+    \item \textbf{Reconstructed Models:} Showcase how artefacts would look originally(having in consideration characteristics such as: colourless glass, archeological drawings and symmetry). However, due to time constraints, the reconstruction funcionality may not be completed.
     \item \textbf{3D Models Integration:} The user can zoom the map to visualize the perspective of a specific \gls{3D} model.
     %select a position to visualize the perspective of their 3D model.
 \end{itemize}
@@ -54,8 +55,6 @@ This section describes the requirements and functionalities to be developed duri
    % \item \textbf{Multilingual Support:} Provide language options to ensure accessibility for an international audience.
 \end{itemize}
 
-
-
 \section{Development Technologies and Tools}
 \label{sec:technologies}
 
@@ -74,20 +73,12 @@ Other alternatives for web development frameworks used for map rendering and int
 Another powerful tool is the Google Maps API\footnote{\url{https://developers.google.com/maps}}, which allows developers to embed Google Maps functionalities directly into both web and mobile applications.
 Additionally, Mapbox\footnote{\url{https://www.mapbox.com/}} and \gls{OSM}\footnote{\url{https://www.openstreetmap.org/}} provide online mapping solutions. While \gls{OSM} is open-source, offering greater flexibility and customization, and is maintained and updated by the community, Mapbox and Google Maps API have usage-based pricing plans.
 For this dissertation, one of these technologies will be used to create an interactive map, complementing an existing illustration of the Troia site area, that includes the mausoleum under study. This will be supplemented with an open map, potentially sourced from \gls{OSM}\footnote{\url{https://www.openstreetmap.org/}}.
-%REACT????
 
-%Turf\footnote{\url{https://turfjs.org/}}
-%Some popular options include 
-%ArcGIS
-%QGIS
-%Other alternatives for web development
-%notable
-%Google Maps API provides extensive features such as map layers, markers, street view, and geocoding.
 \subsection{Backend Technologies}
 \label{sec:backend} 
 
 The backend tecnologies selected for this thesis include the C\# programming language integration in Unity for scene interactions in the \gls{VE}.
-Additionally, Node.js\footnote{\url{https://nodejs.org/}} software was choosen. Node.js is an open-source and cross-platform JavaScript runtime environment that enables developers to create servers, web applications, command-line tools, and automation programs.
+Additionally, Node.js software was choosen. Node.js is an open-source and cross-platform JavaScript runtime environment that enables developers to create servers, web applications, command-line tools, and automation programs.
 This tool will be use to support the web server and to improve performance and scalibility when managing with repository data.
 
 
@@ -103,7 +94,7 @@ All three databases databases support spatial data types, allowing to store and 
 Among these, PostGIS is widely used for spatial data storage, geometry processing, and efficient geospatial querying.
 Oracle supports advanced spatial features and 3D features but has a commercial license. On the other hand, MySQL is open-source and more suitable for small-to-medium-scale projects.
 
-PostgreSQL database was chosen for this thesis because of its high performance and flexibility in managing spatial data. All geographic data, artifacts metadata, and excavation details will be stored within this system.
+PostgreSQL database was chosen for this thesis because of its high performance and flexibility in managing spatial data. All geographic data, artefacts metadata, and excavation details will be stored within this system.
 
 
 \subsection{Unity Engine}
@@ -114,7 +105,7 @@ Its component-based architecture simplifies \gls{3D} development by allowing dev
 Despite not being open-source, Unity offers a community forum and repositories where developers can access resources, and adapt them for their projects.
 Additionally, the Unity Learn\footnote{\url{https://learn.unity.com/}} platform provides free tutorials, simplifying the learning process.
 
-Unity will be a fundamental technology for supporting the \gls{VR} development of this project. Its integration enables users an immersive experience by visualizing several \gls{3D} data types, including excavation and glass artifacts metadata. 
+Unity will be a fundamental technology for supporting the \gls{VR} development of this project. Its integration enables users an immersive experience by visualizing several \gls{3D} data types, including excavation and glass artefacts metadata. 
 
 
 \subsection{Photogrammetry Tools}
@@ -125,14 +116,14 @@ This software performs photogrammetric processing of digital images to generate 
 By stitching together photographs, \textit{Agisoft Metashape} captures the geometry, texture, and visual appearance of physical objects or environments.
 Other alternatives for photogrammetry softwares are Pix4D, RealityCapture and DroneDeploy
 
-There are some already built models of the artifacts provided by Troia archaeologists, there will be done a selection and evaluation of the greatest possibilities.
+There are some already built models of the artefacts provided by Troia archaeologists, there will be done a selection and evaluation of the greatest possibilities.
 
 
 \section{System Architecture}
 \label{sec:architecture}
 
 This section includes an overview of the system architecture. The communication flow between the layers will be conducted by a REST \gls{API}.
-REST \glspl{API} connect components in microservices architectures\footnote{{https://www.ibm.com/think/topics/rest-apis}}.
+REST \glspl{API} connect components in microservices architectures\footnote{\url{https://www.ibm.com/think/topics/rest-apis}}.
 This service was selected due to its flexiblility and lightweight solution. 
 
 \begin{figure}[h!]
@@ -172,7 +163,7 @@ Additionally, frameworks like Leaflet were used for map rendering, visualization
 \section{Data Structure Proposal}
 \label{sec:data_strucutre}
 
-A data structure has been proposed and analysed for artifacts storage management.  
+A data structure has been proposed and analysed for artefacts storage management.  
 It incorporates the key characteristics of each object to ensure structured organization and availability.
 
 
@@ -189,7 +180,7 @@ It incorporates the key characteristics of each object to ensure structured orga
 
 A photogrammetric simulation was conducted using the \textit{Agisoft Metashape} environment. A total of 143 images were collected during the excavation campaign by the restoration department of NOVA, for analysis. 
 Based on these images, a \gls{3D} model was generated and subsequently imported into the \textit{Sketchfab} viewer for intuitive interaction.
-Within the grave where the deceased was buried, three open triangular areas were identified, containing the precious artifacts of the defunct, as shown in Figure~\ref{fig:model3} below.
+Within the grave where the deceased was buried, three open triangular areas were identified, containing the precious artefacts of the defunct, as shown in Figure~\ref{fig:model3} below.
 
 \begin{figure}[h]
     \centering
@@ -203,7 +194,7 @@ Within the grave where the deceased was buried, three open triangular areas were
 \label{sec:unity} 
 
 To reproduce the visualization of the \gls{3D} models on the map, a simulation was created in Unity, as presented in Figure \ref{fig:overlay}. The goal was to overlay the map with the \gls{3D} excavation model.
-To achieve this, the illustrated map was placed as the ground surface, with the excavation model positioned above it. The ultimate objective is to apply this approach to the artifacts found within the three triangular areas of the grave.
+To achieve this, the illustrated map was placed as the ground surface, with the excavation model positioned above it. The ultimate objective is to apply this approach to the artefacts found within the three triangular areas of the grave.
 
 This experiment simulates an intended interactive and dynamic experience, allowing users to explore the map and objects through interactive layers while using an \gls{HMD}.
 
