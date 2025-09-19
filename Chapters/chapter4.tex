@@ -13,10 +13,12 @@
 
 \section{Adopted Tools and Tecnhologies}
 
-The following section focuses on the technologies and tools that were used in the implementation of this project. These include frontend, backend, database, and \gls{3D} development tools.
+The following section focuses on the technologies and tools used in implementing this project. 
+These include environments used, backend, database, and \gls{3D} development tools.
+
 \subsection{Working Environment}
 
-In the \gls{VR} environment, the Unity editor was employed, with code scripts developed in the programming language C++ using the \textbf{Visual Studio Integrated Development Environment (IDE)}.
+The  \gls{VR} environment was developed using the Unity editor, with code scripts written in C\# within the \textbf{Visual Studio Integrated Development Environment (IDE)}.
 Its features, such as debugging tools, error detection, code navigation, Unity-specific types recognized automatically, and IntelliSense suggestions, greatly enhanced productivity. 
 To further support this integration, the Visual Studio Editor package was utilized. 
 
@@ -26,9 +28,7 @@ The same IDE was also adopted for the report writing in LaTeX, due to Overleaf l
 The version control system used initially for project management was \textbf{GitHub}, providing effective tracking of updates and overall code organization.
 However, as a consequence of storage limitations in handling large files, such as the \gls{2D} ground view or the funerary enclosure \gls{3D} model, the \textbf{Diversion} tool was employed as an alternative solution for managing these system.
 
-\subsection{3D Engines and Libraries}
-
-\subsubsection{Unity}
+\subsection{Unity}
 \textbf{Unity} is a cross-platform engine that provides a robust environment for developing \gls{2D} and \gls{3D} applications. 
 Its component-based architecture simplifies \gls{3D} development by allowing developers to define object behaviors through scripts in \glspl{VE}.
 Unity also offers a community forum and repositories available in \textbf{Unity Asset Store}\footnote{\url{https://assetstore.unity.com/}} where developers can access resources and adapt them for their projects.
@@ -40,62 +40,22 @@ The headset device used for testing during the implementation and for user evalu
 The following packages of Unity Asset Store were used to enhance the \gls{UI} and streamline the development process:
 
 \begin{itemize}
-\item{\textbf{Free UI Click Sound Pack}\footnote{\url{https://assetstore.unity.com/packages/audio/sound-fx/free-ui-click-sound-pack-244644}} - It's a collection of diverse clickable sounds, designed to provide an immersive and complete \gls{UX}.}
+\item{\textbf{Free UI Click Sound Pack}\footnote{\url{https://assetstore.unity.com/packages/audio/sound-fx/free-ui-click-sound-pack-244644}} - This package provides a collection of diverse clickable sounds, designed to provide an immersive and complete \gls{UX}.}
 \item{\textbf{Simple Pie Menu}\footnote{\url{https://assetstore.unity.com/packages/tools/gui/simple-pie-menu-radial-menu-asset-270056}}} - A radial menu system implemented as the main menu of the project. Further details on its functionality are provided in Section X.
 \item{\textbf{White \& Black GUI}\footnote{\url{https://assetstore.unity.com/packages/2d/gui/icons/white-black-gui-by-gamertose-168805}}} - This package includes a range of trivial and useful icons used to guide users in navigating menu items and to support image gallery switching between pre- and post-intervention object states.
 \end{itemize}
 
-Additionally, the \textbf{Unity Learn}\footnote{\url{https://learn.unity.com/}} platform provided free tutorials, substantially simplifying the learning process during development.
+%Additionally, the \textbf{Unity Learn}\footnote{\url{https://learn.unity.com/}} platform provided free tutorials, substantially simplifying the learning process during development.
 
-\subsubsection{XR Plugin Management}
-The \textbf{XR Plugin Management} package was used to simplify the integration and management of various XR plug-ins. 
-This package is primarily responsible for loading, initializing, configuring settings, and providing build support for XR features. 
-It was used in conjunction with the OpenXR.
-
-\textbf{OpenXR} is an open-standard \gls{API} enabling cross-platform development, with a high-performance access to AR and VR paltforms and devices. In this sudy this plugin, handles communication with the \gls{VR} headset.
-
-\subsubsection{XR Interaction Toolkit}
-The \textbf{XR Interaction Toolkit} was a central component in the development process, providing essential interaction capabilities and abstracting much of the low-level complexity of \gls{VR} development. It enabled features such as Hand tracking, 
-Object interaction (e.g., grab and release), Teleportation-based locomotion, \gls{UI} interaction, and Controller support.
-
-\subsubsection{XR Device Simulator}
-
-One of the most relevant features during the development phase on controller support was the \textbf{XR Device Simulator} included in this toolkit. 
-This utility allowed for testing \gls{VR} interactions without the need for a physical \gls{HMD}. 
-It simulated input from \gls{VR} controllers using a standard mouse and keyboard. 
-Despite its usefulness along this dissertation, it's important to note that certain interactions did not behave identically compared to testing with the actual headset.
-
-The \textbf{XR Origin} served as the root GameObject that encapsulates the main camera and controller setup. 
-It handles camera tracking based on the user's head movement and manages controller positioning and orientation. 
-Within this structure, the XR Rig was used as the container for the camera and associated controllers.
-
-To implement user movement within the \gls{VE}, the Locomotion System package was utilized. The following components were integrated: 
-
-Teleportation Provider: Enabled teleportation across the plane surface using the left joystick.
-
-Teleportation Anchors: Defined specific teleportation points, represented as buttons.
-
-Continuous Move Provider: Allowed smooth movement via the right joystick.
-
-Snap Turn Provider: Enabled rotational movement in fixed increments, chosen over continuous turning to reduce motion sickness.
-
-
-
-For interaction within the virtual scene, the toolkit offered components such as the XR Near-far interactor, that provided a way to interact with the scene through the ray emitted from the controllers, and the XR Grab Interactable enabled direct manipulation of virtual objects through grabbing, holding, and releasing actions.
-
-For input handling, Unity provides two systems: the old Input Manager and the newer \textbf{Input System Package}. 
-While the Input Manager is built into the Unity engine and used by default, the project adopted the Input System Package due to its flexibility, and scalability. 
-This newer system supports a wide range of input devices and enables precise configuration through a centralized interface. Input actions are defined and managed using the Input Action Manager, which allows the developer to specify actions and map them to devices or controls. Each input action is activated as needed during runtime, offering an adaptable input handling framework.
-
-\subsubsection{Tools}
-\textbf{GIMP}, an open-source cross-platform image editor, was used to edit the map draw for integration as ground in Unity (rotated and cropped).
-
-Additionally, GIMP was useful in editing the post-intervention object images. The object's images were cut out from their backgrounds, which were then replaced with a neutral grey. This enhanced clarity for users and allowed easy comparison between the object's before and after the cleaning and conservation treatment.
-
+\subsection{Tools}
 \textbf{Blender} is an open-source computer graphics software useful to a wide range of tasks, such as model, animate, create textures, materials. 
 This tool was used to create an aproximation of the original texture of the glass object. Originally transparent, translucent.
 
-\subsubsection*{Photogrammetry}
+\textbf{GIMP}, an open-source cross-platform image editor, was used to edit the map draw for integration as ground in Unity (rotated and cropped).
+Additionally, GIMP was useful in editing the post-intervention object images. The object's images were cut out from their backgrounds, which were then replaced with a neutral grey. 
+This enhanced clarity for users and allowed easy comparison between the object's before and after the cleaning and conservation treatment.
+
+\subsubsection{Photogrammetry}
 \label{sec:photogrammetry_tool} 
 
 The software used to process digital images and generate the \gls{3D} model of the funerary enclosure was \textit{Agisoft Metashape}\footnote{\url{https://www.agisoft.com/}}.
@@ -110,7 +70,8 @@ By stitching together photographs, \textit{Agisoft Metashape} captured the geome
 
 Two already built models of artefacts provided were provided by \gls{VICARTE}.
 
-\subsection{Backend}
+\subsection{Backend \& Data Management}
+\subsubsection{Backend}
 
 The backend technology selected for this thesis was \textbf{Node.js}, an open-source, cross-platform JavaScript runtime environment. 
 Node.js enables developers to create servers, web applications, command-line tools, and automation programs.
@@ -122,7 +83,7 @@ Express.js is the most popular Node.js web application framework, widely used fo
 In this study, the web server Express.js\footnote{\url{https://expressjs.com/}} was used to expose the REST endpoints.
 
 
-\subsection{Database Repository}
+\subsubsection{Database Repository}
 \label{sec:repos}
 
 There are several alternatives for storage management systems, but the option shelt for this project was \textbf{PostgreSQL} for its geographical extension, PostGIS, and its relational database is more appropriate due to its flexibility and consistency.
@@ -130,14 +91,74 @@ Additionally, because of its high performance and flexibility in managing spatia
 
 PostGIS is widely used for spatial data storage, geometry processing, and efficient geospatial querying.
 
-All artefacts data, excavation details, and objects intervention data were be stored within this system.
-%REFERIR QUANTAS TABELAS E DE QUÊ...artigo
+\subsubsection{Testing Tools}
 
-\section{Communication between Unity and Database}
+One of the most relevant features during the development phase on controller support was the \textbf{XR Device Simulator} included in XR Interaction Toolkit. 
+This utility allowed for testing \gls{VR} interactions without the need for a physical \gls{HMD}. 
+It simulated input from \gls{VR} controllers using a standard mouse and keyboard. 
+Despite its usefulness along this dissertation, it's important to note that certain interactions did not behave identically compared to testing with the actual headset.
 
-\subsection{Unity Communication}
 
-\subsection{Get Dropdown Options}
+\subsection{XR Components and Plugins}
+\subsubsection{XR Plugin Management}
+The \textbf{XR Plugin Management} package was used to simplify the integration and management of various XR plug-ins. 
+This package is primarily responsible for loading, initializing, configuring settings, and providing build support for XR features. 
+It was used in conjunction with the OpenXR.
+
+\textbf{OpenXR} is an open-standard \gls{API} enabling cross-platform development, with a high-performance access to AR and VR paltforms and devices. In this sudy this plugin, handles communication with the \gls{VR} headset.
+
+\subsubsection{XR Interaction Toolkit}
+The \textbf{XR Interaction Toolkit} was a central component in the development process, providing essential interaction capabilities and abstracting much of the low-level complexity of \gls{VR} development. It enabled features such as Hand tracking, 
+Object interaction (e.g., grab and release), Teleportation-based locomotion, \gls{UI} interaction, and Controller support.
+
+\subsubsection{User Movement Components}
+The \textbf{XR Origin} served as the root GameObject that encapsulates the main camera and controller setup. 
+It handles camera tracking based on the user's head movement and manages controller positioning and orientation. 
+Within this structure, the XR Rig was used as the container for the camera and associated controllers.
+
+To implement user movement within the \gls{VE}, the Locomotion System package was utilized. The following components were integrated: 
+
+\begin{itemize}
+\item{\textbf{Continuous Move Provider:}  Allowed smooth movement via the right joystick.}
+\item{\textbf{Snap Turn Provider:}  Enabled rotational movement in fixed increments, chosen over continuous turning to reduce motion sickness.}
+\item{\textbf{Teleportation Provider:} Enabled teleportation across the plane surface using the left joystick.}
+\item{\textbf{Teleportation Anchors:} Defined specific teleportation points, represented as buttons.}
+\end{itemize}
+
+\subsubsection{User Interaction Components}
+For interaction within the virtual scene, the toolkit offered components such as the XR Near-far interactor, that provided a way to interact with the scene through the ray emitted from the controllers, and the XR Grab Interactable enabled direct manipulation of virtual objects through grabbing, holding, and releasing actions.
+
+For input handling, Unity provides two systems: the old Input Manager and the newer \textbf{Input System Package}. 
+While the Input Manager is built into the Unity engine and used by default, the project adopted the Input System Package due to its flexibility, and scalability. 
+This newer system supports a wide range of input devices and enables precise configuration through a centralized interface. Input actions are defined and managed using the Input Action Manager, which allows the developer to specify actions and map them to devices or controls. 
+Each input action is activated as needed during runtime, offering an adaptable input handling framework.
+
+
+Character Controller ?
+
+\section{System Architecture}
+
+The system is divided into three application layers.
+The \textbf{Presentation Layer} manages the \gls{VR} environment and its interaction with users. The \textbf{Application Layer} includes the management of Unity Requests, with the support of the framework "UnityWebRequest" REF, acting as an intermediate between the Unity client and the database. 
+The communication flow between these layers is managed through a Node.js REST API, chosen for its flexibility and lightweight design. 
+Finally, the \textbf{Data Access Layer} contains the database, which stores all information related to object data, excavation, and object interventions. 
+The architecture of the system can be observed in Figure \ref{fig:architecture}.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{Diagrama_Arquitetura}
+    \caption{System Architecture Overview of the Developed System.} 
+    \label{fig:architecture}
+\end{figure}
+
+During the development stage, the database was hosted locally on a PostgreSQL server managed via pgAdmin\footnote{\url{https://www.pgadmin.org/}}, an Open Source management tool for PostgreSQL. To access and present data in Unity, it was necessary to manually execute the "index.js" file, which contained the Node.js API endpoints.
+Subsequently, before the user testing phase, the backend code, comprising both the API endpoints and the PostgreSQL database, was deployed to the FCT Server with a dedicated service.
+This deployment ensured that the server hosting the API endpoints remained continuously active, allowing Unity clients to retrieve data seamlessly without manual intervention.
+
+\section{System Implementation}
+
+\subsection{Communication between Unity and Database}
+
+\subsubsection{Dropdown Options Retrieval}
 
 \begin{lstlisting}[language=C++, caption={Method used to load artifact IDs and define as options in the Dropdown.}, label={lst:artifact_ids}]
       IEnumerator GetOptionsIds(string url)
@@ -168,7 +189,7 @@ All artefacts data, excavation details, and objects intervention data were be st
         }
     }
 \end{lstlisting}
-\subsection{Get Images}
+\subsubsection{Object Images Retrieval}
 \begin{lstlisting}[language=C++]
       private void GetImages(int id, string[] images_path)
     {
@@ -216,7 +237,7 @@ All artefacts data, excavation details, and objects intervention data were be st
     }
 \end{lstlisting}
 
-\subsection{Get Textual Data}
+\subsubsection{Object Textual Data Retrieval}
 \begin{lstlisting}[language=C++]
       IEnumerator GetData(string url)
     {
@@ -250,7 +271,7 @@ All artefacts data, excavation details, and objects intervention data were be st
     }
 \end{lstlisting}
 
-\subsection{API Endpoints}
+\subsubsection{API Endpoints}
 
 To retrieve information for each object, requests are made to the repository layer. 
 Two main API endpoints were implemented for this purpose:
@@ -282,32 +303,8 @@ Two main API endpoints were implemented for this purpose:
 });
 \end{lstlisting}
 
-\section{System Architecture}
 
-The system is divided into three application layers.
-The \textbf{Presentation Layer} manages the \gls{VR} environment and its interaction with users. The \textbf{Application Layer} includes the management of Unity Requests, with the support of the framework "UnityWebRequest" REF, acting as an intermediate between the Unity client and the database. 
-The communication flow between these layers is managed through a Node.js REST API, chosen for its flexibility and lightweight design. 
-Finally, the \textbf{Data Access Layer} contains the database, which stores all information related to object data, excavation, and object interventions. 
-The architecture of the system can be observed in Figure \ref{fig:architecture}.
-
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=1\linewidth]{Diagrama_Arquitetura}
-    \caption{System Architecture Overview of the Developed System.} 
-    \label{fig:architecture}
-\end{figure}
-
-
-During the development stage, the database was hosted locally on a PostgreSQL server managed via pgAdmin\footnote{\url{https://www.pgadmin.org/}}, an Open Source management tool for PostgreSQL. To access and present data in Unity, it was necessary to manually execute the "index.js" file, which contained the Node.js API endpoints.
-Subsequently, before the user testing phase, the backend code, comprising both the API endpoints and the PostgreSQL database, was deployed to the FCT Server with a dedicated service.
-This deployment ensured that the server hosting the API endpoints remained continuously active, allowing Unity clients to retrieve data seamlessly without manual intervention.
-
-
-
-\section{Virtual Environment}
-
-\subsection{Content/Media Visualization}
+\subsection{Virtual Environment}
 
 \subsection*{Objects UI}
 The UI includes a canvas where users can interact with and explore object data. A dropdown menu allows the user to select an object by its identification number. Once selected, the corresponding data is retrieved from the database, as described in the "Database Section".
@@ -331,11 +328,10 @@ A \textbf{Lerp function} was used to blend between the two textures based on the
 \textbf{Reflection Probes} to simulate environmental reflections, \textbf{Fresnel effects} to model light behaviour at glancing angles, and adjustments to \textbf{specular} and  \textbf{diffuse} lighting properties. This shader enabled a more faithful representation of the object's original appearance.
 
 
-\subsection{Object Manipulation}
-\subsection{User Navigation}
+\subsection*{User Navigation}
 The user can navigate in the environment with the controllers. Using them you can simplify moving by walking as in real world or teletransporting with the controllers.
 
-\subsection{Map Functionalities}
+\subsection*{Map Functionalities}
 Activate 3D model of the funerary enclosure.
 
 %Essential Stages/Steps
@@ -343,7 +339,7 @@ Activate 3D model of the funerary enclosure.
 \subsubsection{Light Technique}
 There is a main directional light that illuminates the entire environment along, simulating reality. However, it was understood that depending on the angle, the user might see the tomb and objects black due to shadows. To address this, a secondary point light was added that follows the user, so the user can view the tomb with clarity and have a good visibility while navigating in the environment.
 
-\section{Funerary Enclosure model reduction}
+\subsubsection{Funerary Enclosure model reduction}
 The resolution of the burial site model was significantly reduced in Agisoft Metashape software through "Decimate Model" property.
 This adjustment was necessary due to warnings of potential collision issues arising in the model's size of over 2 million triangles. 
 Therefore, the number of faces was reduced from 1.9 million to approximately 100 thousand, preserving the essential level of detail while improving efficiency.
@@ -354,31 +350,39 @@ Therefore, the number of faces was reduced from 1.9 million to approximately 100
 
 %\subsection{Map Functionalities}
 %\subsection{Files Upload}
-\section{Geospatial Database}
+\section{Database Management}
 \subsection{Data Structure}
 
-The database contains 11 tables that assure the significant data of excavation and objects are stored.
-(FOTO)
+The database consists of 11 tables that ensure the significant data of excavation and objects are stored. %All artefacts data, excavation details, and objects intervention data were stored within this repository.
+These tables cover data on the necropolis, funerary enclosure, tombs, objects, excavations, and interventions.
+The detailed structure, including relationships and attributes, is illustrated in Figure \ref{fig:database}.
 
-The database model was designed considering future extensibility. Initially, it was structured to store significant data from the necrópoles, including the mausoléu and tomb under study. The structure was generalized to improve scalability, flexibility to possibly include data, such as other tombs, associated objects, and aggregate the maximum information. 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth, trim=10cm 0cm 10cm 0cm, clip]{thesis_db_}
+    \caption{Relational Database Model.} 
+    \label{fig:database}
+\end{figure}
+
+
+The database model was designed considering future extensibility. Initially, it was structured to store significant data from the necropolis, including the funerary enclosure and tomb under study. The structure was generalized to improve scalability, flexibility to possibly include data, such as other tombs, associated objects, and aggregate the maximum information. 
 Throughout the thesis period, the database structure was continuously refined and restructured with new tables, relations, and data fields.
 
-It was decided to not store the entire image (as binary data) in the database. Instead, only file paths to the images were saved. This allowed for efficient access and manipulation of images, while other object-related data (e.g., text and links) was fully stored in the database.
+It was decided to not store the entire image, as binary data in the database. Instead, only file paths to the images were saved. This allowed for efficient access and manipulation of images, while other object-related data, such as text and links, was fully stored in the database.
 
 For generating the data model, SQL was used to create a database dump.
 Using "dbdiagram.io", this dump was translated into a visual diagram showing tables and their relations. This tool streamlined the creation of the Entity-Relationship diagram through code.
 
 
-\section{Potential Usage and Expansion}
+\section{Potential Usage and Future Expansion}
 
-The integration of a mix reality experience, when the user clicked in a button the user would be redirected and teletransported to the VR environment that I developed. 
+\subsection{Mixed Reality Integration}
+The integration of a mixed reality experience, where, upon clicking a button, users would be redirected and teleported into the developed VR environment. 
 
-Initially it was pensado desenvnolver um mapa with JavaScript, and its library Leaflet. But the path of the project changed to combining together in the Unity \gls{VE} the map and the funerary enclosure and its elements. This way the user is walking in the map as is it should in reality and has the model in the specific position.
-The map that could be improved creating a more complete experience in the \gls{VE}.
-
-
-Leaflet.js
-Javascript
+\subsection{Design Choices}
+Initially, the idea involved creating a map using JavaScript and its Leaflet.js\footnote{\url{https://leafletjs.com/}} library. 
+However, the dissertation's direction shifted towards integrating the map with the funerary enclosure and its elements directly in Unity, forming a unified \gls{VE}. This way, the users can walk across the map as if in reality, while simultaneously viewing the \gls{3D} model accurately positioned in space. 
+The map itself still holds potential for further enhancement, which could contribute to a more complete and immersive experience within the \gls{VE}.
 
 %Incluo seccao de dificuldades/desafios ao lonbgo do desenvolvimento? 
 %ou vou colocando na seccao pretendzida;;ex: hand tracking vs controllers
