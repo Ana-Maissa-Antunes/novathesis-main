@@ -13,51 +13,297 @@
 
 \section{Adopted Tools and Tecnhologies}
 
+The following section focuses on the technologies and tools that were used in the implementation of this project. These include frontend, backend, database, and \gls{3D} development tools.
 \subsection{Working Environment}
 
-In the \gls{VE} it was used the Unity editor and each code script with programming language C++ was implementend in Visual Studio IDE.\\
+In the \gls{VR} environment, the Unity editor was employed, with code scripts developed in the programming language C++ using the \textbf{Visual Studio Integrated Development Environment (IDE)}.
+Its features, such as debugging tools, error detection, code navigation, Unity-specific types recognized automatically, and IntelliSense suggestions, greatly enhanced productivity. 
+To further support this integration, the Visual Studio Editor package was utilized. 
 
-For the backend (node.js server and database) it was used VSCode, as well the report writing along the thesis, due to latex limitations.
-%\subsection{Frontend}
+For the backend implementation, comprising the Node.js server and the database, \textbf{Visual Studio Code (VSCode)} was utilized. 
+The same IDE was also adopted for the report writing in LaTeX, due to Overleaf limitations.
+
+The version control system used initially for project management was \textbf{GitHub}, providing effective tracking of updates and overall code organization.
+However, as a consequence of storage limitations in handling large files, such as the \gls{2D} ground view or the funerary enclosure \gls{3D} model, the \textbf{Diversion} tool was employed as an alternative solution for managing these system.
 
 \subsection{3D Engines and Libraries}
 
 \subsubsection{Unity}
+\textbf{Unity} is a cross-platform engine that provides a robust environment for developing \gls{2D} and \gls{3D} applications. 
+Its component-based architecture simplifies \gls{3D} development by allowing developers to define object behaviors through scripts in \glspl{VE}.
+Unity also offers a community forum and repositories available in \textbf{Unity Asset Store}\footnote{\url{https://assetstore.unity.com/}} where developers can access resources and adapt them for their projects.
+
+For this study, Unity was selected for developing the \gls{VR} environment. The C\# programming language within Unity facilitates the management of game objects and user interactions in the \gls{VE}.
+Its integration enables users an immersive experience while interacting with \gls{UI}, using the \gls{HMD}. 
+The headset device used for testing during the implementation and for user evaluation was \textbf{Meta Quest 3}.
+
+The following packages of Unity Asset Store were used to enhance the \gls{UI} and streamline the development process:
+
+\begin{itemize}
+\item{\textbf{Free UI Click Sound Pack}\footnote{\url{https://assetstore.unity.com/packages/audio/sound-fx/free-ui-click-sound-pack-244644}} - It's a collection of diverse clickable sounds, designed to provide an immersive and complete \gls{UX}.}
+\item{\textbf{Simple Pie Menu}\footnote{\url{https://assetstore.unity.com/packages/tools/gui/simple-pie-menu-radial-menu-asset-270056}}} - A radial menu system implemented as the main menu of the project. Further details on its functionality are provided in Section X.
+\item{\textbf{White \& Black GUI}\footnote{\url{https://assetstore.unity.com/packages/2d/gui/icons/white-black-gui-by-gamertose-168805}}} - This package includes a range of trivial and useful icons used to guide users in navigating menu items and to support image gallery switching between pre- and post-intervention object states.
+\end{itemize}
+
+Additionally, the \textbf{Unity Learn}\footnote{\url{https://learn.unity.com/}} platform provided free tutorials, substantially simplifying the learning process during development.
+
+\subsubsection{XR Plugin Management}
+The \textbf{XR Plugin Management} package was used to simplify the integration and management of various XR plug-ins. 
+This package is primarily responsible for loading, initializing, configuring settings, and providing build support for XR features. 
+It was used in conjunction with the OpenXR.
+
+\textbf{OpenXR} is an open-standard \gls{API} enabling cross-platform development, with a high-performance access to AR and VR paltforms and devices. In this sudy this plugin, handles communication with the \gls{VR} headset.
+
+\subsubsection{XR Interaction Toolkit}
+The \textbf{XR Interaction Toolkit} was a central component in the development process, providing essential interaction capabilities and abstracting much of the low-level complexity of \gls{VR} development. It enabled features such as Hand tracking, 
+Object interaction (e.g., grab and release), Teleportation-based locomotion, \gls{UI} interaction, and Controller support.
+
+\subsubsection{XR Device Simulator}
+
+One of the most relevant features during the development phase on controller support was the \textbf{XR Device Simulator} included in this toolkit. 
+This utility allowed for testing \gls{VR} interactions without the need for a physical \gls{HMD}. 
+It simulated input from \gls{VR} controllers using a standard mouse and keyboard. 
+Despite its usefulness along this dissertation, it's important to note that certain interactions did not behave identically compared to testing with the actual headset.
+
+The \textbf{XR Origin} served as the root GameObject that encapsulates the main camera and controller setup. 
+It handles camera tracking based on the user's head movement and manages controller positioning and orientation. 
+Within this structure, the XR Rig was used as the container for the camera and associated controllers.
+
+To implement user movement within the \gls{VE}, the Locomotion System package was utilized. The following components were integrated: 
+
+Teleportation Provider: Enabled teleportation across the plane surface using the left joystick.
+
+Teleportation Anchors: Defined specific teleportation points, represented as buttons.
+
+Continuous Move Provider: Allowed smooth movement via the right joystick.
+
+Snap Turn Provider: Enabled rotational movement in fixed increments, chosen over continuous turning to reduce motion sickness.
 
 
-The Headset device user for this purpose it was Metaquest3, because...
+
+For interaction within the virtual scene, the toolkit offered components such as the XR Near-far interactor, that provided a way to interact with the scene through the ray emitted from the controllers, and the XR Grab Interactable enabled direct manipulation of virtual objects through grabbing, holding, and releasing actions.
+
+For input handling, Unity provides two systems: the old Input Manager and the newer \textbf{Input System Package}. 
+While the Input Manager is built into the Unity engine and used by default, the project adopted the Input System Package due to its flexibility, and scalability. 
+This newer system supports a wide range of input devices and enables precise configuration through a centralized interface. Input actions are defined and managed using the Input Action Manager, which allows the developer to specify actions and map them to devices or controls. Each input action is activated as needed during runtime, offering an adaptable input handling framework.
 
 \subsubsection{Tools}
-GIMP, an open-source cross-platform image editor, was used to edit the map draw for integration as ground in Unity (rotated and cropped).
+\textbf{GIMP}, an open-source cross-platform image editor, was used to edit the map draw for integration as ground in Unity (rotated and cropped).
 
 Additionally, GIMP was useful in editing the post-intervention object images. The object's images were cut out from their backgrounds, which were then replaced with a neutral grey. This enhanced clarity for users and allowed easy comparison between the object's before and after the cleaning and conservation treatment.
 
+\textbf{Blender} is an open-source computer graphics software useful to a wide range of tasks, such as model, animate, create textures, materials. 
+This tool was used to create an aproximation of the original texture of the glass object. Originally transparent, translucent.
+
+\subsubsection*{Photogrammetry}
+\label{sec:photogrammetry_tool} 
+
+The software used to process digital images and generate the \gls{3D} model of the funerary enclosure was \textit{Agisoft Metashape}\footnote{\url{https://www.agisoft.com/}}.
+This software performs photogrammetric processing of digital images to generate \gls{3D} spatial data, which can be applied in various fields such as \gls{GIS} applications, \gls{CH} documentation, visual effects production, and indirect measurements of objects of diverse scales. 
+
+ A total of 143 images were collected after the excavation campaign by an archaelogist of this site. (INCLUO NOME DA INES VAZ PINTO?)
+ % by the restoration department of NOVA for analysis. 
+Based on these images, a \gls{3D} model was generated from the photogrammetric survey and subsequently imported into the \textit{Sketchfab} viewer for intuitive interaction.
+Within the grave where the deceased was buried, three open triangular areas were identified, containing the precious artefacts of the defunct, as shown in Figure~\ref{fig:model3} below.
+By stitching together photographs, \textit{Agisoft Metashape} captured the geometry, texture, and visual appearance details of the physical funerary enclosure.
+%Other alternatives for photogrammetry softwares are Pix4D\footnote{\url{https://www.pix4d.com/}}, RealityCapture\footnote{\url{https://www.capturingreality.com/}} and DroneDeploy\footnote{\url{https://www.dronedeploy.com/}}
+
+Two already built models of artefacts provided were provided by \gls{VICARTE}.
 
 \subsection{Backend}
 
-Node.js - To make the communication between Unity and the Database\\
-Requests: GET Object/GET by ID\\
+The backend technology selected for this thesis was \textbf{Node.js}, an open-source, cross-platform JavaScript runtime environment. 
+Node.js enables developers to create servers, web applications, command-line tools, and automation programs.
 
-PostgresSQL - Contains the SQL code to create the pretended tables and constraints, and the insertion of data
+In this thesis, Node.js was used to support the web server and to improve performance and scalability when handling repository data. 
+Additionally, it will streamline the communication between Unity and the database repository.
+
+Express.js is the most popular Node.js web application framework, widely used for building web applications and \gls{API}s, with a minimal and flexible design.
+In this study, the web server Express.js\footnote{\url{https://expressjs.com/}} was used to expose the REST endpoints.
 
 
-\section*{API Endpoints}
+\subsection{Database Repository}
+\label{sec:repos}
+
+There are several alternatives for storage management systems, but the option shelt for this project was \textbf{PostgreSQL} for its geographical extension, PostGIS, and its relational database is more appropriate due to its flexibility and consistency.
+Additionally, because of its high performance and flexibility in managing spatial data. 
+
+PostGIS is widely used for spatial data storage, geometry processing, and efficient geospatial querying.
+
+All artefacts data, excavation details, and objects intervention data were be stored within this system.
+%REFERIR QUANTAS TABELAS E DE QUÊ...artigo
+
+\section{Communication between Unity and Database}
+
+\subsection{Unity Communication}
+
+\subsection{Get Dropdown Options}
+
+\begin{lstlisting}[language=C++, caption={Method used to load artifact IDs and define as options in the Dropdown.}, label={lst:artifact_ids}]
+      IEnumerator GetOptionsIds(string url)
+    {
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            string wrappedJson = "{\"items\":" + www.downloadHandler.text + "}";
+            ArtifactList artifactList = JsonUtility.FromJson<ArtifactList>(wrappedJson);
+            
+            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+
+            options.Add(new TMP_Dropdown.OptionData("-- Select ID --"));
+
+            foreach (Artifact artifact in artifactList.items)
+            {
+                string id = artifact.id.ToString();
+
+                options.Add(new TMP_Dropdown.OptionData("     " + id));
+            }
+            dropdown.AddOptions(options);
+        }
+        else
+        {
+            Debug.LogError("Error: " + www.error);
+        }
+    }
+\end{lstlisting}
+\subsection{Get Images}
+\begin{lstlisting}[language=C++]
+      private void GetImages(int id, string[] images_path)
+    {
+
+        if (images_path.Length != 0)
+        {
+            changeView.SetActive(true);
+
+            for (int x = 0; x < images_path.Length; x++)
+            {
+                var imagePath = images_path[x];
+
+                if (x > images_path.Length / 2)
+                {
+                    height = 0;
+                }
+                else if (x == images_path.Length / 2) { x_pos = 1.5f; height = 0; }
+                else { height = 1; }
+
+                Sprite sprite = Resources.Load<Sprite>("Images/" + imagePath);
+
+                if (sprite != null)
+                {
+                    GameObject newImgObj = new GameObject("Image_" + imagePath, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+                    newImgObj.transform.SetParent(imageParent, false);
+
+                    RectTransform rectTransform = newImgObj.GetComponent<RectTransform>();
+                    rectTransform.sizeDelta = new Vector2(1, 1);
+                    rectTransform.localPosition = new Vector3(x_pos++, height, 0);
+
+                    Image imgComponent = newImgObj.GetComponent<Image>();
+                    imgComponent.sprite = sprite;
+                }
+                else
+                {
+                    Debug.LogWarning("Couldn't load sprite at path: " + imagePath);
+                }
+            }
+            x_pos = 1.5f;
+        }
+        else
+        {
+            Debug.LogWarning("Couldn't load Images for Object ID" + id);
+        }
+    }
+\end{lstlisting}
+
+\subsection{Get Textual Data}
+\begin{lstlisting}[language=C++]
+      IEnumerator GetData(string url)
+    {
+
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+        Debug.Log($"Getting objects data.. {www.result}");
+
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+             artifact = JsonUtility.FromJson<Artifact>(www.downloadHandler.text);
+
+             string displayText = "<b>Object Details:</b>\n\n";
+
+            string new_string = artifact.material.Split("{")[1];
+            string new_string1 = new_string.Split("}")[0];
+
+             displayText += $"ID: {artifact.id} | Name: {artifact.name} \nMaterial: {new_string1} | Epoch: {artifact.epoch} \nProvenance: {artifact.provenance}" +
+                         $"\nDimensions: {artifact.dimensions.height} x {artifact.dimensions.width} cm, Weight: {Mathf.Round(artifact.dimensions.weight * 10.0f) * 0.1f} g";
+
+            resultText.text = displayText;
+
+            GetImages(artifact.id, artifact.images_path_b_interv);
+        }
+        else
+        {
+            resultText.text = "Error loading data.";
+            Debug.LogError("Error: " + www.error);
+        }
+    }
+\end{lstlisting}
+
+\subsection{API Endpoints}
 
 To retrieve information for each object, requests are made to the repository layer. 
 Two main API endpoints were implemented for this purpose:
 
 \begin{enumerate}
-  \item \textbf{/GET (get\_data)}
-  \\Retrieves a list of object IDs by querying the \textbf{"objects"} table. These IDs are used to populate the dropdown menu options in the user interface.
- %\vspace{1em}
-  \item \textbf{/GET (get\_data\_by\_id)}
-  \\Fetches detailed information for a specific object based on its ID. This request is triggered when a user selects an object ID from the dropdown menu in the UI.
-  Sempre que o ID é alterado no dropdown, o pedido é refeito e os dados no painel e galeria de imagens são atualizados.
+  \item \textbf{/GET (get-objects\_data)}
+  \\Retrieves a list of object IDs by querying the \textbf{"object"} table. These IDs are used to populate the dropdown menu options in the \gls{UI}.
+
+  \item \textbf{/GET (get-objects\_data/:id)}
+  \\Fetches detailed information for a specific object based on its ID. This request is triggered when a user selects an object ID from the dropdown menu in the \gls{UI}
+  Whenever the ID in the dropdown is changed, the system issues a new request for the corresponding ID, and the visualization panel and image gallery are updated accordingly.
+
+  The representation of this endpoint is shown in Listing \ref{lst:api}. As illustrated int line 5, the query joins two tables, \textbf{"object"} and \textbf{"object\_intervention"}, to fetch simultaneously object data and images before and after interventions for display in the Image Gallery (REF FUNCIONALIDADE). 
+  This SQL query enables the system to retrieve all necessary information with a single request after the user selects an object ID, thereby improving efficiency and reducing the need for multiple requests.
+
 \end{enumerate}
 
+\begin{lstlisting}[language=C++, caption={Example of defining an API endpoint in Node.js.},label={lst:api}]
+  app.get('/get-objects_data/:id', async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const result = await pool.query('SELECT * FROM object inner join object_intervention on object.id = object_intervention.object_id WHERE object.id = $1', [id]);
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
+\end{lstlisting}
 
 \section{System Architecture}
-Acrescentar imagem e texto da preparação!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+The system is divided into three application layers.
+The \textbf{Presentation Layer} manages the \gls{VR} environment and its interaction with users. The \textbf{Application Layer} includes the management of Unity Requests, with the support of the framework "UnityWebRequest" REF, acting as an intermediate between the Unity client and the database. 
+The communication flow between these layers is managed through a Node.js REST API, chosen for its flexibility and lightweight design. 
+Finally, the \textbf{Data Access Layer} contains the database, which stores all information related to object data, excavation, and object interventions. 
+The architecture of the system can be observed in Figure \ref{fig:architecture}.
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{Diagrama_Arquitetura}
+    \caption{System Architecture Overview of the Developed System.} 
+    \label{fig:architecture}
+\end{figure}
+
+
+During the development stage, the database was hosted locally on a PostgreSQL server managed via pgAdmin\footnote{\url{https://www.pgadmin.org/}}, an Open Source management tool for PostgreSQL. To access and present data in Unity, it was necessary to manually execute the "index.js" file, which contained the Node.js API endpoints.
+Subsequently, before the user testing phase, the backend code, comprising both the API endpoints and the PostgreSQL database, was deployed to the FCT Server with a dedicated service.
+This deployment ensured that the server hosting the API endpoints remained continuously active, allowing Unity clients to retrieve data seamlessly without manual intervention.
+
+
 
 \section{Virtual Environment}
 
