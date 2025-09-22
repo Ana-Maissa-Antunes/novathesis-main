@@ -381,33 +381,57 @@ These allow two modes of movement: continuous walking, which simulates real-worl
 
 There are two types of teleportation available in the environment. The first allows the user to teleport freely to any position on the environment’s ground plane. The second restricts teleportation to specific points of interest, marked with blue icons (anchors).
 
-Additionally, users can rotate the perspective inside the environment, using the controllers, moving laterally with the right joystick.
+In addition to locomotion, users can switch their perspective inside the environment, using the controllers, moving laterally with the right joystick.
 Both continuous movement and snap turning can also be performed physically, without controllers, within the limits of the real-world space.
+
+The overall movement system is managed by the "Character Controller" component, which also ensures accurate collision detection. In particular, the collider associated with the user interacts with the collider of the funerary enclosure, preventing the user from passing through walls and thereby preserving realism in the experience.
+
+Further refinements and a dynamic management of movement behavior were introduced in the script "CustomMovement", where two key methods were implemented within Unity’s default Update() function.
+The first method continuously updates the center of the character controller to reflect the user’s current position during locomotion. 
+The second manages custom movement behaviors by dynamically controlling gravity. Depending on the context, gravity may either be applied or disabled. When active, it influences the user’s velocity over time, and its intensity can be adjusted dynamically.
 
 \subsection*{Tomb Navigation Logic}
 To access the tomb, the user may either walk in continuous movement toward its interior or use teleportation by clicking on the blue anchor located in that area.
 
-During the dissertation process, different techniques were implemented and tested.
+During the dissertation process, different techniques were implemented and tested to address navigation and visualization challenges inside the tomb.
 
-\textbf{Plan Removal to View the Tomb Interior}
+\begin{enumerate}
+\item{\textbf{Plan Removal}
 
 The first approach used a collider placed inside the tomb. When the user collided with it, the ground plane was removed, revealing the full interior of the tomb.
 
 This, in the end, caused conflicts because the interior collider overlapped with the collider responsible for activating the funerary enclosure.
 
 To handle this issue, the limits of the tomb were defined manually. With this method, the plane disappears when the user enters that space and reappears once the user exits it.
+}
+\item{
+\textbf{Vertical Descend}
 
-                                                                                  
+Another challenge was ensuring that users could navigate naturally within the tomb while maintaining clear visibility of objects and architectural details inside. Standard gravity alone was insufficient, as it did not allow reliable interaction with objects located in triangular areas.
+To address this, the "TombNavigation" script was developed, introducing controlled vertical displacement along the y-axis.
+
+Initially, a Raycasting approach was tested, directing rays toward the front and the floor of the tomb. When a collision was detected, the user’s position was adjusted and lowered by a few centimeters. Although functional, this method is unreliable, as it heavily depends on the user’s viewing direction, extracted from the camera position.
+
+The final implementation instead defined the tomb interior using axis-based boundaries. When the user entered this delimited area, they were automatically displaced downward. Upon exiting, the user’s position was restored to its correct height, ensuring they did not remain unnaturally below the expected level. This approach allows the user to enter and exit the tomb by simply walking.
+
+During development, two alternative exit mechanisms, a block and a ladder, were added. However, these were later deactivated, as they were unnecessary with the finalized gravity-based solution and occupied additional space in the relatively small tomb environment. Nevertheless, both alternatives remain available for reactivation if required in the future.
+}
+\end{enumerate}
+
 \subsection*{Funerary Enclosure Interaction}
-Activate 3D model of the funerary enclosure.
-%referir limitação das paredes que fazem um papel real
+The system provides the possibility to activate/deactivate the \gls{3D} model of the funerary enclosure.
+This functionality is triggered using the trigger button of the left command. When the user points to the funerary enclosure area in the map, a purple reticle appears, indicating that the enclosure can be activated. This interaction can be performed at any point during the experience.
+
+To ensure realism, the funerary enclosure is implemented with a default Mesh Collider combined with an aggregated Rigidbody. This configuration prevents the user from crossing the enclosure walls and accurately reproduces the surface levels of the original structure, thereby enhancing the immersive experience.
+
+An exception occurs when the user is inside the tomb. In this case, the funerary enclosure collider is temporarily disabled, allowing the user to descend naturally to the ground without obstruction. Once the user exits the tomb, the collider is restored to maintain consistent collision detection.
 
 %Essential Stages/Steps
 \subsection{Key Techniques}
 \subsubsection{Light Technique}
 There is a main directional light that illuminates the entire environment along, simulating reality. However, it was understood that depending on the angle, the user might see the tomb and objects black due to shadows. To address this, a secondary point light was added that follows the user, so the user can view the tomb with clarity and have a good visibility while navigating in the environment.
 
-\subsubsection{Funerary Enclosure model reduction}
+\subsubsection{Funerary Enclosure Model Reduction}
 The resolution of the burial site model was significantly reduced in Agisoft Metashape software through "Decimate Model" property.
 This adjustment was necessary due to warnings of potential collision issues arising in the model's size of over 2 million triangles. 
 Therefore, the number of faces was reduced from 1.9 million to approximately 100 thousand, preserving the essential level of detail while improving efficiency.
