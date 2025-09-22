@@ -41,7 +41,7 @@ The following packages of Unity Asset Store were used to enhance the \gls{UI} an
 
 \begin{itemize}
 \item{\textbf{Free UI Click Sound Pack}\footnote{\url{https://assetstore.unity.com/packages/audio/sound-fx/free-ui-click-sound-pack-244644}} - This package provides a collection of diverse clickable sounds, designed to provide an immersive and complete \gls{UX}.}
-\item{\textbf{Simple Pie Menu}\footnote{\url{https://assetstore.unity.com/packages/tools/gui/simple-pie-menu-radial-menu-asset-270056}}} - A radial menu system implemented as the main menu of the project. Further details on its functionality are provided in Section X.
+\item{\textbf{Simple Pie Menu}\footnote{\url{https://assetstore.unity.com/packages/tools/gui/simple-pie-menu-radial-menu-asset-270056}}} - A radial menu system implemented as the main menu of the project. Further details on its functionality are provided in Section \ref{sec:main_menu}.
 \item{\textbf{White \& Black GUI}\footnote{\url{https://assetstore.unity.com/packages/2d/gui/icons/white-black-gui-by-gamertose-168805}}} - This package includes a range of trivial and useful icons used to guide users in navigating menu items and to support image gallery switching between pre- and post-intervention object states.
 \end{itemize}
 
@@ -190,7 +190,11 @@ This deployment ensured that the server hosting the API endpoints remained conti
     }
 \end{lstlisting}
 \subsubsection{Object Images Retrieval}
-\begin{lstlisting}[language=C++]
+
+As shown in Listing \ref{lst:artifact_images}, the images are iterated in a loop over the path array retrieved from the "object\_intervention" table. The array passed to this method may be either "images\_path\_b\_interv", containing the object images before intervention, or "images\_path\_a\_interv", after the intervention.
+For each image, a component is created and positioned appropriately within the gallery.
+
+\begin{lstlisting}[language=C++, caption={Method used to load artifact images and displayed them in the Images Gallery.}, label={lst:artifact_images}]
       private void GetImages(int id, string[] images_path)
     {
 
@@ -306,11 +310,27 @@ Two main API endpoints were implemented for this purpose:
 
 \subsection{Virtual Environment}
 
-\subsection*{Objects UI}
-The UI includes a canvas where users can interact with and explore object data. A dropdown menu allows the user to select an object by its identification number. Once selected, the corresponding data is retrieved from the database, as described in the "Database Section".
+\subsection*{Panel \gls{UI}}
+The \gls{UI} includes a canvas where users can interact with and explore object data. 
+ It contains three interactive elements: the Toggle Layer and the Mausoleum Profile checkboxes,  and Dropdown Menu.
+
+ The first element, \textbf{Toggle Layer}, is a checkbox that controls the visibility of the ground plane.
+By default, the base plan is represented by a partial drawing of this archaeological site, which includes the burial enclosure under study. 
+ When the user activates the checkbox, the plan switches to a photograph of the actual site, offering a more realistic view and a stronger sense of presence. The user can at any time toggle the view in the checkbox to view the pretended plan.
+
+The second element, the \textbf{Mausoleum Profile}, works similarly. However, in this case, it opens a profile image of the mausoleum wall, displaying the different material types and layers of construction.
+
+The third element, the \textbf{Dropdown Menu}, allows the user to select an object by its identification number (ID).
+Once selected, the corresponding textual data and intervention images are retrieved from the database.
+Besides this interaction panel, on the right side of the interface is the place where the textual data related to the selected Object ID is displayed.
+
+The Images Gallery interaction, displayed on the left side of the map, is described below.
 
 \subsection*{Image Gallery}
-The VE also contains an image gallery that is activated upon object selection. This gallery displays images of the object before and after the intervention. Users can switch between these states by hovering the controller ray over the gallery arrow. In this manner, the users can view the images of a concrete object, compare the visual differences, and acquire a clearer understanding of the intervention's impact on each object.
+The \gls{VE} also contains an image gallery that is activated upon object selection. 
+This gallery displays images of the object before and after intervention. 
+Users can switch between these states by hovering the controller ray over the gallery arrow. 
+In this manner, they can view the images of a concrete object, compare the visual differences, and acquire a clearer understanding of the intervention's impact on each object.
 
 \subsection*{Object Slider}
 
@@ -327,12 +347,60 @@ the original appearance of the object, and the current state.
 A \textbf{Lerp function} was used to blend between the two textures based on the user's interaction with the virtual slider. To enhance realism, additional lighting and reflection techniques were integrated into the shader, including:
 \textbf{Reflection Probes} to simulate environmental reflections, \textbf{Fresnel effects} to model light behaviour at glancing angles, and adjustments to \textbf{specular} and  \textbf{diffuse} lighting properties. This shader enabled a more faithful representation of the object's original appearance.
 
+\subsection*{Main Menu}
+\label{sec:main_menu}
+
+The main menu was built with the support of the \textbf{SimplePieMenu} asset.
+However, it was restructured and adapted for use with \gls{VR} controllers, since the original implementation was developed for Unity \gls{3D} without \gls{VR} handling.
+The menu can be opened or closed with the trigger button of the right controller.
+Additionally, to select an option, the user points at it with the ray and selects it using the controller’s select button. To detect which menu option is being targeted, a \textbf{Raycast} operation is performed based on the current position of the right controller ray, as illustrated in Listing \ref{lst:menu_raycast}.
+
+Currently, the menu contains only one functional option, represented by a menu icon. This option performs a single action: activating or deactivating the \textbf{Panel \gls{UI}} menu.
+
+\begin{lstlisting}[language=C++, caption={Method used to get the position that was pointed by the controller ray.}, label={lst:menu_raycast}]
+    public Vector2 GetPosition(Vector2 anchoredPosition, Transform controllerTransform)
+    {
+        Ray ray = new Ray(controllerTransform.position, controllerTransform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, 50f, LayerMask.GetMask("Default")))
+        {
+            Vector3 screenPoint = Camera.main.WorldToScreenPoint(hit.point);
+            
+            return new Vector2(
+                screenPoint.x - Screen.width / 2f,
+                screenPoint.y - Screen.height / 2f
+            );
+        }
+        return Vector2.zero;
+    }
+\end{lstlisting}
+
 
 \subsection*{User Navigation}
-The user can navigate in the environment with the controllers. Using them you can simplify moving by walking as in real world or teletransporting with the controllers.
+The user can navigate in the environment with the controllers. 
+These allow two modes of movement: continuous walking, which simulates real-world locomotion, and teleportation, providing a faster way to reposition within the scene.
 
-\subsection*{Map Functionalities}
+There are two types of teleportation available in the environment. The first allows the user to teleport freely to any position on the environment’s ground plane. The second restricts teleportation to specific points of interest, marked with blue icons (anchors).
+
+Additionally, users can rotate the perspective inside the environment, using the controllers, moving laterally with the right joystick.
+Both continuous movement and snap turning can also be performed physically, without controllers, within the limits of the real-world space.
+
+\subsection*{Tomb Navigation Logic}
+To access the tomb, the user may either walk in continuous movement toward its interior or use teleportation by clicking on the blue anchor located in that area.
+
+During the dissertation process, different techniques were implemented and tested.
+
+\textbf{Plan Removal to View the Tomb Interior}
+
+The first approach used a collider placed inside the tomb. When the user collided with it, the ground plane was removed, revealing the full interior of the tomb.
+
+This, in the end, caused conflicts because the interior collider overlapped with the collider responsible for activating the funerary enclosure.
+
+To handle this issue, the limits of the tomb were defined manually. With this method, the plane disappears when the user enters that space and reappears once the user exits it.
+
+                                                                                  
+\subsection*{Funerary Enclosure Interaction}
 Activate 3D model of the funerary enclosure.
+%referir limitação das paredes que fazem um papel real
 
 %Essential Stages/Steps
 \subsection{Key Techniques}
