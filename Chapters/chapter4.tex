@@ -70,6 +70,13 @@ By stitching together photographs, \textit{Agisoft Metashape} captured the geome
 
 Two already built models of artefacts provided were provided by \gls{VICARTE}.
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{model3}
+    \caption{\gls{3D} Model Imported into Sketchfab for Visualization.}
+    \label{fig:model3}
+\end{figure}
+
 \subsection{Backend \& Data Management}
 \subsubsection{Backend}
 
@@ -133,8 +140,6 @@ While the Input Manager is built into the Unity engine and used by default, the 
 This newer system supports a wide range of input devices and enables precise configuration through a centralized interface. Input actions are defined and managed using the Input Action Manager, which allows the developer to specify actions and map them to devices or controls. 
 Each input action is activated as needed during runtime, offering an adaptable input handling framework.
 
-
-Character Controller ?
 
 \section{System Architecture}
 
@@ -288,7 +293,7 @@ Two main API endpoints were implemented for this purpose:
   \\Fetches detailed information for a specific object based on its ID. This request is triggered when a user selects an object ID from the dropdown menu in the \gls{UI}
   Whenever the ID in the dropdown is changed, the system issues a new request for the corresponding ID, and the visualization panel and image gallery are updated accordingly.
 
-  The representation of this endpoint is shown in Listing \ref{lst:api}. As illustrated int line 5, the query joins two tables, \textbf{"object"} and \textbf{"object\_intervention"}, to fetch simultaneously object data and images before and after interventions for display in the Image Gallery (REF FUNCIONALIDADE). 
+  The representation of this endpoint is shown in Listing \ref{lst:api}. As illustrated int line 5, the query joins two tables, \textbf{"object"} and \textbf{"object\_intervention"}, to fetch simultaneously object data and images before and after interventions for display in the Image Gallery, described in Section \ref{sec:image_gallery}. 
   This SQL query enables the system to retrieve all necessary information with a single request after the user selects an object ID, thereby improving efficiency and reducing the need for multiple requests.
 
 \end{enumerate}
@@ -311,14 +316,43 @@ Two main API endpoints were implemented for this purpose:
 \subsection{Virtual Environment}
 
 \subsection*{Panel \gls{UI}}
-The \gls{UI} includes a canvas where users can interact with and explore object data. 
- It contains three interactive elements: the Toggle Layer and the Mausoleum Profile checkboxes,  and Dropdown Menu.
 
- The first element, \textbf{Toggle Layer}, is a checkbox that controls the visibility of the ground plane.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/main_panel}
+    \caption{Panel \gls{UI} Interaction.}
+    \label{fig:main_panel}    
+\end{figure}
+
+The \gls{UI} includes a canvas where users can interact with and explore object data, as shown in the left panel of Figure \ref{fig:main_panel}. 
+
+In this example, the object ID selected from the dropdown menu is "21684," and the textual data associated with this object is displayed in the right panel. 
+This panel is initially empty and populates with the relevant object details after a selection is made. 
+
+The \gls{UI} contains three interactive elements: the "Toggle Layer" and "Mausoleum Profile" checkboxes, and the "Dropdown Menu".
+
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/layer}
+    \caption{Toggle Layer to a photo of the Site Occidental part.}
+    \label{fig:toggle_layer}    
+\end{figure}
+
+
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/mausoleum_profile}
+    \caption{Funerary Enclosure Profile constructions layer view.}
+    \label{fig:mausoleum_profile}    
+\end{figure}
+
+The first element, \textbf{Toggle Layer}, is a checkbox that controls the visibility of the ground plane.
 By default, the base plan is represented by a partial drawing of this archaeological site, which includes the burial enclosure under study. 
- When the user activates the checkbox, the plan switches to a photograph of the actual site, offering a more realistic view and a stronger sense of presence. The user can at any time toggle the view in the checkbox to view the pretended plan.
+When the user activates the checkbox, the plan switches to a photograph of the actual site, offering a more realistic view and a stronger sense of presence. 
+This feature is illustrated in Figure \ref{fig:toggle_layer}.
+The user can at any time toggle the view in the checkbox to view the pretended plan.
 
-The second element, the \textbf{Mausoleum Profile}, works similarly. However, in this case, it opens a profile image of the mausoleum wall, displaying the different material types and layers of construction.
+The second element, the \textbf{Funerary Enclosure Profile}, demonstrated in Figure \ref{fig:mausoleum_profile}, works similarly. However, in this case, it opens a profile image of the mausoleum wall, displaying the different material types and layers of construction.
 
 The third element, the \textbf{Dropdown Menu}, allows the user to select an object by its identification number (ID).
 Once selected, the corresponding textual data and intervention images are retrieved from the database.
@@ -327,19 +361,38 @@ Besides this interaction panel, on the right side of the interface is the place 
 The Images Gallery interaction, displayed on the left side of the map, is described below.
 
 \subsection*{Image Gallery}
+\label{sec:image_gallery}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Implementation/images_gallery}
+    \caption{Image Gallery with object images before intervention.}
+    \label{fig:image_gallery}
+\end{figure}
+
 The \gls{VE} also contains an image gallery that is activated upon object selection. 
 This gallery displays images of the object before and after intervention. 
 Users can switch between these states by hovering the controller ray over the gallery arrow. 
 In this manner, they can view the images of a concrete object, compare the visual differences, and acquire a clearer understanding of the intervention's impact on each object.
 
 \subsection*{Object Slider}
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/grab_object}
+    \caption{Object Slider Interaction.}
+    \label{fig:object_slider}
+\end{figure}
 
-The Object Slider was designed as an interactive feature within the VE, allowing users to visualize an object's transformation over time—from its original condition to its current, restored state. The goal was to provide an immersive experience, creating the sensation of traveling back in time to observe the physical changes the object has undergone throughout the years.
+The Object Slider was designed as an interactive feature within the \gls{VE}, allowing users to visualize an object's transformation over time, from its original condition to its current, restored state. 
+
+This functionality is illustrated in Figure \ref{fig:object_slider}, where the user holds the object with the left controller while manipulating the slider, named “Original Texture,” with the right controller. 
+The texture initially displayed corresponds to the post-excavation state, and as the user moves the slider to the right, it gradually transitions to the original glass texture.
+The goal was to provide an immersive experience, creating the sensation of traveling back in time to observe the physical changes the object has undergone throughout the years.
 
 Several experimental approaches were conducted to achieve this effect, focusing on shader development.
 Two main approaches were explored, as described below:
 
-The first attempt involved creating a shader that utilized a single texture input—specifically, the texture of the object after restoration. A white color was used to control the alpha (transparency) values, and the transition effect was managed using a linear interpolation (lerp) function. This shader was developed using Unity’s Shader Graph, which provided a visual, node-based interface for building the transition logic.
+The first attempt involved creating a shader that utilized a single texture input, specifically the texture of the object after restoration. A white color was used to control the alpha (transparency) values, and the transition effect was managed using a linear interpolation (lerp) function. This shader was developed using Unity’s Shader Graph, which provided a visual, node-based interface for building the transition logic.
 
 The final solution involved a more advanced shader developed using Unity’s Surface Shader. This version accepted two texture inputs:
 the original appearance of the object, and the current state.
@@ -350,7 +403,14 @@ A \textbf{Lerp function} was used to blend between the two textures based on the
 \subsection*{Main Menu}
 \label{sec:main_menu}
 
-The main menu was built with the support of the \textbf{SimplePieMenu} asset.
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/main_menu}
+    \caption{Main Menu Interaction, with the option of the Main Panel selected.}
+    \label{fig:main_menu}
+\end{figure}
+
+The main menu, displayed in Figure \ref{fig:main_menu}, was built with the support of the \textbf{SimplePieMenu} asset.
 However, it was restructured and adapted for use with \gls{VR} controllers, since the original implementation was developed for Unity \gls{3D} without \gls{VR} handling.
 The menu can be opened or closed with the trigger button of the right controller.
 Additionally, to select an option, the user points at it with the ray and selects it using the controller’s select button. To detect which menu option is being targeted, a \textbf{Raycast} operation is performed based on the current position of the right controller ray, as illustrated in Listing \ref{lst:menu_raycast}.
@@ -391,7 +451,23 @@ The first method continuously updates the center of the character controller to 
 The second manages custom movement behaviors by dynamically controlling gravity. Depending on the context, gravity may either be applied or disabled. When active, it influences the user’s velocity over time, and its intensity can be adjusted dynamically.
 
 \subsection*{Tomb Navigation Logic}
+
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/tomb_outside}
+    \caption{Tomb Exterior View with blue anchor inside.}
+    \label{fig:tomb_outside}    
+\end{figure}
+
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/tomb_inside}
+    \caption{Tomb Interior View with Objects positioned.}
+    \label{fig:tomb_inside}    
+\end{figure}
+
 To access the tomb, the user may either walk in continuous movement toward its interior or use teleportation by clicking on the blue anchor located in that area.
+Upon entering, the user will have a view similar to the one shown in Figure \ref{fig:tomb_inside}.
 
 During the dissertation process, different techniques were implemented and tested to address navigation and visualization challenges inside the tomb.
 
@@ -403,6 +479,7 @@ The first approach used a collider placed inside the tomb. When the user collide
 This, in the end, caused conflicts because the interior collider overlapped with the collider responsible for activating the funerary enclosure.
 
 To handle this issue, the limits of the tomb were defined manually. With this method, the plane disappears when the user enters that space and reappears once the user exits it.
+In Figure \ref{fig:tomb_outside}, the outside view of the tomb is depicted. As illustrated, the plane is disabled, providing full visibility of the tomb’s interior.
 }
 \item{
 \textbf{Vertical Descend}
@@ -419,8 +496,15 @@ During development, two alternative exit mechanisms, a block and a ladder, were 
 \end{enumerate}
 
 \subsection*{Funerary Enclosure Interaction}
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/default_plan_with_reticle}
+    \caption{Funerary Enclosure Activation Reticle in the default ground plan.}
+    \label{fig:funerary_interaction}    
+\end{figure}
+
 The system provides the possibility to activate/deactivate the \gls{3D} model of the funerary enclosure.
-This functionality is triggered using the trigger button of the left command. When the user points to the funerary enclosure area in the map, a purple reticle appears, indicating that the enclosure can be activated. This interaction can be performed at any point during the experience.
+This functionality is triggered using the trigger button of the left command. When the user points to the funerary enclosure area in the map, a purple reticle appears, indicating that the enclosure can be activated, as illustrated in Figure \ref{fig:funerary_interaction}. This interaction can be performed at any point during the experience.
 
 To ensure realism, the funerary enclosure is implemented with a default Mesh Collider combined with an aggregated Rigidbody. This configuration prevents the user from crossing the enclosure walls and accurately reproduces the surface levels of the original structure, thereby enhancing the immersive experience.
 
