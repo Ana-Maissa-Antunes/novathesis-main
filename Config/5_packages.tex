@@ -101,3 +101,18 @@
       {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
       {€}{{\EUR}}1 {£}{{\pounds}}1
 }
+
+% Define HLSL language settings
+\lstdefinelanguage{HLSL}{
+    keywords={
+       float, return, smoothstep, lerp, fresnel, SAMPLE_TEXTURE2D
+    },
+    keywordstyle=\bfseries, % Bold black for all keywords
+    sensitive=true,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    commentstyle=\color{green!50!black}\itshape,
+    string=[b]{"},
+    stringstyle=\color{red},
+    morestring=[b]{'}
+}

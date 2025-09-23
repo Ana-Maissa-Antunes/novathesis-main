@@ -376,6 +376,8 @@ Users can switch between these states by hovering the controller ray over the ga
 In this manner, they can view the images of a concrete object, compare the visual differences, and acquire a clearer understanding of the intervention's impact on each object.
 
 \subsection*{Object Slider}
+\label{sec:object_slider}
+
  \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\linewidth]{Implementation/grab_object}
@@ -394,11 +396,73 @@ Two main approaches were explored, as described below:
 
 The first attempt involved creating a shader that utilized a single texture input, specifically the texture of the object after restoration. A white color was used to control the alpha (transparency) values, and the transition effect was managed using a linear interpolation (lerp) function. This shader was developed using Unity’s Shader Graph, which provided a visual, node-based interface for building the transition logic.
 
-The final solution involved a more advanced shader developed using Unity’s Surface Shader. This version accepted two texture inputs:
-the original appearance of the object, and the current state.
 
-A \textbf{Lerp function} was used to blend between the two textures based on the user's interaction with the virtual slider. To enhance realism, additional lighting and reflection techniques were integrated into the shader, including:
-\textbf{Reflection Probes} to simulate environmental reflections, \textbf{Fresnel effects} to model light behaviour at glancing angles, and adjustments to \textbf{specular} and  \textbf{diffuse} lighting properties. This shader enabled a more faithful representation of the object's original appearance.
+The final solution involved a more advanced shader, written in Unity High-Level Shader Language (HLSL) for the Universal Render Pipeline (URP)\footnote{\url{https://docs.unity3d.com/Manual/urp/writing-custom-shaders-urp.html}}. 
+This approach provided more control over the material's appearance compared to Unity's built-in shaders.
+The shader was constructed using key URP shader libraries, including those for lighting and shading calculations\footnote{\url{https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@14.0/manual/use-built-in-shader-methods-lighting.html}}
+, reflection probes\footnote{\url{https://docs.unity3d.com/Manual/urp/use-built-in-shader-methods-indirect-lighting.html}}
+, shadow integration\footnote{\url{https://docs.unity3d.com/6000.1/Documentation/Manual/urp/use-built-in-shader-methods-shadows.html}}
+, camera operations\footnote{\url{https://docs.unity3d.com/Manual/urp/use-built-in-shader-methods-camera.html}}
+, and transformations\footnote{\url{https://docs.unity3d.com/Manual/urp/use-built-in-shader-methods-transformations.html}}.
+%https://docs.unity3d.com/Manual/urp/use-built-in-shader-methods.html
+
+This version accepted two texture inputs: the original appearance of the object (input variable \texttt{\_DecayTex}) and its current state (input variable \texttt{\_RestoredTex}).
+Besides the texture inputs, the shader provides the following adjustable material properties: \emph{Blend Factor}, \emph{Glass Color}, \emph{Smoothness}, \emph{Fresnel Power}, \emph{Specular Color}, and \emph{Reflection Intensity}, enabling precise control over how the textures blend and the visual appearance of the material. 
+These properties can be modified directly through the Unity Inspector.
+
+A \textbf{Lerp function} was used to interpolate between the two textures, considering their \texttt{Albedo}, \texttt{Alpha} and \texttt{Smoothness} attributes, as shown in Listing \ref{lst:shader_blend}. %based on the user's interaction with the virtual slider. 
+
+To enhance realism, additional lighting and reflection techniques were integrated into the shader, including 
+\textbf{Reflection Probes} to simulate environmental reflections, 
+the \textbf{Fresnel Effect}\footnote{\url{https://docs.unity3d.com/Packages/com.unity.shadergraph@6.9/manual/Fresnel-Effect-Node.html}} to model light behaviour based on the angle between the surface normal (\texttt{normalWS}) and the view direction (\texttt{viewDirWS}), 
+and adjustments to \textbf{specular}, \textbf{diffuse}, and \textbf{environment lighting} properties. 
+These calculations were performed independently for each component, as illustrated in Listing~\ref{lst:lighting_glass}, before being aggregated into the final \texttt{finalColor}. 
+This shader enabled a more faithful representation of the object's original appearance.
+
+\begin{lstlisting}[language=HLSL, caption={Partial Fragment shader for blending original and restored textures.}, label={lst:shader_blend}]
+        half4 frag(Varyings IN) : SV_Target
+        {
+            half4 decayAlbedo = SAMPLE_TEXTURE2D(_DecayTex, sampler_DecayTex, IN.uv) * _GlassColor;
+            half4 restoredAlbedo = SAMPLE_TEXTURE2D(_RestoredTex, sampler_RestoredTex, IN.uv);
+
+            float3 normalWS = normalize(IN.worldNormal);
+            float3 viewDirWS = normalize(IN.viewDirWS);
+
+            float fresnel = CalculateFresnel(normalWS, viewDirWS, _FresnelPower);
+
+            half3 finalAlbedo = lerp(decayAlbedo.rgb, restoredAlbedo.rgb, _BlendFactor);
+            half finalAlpha = lerp(decayAlbedo.a, restoredAlbedo.a, _BlendFactor);
+            half finalSmoothness = lerp(_GlassSmoothness, _RestoredSmoothness, _BlendFactor);
+            ... Populate Data...
+            
+            half3 glasslitColor = CalculateGlassLighting(surfaceData, inputData, fresnel);            
+            half enhancedAlpha = lerp(finalAlpha, finalAlpha * 0.5, fresnel * 0.5);
+            
+            return half4(glasslitColor, enhancedAlpha);
+        }
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=C++, caption={Lighting Glass Texture Partial Calculation.}, label={lst:lighting_glass}]
+  float3 CalculateGlassLighting(SurfaceData surfaceData, InputData inputData, float fresnel)
+  {
+      Light mainLight = GetMainLight(inputData.shadowCoord, inputData.positionWS, inputData.shadowMask);
+      ...
+
+      float3 specular = specularTerm * mainLight.color * _SpecularColor.rgb * surfaceData.smoothness;
+      ...
+
+      float3 diffuse = lerp((surfaceData.albedo * mainLight.color * NdotL * 0.1),surfaceData.albedo, _BlendFactor);
+      ...     
+
+      float3 environmentReflection = GlossyEnvironmentReflection(reflectionVector, 
+          inputData.positionWS, surfaceData.smoothness, 1.0) * _ReflectionIntensity;
+
+      float3 finalColor = diffuse + (specular + environmentReflection * fresnel);
+      
+      return finalColor;
+  }
+\end{lstlisting}
 
 \subsection*{Main Menu}
 \label{sec:main_menu}
@@ -444,9 +508,9 @@ There are two types of teleportation available in the environment. The first all
 In addition to locomotion, users can switch their perspective inside the environment, using the controllers, moving laterally with the right joystick.
 Both continuous movement and snap turning can also be performed physically, without controllers, within the limits of the real-world space.
 
-The overall movement system is managed by the "Character Controller" component, which also ensures accurate collision detection. In particular, the collider associated with the user interacts with the collider of the funerary enclosure, preventing the user from passing through walls and thereby preserving realism in the experience.
+The overall movement system is managed by the \emph{Character Controller} component, which also ensures accurate collision detection. In particular, the collider associated with the user interacts with the collider of the funerary enclosure, preventing the user from passing through walls and thereby preserving realism in the experience.
 
-Further refinements and a dynamic management of movement behavior were introduced in the script "CustomMovement", where two key methods were implemented within Unity’s default Update() function.
+Further refinements and a dynamic management of movement behavior were introduced in the script "CustomMovement", where two key methods were implemented within Unity’s default \texttt{Update()} function.
 The first method continuously updates the center of the character controller to reflect the user’s current position during locomotion. 
 The second manages custom movement behaviors by dynamically controlling gravity. Depending on the context, gravity may either be applied or disabled. When active, it influences the user’s velocity over time, and its intensity can be adjusted dynamically.
 
@@ -503,12 +567,123 @@ During development, two alternative exit mechanisms, a block and a ladder, were 
     \label{fig:funerary_interaction}    
 \end{figure}
 
-The system provides the possibility to activate/deactivate the \gls{3D} model of the funerary enclosure.
+The system provides the possibility to activate or deactivate the \gls{3D} model of the funerary enclosure.
 This functionality is triggered using the trigger button of the left command. When the user points to the funerary enclosure area in the map, a purple reticle appears, indicating that the enclosure can be activated, as illustrated in Figure \ref{fig:funerary_interaction}. This interaction can be performed at any point during the experience.
 
-To ensure realism, the funerary enclosure is implemented with a default Mesh Collider combined with an aggregated Rigidbody. This configuration prevents the user from crossing the enclosure walls and accurately reproduces the surface levels of the original structure, thereby enhancing the immersive experience.
+To ensure realism, the funerary enclosure is implemented with a default \emph{Mesh Collider} combined with an aggregated \emph{Rigidbody}. This configuration prevents the user from crossing the enclosure walls and accurately reproduces the surface levels of the original structure, thereby enhancing the immersive experience.
 
 An exception occurs when the user is inside the tomb. In this case, the funerary enclosure collider is temporarily disabled, allowing the user to descend naturally to the ground without obstruction. Once the user exits the tomb, the collider is restored to maintain consistent collision detection.
+
+\subsection*{Object Outline}
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/outline_object}
+    \caption{Outline effect applied when an object is hited with the controller ray.}
+    \label{fig:outline_object}    
+\end{figure}
+
+
+This functionality was implemented to improve the visibility of objects within the tomb and to distinguish them from the surrounding funerary ground.  
+It essentially consists of an outline shader and a complementary script that manages its parameters. 
+The shader highlights objects when targeted with the controller ray, as illustrated in Figure~\ref{fig:outline_object}
+
+The shader includes the following input parameters: \emph{Outline Color}, \emph{Outline Width}, \emph{Outline Power}, and \emph{Outline Softness}.  
+Similar to the shader described for the Object Slider functionality in Section~\ref{sec:object_slider}, this shader also relies on the Fresnel effect to control outline intensity and appearance.  
+
+The rendering of each object includes two materials: a primary material representing its texture and a secondary material responsible for the outline effect.
+When the user points at the object, the parameter \texttt{OutlineColor} is switched from yellow to blue. But if the object is not being grabbed (\texttt{if(!select)}), the outline disappears. 
+This behavior is handled through hover events, as shown in Listing~\ref{lst:outline_color}. 
+By accessing the second material of the object via \texttt{meshRenderer.materials[1]}, the shader updates the outline color.  
+
+The fragment shader logic for the glowing outline is presented in Listing~\ref{lst:outline_effect}. 
+It computes the Fresnel term with the Outline Power attribute, and applies a \texttt{smoothstep()} to achieve a soft personalized outline.  
+This mechanism ensures that the objects are easily identifiable. 
+
+
+\begin{lstlisting}[language=C++, caption={Partial class with Outline Color changed when the object is Hovered.}, label={lst:outline_color}]
+    public class GlowingObject : MonoBehaviour
+{
+    private MeshRenderer meshRenderer;
+    private bool select = false;
+    Color Yellow = new Color(65, 65, 0, 1);
+    Color Blue = new Color(0, 59, 49, 1);
+    ...
+    public void OnHoverEnter()
+    {
+        meshRenderer.materials[1].SetColor("_OutlineColor", Blue);
+    }
+
+    public void OnHoverExit()
+    {
+        if(!select)
+            meshRenderer.materials[1].SetColor("_OutlineColor", Yellow);
+    }
+    ...
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=HLSL, caption={Partial Fragment shader for creating an outline effect to the object.}, label={lst:outline_effect}]
+        float4 frag(v2f i) : SV_Target
+        {
+            float3 N = normalize(i.normalWS);
+            float3 V = normalize(i.viewDirWS);
+
+            float fresnel = pow(1.0 - saturate(dot(N, V)), _OutlinePower);
+
+            float edge1 = 1.0 - _OutlineWidth;
+            float edge2 = edge1 + _OutlineSoftness;
+            float outlineFactor = smoothstep(edge1, edge2, fresnel);
+
+            return _OutlineColor * outlineFactor;
+        }
+\end{lstlisting}
+
+\subsection*{Grab and Release Object}
+
+The artefacts can be grabbed with the lateral button of the controllers.
+When the object is grabbed or released, the corresponding event in Listing~\ref{lst:grab_release} is triggered.  
+
+The proximity of the controller's ray to the object determines how close the object appears to the user's view. 
+Releasing the object is achieved simply by releasing the button.  
+Small objects are automatically zoomed when hovered over or grabbed (operation \texttt{transform.localScale = zoomScale}), improving clarity and visibility during interaction.
+
+Additionally, two other behaviors are implemented. 
+The colliders that might interfere during grabbing are reactivated upon release, except when the user is inside the tomb, in which case a coroutine (\texttt{StartCoroutine}) is executed.
+During \texttt{OnGrab}, and as illustrated in Figure \ref{fig:object_slider}, the object slider is repositioned depending on whether the object is grabbed with the left or right controller, controlled by the \texttt{CompareTag} method.
+
+\begin{lstlisting}[language=C++, caption={Partial Fragment of objects onGrab and onRelease events.}, label={lst:grab_release}]
+     
+    private void OnGrab(SelectEnterEventArgs args)
+    {
+        transform.localScale = zoomScale;
+        args.interactableObject.colliders.ForEach(collider => { collider.enabled = false; });
+        ...
+        var interactor = args.interactorObject.transform;
+        if (interactor.CompareTag("left")) 
+        {
+            follow.targetOffset = new Vector3(sliderRightxPos, follow.targetOffset.y, follow.targetOffset.z);
+        }
+        else if (interactor.CompareTag("right")) 
+        {
+            follow.targetOffset = new Vector3(sliderLeftxPos, follow.targetOffset.y, follow.targetOffset.z);
+        }
+    }
+
+    private void OnRelease(SelectExitEventArgs args)
+    {
+        transform.localScale = originalScale;
+        args.interactableObject.colliders.ForEach(collider => { collider.enabled = true; });
+        ...
+        if (r.isInsideTomb)
+        {
+            StartCoroutine(DisableColliderRoutine(5f));
+        }
+        ...
+    }
+\end{lstlisting}
+
+
 
 %Essential Stages/Steps
 \subsection{Key Techniques}
@@ -516,7 +691,7 @@ An exception occurs when the user is inside the tomb. In this case, the funerary
 There is a main directional light that illuminates the entire environment along, simulating reality. However, it was understood that depending on the angle, the user might see the tomb and objects black due to shadows. To address this, a secondary point light was added that follows the user, so the user can view the tomb with clarity and have a good visibility while navigating in the environment.
 
 \subsubsection{Funerary Enclosure Model Reduction}
-The resolution of the burial site model was significantly reduced in Agisoft Metashape software through "Decimate Model" property.
+The resolution of the burial site model was significantly reduced in \emph{Agisoft Metashape} software through "Decimate Model" property.
 This adjustment was necessary due to warnings of potential collision issues arising in the model's size of over 2 million triangles. 
 Therefore, the number of faces was reduced from 1.9 million to approximately 100 thousand, preserving the essential level of detail while improving efficiency.
 
