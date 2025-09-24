@@ -31,7 +31,7 @@ This section covers the fundamental concepts for integrating digital tools to vi
 \subsection{Digital Cultural Heritage}
 \label{sec:digital_heritage}
 
-\gls{CH} includes monuments, sites, landscapes, skills, practices, knowledge and expressions of human creativity~\cite{eu_cultural_heritage}. Collections conserved and managed by public and private bodies - such as museums, libraries and archives - and film heritage are also part of CH. It enriches the lives of people, constitutes a driving force for the cultural and creative sectors, and plays a role in creating and enhancing Europe's social capital.
+\gls{CH} includes monuments, sites, landscapes, skills, practices, knowledge and expressions of human creativity~\cite{eu_cultural_heritage}. Collections preserved and managed by public and private bodies - such as museums, libraries and archives - and film heritage are also part of CH. It enriches the lives of people, constitutes a driving force for the cultural and creative sectors, and plays a role in creating and enhancing Europe's social capital.
 \gls{CH} can be tangible (castles, museums, works of art), intangible (songs, traditions, etc.), or
 digital (born-digital and digitised). In this thesis we will reproduce tangible objects, and represent them in \gls{3D} models digitally.
 While policymaking in this area is primarily the responsibility of member states, regional and local authorities, the \gls{EU} is committed to safeguarding and enhancing Europe's \gls{CH}. It does so through a number of policy areas and programmes.
@@ -346,42 +346,43 @@ Finally, the software refines this sparse model by reanalyzing the images to gen
 The most valuable application of multi-image photogrammetry
 may lie in its ability to facilitate community engagement in archaeological documentation.
 This approach enables the efficient creation of interactive \gls{3D} models, allowing the public to engage with heritage sites
-in a more immersive way than traditional static representations such as site plans and sectional drawings. In the "Previous Work", a close-range photogrammetry technique was used to generate the \gls{3D} excavation model, as detailed in section \ref{sec:photogrammetry_previous}.
+in a more immersive way than traditional static representations such as site plans and sectional drawings. 
+%In the "Previous Work", a close-range photogrammetry technique was used to generate the \gls{3D} excavation model, as detailed in section \ref{sec:photogrammetry_previous}.
 
-\subsection{LiDAR}
+\subsection{Light Detection And Ranging (\gls{lidar})}
 \label{sec:lidar}
 
-\gls{LiDAR} sensors enable precise \gls{3D} sensing of objects and are widely used in metrology, environment monitoring, archaeology, and robotics~\cite{li2022progress}.
+\gls{lidar} sensors enable precise \gls{3D} sensing of objects and are widely used in metrology, environment monitoring, archaeology, and robotics~\cite{li2022progress}.
 This technology allows for accurate determination of an object’s distance and velocity. 
-Similar to photogrammetry, \gls{LiDAR} scanning is classified into two main types: terrestrial and airborne.
-The three most significant approaches in \gls{LiDAR} technology are mechanical, nanophotonics-based, and solid-state.
-In traditional \gls{LiDAR} sensors, as shown in Figure \ref{fig:mechanical_LIDAR}, a mechanical rotator is used for optical beam scanning, which introduces limitations on their reliability, size, and cost.
+Similar to photogrammetry, \gls{lidar} scanning is classified into two main types: terrestrial and airborne.
+The three most significant approaches in \gls{lidar} technology are mechanical, nanophotonics-based, and solid-state.
+In traditional \gls{lidar} sensors, as shown in Figure \ref{fig:mechanical_LIDAR}, a mechanical rotator is used for optical beam scanning, which introduces limitations on their reliability, size, and cost.
 
  
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.6\linewidth]{mechanical_LIDAR}
-    \caption{Mechanical Spinning \gls{LiDAR}~\cite{inbook}.}
+    \caption{Mechanical Spinning \gls{lidar}~\cite{inbook}.}
     \label{fig:mechanical_LIDAR}
 \end{figure} 
 \FloatBarrier
 
 
-Solid-state \gls{LiDAR} presents an alternative to traditional \gls{LiDAR} by eliminating the need for a bulky mechanical rotator. %, visualization example in Figure \ref{fig:flash_based}.
-Moreover, advancements in optical technology have led to the development of nanophotonics-based devices with high potential and superior advantages for \gls{LiDAR} sensors. %An example of its usage in Figure \ref{fig:sequential_ilumination}. 
-Different scanning techniques produce diverse types of scan outputs. For instance, flash-based LiDAR from solid-state approach captures a full-frame \gls{3D} image in a single snapshot, as shown in Figure \ref{fig:flash_based}, while sequential illumination-based LiDAR scans objects by sequentially illuminating small regions, producing the whole frame, as depicted in Figure \ref{fig:sequential_ilumination}. \\
+Solid-state \gls{lidar} presents an alternative to traditional \gls{lidar} by eliminating the need for a bulky mechanical rotator. %, visualization example in Figure \ref{fig:flash_based}.
+Moreover, advancements in optical technology have led to the development of nanophotonics-based devices with high potential and superior advantages for \gls{lidar} sensors. %An example of its usage in Figure \ref{fig:sequential_ilumination}. 
+Different scanning techniques produce diverse types of scan outputs. For instance, flash-based \gls{lidar} from solid-state approach captures a full-frame \gls{3D} image in a single snapshot, as shown in Figure \ref{fig:flash_based}, while sequential illumination-based \gls{lidar} scans objects by sequentially illuminating small regions, producing the whole frame, as depicted in Figure \ref{fig:sequential_ilumination}. \\
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.65\linewidth]{flash_based}
-    \caption{Flash-based \gls{LiDAR} sensor. \small{Left: \gls{2D} image of sensing target, Right: Captured \gls{3D} image}~\cite{li2022progress}.}
+    \caption{Flash-based \gls{lidar} sensor. \small{Left: \gls{2D} image of sensing target, Right: Captured \gls{3D} image}~\cite{li2022progress}.}
     \label{fig:flash_based}
 \end{figure} 
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.45\linewidth]{sequential_ilumination}
-    \caption{A \gls{LiDAR} sensor based on sequential illumination~\cite{li2022progress}.}
+    \caption{A \gls{lidar} sensor based on sequential illumination~\cite{li2022progress}.}
     \label{fig:sequential_ilumination}
 \end{figure} 
 
@@ -446,8 +447,8 @@ and visualize geospatial data from archaeological sites~\cite{yao2023overview}. 
 patterns. Additionally, the development of \gls{3D} \gls{GIS} technology enabled archaeologists to reconstruct ancient sites in virtual environments, offering a 
 better understanding and visualization of archaeological site structures and layouts.
 
-A key technology that complements \gls{GIS} in archaeology is \gls{LiDAR}. 
-The employment of \gls{LiDAR} has been successful as an archaeological surveying tool for locating and identifying
+A key technology that complements \gls{GIS} in archaeology is \gls{lidar}. 
+The employment of \gls{lidar} has been successful as an archaeological surveying tool for locating and identifying
 sites, sometimes in very remote and difficult to access locations~\cite{article_lidar}. For example, the recent, and highly publicized, 
 discovery of what is believed to be the Mayan site of Ciudad Blanca in Honduras~\cite{Tolley2012}.
 
