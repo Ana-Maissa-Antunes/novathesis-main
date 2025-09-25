@@ -10,7 +10,64 @@
 
 \chapter{Conclusions}
 \label{cha:conclusions}
-
+The last chapter begins with a conclusion of the results achieved and functionalities developed, and their alignment with the intended goals, in Section \ref{sec:final_overview}.
+Section \ref{sec:future} then enumerates possible future improvements, identifies limitations, and new ideas that could further evolve the system and provide a more complete user experience.
 \section{Final Overview}
+\label{sec:final_overview}
+The system was developed with careful attention to the special Cultural Heritage artifacts and monuments of the archaeological site of Troia. The concept of a Digital Twin was considered throughout the project, aiming to provide a virtual representation of real objects and, in the case of the funerary enclosure, a reconstructed immersive space within the tomb that preserved the context of the artifacts. Another important outcome of this project was the dissemination of developments: a short paper has been written and will be published soon.
+The system provided an engaging user experience by displaying informative content through data panels. It also offered interactive features, such as grabbing objects, map teleport and exploration, and navigating within the realistic \gls{3D} funerary enclosure. Users often perceived the experience as finished after these interactions, even before opening the \emph{Panel \gls{UI}} for additional exploration. 
+
+Among the implemented features, the \emph{Object Slider}, which allowed a gradual transition control in a slider bar between the original and restored states of an object, is one of the most innovative features of this work. This combination of immersion in an environment with artifacts, map layers, and cultural learning of the system fosters a meaningful engagement with heritage content.
+
+As this dissertation represents the beginning of a broader project, there was some freedom in defining the primary focus of this study. The implementation concentrated on developing functionalities that enhanced immersion and interaction within the \gls{VR} environment. The development in Unity was the tool that was dedicated the most time during the implementation phase. The custom scripts focused primarily on user navigation within the plane, including tombstones, interaction with objects, and interaction with the data panels containing images before and after the intervention, as well as text, and interaction with the dropdown and checkboxes. The repository was designed as a parallel focus. A base structure with 11 tables was created, although only two tables, “object” and “object\_intervention”, were used in this study. The communication between Unity and the Postgres database was established through a \emph{Node.js} backend, which implemented two requests. These enabled data exchange between Unity and the database using \texttt{UnityWebRequest}. The artifact attributes stored in the database were ensured to be technically correct with conservation and restoration specialists.
+
+Some external tools supported the technical pipeline and imported them to Unity. The \emph{AgisoftMetashape} was employed in two key moments. 
+At the beginning of the implementation, to generate the funerary enclosure \gls{3D} model with its associated texture. And at the end of the development phase, to perform the "Decimation", and to optimize the model size for efficiency.
+Additionally, the use of the \emph{Blender} tool was a challenge for designing a simulation of the original glass texture, given the limited references and experience.
+
+The user evaluation and feedback played a crucial role in validating the system. Moreover, several minor improvements were made after the user evaluation phase. These modifications focused on aspects of the \gls{UI} and subtle interaction details that only became evident through user testing. Also, receiving feedback from domain experts was essential. The evaluation results, analyzed with supporting graphics in Chapter~\ref{cha:user_evaluation}, confirmed a generally positive experience, and users gave interesting suggestions for future environment improvements.
+
+
+
 \section{System Limitations and Future Work}
+\label{sec:future}
+As this dissertation represents a first step toward a broader project, several future improvements are interesting. 
+Some were identified during development, while others emerged from user feedback during the evaluation phase. 
+These ideas are summarized below:
+
+\section*{User Interaction}
+\begin{itemize}
+    \item \textbf{Hand Tracking vs Controllers:} Possibility to replace the controller-based interaction with hand tracking to provide a more natural and immersive experience, which would be particularly helpful for users less familiar with controllers.
+    \item \textbf{Object Proximity Control:} Introduce a mechanism that allows users to control the distance they want when an object is grabbed. Currently, the distance is determined by how close the controller ray is when the user grabs the object.
+    \item \textbf{Object Identification:} In the future, it would be interesting if, when grabbing an object, it would display object data when an object is grabbed, which would be more intuitive and easier to understand. An implementation had been tried, but not concluded, that consisted of showing the object's measurements in \gls{3D} when grabbed.
+    \item \textbf{Tomb Navigation Control:} Add, for example, a button that explicitly places the user inside or outside the tomb to avoid the user entering the tomb when it is not wanted.
+    \item \textbf{Plan Limits:} Add some warning safety bay, or a safety sign, or disable gravity outside the plan, to prevent users from falling off the plan.
+\end{itemize}   
+
+\section*{User Interface}
+\begin{itemize}
+    \item \textbf{Dynamic Panels:} Allow Panel \gls{UI} and Main Menu to open relative to the user’s position and be repositioned dynamically, instead of remaining static. Additionally, the possibility for the user to move the Panel to another side if they desire.
+    \item \textbf{Main Menu Improvements:} Expand the menu with additional options and improve usability.
+    \item \textbf{Panel UI:} Possibility to view more details data, returning more information already stored in the database, adding more backend requests to the system. Additionally, integrate in the Panel \gls{UI} a link to related excavation findings or museum artifacts. This feature was developed and is working, but an additional paid library, such as \gls{3D} WebView\footnote{\url{https://developer.vuplex.com/webview/overview}} would be needed to open the link to the parallel museums with these findings. With the implementation made, the link only opens in the computer browser.
+    \item \textbf{Search and Filter Features:} Add users search and filter objects details feature based on fields, such as time period, shape, and provenance.
+\end{itemize}
+
+\section*{Environment \& Immersion}
+\begin{itemize}
+    \item \textbf{Expand Environment:} Add more \gls{3D} object models and have further points of interest with \gls{3D} models across the map.
+    \item \textbf{Sound Design:} Provide a more complete experience with sounds, such as footsteps, ambient audio, and \gls{UI} interaction effects. It already exists in some functionalities, but it is very little because it was not a priority.
+    \item \textbf{Geospatial Data Integration:} Incorporate \gls{GIS} layers, and georeferencing for richer spatial context, for example, in the excavation process, or objects location.
+    \item \textbf{Extended Map Interaction:} Extend and improve map interaction, such as uploading an object after clicking on a position in the map and saving it in the ``Location'' table, or an Algorithm to find the best route for the visit and provide directions, such as using direction arrows to guide users to historically significant locations.
+\end{itemize}
+
+\section*{Repository \& Data Management}
+\begin{itemize}
+    \item \textbf{Document Upload/Download:} Allow contributors to upload images, videos, or excavation reports of the archaeological intervention.
+    \item \textbf{Digital Preservation:} Add the usage of standard formats for the \gls{CH} information stored in the database, such as the \gls{CIDOC-CRM}, approached in the Chapter \ref{cha:fundamental_concepts}, Section \ref{sec:cidoc}.
+\end{itemize}
+\section*{Bug Fixes}
+\begin{itemize}
+    \item \textbf{Reticles Bug:} Address the issue of duplicate pink reticles appearing in the headset when the user is looking forward.
+\end{itemize}
+
 

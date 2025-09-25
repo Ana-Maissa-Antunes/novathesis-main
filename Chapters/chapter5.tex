@@ -62,9 +62,17 @@ The usage of the controllers and main buttons was explained. Then, the users wer
 While the users were wearing the \gls{HMD} and controllers in their hands, as displayed in Figure \ref{fig:user}, the tasks were repeated to them, since the goal was not to evaluate memory, but usability.
 
 During the tasks phase, time was measured for each user while interacting with the \gls{VR} environment, and using the headset. 
-As shown in Table \ref{table:times}, the average time spent was around 10 minutes, with the exception of faster users and 3 cases where the application had to be restarted after users fell out of the environment, which increased the experience time.
-Furthermore, the "Meta Horizon" app was employed to manage the headset. Through the app, with the "Cast" option activated, it was possible to view on the phone exactly what the user was viewing in real-time. 
+As shown in Table \ref{table:times}, the average time spent was around 10 minutes, with the exception of faster users and three cases where the application had to be restarted after users fell out of the environment, which increased the experience time.
+
+\subsection{User Testing Setup}
+\label{sec:setup}
+
+The "Meta Horizon" app was employed to manage the headset. Through the app, with the "Cast" option activated, it was possible to view on the phone exactly what the user was viewing in real-time. 
 With this feature, users were guided to perform the intended tasks and receive immediate assistance if any issues arose. 
+
+After the initial setup with a USB connection, an \textbf{Android build} was generated in Unity, producing an \emph{.apk} file that allowed the application to run natively on the headset without requiring a cable. 
+This provided greater flexibility during the evaluation. 
+The \emph{Meta Quest Developer Hub} application was then used to transfer the \emph{.apk} file to the headset.
 
 \begin{figure}[h!]
     \centering
@@ -82,8 +90,6 @@ With this feature, users were guided to perform the intended tasks and receive i
 
 Finally, the users evaluated the experience through three separate sections. The first measured task success and the perception of key functionalities.
 The following section evaluated the sense of presence in the environment. The third and final section assessed the overall experience within the environment.
-
-
 
 \section{Tests Results}
 \label{sec:results}
@@ -378,5 +384,6 @@ Some minor improvements were made following user testing. These mainly concerned
  \item Added a legend when selecting the correct option in the main menu to guide users.
  \item Simplified slider interaction: it is no longer necessary to cross the arms to move the slider. When grabbing the object with the right controller, the bar now correctly repositions on the corresponding side.
  \item Original Glass Texture Improvements: Adjusted parameters for object ID 2676. Enhanced the realism of the texture by adding a slight blue tint, as experts indicated that these Roman glasses tended to have a bluish hue.
+ \item Tomb Interaction: Improved the definition of the tomb limits, increasing the coordinate precision on both sides.
 \end{itemize}
 

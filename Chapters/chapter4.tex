@@ -7,14 +7,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \typeout{NT FILE chapter4.tex}%
-
 \chapter{System Design and Implementation}
 \label{cha:system_implementation}
+This chapter begins with an introduction to the technologies used for the implementation in Section \ref{sec:tools}.
+Subsequently, the overall architecture is followed by a support diagram, in Section \ref{sec:architecture}.
+In Section \ref{sec:implementation}, all the implementation processes and features are developed.
+Section \ref{sec:database} includes the data management and structured design.
+Finally, the Section \ref{sec:design} explains the design path followed.
 
 \section{Adopted Tools and Tecnhologies}
-
+\label{sec:tools}
 The following section focuses on the technologies and tools used in implementing this project. 
-These include environments used, backend, database, and \gls{3D} development tools.
+These include environments used, Unity, development tools, backend, database, and plugins.
 
 \subsection{Working Environment}
 
@@ -67,6 +71,7 @@ Based on these images, a \gls{3D} model of the funerary enclosure was generated,
 Two already built models of artefacts were provided by Sofia Pires.
 
 \subsection{Backend \& Data Management}
+This section includes the backend and database repository technologies choices. 
 \subsubsection{Backend}
 
 The backend technology selected for this thesis was \textbf{Node.js}, an open-source, cross-platform JavaScript runtime environment. 
@@ -87,15 +92,8 @@ Additionally, because of its high performance and flexibility in managing spatia
 
 PostGIS is widely used for spatial data storage, geometry processing, and efficient geospatial querying.
 
-\subsubsection{Testing Tools}
-
-One of the most relevant features during the development phase on controller support was the \textbf{XR Device Simulator} included in XR Interaction Toolkit. 
-This utility allowed for testing \gls{VR} interactions without the need for a physical \gls{HMD}. 
-It simulated input from \gls{VR} controllers using a standard mouse and keyboard. 
-Despite its usefulness along this dissertation, it's important to note that certain interactions did not behave identically compared to testing with the actual headset.
-
-
 \subsection{XR Components and Plugins}
+This section comprises the main plugins and components used to support the custom implementation.
 \subsubsection{XR Plugin Management}
 The \textbf{XR Plugin Management} package was used to simplify the integration and management of various XR plug-ins. 
 This package is primarily responsible for loading, initializing, configuring settings, and providing build support for XR features. 
@@ -131,6 +129,7 @@ Each input action is activated as needed during runtime, offering an adaptable i
 
 
 \section{System Architecture}
+\label{sec:architecture}
 
 The system is divided into three application layers.
 The \textbf{Presentation Layer} manages the \gls{VR} environment and its interaction with users. The \textbf{Application Layer} includes the management of Unity Requests, with the support of the framework "UnityWebRequest" REF, acting as an intermediate between the Unity client and the database. 
@@ -149,6 +148,12 @@ Subsequently, before the user testing phase, the backend code, comprising both t
 This deployment ensured that the server hosting the API endpoints remained continuously active, allowing Unity clients to retrieve data seamlessly without manual intervention.
 
 \section{System Implementation}
+\label{sec:implementation}
+
+This section starts with some explanation of the implementation scripts made from Unity to the Database.
+After that, it contains the implementation process of all functionalities developed within the \gls{VE}.
+The following is the method explanation of the three fundamental techniques.
+Finally, testing and debugging methodologies were applied during the dissertation.
 
 \subsection{Communication between Unity and Database}
 
@@ -708,7 +713,8 @@ The second manages custom movement behaviors by dynamically controlling gravity.
 
 To access the tomb, the user may either walk in continuous movement toward its interior or use teleportation by clicking on the blue anchor located in that area.
 Upon entering, the user will have a view similar to the one shown in Figure \ref{fig:tomb_inside}.
-
+The tomb contains triangular areas, that was the place where the majority of the objects were discovered. 
+It's important to note that the artifacts are presented in the exact positions in which they were found during the excavations.
 During the dissertation process, different techniques were implemented and tested to address navigation and visualization challenges inside the tomb.
 
 \begin{enumerate}
@@ -773,7 +779,7 @@ With these materials, a "Combined" texture was baked and imported to Unity as a 
 
 In Unity, one \textbf{Reflection Probe} for each object was added to simulate the environment's reflection on the glass surface.
 Additionally, the four attributes \emph{\_GlassSmoothness}, \emph{\_FresnelPower}, \emph{\_SpecularColor}, and \emph{\_ReflectionIntensity}, used in the slider shader in Section \ref{sec:object_slider}, can be adjusted to control the pretended reflections in the glass.
-The final glass texture exemplified of one object is illustrated in Figure \ref{fig:glass1}.
+The final glass texture exemplifying one object is illustrated in Figure \ref{fig:glass1}.
 
 \begin{figure}[h!]
     \centering
@@ -813,7 +819,21 @@ Finally, the model was exported in \texttt{.obj} format, and grouped with \textt
 
 %\subsection{Map Functionalities}
 %\subsection{Files Upload}
+
+\subsection{Testing and Debugging}
+
+One of the most relevant features during the development phase on controller support was the \textbf{XR Device Simulator} included in XR Interaction Toolkit. 
+This utility allowed for testing \gls{VR} interactions without the need for a physical \gls{HMD}. 
+It simulated input from \gls{VR} controllers using a standard mouse and keyboard. 
+Despite its usefulness along this dissertation, it's important to note that certain interactions did not behave identically compared to testing with the actual headset.
+
+During the dissertation, the functionalities within the environment were tested in real-time using the \emph{MetaLink} app. However, when connected via Wi-Fi, the environment did not load correctly. This issue was resolved by employing a wired connection.
+
+Additionally, debugging was performed with the Visual Studio debugger and Android Debug Bridge (adb). This second tool enabled a deeper debugging and the identification of issues in the interaction with the headset by accessing detailed system logs through the \texttt{adb logcat} command. The logs proved useful for tracing errors and understanding their source during testing.
+
 \section{Database Management}
+\label{sec:database}
+
 \subsection{Data Structure}
 
 The database consists of 11 tables that ensure the significant data of excavation and objects are stored. %All artefacts data, excavation details, and objects intervention data were stored within this repository.
@@ -837,12 +857,8 @@ For generating the data model, SQL was used to create a database dump.
 Using "dbdiagram.io", this dump was translated into a visual diagram showing tables and their relations. This tool streamlined the creation of the Entity-Relationship diagram through code.
 
 
-\section{Potential Usage and Future Expansion}
-
-\subsection{Mixed Reality Integration}
-The integration of a mixed reality experience, where, upon clicking a button, users would be redirected and teleported into the developed \gls{VR} environment. 
-
-\subsection{Design Choices}
+\section{Design Choices}
+\label{sec:design}
 Initially, the idea involved creating a map using JavaScript and its Leaflet.js\footnote{\url{https://leafletjs.com/}} library. 
 However, the dissertation's direction shifted towards integrating the map with the funerary enclosure and its elements directly in Unity, forming a unified \gls{VE}. This way, the users can walk across the map as if in reality, while simultaneously viewing the \gls{3D} model accurately positioned in space. 
 The map itself still holds potential for further enhancement, which could contribute to a more complete and immersive experience within the \gls{VE}.
