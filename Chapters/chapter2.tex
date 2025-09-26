@@ -28,7 +28,7 @@ The last two sections address important standards, and documentation principles 
 
 This section covers the fundamental concepts for integrating digital tools to visualize and preserve artefacts during archaeological studies.
 
-\subsection{Digital Cultural Heritage}
+\subsection{\gls{DCH}}
 \label{sec:digital_heritage}
 
 \gls{CH} includes monuments, sites, landscapes, skills, practices, knowledge and expressions of human creativity~\cite{eu_cultural_heritage}. Collections preserved and managed by public and private bodies - such as museums, libraries and archives - and film heritage are also part of CH. It enriches the lives of people, constitutes a driving force for the cultural and creative sectors, and plays a role in creating and enhancing Europe's social capital.
@@ -41,8 +41,6 @@ Digital technologies provide new opportunities to preserve cultural content and 
 The \gls{EU} funds an extensive list of projects combining tecnology and art.
 Europeana\footnote{\url{https://www.europeana.eu/}} is a European digital platform to empower \gls{CH} in its digital transformation. It supports thousands of European museums, archives and libraries to offer free access to digitalised versions of artworks, books and music.
 
-The visualization of \gls{CH} collections can involve two classes of data: the data constituting the digital cultural object, and
-the accompanying metadata, as exemplified below in the Figure \ref{fig:ch_data}~\cite{Windhager2019Visualization}.
 
 \begin{figure}[h!]
     \centering
@@ -52,9 +50,10 @@ the accompanying metadata, as exemplified below in the Figure \ref{fig:ch_data}~
 \end{figure}
 \FloatBarrier
 
-
+The visualization of \gls{CH} collections (process illustrated in \ref{fig:ch_data}) can involve two classes of data: the data constituting the digital cultural object, and
+the accompanying metadata, as exemplified below in the Figure \ref{fig:ch_objects}~\cite{Windhager2019Visualization}.
 The metadata can describe a broad diversity of information associated
-with \gls{CH} objects (Figure \ref{fig:ch_objects}), therefore, to systematically classify different types of metadata, it is essential to adopt a unified metadata model. 
+with \gls{CH} objects, therefore, to systematically classify different types of metadata, it is essential to adopt a unified metadata model. 
 Among several standardization initiatives, the \gls{EDM}\footnote{\url{https://pro.europeana.eu/page/edm-documentation}} is one of the most mature efforts. 
 The \gls{EDM} reuses several existing Semantic Web vocabularies, such as the metadata set of the \gls{DCMI}\footnote{\url{https://www.dublincore.org/}}, and the
 \gls{CIDOC-CRM}\footnote{\url{https://cidoc-crm.org/}} from the \gls{CIDOC} of the International Council of Museums\footnote{\url{https://icom.museum/}}. 
@@ -90,7 +89,7 @@ in \gls{3D} in this project, enabling users to explore and interact with \gls{CH
 Since the 1990s, \gls{VR} was continuously used to recreate historical sites in a virtual immersive environment~\cite{hale2014handbook}. 
 This technology provides a way to protect fragile sites while simultaneously educating visitors on how to explore, comprehend, and appreciate significant heritage sites.
 
-\subsection{Digital Twin in Cultural Heritage}
+\subsection{Digital Twins in Cultural Heritage}
 \label{sec:digital_twin}
 
 
@@ -278,9 +277,9 @@ displays should be designed in a manner to minimize these less-desirable rotatio
 
 The industry of \gls{VR} combines expertise from diverse disciplines, including engineering, cybernetics, database management, real-time computing, simulation, computer graphics, ergonomics, stereoscopic imaging, anatomy, and even artificial intelligence. Despite its continuously advancements, \gls{VR} still faces significant challenges, such as improving software performance, hardware capabilities, user interaction design, and high-speed network integration.
 
-This project will utilize a \gls{VR} environment which integrates various components to produce an immersive and interactive experience.
-This includes the use of digital representations such as \gls{3D} models of glass artefacts and static images of the Troia ruins.
-Additionally, the project may incorporate input methods, such as user gestures and touch, allowing for dynamic interactions with the media. 
+%This project will utilize a \gls{VR} environment which integrates various components to produce an immersive and interactive experience.
+%This includes the use of digital representations such as \gls{3D} models of glass artefacts and static images of the Troia ruins.
+%Additionally, the project may incorporate input methods, such as user gestures and touch, allowing for dynamic interactions with the media. 
 %By combining these diverse technologies—augmented reality (AR), digital repositories, and real-world artefacts—the project aims to provide a comprehensive platform that enhances the visitor’s experience while preserving and presenting the cultural heritage of Troia.
 
 
@@ -493,9 +492,6 @@ Since 2006, \gls{CIDOC-CRM} has been recognized as an official ISO standard (\te
     \caption{Fundamental concepts of \texttt{ISO 21127}~\cite{doerr2007cidoc}}.
     \label{fig:cidoc}
 \end{figure}
-\FloatBarrier
-
-\newpage
 
 \noindent \textbf{From database to \gls{CIDOC-CRM}} \\
 The necessary information is extracted from different archaeological and museum collection data models (with various structured, as well as non-structured
@@ -507,7 +503,7 @@ Although the \gls{CIDOC-CRM} model provides a common, standardized framework for
 \section{Cultural Heritage Cloud}
 \label{sec:ch_cloud}
 
-The \gls{ECCCH}\footnote{\label{myfootnote}https://www.echoes-eccch.eu/}   is a European Union initiative 
+The \gls{ECCCH}\footnote{\label{myfootnote}\url{https://www.echoes-eccch.eu/}} is a European Union initiative 
 to create a shared digital infrastructure that connects \gls{CH} institutions and professionals across the \gls{EU}.
 The \gls{ECCCH} aims to add a digital dimension to \gls{CH} preservation, conservation, restoration, and enhancement 
 by providing cutting-edge technology for artefact digitisation and artwork research. 
@@ -521,5 +517,26 @@ While \gls{ICOM} Portugal and \gls{CRUSOE} represent the participants in Portuga
     \caption{\gls{ECHOES} goals \ref{myfootnote}.} 
     \label{fig:echoes}
 \end{figure}
-\FloatBarrier
+
+\section{Discussion}
+\label{sec:discussion_chapter2}
+
+The theoretical concepts introduced in this chapter provided the theoretical basis for the practical implementation described in Chapter \ref{cha:system_implementation}.
+In particular, the principles of \gls{DCH}, interaction and visualization techniques, input/output devices, and \gls{3D} reconstruction methods affect the implementation of the developed \gls{VE}. This work utilized a \gls{VR} environment that integrated various components to produce an immersive and interactive experience. 
+This includes the use of digital representations such as \gls{3D} models of glass artefacts and static images of the Troia ruins.  
+
+This dissertation is strongly grounded in the concept of \gls{DCH}, understood as the digital representation of cultural assets in forms such as images, texts, and \gls{3D} models (Figure \ref{fig:ch_objects}). 
+Within this context, the \gls{DT} emerges as a highly relevant paradigm, offering a dynamic way to mirror physical artefacts and environments. 
+
+Interaction and visualization techniques, such as ray-based selection and menu-driven interface (Figure \ref{fig:human_interaction}), were essential to user engagement. These techniques allowed users to manipulate objects, navigate menus, and interact with the \gls{VE} intuitively. While manipulation was limited to rotation and positioning, excluding transformations such as scaling or zooming, the implemented interactions ensured that users could meaningfully engage with the artifacts.
+These interaction techniques depended directly on the input/output devices employed. Controllers served as the primary input device, supporting the four \gls{VE} task categories outlined in Section \ref{sec:input_devices}: selection, manipulation, travel, and system control. For example, selection was used both to grasp artefacts and to interact with \gls{UI} elements; travel was enabled through teleportation and continuous locomotion; and system control allowed users to position objects in the environment when released. 
+The \emph{Meta Quest 3} headset, regarding the ones studied in this chapter, was the modern output device used, with a high-quality immersive display crucial for user testing.
+
+Photogrammetry was applied to generate \gls{3D} models of glass artifacts and the funerary enclosure. Although \gls{lidar} scanning was not explored due to time constraints, it remains a possibility for future developments. Artefact reconstruction also played a significant role, with specialists producing \gls{2D} documentation of interventions such as cleaning and restoration. These reconstructed elements can be explored in digital analysis.
+
+The project integrated a database to organize object data, including identifiers, locations, functions, and conservation states. While geospatial data storage was prepared with Postgres' "location" table, it was not yet applied in practice due to time constraints. Nevertheless, the system was deliberately designed for scalability, ensuring compatibility with future enhancements. Standards and documentation, although only briefly considered, remain essential for ensuring the long-term sustainability of cultural heritage digitization.
+
+This way, the dissertation not only contributes to the field of \gls{DCH} but also aligns with European initiatives such as the \gls{ECCCH} described in this chapter, which emphasizes the preservation, conservation, and dissemination of material cultural heritage. 
+Moreover, while \gls{AR} was not explored within this work, it is suggested as a direction for expanding into mixed reality in future developments, as discussed in Chapter \ref{cha:conclusions}.
+
 
