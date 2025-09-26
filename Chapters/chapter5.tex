@@ -7,383 +7,1320 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \typeout{NT FILE chapter5.tex}%
+\chapter{Implementation Details}
+\label{cha:system_implementation}
+This chapter begins with an introduction to the technologies used for the implementation in Section \ref{sec:tools}.
+%Subsequently, the overall architecture is followed by a support diagram, in Section \ref{sec:architecture}.
+Subsequently, in Section \ref{sec:implementation}, all the implementation processes and features are described in detail.
+%Section \ref{sec:database} includes the data management and structured design.
+%Finally, the Section \ref{sec:design} explains the design path followed.
 
-\chapter{User Evaluation}
-\label{cha:user_evaluation}
-\setlength{\parskip}{0pt} 
+\section{Adopted Tools and Tecnhologies}
+\label{sec:tools}
+The following section focuses on the technologies and tools used in implementing this project. 
+These include environments used, Unity, development tools, backend, database, and plugins.
 
-This chapter introduces the user evaluation conducted in the scope of this dissertation. 
-Section~\ref{sec:protocol} describes the methodology and procedures adopted for the evaluation, while Section~\ref{sec:results} presents the results obtained from the questionnaires, including a description of each type of questionnaire used and its intended purpose.
+\subsection{Working Environment}
 
-User testing was conducted in person with several groups of participants. \gls{VICARTE} experts, archaeologists (including the director of the Roman Ruins of Troia), and regular users provided more experienced and comprehensive feedback.
-To differentiate and collect statistics from these groups independently, a question was added to the form to filter participants by professional specialty.
-In this context, testing with experts was particularly relevant, considering these archaeologists had visited the site and examined the real objects. They contributed with their expertise in evaluating aspects such as the original glass texture generated REF and the tomb’s \gls{3D} model REF.
+The  \gls{VR} environment was developed using the Unity editor, with code scripts written in C\# within the \textbf{Visual Studio Integrated Development Environment (IDE)}\footnote{\url{https://visualstudio.microsoft.com/}}.
+Its features, such as debugging tools, error detection, code navigation, Unity-specific types recognized automatically, and IntelliSense suggestions, greatly enhanced productivity. 
+To further support this integration, the Visual Studio Editor package was used. 
 
-In total, 28 tests were carried out in presence: 16 with standard users, 3 with archaeologists, and 9 with \gls{VICARTE} members, including conservation and restoration specialists. The last group provided essential technical feedback in this field, as they were directly involved in interventions with the real objects.
-The remaining users contributed a broader perspective on the usability of the \gls{VE}. Colleagues with prior \gls{VR} experience offered more informed insights, while standard users provided suggestions from a regular user’s perspective.
+For the backend implementation, comprising the Node.js server and the database, \textbf{Visual Studio Code (VSCode)}\footnote{\url{https://code.visualstudio.com/}} was used. 
 
-%In total were made twenty-eight tests, sixtheen texts with standart users, three tests with archaeologists, and with \gls{VICARTE} members, including conservation and restoration specialists, nine tests were conducted. %These allowed them to analyze and provide essential technical feedback in this field, people who made interventions in the real objects.
+The version control system used initially for project management was \textbf{GitHub}\footnote{\url{https://github.com/}}, providing effective tracking of updates and overall code organization.
+However, as a consequence of storage limitations in handling large files, such as the \gls{2D} ground view or the funerary enclosure \gls{3D} model, the \textbf{Diversion}\footnote{\url{https://www.diversion.dev/}} tool was employed as an alternative solution for managing these system.
 
-%Protocol/Questionnaires
-\section{Protocol}
-\label{sec:protocol}
+\subsection{Unity}
+\textbf{Unity} is a cross-platform engine that provides a robust environment for developing \gls{2D} and \gls{3D} applications. 
+Its component-based architecture simplifies \gls{3D} development by allowing developers to define object behaviors through scripts in Virtual Environments (\glspl{VE}).
+Unity also offers a community forum and repositories available in \textbf{Unity Asset Store}\footnote{\url{https://assetstore.unity.com/}} where developers can access resources and adapt them for their projects.
 
-This section describes the protocol adopted for the user evaluation questionnaire, which was organized into three subsections of the user form, each with a brief description and the corresponding test results.
+For this study, Unity was selected for developing the \gls{VR} environment. The C\# programming language used within Unity facilitates the management of game objects and user interactions in the \gls{VE}.
+Its integration enables users an immersive experience while interacting with \gls{UI}, using the \gls{HMD}. 
+The headset device used for testing during the implementation and for user evaluation was \textbf{Meta Quest 3}.
 
-The tests were fundamental in evaluating the usability 
-%REF 
-of the developed environment, as well as the sense of presence 
-%REF 
-and the overall experience. 
-%REF.
-The users had to answer a set of questions provided through Google Forms, divided into four sections. 
+The following packages of Unity Asset Store were used to enhance the \gls{UI} and streamline the development process:
 
-First, it was given a brief context of the project and the structure of the test.
-Before using the headset, participants completed a personal questionnaire for statistical user analysis. 
-Subsequently, it was time to make use of the \gls{HMD} and its right and left controllers.
-The usage of the controllers and main buttons was explained. Then, the users were asked to complete a set of predefined tasks for the experience, which were:
+\begin{itemize}
+\item{\textbf{Free UI Click Sound Pack}\footnote{\url{https://assetstore.unity.com/packages/audio/sound-fx/free-ui-click-sound-pack-244644}} - This package provides a collection of diverse clickable sounds, designed to provide an immersive and complete \gls{UX}.}
+\item{\textbf{Simple Pie Menu}\footnote{\url{https://assetstore.unity.com/packages/tools/gui/simple-pie-menu-radial-menu-asset-270056}}} - A radial menu system implemented as the main menu of the project. Further details on its functionality are provided in Section \ref{sec:main_menu}.
+\item{\textbf{White \& Black GUI}\footnote{\url{https://assetstore.unity.com/packages/2d/gui/icons/white-black-gui-by-gamertose-168805}}} - This package includes a range of trivial and useful icons used to guide users in navigating menu items and to support image gallery switching between pre- and post-intervention object states.
+\end{itemize}
+
+%Additionally, the \textbf{Unity Learn}\footnote{\url{https://learn.unity.com/}} platform provided free tutorials, substantially simplifying the learning process during development.
+
+\subsection{Tools}
+\textbf{Blender}\footnote{\url{https://www.blender.org/}} is an open-source computer graphics software useful to a wide range of tasks, such as model, animate, create textures, materials. 
+This tool was used to create an aproximation of the original texture of the glass object. Originally transparent, translucent.
+
+\textbf{GIMP}\footnote{\url{https://www.gimp.org/}}, an open-source cross-platform image editor, was used to edit the map draw for integration as ground in Unity (rotated and cropped).
+Additionally, GIMP was useful in editing the post-intervention object images. The object's images were cut out from their backgrounds, which were then replaced with a neutral grey. 
+This enhanced clarity for users and allowed easy comparison between the object's before and after the cleaning and conservation treatment.
+
+\subsubsection{Photogrammetry}
+\label{sec:photogrammetry_tool} 
+
+The software used to process digital images and generate the \gls{3D} model of the funerary enclosure was \textit{Agisoft Metashape}\footnote{\url{https://www.agisoft.com/}}.
+This software performs photogrammetric processing of digital images to generate \gls{3D} spatial data, which can be applied in various fields such as \gls{GIS} applications, \gls{CH} documentation, visual effects production, and indirect measurements of objects of diverse scales. 
+
+ A total of 143 images were collected after the excavation campaign by the archaeologist responsible for this site, Inês Vaz Pinto.
+ % by the restoration department of NOVA for analysis. 
+Based on these images, a \gls{3D} model of the funerary enclosure was generated, as described in Section \ref{sec:build_model}.
+As part of the collaboration with the institutions, two already built models of artefacts, were provided by Sofia Pires.
+
+\subsection{Backend \& Data Management}
+This section includes the backend and database repository technologies choices. 
+\subsubsection{Backend}
+
+The backend technology selected for this thesis was \textbf{Node.js}, an open-source, cross-platform JavaScript runtime environment. 
+Node.js enables developers to create servers, web applications, command-line tools, and automation programs.
+
+In this thesis, Node.js was used to support the web server and to improve performance and scalability when handling repository data. 
+Additionally, it will mediate the communication between Unity and the database repository.
+
+Express.js\footnote{\url{https://expressjs.com/}} is the most popular Node.js web application framework, widely used for building web applications and \glspl{API}, with a minimal and flexible design.
+In this study, the web server Express.js was used to expose the \gls{REST}\footnote{\url{https://www.ibm.com/think/topics/rest-apis}} endpoints.
+
+
+\subsubsection{Database Repository}
+\label{sec:repos}
+
+There are several alternatives for storage management systems, but the option shelt for this project was \textbf{PostgreSQL} for its geographical extension, PostGIS, and its relational database is more appropriate due to its flexibility and consistency.
+Additionally, because of its high performance and flexibility in managing spatial data. 
+
+PostGIS is widely used for spatial data storage, geometry processing, and efficient geospatial data querying.
+
+\subsection{XR Components and Plugins}
+This section comprises the main plugins and components used to support the custom implementation.
+\subsubsection{XR Plugin Management}
+The \textbf{XR Plugin Management} package was used to simplify the integration and management of various XR plug-ins. 
+This package is primarily responsible for loading, initializing, configuring settings, and providing build support for XR features. 
+It was used in conjunction with the OpenXR.
+
+\textbf{OpenXR} is an open-standard \gls{API} enabling cross-platform development, with a high-performance access to AR and VR paltforms and devices. In this sudy this plugin, handles communication with the \gls{VR} headset.
+
+\subsubsection{XR Interaction Toolkit}
+The \textbf{XR Interaction Toolkit} was a central component in the development process, providing essential interaction capabilities and abstracting much of the low-level complexity of \gls{VR} development. It enabled features such as Hand tracking, 
+Object interaction (e.g., grab and release), Teleportation-based locomotion, \gls{UI} interaction, and Controller support.
+
+\subsubsection{User Movement Components}
+The \textbf{XR Origin} served as the root GameObject that encapsulates the main camera and controller setup. 
+It handles camera tracking based on the user's head movement and manages controller positioning and orientation. 
+Within this structure, the XR Rig was used as the container for the camera and associated controllers.
+
+To implement user movement within the \gls{VE}, the Locomotion System package was utilized. The following components were integrated: 
+
+\begin{itemize}
+\item{\textbf{Continuous Move Provider:}  Allowed smooth movement via the right joystick.}
+\item{\textbf{Snap Turn Provider:}  Enabled rotational movement in fixed increments, chosen over continuous turning to reduce motion sickness.}
+\item{\textbf{Teleportation Provider:} Enabled teleportation across the plane surface using the left joystick.}
+\item{\textbf{Teleportation Anchors:} Defined specific teleportation points, represented as buttons.}
+\end{itemize}
+
+\subsubsection{User Interaction Components}
+For interaction within the virtual scene, the toolkit offered components such as the XR Near-far interactor, that provided a way to interact with the scene through the ray emitted from the controllers, and the XR Grab Interactable enabled direct manipulation of virtual objects through grabbing, holding, and releasing actions.
+
+For input handling, Unity provides two systems: the old Input Manager and the newer \textbf{Input System Package}. 
+While the Input Manager is built into the Unity engine and used by default, the project adopted the Input System Package due to its flexibility, and scalability. 
+This newer system supports a wide range of input devices and enables precise configuration through a centralized interface. Input actions are defined and managed using the Input Action Manager, which allows the developer to specify actions and map them to devices or controls. 
+Each input action is activated as needed during runtime, offering an adaptable input handling framework.
+
+\section{Implementation}
+\label{sec:implementation}
+
+This section starts with some explanation of the implementation made from Unity to the Database.
+After that, it contains the implementation process of all functionalities developed within the \gls{VE}.
+The following is the method explanation of the three fundamental techniques.
+Finally, testing and debugging methodologies were applied during the dissertation.
+
+\subsection{Communication between Unity and Database}
+The \textbf{UnityWebRequest} class was used to send HTTP requests to the Node.js server, supporting both options retrieval (Section \ref{sec:options}) and object data retrieval (Section \ref{sec:data_retrieval}).
+
+To acquire the desired data retrieval, only three data structures were required:  
+\begin{enumerate}
+    \item \textbf{Artifact} – representing an individual artifact and containing all attributes from the \texttt{artifact} table described in Chapter \ref{cha:system_design}, Section \ref{sec:database}.  
+    \item \textbf{Dimensions} – a substructure of \textbf{Artifact}, storing three measurements: weight, height, and width.  
+    \item \textbf{Artifact List} – a collection of \textbf{Artifact} structures to manage multiple objects retrieved from the database.  
+\end{enumerate}
+% The structures required to retrieve the desired object attributes are represented in Listing \ref{lst:structure}.
+
+% \begin{lstlisting}[language=C++, caption={Artifact Structure to extract responses.}, label={lst:structure}]
+% public class Dimensions
+% {
+%     public float height;
+%     public float width;
+%     public float weight;
+% }
+
+% public class Artifact
+% {
+%     public int id;
+%     public int tomb_id;
+%     public string name;
+%     public string material;
+%     public string glass_type;
+%     public string shape;
+%     public Dimensions dimensions;
+%     public bool is_fragmented;
+%     public bool has_pontil_mark;
+%     public bool has_gold_fragments;
+%     public string provenance;
+%     public string general_description;
+%     public string epoch;
+%     public string[] paralels_url;
+%     public string[] images_path_b_interv;
+%     public string[] images_path_a_interv;
+% }
+% public class ArtifactList
+% {
+%     public List<Artifact> items;
+% }
+% \end{lstlisting}
+
+\subsubsection{Dropdown Options Retrieval}
+\label{sec:options}
+
+This implementation retrieves all the IDs of the available artifacts, to fulfill the requirement of the user to view the desired object's textual and image information.  
+The artifacts returned from the database are stored in a list structure, which is then iterated to populate the dropdown \texttt{options} list, as illustrated in Listing~\ref{lst:artifact_ids}.
+
+\begin{lstlisting}[language=C++, caption={Method used to load artifact IDs and define as options in the Dropdown.}, label={lst:artifact_ids}]
+      IEnumerator GetOptionsIds(string url)
+    {
+        // Send HTTP GET request to the given URL
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        ...
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            ...
+            ArtifactList artifactList = JsonUtility.FromJson<ArtifactList>(wrappedJson);
+            
+            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+            ...
+            // Iterate through all artifacts and add their IDs to options List
+            foreach (Artifact artifact in artifactList.items)
+            {
+                string id = artifact.id.ToString();
+                options.Add(new TMP_Dropdown.OptionData("     " + id));
+            }
+            dropdown.AddOptions(options);
+        }
+        else{
+            Debug.LogError("Error: " + www.error);
+        }
+    }
+\end{lstlisting}
+
+
+\subsubsection{Object Data Retrieval}
+\label{sec:data_retrieval}
+This method, shown in Listing \ref{lst:get_data}, retrieves all data of objects necessary to present in the \gls{VE}.  
+It sends a \texttt{GET} request to obtain the complete information, including images before and after intervention, which are then passed to \texttt{GetImages()}, explained in the section below.  
+
+Additionally, textual data is retrieved. Once the request is successful, the JSON response is parsed into an \texttt{Artifact} object using Unity's \texttt{JsonUtility.FromJson<Artifact>()} method.  
+From this structure, the following relevant fields are extracted: \emph{id}, \emph{name}, \emph{material}, \emph{epoch}, \emph{provenance}, and \emph{dimensions}.  
+The \emph{dimensions} field is a nested JSON structure containing \emph{height}, \emph{width}, and \emph{weight}.  
+
+Finally, a formatted string is created to display the object's details in the \gls{UI} panel.
+
+\begin{lstlisting}[language=C++,label={lst:get_data}, caption={Method used to load object data from the database.}]
+      IEnumerator GetData(string url)
+    {
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+             artifact = JsonUtility.FromJson<Artifact>(www.downloadHandler.text);
+
+            string displayText = "<b>Object Details:</b>\n\n";
+
+            string material = artifact.material.Replace("{", "").Replace("}", "");
+
+             displayText += $"ID: {artifact.id} | Name: {artifact.name} \nMaterial: {material} | Epoch: {artifact.epoch} \nProvenance: {artifact.provenance}" +
+                         $"\nDimensions: {artifact.dimensions.height} x {artifact.dimensions.width} cm, Weight: {Mathf.Round(artifact.dimensions.weight * 10.0f) * 0.1f} g";
+
+            resultText.text = displayText;
+
+            GetImages(artifact.id, artifact.images_path_b_interv);
+        }
+        ...
+    }
+\end{lstlisting}
+
+\subsubsection{Object Images Retrieval}
+
+The \texttt{GetImages} method iterates over the array of image paths retrieved from the "object\_intervention" table. The array passed to this method may be either "images\_path\_b\_interv", containing the object images before intervention, or "images\_path\_a\_interv", after the intervention.
+For each image, a component is created and positioned appropriately within the gallery.
+
+The implementation of this process is presented in Listing \ref{lst:artifact_images}.
+
+\begin{lstlisting}[language=C++, caption={Method used to load artifact images and to display them in the Images Gallery.}, label={lst:artifact_images}]
+      private void GetImages(int id, string[] images_path)
+    {
+        if (images_path.Length != 0)
+        {
+            changeView.SetActive(true);
+
+            for (int x = 0; x < images_path.Length; x++)
+            {
+                var imagePath = images_path[x];
+
+                if (x > images_path.Length / 2) {height = 0;}
+                else if (x == images_path.Length / 2) { x_pos = 1.5f; height = 0; }
+                else { height = 1; }
+
+                Sprite sprite = Resources.Load<Sprite>("Images/" + imagePath);
+                if (sprite != null)
+                {
+                    GameObject newImgObj = new GameObject("Image_" + imagePath, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+                    newImgObj.transform.SetParent(imageParent, false);
+
+                    RectTransform rectTransform = newImgObj.GetComponent<RectTransform>();
+                    rectTransform.sizeDelta = new Vector2(1, 1);
+                    rectTransform.localPosition = new Vector3(x_pos++, height, 0);
+
+                    Image imgComponent = newImgObj.GetComponent<Image>();
+                    imgComponent.sprite = sprite;
+                }
+                ...
+            }
+            x_pos = 1.5f;
+        }
+        else
+        {
+            Debug.LogWarning("Couldn't load Images for Object ID" + id);
+        }
+    }
+\end{lstlisting}
+
+
+\subsubsection{\gls{API} Endpoints}
+
+To retrieve information for each object, requests are made to the repository layer. 
+Two main \gls{API} endpoints were implemented for this purpose:
 
 \begin{enumerate}
-\item{Try walking in continuous motion and/or teleporting in the environment.}
-\item{Activate the 3D model of the funerary enclosure.}
-\item{Walk to the tomb or select its blue icon to teleport.}
-\item{Inside the tomb, point at an object until you see its blue outline and grab it.}
-\item{Exit the tomb with the object in your hand.}
-\item{With the object in your hand, use the other controller to move the slider and view its original appearance.}
-\item{Release the object by releasing the side button on the controller.}
-\item{Teleport to a Point of Interest by selecting one of the blue icons.}
-\item{Activate the main menu and select the visible icon.}
-\item{Close the main menu.}
-\item{In the panel in front of you, select the Object ID 21684 and view the displayed information.}
-\item{Walk to the blue panel and hover over the arrows to view object images after the intervention.}
-\item{In the black panel in front of you, change the ground plane by selecting the "Toggle Layer" option and explore.}
+  \item \textbf{/GET (get-objects\_data)}
+  \\Retrieves a list of object IDs by querying the \textbf{"object"} table. These IDs are used to populate the dropdown menu options in the \gls{UI}.
+
+  \item \textbf{/GET (get-objects\_data/:id)}
+  \\Fetches detailed information for a specific object based on its ID. This request is triggered when a user selects an object ID from the dropdown menu in the \gls{UI}
+  Whenever the ID in the dropdown is changed, the system issues a new request for the corresponding ID, and the visualization panel and image gallery are updated accordingly.
+
+  The representation of this endpoint is shown in Listing \ref{lst:api}. As illustrated int line 5, the query joins two tables, \textbf{"object"} and \textbf{"object\_intervention"}, to fetch simultaneously object data and images before and after interventions for display in the Image Gallery, described in Section \ref{sec:image_gallery}. 
+  This SQL query enables the system to retrieve all necessary information with a single request after the user selects an object ID, thereby improving efficiency and reducing the need for multiple requests.
+
 \end{enumerate}
 
-While the users were wearing the \gls{HMD} and controllers in their hands, as displayed in Figure \ref{fig:user}, the tasks were repeated to them, since the goal was not to evaluate memory, but usability.
+\begin{lstlisting}[language=C++, caption={Example of defining an \gls{API} endpoint in Node.js.},label={lst:api}]
+  //GET endpoint that retrieves object data by ID
+  app.get('/get-objects_data/:id', async (req, res) => {
+    const id = req.params.id;
 
-During the tasks phase, time was measured for each user while interacting with the \gls{VR} environment, and using the headset. 
-As shown in Table \ref{table:times}, the average time spent was around 10 minutes, with the exception of faster users and three cases where the application had to be restarted after users fell out of the environment, which increased the experience time.
+    try {
+        // Query to the database: select all object data present in 'object' and 'object_intervention' tables by ID
+        const result = await pool.query('SELECT * FROM object inner join object_intervention on object.id = object_intervention.object_id WHERE object.id = $1', [id]);
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
+\end{lstlisting}
 
-\subsection{User Testing Setup}
-\label{sec:setup}
 
-The "Meta Horizon" app was employed to manage the headset. Through the app, with the "Cast" option activated, it was possible to view on the phone exactly what the user was viewing in real-time. 
-With this feature, users were guided to perform the intended tasks and receive immediate assistance if any issues arose. 
+\subsection{Virtual Environment}
+The initial step was to place the \gls{2D} map on the ground plane, using the 1-meter default grid scale of Unity to ensure the precise real-world dimensions. With this in place, it was only necessary to adjust the scale of the funerary enclosure to match its position on the map. It is also important to mention that the two objects in the environment were carefully measured using virtual rules.
 
-After the initial setup with a USB connection, an \textbf{Android build} was generated in Unity, producing an \emph{.apk} file that allowed the application to run natively on the headset without requiring a cable. 
-This provided greater flexibility during the evaluation. 
-The \emph{Meta Quest Developer Hub} application was then used to transfer the \emph{.apk} file to the headset.
+In the \gls{VE}, a set of functionalities was implemented. 
+They are described in this section, in the following order: the Main Menu in Section \ref{sec:main_menu}, the Panel \gls{UI} in Section \ref{sec:panel_UI}, the Image Gallery in Section \ref{sec:image_gallery}, object interaction starting with the Slider in Section \ref{sec:object_slider}, the Outline in Section \ref{sec:object_outline}, and Grab and Release in Section \ref{sec:object_interaction}, and Points of Interest in Section \ref{sec:points_interest}. 
+Furthermore, funerary interaction is described in Section \ref{sec:funerary_interaction}, and navigation logic in Sections \ref{sec:user_navigation} and \ref{sec:tomb_logic}.
+
+\subsubsection{Main Menu}
+\label{sec:main_menu}
+
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Implementation/main_menu}
+    \caption{Main Menu Interaction, with the option of the Main Panel selected.}
+    \label{fig:main_menu}
+\end{figure}
+
+The main menu, displayed in Figure \ref{fig:main_menu}, was built with the support of the \textbf{SimplePieMenu} asset.
+However, it was restructured and adapted for use with \gls{VR} controllers, since the original implementation was developed for Unity \gls{3D} without \gls{VR} handling.
+The menu can be opened or closed with the trigger button of the right controller. The menu follows the user through the position of the right controller attributed in the "Follow\_Controller" script.
+Additionally, to select an option, the user points at it with the ray and selects it using the right controller’s select button. To detect which menu option is being targeted, a \textbf{Raycast} operation is performed based on the current position of the right controller ray, as illustrated in Listing \ref{lst:menu_raycast}.
+
+Currently, the menu contains only one functional option, represented by a menu icon. This option performs a single action: activating or deactivating the \textbf{Panel \gls{UI}} menu.
+
+\begin{lstlisting}[language=C++, caption={Method used to acquire the position that was pointed at by the controller ray.}, label={lst:menu_raycast}]
+    public Vector2 GetPosition(Vector2 anchoredPosition, Transform controllerTransform)
+    {
+        // Create a ray starting from the controller's position, pointing forward
+        Ray ray = new Ray(controllerTransform.position, controllerTransform.forward);
+        /Ray to detects collisions with the main menu
+        if (Physics.Raycast(ray, out RaycastHit hit, 50f, LayerMask.GetMask("Default")))
+        {
+            Vector3 screenPoint = Camera.main.WorldToScreenPoint(hit.point);
+            
+            // Return the point relative to the center of the screen
+            return new Vector2(
+                screenPoint.x - Screen.width / 2f,
+                screenPoint.y - Screen.height / 2f);
+        }
+        return Vector2.zero;
+    }
+\end{lstlisting}
+
+
+
+\subsubsection{Panel \gls{UI}}
+\label{sec:panel_UI}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/main_panel}
+    \caption{Panel \gls{UI} Interaction.}
+    \label{fig:main_panel}    
+\end{figure}
+
+The \gls{UI} includes a canvas where users can interact with and explore object data, as shown in the left panel of Figure \ref{fig:main_panel}. 
+
+In this example, the object ID selected from the dropdown menu is "21684," and the textual data associated with this object is displayed in the right panel. 
+This panel is initially empty and populates with the relevant object details after a selection is made. 
+
+The \gls{UI} contains three interactive elements: the "Toggle Layer" and "Mausoleum Profile" checkboxes, and the "Dropdown Menu".
+
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/layer}
+    \caption{Toggle Layer to a photo of the Site Occidental part.}
+    \label{fig:toggle_layer}    
+\end{figure}
+
+
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/mausoleum_profile}
+    \caption{Funerary Enclosure Profile constructions layer view.}
+    \label{fig:mausoleum_profile}    
+\end{figure}
+
+The first element, \textbf{Toggle Layer}, is a checkbox that controls the visibility of the ground plane.
+By default, the base plan is represented by a partial drawing of this archaeological site, which includes the burial enclosure under study. 
+When the user activates the checkbox, the plan switches to a photograph of the actual site, offering a more realistic view and a stronger sense of presence. 
+This feature is illustrated in Figure \ref{fig:toggle_layer}.
+The user can at any time toggle the view in the checkbox to view the pretended plan.
+
+The second element, the \textbf{Funerary Enclosure Profile}, demonstrated in Figure \ref{fig:mausoleum_profile}, works similarly. However, in this case, it opens a profile image of the mausoleum wall, displaying the different material types and layers of construction.
+
+The third element, the \textbf{Dropdown Menu}, allows the user to select an object by its identification number (ID).
+Once selected, the corresponding textual data and intervention images are retrieved from the database.
+Besides this interaction panel, on the right side of the interface is the place where the textual data related to the selected Object ID is displayed.
+
+The Images Gallery interaction, displayed on the left side of the map, is described below.
+
+\subsubsection{Image Gallery}
+\label{sec:image_gallery}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.35\linewidth]{test_user}
-    \caption{User Testing the \gls{VR} Environment with the \gls{HMD} and controllers.} 
-    \label{fig:user}
+    \includegraphics[width=0.7\textwidth]{Implementation/images_gallery}
+    \caption{Image Gallery with object images before intervention.}
+    \label{fig:image_gallery}
 \end{figure}
 
-\begin{table}[h!]
-    \caption{Registered Times spent by each Participant to Execute the provided Tasks.} 
-    \centering
-    \includegraphics[width=0.25\linewidth]{Users/time_users}
-    \label{table:times}
-\end{table}
+The \gls{VE} also contains an image gallery that is activated upon object selection. 
+This gallery displays images of the object before and after intervention. 
+Users can switch between these states by hovering the controller ray over the gallery arrow. 
+In this manner, they can view the images of a concrete object, compare the visual differences, and acquire a clearer understanding of the intervention's impact on each object.
 
-Finally, the users evaluated the experience through three separate sections. The first measured task success and the perception of key functionalities.
-The following section evaluated the sense of presence in the environment. The third and final section assessed the overall experience within the environment.
-
-\section{Tests Results}
-\label{sec:results}
-
-Starting with the subsection "User Analysis", which presents statistical information about the participants, followed by "Tasks Difficulty and Feedback", which reports their perceptions after completing the tasks.
-In addition, the \gls{PQ} and \gls{UEQ} are employed to evaluate the overall experience and sensation. Finally, the subsection "Graphics Comparison" provides graphical representations that highlight relevant relationships between the users and their responses after performing the tasks.
-\subsection{User Analysis}
-
-This set of questions was designed to collect information on users' characteristics, enabling the identification of statistical differences and supporting the interpretation of the evaluation results. 
-It includes demographic data such as age, gender, and education, along with information on professional or academic background.
-In addition, it assesses prior experience with \gls{VR}, and digital technologies applied to \gls{CH}.
-%video games, \gls{3D} environments,
+\subsubsection{Points of Interest}
+\label{sec:points_interest}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\linewidth]{Images/Age}
-    \caption{Age Distribution of the Test Participants.} 
-    \label{fig:age}
+    \includegraphics[width=0.7\textwidth]{Implementation/anchor_with_tool_tip}
+    \caption{Exemplified point of interest with an aggregated tooltip.}
+    \label{fig:points_interest}
 \end{figure}
 
-The bar plot in Figure \ref{fig:age} illustrates the distribution of participants across age groups. A decreasing trend of users can be observed with increasing age. Notably, the majority of participants, 86\%, are younger than 45 years old.
-%As shown in Table X, and as expected, users specialists in conservation and restoration, or archaeology are predominantly represented in the age groups above 25 years.
-We can conclude that we have a good age range despite a smaller sample of older people.
+Diverse points of interest were placed in key areas across the plane.
+
+Users can teleport directly to a point of interest by selecting a blue anchor (implemented with the default \emph{Teleportation Anchor} component) within the plan. These points are designed to draw the user’s attention to notable features or artifacts, with the most relevant point for the current study located inside the tomb within the funerary enclosure.
+Figure \ref{fig:points_interest} illustrates one of these anchors.
+
+In the future, the idea is to expand to other points and create interactive features as the \gls{3D} funerary enclosure model. 
+\subsubsection{Object Slider}
+\label{sec:object_slider}
+
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/grab_object}
+    \caption{Object Slider Interaction.}
+    \label{fig:object_slider}
+\end{figure}
+
+The Object Slider was designed as an interactive feature within the \gls{VE}, allowing users to visualize an object's transformation over time, from its original condition to its current, restored state. 
+
+This functionality is illustrated in Figure \ref{fig:object_slider}, where the user holds the object with the left controller while manipulating the slider, named “Original Texture,” with the right controller. 
+The texture initially displayed corresponds to the post-excavation state, and as the user moves the slider to the right, it gradually transitions to the original glass texture.
+The goal was to provide an immersive experience, creating the sensation of traveling back in time to observe the physical changes the object has undergone throughout the years.
+
+Several experimental approaches were conducted to achieve this effect, focusing on shader development.
+Two main approaches were explored, as described below:
+
+The first attempt involved creating a shader that utilized a single texture input, specifically the texture of the object after restoration. A white color was used to control the alpha (transparency) values, and the transition effect was managed using a linear interpolation (lerp) function. This shader was developed using Unity’s Shader Graph, which provided a visual, node-based interface for building the transition logic.
+
+
+The final solution involved a more advanced shader, written in Unity High-Level Shader Language (HLSL) for the Universal Render Pipeline (URP)\footnote{\url{https://docs.unity3d.com/Manual/urp/writing-custom-shaders-urp.html}}. 
+This approach provided more control over the material's appearance compared to Unity's built-in shaders.
+The shader was constructed using key URP shader libraries, including those for lighting and shading calculations\footnote{\url{https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@14.0/manual/use-built-in-shader-methods-lighting.html}}
+, reflection probes\footnote{\url{https://docs.unity3d.com/Manual/urp/use-built-in-shader-methods-indirect-lighting.html}}
+, shadow integration\footnote{\url{https://docs.unity3d.com/6000.1/Documentation/Manual/urp/use-built-in-shader-methods-shadows.html}}
+, camera operations\footnote{\url{https://docs.unity3d.com/Manual/urp/use-built-in-shader-methods-camera.html}}
+, and transformations\footnote{\url{https://docs.unity3d.com/Manual/urp/use-built-in-shader-methods-transformations.html}}.
+%https://docs.unity3d.com/Manual/urp/use-built-in-shader-methods.html
+
+This version accepted two texture inputs: the original appearance of the object (input variable \texttt{\_DecayTex}) and its current state (input variable \texttt{\_RestoredTex}).
+Besides the texture inputs, the shader provides the following adjustable material properties: \emph{Blend Factor}, \emph{Smoothness}, \emph{Fresnel Power}, \emph{Specular Color}, and \emph{Reflection Intensity}, enabling precise control over how the textures blend and the visual appearance of the material. 
+These properties can be modified directly through the Unity Inspector.
+
+A \textbf{Lerp function}\footnote{\url{https://docs.unity3d.com/6000.2/Documentation/ScriptReference/Vector3.Lerp.html}} is a methodology that performs a linear interpolation between two values, based on an interpolation factor.
+In this case, it was used to interpolate between the two textures, considering their \texttt{Albedo}, \texttt{Alpha}, and \texttt{Smoothness} attributes, as shown in Listing \ref{lst:shader_blend}. 
+In this case, the interpolant factor is \emph{\_BlendFactor}, the input value that changes when the user moves the slider bar.
+
+To enhance realism, additional lighting and reflection techniques were integrated into the shader, including 
+the \textbf{Fresnel Effect}\footnote{\url{https://docs.unity3d.com/Packages/com.unity.shadergraph@6.9/manual/Fresnel-Effect-Node.html}} to model light behaviour based on the angle between the surface normal (\texttt{normalWS}) and the view direction (\texttt{viewDirWS}), 
+and adjustments to \textbf{specular}, \textbf{diffuse}, and \textbf{environment lighting} properties. 
+These calculations were performed independently for each component, as illustrated in Listing~\ref{lst:lighting_glass}, before being aggregated into the final \texttt{finalColor}. 
+This shader enabled a more faithful representation of the object's original appearance.
+
+\begin{lstlisting}[language=HLSL, caption={Partial Fragment shader for blending original and restored textures.}, label={lst:shader_blend}]
+        half4 frag(Varyings IN) : SV_Target
+        {
+            half4 decayAlbedo = SAMPLE_TEXTURE2D(_DecayTex, sampler_DecayTex, IN.uv);
+            half4 restoredAlbedo = SAMPLE_TEXTURE2D(_RestoredTex, sampler_RestoredTex, IN.uv);
+
+            float3 normalWS = normalize(IN.worldNormal);
+            float3 viewDirWS = normalize(IN.viewDirWS);
+
+            float fresnel = CalculateFresnel(normalWS, viewDirWS, _FresnelPower);
+
+            half3 finalAlbedo = lerp(decayAlbedo.rgb, restoredAlbedo.rgb, _BlendFactor);
+            half finalAlpha = lerp(decayAlbedo.a, restoredAlbedo.a, _BlendFactor);
+            half finalSmoothness = lerp(_GlassSmoothness, _RestoredSmoothness, _BlendFactor);
+            ... Populate Data...
+            
+            half3 glasslitColor = CalculateGlassLighting(surfaceData, inputData, fresnel);            
+            half enhancedAlpha = lerp(finalAlpha, finalAlpha * 0.5, fresnel * 0.5);
+            
+            return half4(glasslitColor, enhancedAlpha);
+        }
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=C++, caption={Lighting Glass Texture Partial Calculation.}, label={lst:lighting_glass}]
+  float3 CalculateGlassLighting(SurfaceData surfaceData, InputData inputData, float fresnel)
+  {
+      Light mainLight = GetMainLight(inputData.shadowCoord, inputData.positionWS, inputData.shadowMask);
+      ...
+
+      float3 specular = specularTerm * mainLight.color * _SpecularColor.rgb * surfaceData.smoothness;
+      ...
+
+      float3 diffuse = lerp((surfaceData.albedo * mainLight.color * NdotL * 0.1),surfaceData.albedo, _BlendFactor);
+      ...     
+
+      float3 environmentReflection = GlossyEnvironmentReflection(reflectionVector, 
+          inputData.positionWS, surfaceData.smoothness, 1.0) * _ReflectionIntensity;
+
+      float3 finalColor = diffuse + (specular + environmentReflection * fresnel);
+      
+      return finalColor;
+  }
+\end{lstlisting}
+
+\subsubsection{Object Outline}
+\label{sec:object_outline}
+
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/outline_object}
+    \caption{Outline effect applied when an object is hited with the controller ray.}
+    \label{fig:outline_object}    
+\end{figure}
+
+
+This functionality was implemented to improve the visibility of objects within the tomb and to distinguish them from the surrounding funerary ground.  
+It essentially consists of an outline shader and a complementary script that manages its parameters. 
+The shader highlights objects when targeted with the controller ray, as illustrated in Figure~\ref{fig:outline_object}
+
+The shader includes the following input parameters: \emph{Outline Color}, \emph{Outline Width}, \emph{Outline Power}, and \emph{Outline Softness}.  
+Similar to the shader described for the Object Slider functionality in Section~\ref{sec:object_slider}, this shader also relies on the Fresnel effect to control outline intensity and appearance.  
+
+The rendering of each object includes two materials: a primary material representing its texture and a secondary material responsible for the outline effect.
+When the user points at the object, the parameter \texttt{OutlineColor} is switched from yellow to blue. But if the object is not being grabbed (\texttt{if(!select)}), the outline disappears. 
+This behavior is handled through hover events, as shown in Listing~\ref{lst:outline_color}. 
+By accessing the second material of the object via \texttt{meshRenderer.materials[1]}, the shader updates the outline color.  
+
+The fragment shader logic for the glowing outline is presented in Listing~\ref{lst:outline_effect}. 
+It computes the Fresnel term with the Outline Power attribute, and applies a \texttt{smoothstep()} to achieve a soft personalized outline.  
+This mechanism ensures that the objects are easily identifiable. 
+
+
+\begin{lstlisting}[language=C++, caption={Partial class with Outline Color changed when the object is Hovered.}, label={lst:outline_color}]
+    public class GlowingObject : MonoBehaviour
+{
+    private MeshRenderer meshRenderer;
+    private bool select = false;
+    Color Yellow = new Color(65, 65, 0, 1);
+    Color Blue = new Color(0, 59, 49, 1);
+    ...
+    public void OnHoverEnter()
+    {
+        meshRenderer.materials[1].SetColor("_OutlineColor", Blue);
+    }
+
+    public void OnHoverExit()
+    {
+        if(!select)
+            meshRenderer.materials[1].SetColor("_OutlineColor", Yellow);
+    }
+    ...
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=HLSL, caption={Partial Fragment shader for creating an outline effect to the object.}, label={lst:outline_effect}]
+        float4 frag(v2f i) : SV_Target
+        {
+            float3 N = normalize(i.normalWS);
+            float3 V = normalize(i.viewDirWS);
+
+            float fresnel = pow(1.0 - saturate(dot(N, V)), _OutlinePower);
+
+            float edge1 = 1.0 - _OutlineWidth;
+            float edge2 = edge1 + _OutlineSoftness;
+            float outlineFactor = smoothstep(edge1, edge2, fresnel);
+
+            return _OutlineColor * outlineFactor;
+        }
+\end{lstlisting}
+
+\subsubsection{Grab and Release Object}
+\label{sec:object_interaction}
+
+The artefacts can be grabbed with the lateral button of the controllers.
+When the object is grabbed or released, the corresponding event in Listing~\ref{lst:grab_release} is triggered.  
+
+The proximity of the controller's ray to the object determines how close the object appears to the user's view. 
+Releasing the object is achieved simply by releasing the button.  
+Small objects are automatically zoomed when hovered over or grabbed (operation \texttt{transform.localScale = zoomScale}), improving clarity and visibility during interaction.
+
+Additionally, two other behaviors are implemented. 
+The colliders that might interfere during grabbing are reactivated upon release, except when the user is inside the tomb, in which case a coroutine (\texttt{StartCoroutine}) is executed.
+During \texttt{OnGrab}, and as illustrated in Figure \ref{fig:object_slider}, the object slider is repositioned depending on whether the object is grabbed with the left or right controller, controlled by the \texttt{CompareTag} method.
+
+\begin{lstlisting}[language=C++, caption={Partial Fragment of objects onGrab and onRelease events.}, label={lst:grab_release}]
+     
+    private void OnGrab(SelectEnterEventArgs args)
+    {
+        transform.localScale = zoomScale;
+        args.interactableObject.colliders.ForEach(collider => { collider.enabled = false; });
+        ...
+        var interactor = args.interactorObject.transform;
+        if (interactor.CompareTag("left")) 
+        {
+            follow.targetOffset = new Vector3(sliderRightxPos, follow.targetOffset.y, follow.targetOffset.z);
+        }
+        else if (interactor.CompareTag("right")) 
+        {
+            follow.targetOffset = new Vector3(sliderLeftxPos, follow.targetOffset.y, follow.targetOffset.z);
+        }
+    }
+
+    private void OnRelease(SelectExitEventArgs args)
+    {
+        transform.localScale = originalScale;
+        args.interactableObject.colliders.ForEach(collider => { collider.enabled = true; });
+        ...
+        if (r.isInsideTomb)
+        {
+            StartCoroutine(DisableColliderRoutine(5f));
+        }
+        ...
+    }
+\end{lstlisting}
+
+
+\subsubsection{Funerary Enclosure Interaction}
+\label{sec:funerary_interaction}
+
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/default_plan_with_reticle}
+    \caption{Funerary Enclosure Activation Reticle in the default ground plan.}
+    \label{fig:funerary_interaction}    
+\end{figure}
+
+The system provides the possibility to activate or deactivate the \gls{3D} model of the funerary enclosure.
+This functionality is triggered using the trigger button of the left command. When the user points to the funerary enclosure area in the map, a purple reticle appears, indicating that the enclosure can be activated, as illustrated in Figure \ref{fig:funerary_interaction}. This interaction can be performed at any point during the experience.
+
+To ensure realism, the funerary enclosure is implemented with a default \emph{Mesh Collider} combined with an aggregated \emph{Rigidbody}. This configuration prevents the user from crossing the enclosure walls and accurately reproduces the surface levels of the original structure, thereby enhancing the immersive experience.
+
+An exception occurs when the user is inside the tomb. In this case, the funerary enclosure collider is temporarily disabled, allowing the user to descend naturally to the ground without obstruction. Once the user exits the tomb, the collider is restored to maintain consistent collision detection.
+
+\subsubsection{User Navigation}
+\label{sec:user_navigation}
+
+The user can navigate in the environment with the controllers. 
+These allow two modes of movement: continuous walking, which simulates real-world locomotion, and teleportation, providing a faster way to reposition within the scene.
+
+There are two types of teleportation available in the environment. The first allows the user to teleport freely to any position on the environment’s ground plane (default \emph{Teleportation Area} component). The second restricts teleportation to specific points of interest, marked with blue icons (anchors).
+
+In addition to locomotion, users can switch their perspective inside the environment, using the controllers, moving laterally with the right joystick.
+Both continuous movement and snap turning can also be performed physically, without controllers, within the limits of the real-world space.
+
+The overall movement system is managed by the \emph{Character Controller} component, which also ensures accurate collision detection. In particular, the collider associated with the user interacts with the collider of the funerary enclosure, preventing the user from passing through walls and thereby preserving realism in the experience.
+
+Further refinements and a dynamic management of movement behavior were introduced in the script "CustomMovement", where two key methods were implemented within Unity’s default \texttt{Update()} function.
+The first method continuously updates the center of the character controller to reflect the user’s current position during locomotion. 
+The second manages custom movement behaviors by dynamically controlling gravity. Depending on the context, gravity may either be applied or disabled. When active, it influences the user’s velocity over time, and its intensity can be adjusted dynamically.
+
+\subsubsection{Tomb Navigation Logic}
+\label{sec:tomb_logic}
+
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/tomb_outside}
+    \caption{Tomb Exterior View with blue anchor inside.}
+    \label{fig:tomb_outside}    
+\end{figure}
+
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/tomb_inside}
+    \caption{Tomb Interior View with Objects positioned.}
+    \label{fig:tomb_inside}    
+\end{figure}
+
+To access the tomb, the user may either walk in continuous movement toward its interior or use teleportation by clicking on the blue anchor located in that area.
+Upon entering, the user will have a view similar to the one shown in Figure \ref{fig:tomb_inside}.
+The tomb contains triangular areas, that was the place where the majority of the objects were discovered. 
+It's important to note that the artifacts are presented in the exact positions in which they were found during the excavations.
+During the dissertation process, different techniques were implemented and tested to address navigation and visualization challenges inside the tomb.
+
+\subsection*{Plan Removal}
+
+The first approach used a collider placed inside the tomb. When the user collided with it, the ground plane was removed, revealing the full interior of the tomb.
+
+This, in the end, caused conflicts because the interior collider overlapped with the collider responsible for activating the funerary enclosure.
+
+To handle this issue, the limits of the tomb were defined manually. With this method, the plane disappears when the user enters that space and reappears once the user exits it.
+In Figure \ref{fig:tomb_outside}, the outside view of the tomb is depicted. As illustrated, the plane is disabled, providing full visibility of the tomb’s interior.
+
+\subsection*{Vertical Descend}
+
+Another challenge was ensuring that users could navigate naturally within the tomb while maintaining clear visibility of objects and architectural details inside. Standard gravity alone was insufficient, as it did not allow reliable interaction with objects located in triangular areas.
+To address this, the "TombNavigation" script was developed, introducing controlled vertical displacement along the y-axis.
+
+Initially, a Raycasting approach was tested, directing rays toward the front and the floor of the tomb. When a collision was detected, the user’s position was adjusted and lowered by a few centimeters. Although functional, this method is unreliable, as it heavily depends on the user’s viewing direction, extracted from the camera position.
+
+The final implementation instead defined the tomb interior using axis-based boundaries. When the user entered this delimited area, they were automatically displaced downward. Upon exiting, the user’s position was restored to its correct height, ensuring they did not remain unnaturally below the expected level. This approach allows the user to enter and exit the tomb by simply walking.
+
+During development, two alternative exit mechanisms, a block and a ladder, were added. However, these were later deactivated, as they were unnecessary with the finalized gravity-based solution and occupied additional space in the relatively small tomb environment. Nevertheless, both alternatives remain available for reactivation if required in the future.
+
+
+%Essential Stages/Steps
+\subsection{Key Techniques}
+This section describes the main techniques implemented during the development process. 
+The first two techniques focus on optimizing \gls{UX} and improving system performance by significantly reducing the complexity of the funerary model, while preserving essential detail. 
+The last two techniques detail the methodologies used to generate the glass material and the funerary \gls{3D} model.
+\subsubsection{Light Technique}
+There is a main directional light that illuminates the entire environment, simulating reality. 
+However, it was understood that depending on the angle, the user might see the tomb and objects as black due to shadows. To address this, a secondary point light was added that follows the user, so the user can view the tomb with clarity and have a good visibility while navigating in the environment.
+
+\subsubsection{Funerary Enclosure Model Reduction}
+The resolution of the burial site model was significantly reduced in \emph{Agisoft Metashape} software through the "Decimate Model" property.
+This adjustment was necessary due to warnings of potential collision issues arising from the model's size of over 2 million triangles. 
+Therefore, the number of faces was reduced from 1.9 million to approximately 100 thousand, preserving the essential level of detail while improving efficiency.
+
+\subsubsection{Generating the Glass Texture}
+The process of generating the glass texture consisted of two phases.  
+
+First, the material was modeled in Blender using a node-based shader structure. The desired glass effect was achieved by combining the \texttt{Glossy BSDF} and \texttt{Refraction BSDF} nodes. It also received a \texttt{Fresnel} node as input\footnote{\url{https://docs.blender.org/manual/en/latest/render/shader_nodes/index.html}}. This structure is represented in Figure~\ref{fig:glass_texture}.  
+
+After having the node structure, a UV unwrapping\footnote {\url{https://docs.blender.org/manual/en/latest/modeling/meshes/uv/unwrapping/}} was made to prepare the \gls{3D} object surface for texture mapping, process illustrated in Figure \ref{fig:uv_process}.
+ Finally, a baking process\footnote{\url{https://docs.blender.org/manual/en/latest/render/cycles/baking.html}} was performed using the Cycles render engine.
+With these materials, a "Combined" texture was baked and imported to Unity as a .png file.
+
+ \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Implementation/Glass_texture}
+    \caption{Glass Material Nodes Blender.}
+    \label{fig:glass_texture}    
+\end{figure}
+
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.4\linewidth]{Images/Gender}
-    \caption{Gender Distribution of the Test Participants.} 
-    \label{fig:gender}
+    \includegraphics[width=0.8\textwidth]{Implementation/UVMapping}
+    \caption{UV unwrapping process with corresponding mapped texture.}
+    \label{fig:uv_process}
 \end{figure}
 
-There is a diversified gender distribution as we can see in Figure \ref{fig:gender}.
+
+In Unity, one \textbf{Reflection Probe} for each object was added to simulate the environment's reflection on the glass surface.
+Additionally, the four attributes \emph{\_GlassSmoothness}, \emph{\_FresnelPower}, \emph{\_SpecularColor}, and \emph{\_ReflectionIntensity}, used in the slider shader in Section \ref{sec:object_slider}, can be adjusted to control the pretended reflections in the glass.
+The final glass texture exemplifying one object is illustrated in Figure \ref{fig:glass1}.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\linewidth]{Images/Education}
-    \caption{Education Level Distribution of the Test Participants.} 
-    \label{fig:education}
+    \includegraphics[width=0.8\textwidth]{Implementation/glass_1}
+    \caption{Glass Texture of Object with ID 21684.}
+    \label{fig:glass1}
 \end{figure}
-
-In the pie chart of Figure \ref{fig:education}, the educational degrees of the participants is depicted. 
-The distribution indicates a predominance of higher education (bachelor, master, and doctorate degees), whereas only a small proportion of participants reported lower levels of education.
-
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=1\linewidth]{Images/Backroumd}
-    \caption{Distribution of Training Levels among Participants.} 
-    \label{fig:background}
-\end{figure}
-
-In Figure \ref{fig:background}, a horizontal bar plot illustrates the distribution of participants’ technical backgrounds. 
-The areas are ordered in descending frequency, with priority given to those most relevant for this thesis. 
-This results in a meaningful sample, comprising mainly technology developers, specialists in conservation and restoration, and archaeologists working in contexts comparable to the site under study.
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.55\linewidth]{Images/VR_experience}
-    \caption{\gls{VR} Experience Levels among Participants.} 
-    \label{fig:VR_experience}
-\end{figure}
-
-As illustrated in Figure \ref{fig:VR_experience}, it is evident that the majority of the participants have prior experience with \gls{VR}, while only a small portion are experts.
-
-\begin{figure}[h!]
-  \centering
-  \begin{subfigure}[b]{0.47\textwidth}
-      \centering
-      \includegraphics[width=1.0\textwidth]{Images/Using2}
-      %\caption{Experience in using technologies.}
-      \label{fig:Using}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.47\textwidth}
-      \centering
-      \includegraphics[width=1.0\textwidth]{Images/Developing2}
-      %\caption{Experience in developing technologies.}
-      \label{fig:Developing}
-  \end{subfigure}
-     \caption{Participants’ Experience with Digital Technologies Applied to \gls{CH}.}
-     \label{fig:hertiage_techs}
-\end{figure}
-\FloatBarrier
-
-%From the two represented distributions represented in Figure \ref{fig:hertiage_techs} of using and developing techologies related to heritage, that they have opposite results. The majority of the participants have used these tecnologies, while only a small quantity has developed.
-%In this case, the most important thing for evaluation is the use, which will be who will actually use the developed system, while the developers are useful to give more technical feedback, or suggestions for improvements in terms of efficiency, for example.
-The two distributions in Figure \ref{fig:hertiage_techs} show a clear disparity between participants' experiences in using and developing digital heritage technologies. Most participants (19) report having some experience as users, generally clustering around moderate levels (ratings 1–2). 
-In contrast, almost all participants (18) report no development experience.
-For evaluation purposes, the key factor is the intended use of the system, as this determines who will actually engage with it. Developers remain valuable mainly for offering technical feedback and suggestions for improvements, such as efficiency.
 
 
 % \begin{figure}[h!]
 %     \centering
-%     \includegraphics[width=0.6\linewidth]{Images/Using}
-%     \caption{\gls{VR} Experience distribution of the test participants.} 
-%     \label{fig:using}
+%     \includegraphics[width=0.8\textwidth]{Implementation/glass_2}
+%     \caption{Glass Texture of Object with ID 21676.}
+%     \label{fig:glass2}
 % \end{figure}
 
+\subsubsection{Generating the Funerary \gls{3D} Model}
+\label{sec:build_model}
+
+The funerary enclosure model was generated with the support of the photogrammetric survey and subsequently imported into the \textit{Sketchfab} viewer for intuitive interaction.
+Within the grave, three open triangular areas were identified, containing the precious artefacts of the deceased, as shown in Figure~\ref{fig:model3} below.
+
+This phase used the \textit{Agisoft Metashape} to stitch together photographs and capture the geometry, texture, and visual characteristics of the physical funerary structure.
+
+The workflow began with the Align Photos operation, which produced 91,053 tie points. Then, a dense point cloud was generated to refine the level of detail, followed by the creation of a \gls{3D} mesh. The resulting model comprised 1,910,026 faces, for which a texture was mapped.
+Finally, the model was exported in \texttt{.obj} format, and grouped with \texttt{.png} texture files, and imported into the Unity \gls{VR} environment.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{model3}
+    \caption{\gls{3D} Model in Sketchfab.}
+    \label{fig:model3}
+\end{figure}
+%\section{Site Map and Data Upload}
+%The map was developed having the basis of the project developed by me and Afonso, consisted on a map containing demographic ....buscar no relatório do projeto
+%This way we could dedicate our time to improving and complementing the implementation as well focusing in the VE.
+
+%\subsection{Map Functionalities}
+%\subsection{Files Upload}
+
+\subsection{Testing and Debugging}
+
+One of the most relevant features during the development phase on controller support was the \textbf{XR Device Simulator} included in XR Interaction Toolkit. 
+This utility allowed for testing \gls{VR} interactions without the need for a physical \gls{HMD}. 
+It simulated input from \gls{VR} controllers using a standard mouse and keyboard. 
+Despite its usefulness along this dissertation, it's important to note that certain interactions did not behave identically compared to testing with the actual headset.
+
+During the development, the functionalities within the environment were tested in real-time using the \emph{MetaLink} app. However, when connected via Wi-Fi, the environment did not load correctly. This issue was resolved by employing a wired connection.
+
+Additionally, debugging was performed with the Visual Studio debugger and Android Debug Bridge (adb). 
+This second tool enabled a in-depth troubleshooting and the identification of issues in the interaction with the headset by accessing detailed system logs through the \texttt{adb logcat} command. The logs proved useful for tracing errors and understanding their source during testing.
+
+
+
+%Incluo seccao de dificuldades/desafios ao lonbgo do desenvolvimento? 
+%ou vou colocando na seccao pretendzida;;ex: hand tracking vs controllers
+
+
+% \chapter{Proposed Work}
+% \label{cha:proposed_work}
+
+% This chapter aims to outline the approach that will be used to achieve the project objectives defined in Chapter \ref{cha:introduction}, while providing the prior work in the various areas relevant to this study.
+
+% \section{Requirements}
+% \label{sec:requirements}
+
+% This section describes the requirements and functionalities to be developed during this dissertation, categorized into the following areas: Interactive Map, \gls{3D} Model Interaction, Repository, and \gls{VR} environment.
+
+% Given the diverse requirements of this project, the primary focus will be on developing an immersive \gls{VE}, prioritizing \gls{3D} models and \gls{VR} for exploring glass artifacts within the tomb. The interactive map features will be included but may be implemented with less detail.
+
+% \subsection*{Interactive Map}
+% A map of the Troia archaeological site under study will be incorporated into the project to offer interactive functionalities.
+% \begin{itemize}
+%     \item \textbf{Map Zoom \& Navigation:} Users can pan, zoom, and explore different locations.
+%     \item \textbf{Perspective Switching:} Toggle between top-down and profile views for better spatial understanding.
+%     \item \textbf{Geospatial Data Integration:} Include \gls{GIS} layers combining excavation findings, and overlay a \textit{.tif} map illustration with some immersive interaction.
+%     \item \textbf{Layer Toggle:} Toggle visibility of layers, such as excavation campaigns or glass antiquities.
+%     \item \textbf{Parallel Objects:} Link parallel excavation findings/museums, possibly integrating them in the object pop-up on the map.
+% \end{itemize}
+
+% \subsection*{\gls{3D} Models \& Interaction}
+% A dedicated component will focus on the interaction with \gls{3D} models, which will later be integrated into a \gls{VR} environment.
+% \begin{itemize}
+%     \item \textbf{Artifact Interaction:} Allows users to virtually manipulate (rotate, zoom etc) the glass artefact models, as well as apply different textures.
+%     \item \textbf{Contextual Overlay:} Display descriptive metadata about the artefact, such as its origin, period, and historical usage.
+%     \item \textbf{Reconstructed Models:} Showcase how artefacts would look originally (having in consideration characteristics such as: colourless glass, archaeological drawings and symmetry). However, due to time constraints and the need to model the original artefacts, the reconstruction functionality may not be completed.
+%     \item \textbf{3D Models Integration:} The user can zoom the map to visualize the perspective of a specific \gls{3D} model.
+%     %select a position to visualize the perspective of their 3D model.
+% \end{itemize}
+
+% \subsection*{Repository}
+% The repository will consist of a spatial database designed to store and manage data from the mausoleum under study.
+% \begin{itemize}
+%     \item \textbf{Document Upload/Download:} Allow contributors to upload images, videos or excavation reports of the archaeological intervention.
+%     \item \textbf{Search and Filter Features:} Users can search and filter based on some fields, such as time period, shape, and provenance.
+%     \item \textbf{Digital Preservation:} The usage of open, and standard formats to ensure a long-term resource access.
+% \end{itemize}
+
+
+% \subsection*{\gls{VR} Environment}
+% \gls{VR} functionalities will provide an intuitive user experience, enabling interaction with the \gls{VE} through the use of \glspl{HMD}.
+% \begin{itemize}
+%     \item \textbf{Immersive Experience:} \gls{VR} allows users to immerse in a virtual tomb visit, enabling interaction with glass relics.
+%     \item \textbf{Device Accessibility:} Primarily user-friendly and enabling haptic interaction, while supporting \gls{VR} glasses as an emerging display option.
+%     \item \textbf{Localization \& Wayfinding:} 
+%     \begin{itemize}
+%         \item \textbf{\gls{POI}:} Use colors, text, visual markers, or direction arrows to emphasize and guide users to historically significant locations.
+%     \end{itemize}
+%    % \item \textbf{Multilingual Support:} Provide language options to ensure accessibility for an international audience.
+% \end{itemize}
+
+% \section{Development Technologies and Tools}
+% \label{sec:technologies}
+
+% The following section focuses on the technologies and tools that will be used in the implementation of this project. These include frontend, backend, database, and \gls{3D} development tools.
+
+% \subsection{Web Mapping Development}
+
+% \subsubsection{Frontend Technologies}
+% \label{sec:frontend}
+
+% JavaScript is a programming language mostly used to control interactive behavior in web
+% pages. To make a map interactive, most websites automatically send JavaScript code to the browser~\cite{ajayi2024utilizing}. In this project, this language will be used for client-side web development and to integrate frameworks that enhance map interactivity.
+
+% Leaflet\footnote{\url{https://leafletjs.com/}} is an open-source JavaScript library that facilitates the creation of mobile-friendly interactive maps. It offers a wide array of plugins that improve usability and simplify application development.
+% Leaflet will be employed in this thesis to integrate interactive map features and create an intuitive user interface.
+
+% Other alternatives for web development frameworks used for map rendering and interaction include OpenLayers\footnote{\url{https://openlayers.org/}}, which enables the integration of dynamic maps into web pages and can display map tiles, vector data, and markers loaded from any source.
+% Another powerful tool is the Google Maps API\footnote{\url{https://developers.google.com/maps}}, which allows developers to embed Google Maps functionalities directly into both web and mobile applications.
+% Additionally, Mapbox\footnote{\url{https://www.mapbox.com/}} and \gls{OSM}\footnote{\url{https://www.openstreetmap.org/}} provide online mapping solutions. While \gls{OSM} is open-source, offering greater flexibility and customization, and is maintained and updated by the community, Mapbox and Google Maps API have usage-based pricing plans.
+% For this dissertation, one of these technologies will be used to create an interactive map, complementing an existing illustration of the Troia site area, that includes the mausoleum under study. This will be supplemented with an open map, potentially sourced from \gls{OSM}\footnote{\url{https://www.openstreetmap.org/}}.
+
+% \subsubsection{Backend Technologies}
+% \label{sec:backend} 
+
+% The backend technology selected for this thesis is Node.js, an open-source, cross-platform JavaScript runtime environment. Node.js enables developers to create servers, web applications, command-line tools, and automation programs.
+
+% In this project, Node.js will be used to support the web server and to improve performance and scalability when handling repository data. Additionally, it will streamline the communication between the backend and the database repository.
+
+
+% \subsection{Unity Engine}
+% \label{sec:unity_description} 
+
+% Unity is a cross-platform engine that provides a robust environment for developing \gls{2D} and \gls{3D} applications. 
+% Its component-based architecture simplifies \gls{3D} development by allowing developers to define object behaviors through scripts in \glspl{VE}.
+% Despite not being open-source, Unity offers a community forum and repositories where developers can access resources, and adapt them for their projects.
+% Additionally, the Unity Learn\footnote{\url{https://learn.unity.com/}} platform provides free tutorials, simplifying the learning process.
+
+% Unity will be a fundamental technology for supporting the \gls{VR} development of this project. Its integration enables users an immersive experience by visualizing several \gls{3D} data types, including excavation and glass artefacts metadata. 
+% Additionally, C\# programming language within Unity facilitates the management of game objects and user interactions in the \gls{VE}.
+
+
+% \subsection{Database Repository}
+% \label{sec:repos}
+
+% There are several alternatives for storage management systems, but the options are more limited when it comes to geographical
+% database systems.
+
+% For this project, organizing the data in a relational database is more appropriate due to its flexibility and consistency.
+% The most common databases for such applications include PostGIS, extension for PostgreSQL, MySQL\footnote{\url{https://www.mysql.com/}} and Oracle.
+% All three databases databases support spatial data types, allowing to store and manage geographic objects, representing them with points, lines, or polygons, and performing geospatial queries.
+% Among these, PostGIS is widely used for spatial data storage, geometry processing, and efficient geospatial querying.
+% Oracle supports advanced spatial features and 3D features but has a commercial license. On the other hand, MySQL is open-source and more suitable for small-to-medium-scale projects.
+
+% PostgreSQL database was chosen for this thesis because of its high performance and flexibility in managing spatial data. All geographic data, artefacts metadata, and excavation details will be stored within this system.
+
+
+% \subsection{Photogrammetry Tools}
+% \label{sec:photogrammetry_tool} 
+
+% The software that will be used to process digital images and generate \gls{3D} object models is \textit{Agisoft Metashape}\footnote{\url{https://www.agisoft.com/}}.
+% This software performs photogrammetric processing of digital images to generate \gls{3D} spatial data, which can be applied in various fields such as \gls{GIS} applications, \gls{CH} documentation, visual effects production, and indirect measurements of objects of diverse scales. 
+% By stitching together photographs, \textit{Agisoft Metashape} captures the geometry, texture, and visual appearance of physical objects or environments.
+% Other alternatives for photogrammetry softwares are Pix4D\footnote{\url{https://www.pix4d.com/}}, RealityCapture\footnote{\url{https://www.capturingreality.com/}} and DroneDeploy\footnote{\url{https://www.dronedeploy.com/}}
+
+% There are some already built models of the artefacts provided by Troia archaeologists, there will be done a selection and evaluation of the greatest possibilities.
+
+
+% \section{System Architecture}
+% \label{sec:architecture}
+
+% This section includes an overview of the system architecture. The communication flow between the layers will be conducted by a REST \gls{API}.
+% REST \glspl{API} with Node.js connects components in microservices architectures\footnote{\url{https://www.ibm.com/think/topics/rest-apis}}.
+% This service was selected due to its flexibility and lightweight solution. 
+
+% \begin{figure}[h!]
+% \centering
+% \includegraphics[width=1.0\linewidth]{system_architecture2}
+% \caption{System Architecture Overview}
+% \label{fig:architecture}
+% \end{figure}
+% \FloatBarrier
+
+% \section{Usability Tests}
+% \label{sec:usability_tests}
+
+% The Usability Tests will be conducted both remotely and presencially throughout the implementation process, specifically the \gls{HMD} interactions will be done in person.
+% Investigators from \gls{VICARTE} will participate in these tests with valuable feedback to improve the platform, while providing input on their archeology necessities. Their collaboration will contribute to a more useful, accurate, and user-friendly platform.
+
+% \section{Previous Work}
+% \label{sec:previous_work}
+
+% During the curricular internship, a platform was developed using React\footnote{\url{https://react.dev/}} and TailwindCSS for the web layer, with C\# and ASP.NET for the application layer, and MongoDB\footnote{\url{https://www.mongodb.com/}} for data storage. Communication between these three components was handled through direct requests to the web server, which forwarded \gls{CRUD} operations and interacted with the database.  
+% Additionally, the Database Systems and Cloud Computation Systems master's course provided hands-on experience in various storage methodologies and introduced different technologies and alternative solutions for data management.
+
+% This section explains the various experiments carried out during the preparation phase.
+
+% \subsection{Web \gls{GIS}}
+% \label{sec:gis_previous} 
+
+% To further develop expertise in \gls{GIS}, enrollment was made in the master's GeoWeb course taught by the thesis adviser, Armanda Rodrigues. During this course, was developed a Web \gls{3D} application designed to provide an interactive map for visualizing and analyzing demographic data, key infrastructure locations, and other notable European datasets. Although this project did not focus on archaeological data, it introduced and enriched the understanding of GIS concepts, map interaction, and geospatial analysis while exposing new technologies.
+
+% The application leveraged PostGIS, a PostgreSQL extension that supports spatial operations.
+% Additionally, frameworks like Leaflet were used for map rendering, visualization, and user interaction. For the base map, \gls{OSM} was integrated, offering a customizable and versatile visualization. This project serves as a preparatory stage for my thesis, specifically for the \gls{GIS} component, in which I will develop an interactive map of the Troia site.
+
+% \section{Data Structure Proposal}
+% \label{sec:data_strucutre}
+
+% A preliminary database structure has been proposed and analysed for artefacts storage management.  
+% It incorporates the key characteristics of each object to ensure structured organization and availability.
 
 % \begin{figure}[h!]
 %     \centering
-%     \includegraphics[width=0.6\linewidth]{Images/Developing}
-%     \caption{\gls{VR} Experience distribution of the test participants.} 
-%     \label{fig:developing}
+%     \includegraphics[width=0.7\textwidth]{data_structure}
+%     \caption{Proposed Data Structure for Managing Artifacts Data.}
+%     \label{fig:data_strucutre}
 % \end{figure}
+% \FloatBarrier
+
+% \subsection{Photogrammetry}
+% \label{sec:photogrammetry_previous} 
+
+% During the preparation, a photogrammetric experiment was conducted by the student using the \textit{Agisoft Metashape} environment. A total of 143 images were collected during the excavation campaign by the restoration department of NOVA for analysis. 
+% Based on these images, a \gls{3D} model was generated from the photogrammetric survey and subsequently imported into the \textit{Sketchfab} viewer for intuitive interaction.
+% Within the grave where the deceased was buried, three open triangular areas were identified, containing the precious artefacts of the defunct, as shown in Figure~\ref{fig:model3} below.
+
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=0.7\textwidth]{model3}
+%     \caption{\gls{3D} Model Imported into Sketchfab for Visualization.}
+%     \label{fig:model3}
+% \end{figure}
+% \FloatBarrier
+
+% \subsection{Unity}
+% \label{sec:unity} 
+
+% To reproduce the visualization of the \gls{3D} models on the map, a simulation was created in Unity, as presented in Figure \ref{fig:overlay}. The goal was to overlay the map with the \gls{3D} excavation model.
+% To achieve this, the illustrated map was placed as the ground surface, with the excavation model positioned above it. The ultimate objective is to apply this approach to the artefacts found within the three triangular areas of the grave.
+
+% This experiment simulates an intended interactive and dynamic experience, allowing users to explore the map and objects through interactive layers while using an \gls{HMD}.
+
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=0.7\textwidth]{overlay_test}
+%     \caption{Overlay \gls{3D} Excavation Model with a Map Representation.}
+%     \label{fig:overlay}
+% \end{figure}
+% \FloatBarrier
 
 
+% \section{Work Plan}
+% \label{cha:work_plan}
 
-\subsection{Tasks Difficulty and Feedback}
+% This section contains the planned progress, organized into distinct tasks, each with a description. Some tasks will be developed in parallel. 
+% Additionally, a Gantt chart is presented in Figure \ref{fig:gantt_chart} to illustrate the timeline for each task.
 
-This segment of questions was answered immediately after the users completed their tasks in the \gls{VE}.
-The first question in this section used a 5-point Likert scale to measure the perceived difficulty of each task, providing insights that may support future improvements or adjustments to the \gls{UI}.
-The second and final question in this section presented a list of ten statements, tailored to the evaluation of this environment, which users rated on a 5-point Likert scale according to their level of agreement.
-This helps to capture more specific perceptions regarding each relevant functionality and the overall experience within the environment.
-%\subsection{General Feedback}
+% \begin{itemize}
+%     \item \textbf{Mockup Development}: This task focuses on developing a mockup that includes map visualization within a \gls{VE}, along with the associated functionalities and \gls{3D} models visualization.
+%     \item \textbf{\gls{VE} Development}: This phase involves creating an immersive environment where users can navigate, and select objects, followed by the implementation of interactive functionalities with \gls{3D} models of the artefacts. These interactions include applying filters, zooming, and scaling. Initially, the development will focus on a simulation with a single object.
+%     \item \textbf{\gls{GIS} Implementation}: This task comprises the creation of a map that allows user interaction with \gls{POI} represented by markers, integrating layers, and providing functionalities as outlined in Section \ref{sec:requirements}. Although the \gls{GIS} and \gls{VR} tools are developed in parallel, it may be possible to transfer from the map to the immersive environment through user interaction (e.g., clicking on a location on the map to display its \gls{3D} model), or the other way around.
+%     \item \textbf{Database Creation for Repository}: In this phase, a database will be established to store significant data, including artefact and excavation metadata. The structure will initially focus on a single object, as proposed in Section \ref{sec:data_strucutre}. The database will be continuously updated over several weeks to data loading and modifications.
+%     \item \textbf{System Evaluation \& Testing}: This task involves testing functionalities, usability, and performance, with participation from VICARTE investigators. Following the conclusion of the testing phase, the system evaluation process will begin with user questionnaires, leading to potential improvements based on the feedback received.  
+%     \item \textbf{Documentation}: The dissertation report will be developed during the whole process.
+% \end{itemize}
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\linewidth]{Images/Task_Difficulty}
-    \caption{Perceived Task Ease among Participants.} 
-    \label{fig:diffculty}
-\end{figure}
-
-Analyzing the graph in Figure \ref{fig:diffculty}, we can observe the overall ease of completing the tasks.
-The results indicate that the most difficult task was T4 – "Access to the main menu", likely because participants did not remember that it required pressing the back button on the right controller. 
-Task T5 – "View original appearance of the object with the slider", also presented difficulty, possibly due to the diffculty of interacting with the slider bar. 
-It is important to note that this issue was later improved by making the entire slider bar visible and removing the need sometimes to cross the arms to move it. 
-This improvement is further explained in Section \ref{sec:improvements}.
-
-% The results demonstrate
-% It IS POSSIBLE TO OBSERVE
-%tHE RESULTS INDICATE
-%tHE VALUES DENOTE
-%SHOWS
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\linewidth]{Images/Task_Overview_}
-    \caption{Participants’ Agreement with Task-Related Statements.} 
-    \label{fig:overview}
-\end{figure}
-\FloatBarrier
+% % \begin{figure}[h!]
+% %     \centering
+% %     \includegraphics[width=1.0\linewidth]{Gantt_chart}
+% %     \caption{Gantt Chart Representation of the Work Plan.}
+% %     \label{fig:gantt_chart}
+% %   \end{figure}
+% %   \FloatBarrier
 
 
-The results shown in Figure \ref{fig:overview} indicate a general agreement among users with the statements concerning their interaction, exploration, and navigation within the environment.
-In particular, statements 4, 5, and 6 received the highest levels of agreement, regarding the effectiveness of the slider in displaying transformations and the engagement of the information provided about the objects.
-The median values of all statements range between 4 and 5, highlighting a very positive outcome.
-%highlighting ou which
+% %   \begin{figure}[h!]
+% %     \centering
+% %     \includegraphics[width=1.0\linewidth]{gantt_chartt}
+% %     \caption{Gantt Chart Representation of the Work Plan.}
+% %     \label{fig:gantt_chart}
+% %   \end{figure}
+% %   \FloatBarrier
 
-\subsection{Presence Questionnaire (PQ)}
-
-The evaluation of presence was conducted using the Portuguese validated version of the Presence Questionnaire, adapted by Vasconcelos-Raposo et al. \cite{Vasconcelos-Raposo03102021} was used, from which eleven items were removed 
-"in order to improve the validity of the constructs and their internal consistency."
-The original Presence Questionnaire by Witmer et al. \cite{10.1162/105474698565686} consists of thirty-two questions, covering four major factor categories: Control, Sensory, Distraction, and Realism.
-In the translated version, ten of the twenty-one validated and translated questions were selected, as they were considered the most relevant for this research. 
-Questions addressing less important topics, such as sounds during the experience, were excluded. This questionnaire section was applied using a 5-point Likert scale.
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.9\linewidth]{Images/PQ}
-    \caption{Perceived Sense of Presence among Participants.} 
-    \label{fig:PQ}
-\end{figure}
-
-It is represented in Figure \ref{fig:PQ} the participants’ sense of presence during this evaluation.%experience.
-
-It is interesting to note that Q6 – "How proficient in moving and interacting with the virtual environment did you feel at the end of the experience?" – shows that quartiles 1, 2, and 3 coincide at the value 4. 
-This indicates a very strong consensus among participants, with at least 50\% reporting good navigation and understanding of the environment after the experience, reflected in a median score of 4 out of 5. 
-Overall, most participants rated their proficiency as 4, showing strong agreement, with only a few outliers providing lower or higher ratings.
-%adiciono questoes 5 e 8 que comprovam  sentimento de imersividade, sem outliers
-\subsection{User Experience Questionnaire (UEQ-S)}
-
-The overall user experience was measured using the Portuguese version of the User Experience Questionnaire\footnote{\url{https://www.ueq-online.org/}}, constructed by Laugwitz et al. \cite{inproceedings}, and translated by Cota et al. \cite{article_t}.
-
-The UEQ-S is the short version of the User Experience Questionnaire (UEQ), comprising a list of eight items selected from the original twenty-six. \cite{article_ueq}. These items are grouped into two meta-dimensions, illustrated in Figure \ref{fig:scale}: pragmatic quality and hedonic quality, each containing four items.
-In addition, the mean value across all items is reported as an overall \gls{UX} score.
-The questionnaire is structured around pairs of contrasting attributes that may describe the system. Participants provide their evaluation on a seven-point scale, where each circle represents a gradation between the two opposites.
-%is based on
-
-%These pairs address five factors: Attractiveness, Perspicuity, Dependability, Efficiency, Novelty, and Stimulation.  
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.9\linewidth]{Images/scale}
-    \caption{Grouping of the two quality attributes \cite{article_sca}.} 
-    \label{fig:scale}
-\end{figure}
+%   \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=1.0\linewidth]{gantt_chartt2}
+%     \caption{Gantt Chart Representation of the Work Plan.}
+%     \label{fig:gantt_chart}
+%   \end{figure}
+%   \FloatBarrier
 
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.9\linewidth]{Images/UEQ3}
-    \caption{Overview of the \gls{UEQ} Evaluation Distribution among Test Participants.} 
-    \label{fig:UEQ2}
-\end{figure}
+%Incluo seccao de dificuldades/desafios ao lonbgo do desenvolvimento? 
+%ou vou colocando na seccao pretendzida;;ex: hand tracking vs controllers
 
 
-The \gls{UEQ} results, as demonstrated in Figure \ref{fig:UEQ2}, show a highly positive overall experience. 
-The evaluation factor hedonic quality, reflecting user satisfaction and enjoyment, was particularly high, while pragmatic quality denoted the system’s usefulness and effectiveness.
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.9\linewidth]{Images/UEQ}
-    \caption{Mean value of \gls{UEQ} Items of the Participants' Experience.} 
-    \label{fig:UEQ1}
-\end{figure}
-\begin{table}[h!]
-    \caption{\gls{UEQ} Items, their Mean responses, Standard Deviations, and the corresponding Opposite Pairs by Scale.}
-    \centering
-    \includegraphics[width=0.9\linewidth]{Images/table_ueq}
-    \label{table:table_UEQ}
-\end{table}
+% \chapter{Proposed Work}
+% \label{cha:proposed_work}
+
+% This chapter aims to outline the approach that will be used to achieve the project objectives defined in Chapter \ref{cha:introduction}, while providing the prior work in the various areas relevant to this study.
+
+% \section{Requirements}
+% \label{sec:requirements}
+
+% This section describes the requirements and functionalities to be developed during this dissertation, categorized into the following areas: Interactive Map, \gls{3D} Model Interaction, Repository, and \gls{VR} environment.
+
+% Given the diverse requirements of this project, the primary focus will be on developing an immersive \gls{VE}, prioritizing \gls{3D} models and \gls{VR} for exploring glass artifacts within the tomb. The interactive map features will be included but may be implemented with less detail.
+
+% \subsection*{Interactive Map}
+% A map of the Troia archaeological site under study will be incorporated into the project to offer interactive functionalities.
+% \begin{itemize}
+%     \item \textbf{Map Zoom \& Navigation:} Users can pan, zoom, and explore different locations.
+%     \item \textbf{Perspective Switching:} Toggle between top-down and profile views for better spatial understanding.
+%     \item \textbf{Geospatial Data Integration:} Include \gls{GIS} layers combining excavation findings, and overlay a \textit{.tif} map illustration with some immersive interaction.
+%     \item \textbf{Layer Toggle:} Toggle visibility of layers, such as excavation campaigns or glass antiquities.
+%     \item \textbf{Parallel Objects:} Link parallel excavation findings/museums, possibly integrating them in the object pop-up on the map.
+% \end{itemize}
+
+% \subsection*{\gls{3D} Models \& Interaction}
+% A dedicated component will focus on the interaction with \gls{3D} models, which will later be integrated into a \gls{VR} environment.
+% \begin{itemize}
+%     \item \textbf{Artifact Interaction:} Allows users to virtually manipulate (rotate, zoom etc) the glass artefact models, as well as apply different textures.
+%     \item \textbf{Contextual Overlay:} Display descriptive metadata about the artefact, such as its origin, period, and historical usage.
+%     \item \textbf{Reconstructed Models:} Showcase how artefacts would look originally (having in consideration characteristics such as: colourless glass, archaeological drawings and symmetry). However, due to time constraints and the need to model the original artefacts, the reconstruction functionality may not be completed.
+%     \item \textbf{3D Models Integration:} The user can zoom the map to visualize the perspective of a specific \gls{3D} model.
+%     %select a position to visualize the perspective of their 3D model.
+% \end{itemize}
+
+% \subsection*{Repository}
+% The repository will consist of a spatial database designed to store and manage data from the mausoleum under study.
+% \begin{itemize}
+%     \item \textbf{Document Upload/Download:} Allow contributors to upload images, videos or excavation reports of the archaeological intervention.
+%     \item \textbf{Search and Filter Features:} Users can search and filter based on some fields, such as time period, shape, and provenance.
+%     \item \textbf{Digital Preservation:} The usage of open, and standard formats to ensure a long-term resource access.
+% \end{itemize}
 
 
-On a scale from -3 to 3, Figure \ref{fig:UEQ1} illustrates the mean responses of the participants per item.  
-We can conclude that there is a good average, especially in the Hedonic Quality.  
-The y-axis shows the list of \gls{UEQ} items, with participants grouped by scale dimension: Pragmatic or Hedonic Quality.  
-Table \ref{table:table_UEQ} supports this graphic with this and more relevant information of the \gls{UEQ} used.
-\FloatBarrier
+% \subsection*{\gls{VR} Environment}
+% \gls{VR} functionalities will provide an intuitive user experience, enabling interaction with the \gls{VE} through the use of \glspl{HMD}.
+% \begin{itemize}
+%     \item \textbf{Immersive Experience:} \gls{VR} allows users to immerse in a virtual tomb visit, enabling interaction with glass relics.
+%     \item \textbf{Device Accessibility:} Primarily user-friendly and enabling haptic interaction, while supporting \gls{VR} glasses as an emerging display option.
+%     \item \textbf{Localization \& Wayfinding:} 
+%     \begin{itemize}
+%         \item \textbf{\gls{POI}:} Use colors, text, visual markers, or direction arrows to emphasize and guide users to historically significant locations.
+%     \end{itemize}
+%    % \item \textbf{Multilingual Support:} Provide language options to ensure accessibility for an international audience.
+% \end{itemize}
 
-\subsection{Graphics Comparison}
-\label{sec:comparison}
+% \section{Development Technologies and Tools}
+% \label{sec:technologies}
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\linewidth]{Images/statements_by_group2}
-    \caption{Comparison between Participant Groups, regarding Agreement with Statements about their Experience.} 
-    \label{fig:statements_background}
-\end{figure}
+% The following section focuses on the technologies and tools that will be used in the implementation of this project. These include frontend, backend, database, and \gls{3D} development tools.
 
-The graph illustrated in Figure \ref{fig:statements_background} compares agreement with statements, distinguishing participants with a background in Archaeology/Conservation from those in other fields. The error bars represent the standard deviation, indicating the variability in the responses.
-The statements correspond to the ones used on the y-axis of Figure \ref{fig:overview}, with a focus on those considered most meaningful for an Archaeology or Conservation/Restoration specialization.
-Those are: 
+% \subsection{Web Mapping Development}
 
-\begin{itemize}
-  \item S5 - I clearly distinguish between the artifact's original and restored state.
-  \item S6 - The information provided helped me better understand the artifact.
-  \item S7 - The experience contributed to a better understanding of the site.
-  \item S8 - The experience helped me better understand the presented artifacts.
-  \item S9 - The experience provoked a sense of presence in the historical site.
-\end{itemize}
+% \subsubsection{Frontend Technologies}
+% \label{sec:frontend}
 
-In general, as represented above, specialists provided a better average score to the statements, except statement 5, presumably due to the greater critical demand of professionals who have direct experience with artifacts in the field of conservation and restoration.
+% JavaScript is a programming language mostly used to control interactive behavior in web
+% pages. To make a map interactive, most websites automatically send JavaScript code to the browser~\cite{ajayi2024utilizing}. In this project, this language will be used for client-side web development and to integrate frameworks that enhance map interactivity.
 
-\begin{figure}[h!]
-     \centering
-     \includegraphics[width=0.8\linewidth]{Images/tasks_byVR_experience}
-     \caption{Ease of Task Execution according to Participants’ \gls{VR} Experience.} 
-     \label{fig:tasks_byVR_experience}
- \end{figure}
+% Leaflet\footnote{\url{https://leafletjs.com/}} is an open-source JavaScript library that facilitates the creation of mobile-friendly interactive maps. It offers a wide array of plugins that improve usability and simplify application development.
+% Leaflet will be employed in this thesis to integrate interactive map features and create an intuitive user interface.
 
-The results presented in Figure \ref{fig:tasks_byVR_experience} indicate a general ease in completing the tasks among participants with higher levels of experience in \gls{VR}. 
-However, in some cases, the scores for the Intermediate group exceeded those of the Advanced group (specifically in T1, T6, T7, and T8). 
-This outcome may be explained by the fact that, as illustrated in Figure \ref{fig:VR_experience}, only two participants were classified as "Advanced", representing a very small sample that may not provide fully reliable results.
+% Other alternatives for web development frameworks used for map rendering and interaction include OpenLayers\footnote{\url{https://openlayers.org/}}, which enables the integration of dynamic maps into web pages and can display map tiles, vector data, and markers loaded from any source.
+% Another powerful tool is the Google Maps API\footnote{\url{https://developers.google.com/maps}}, which allows developers to embed Google Maps functionalities directly into both web and mobile applications.
+% Additionally, Mapbox\footnote{\url{https://www.mapbox.com/}} and \gls{OSM}\footnote{\url{https://www.openstreetmap.org/}} provide online mapping solutions. While \gls{OSM} is open-source, offering greater flexibility and customization, and is maintained and updated by the community, Mapbox and Google Maps API have usage-based pricing plans.
+% For this dissertation, one of these technologies will be used to create an interactive map, complementing an existing illustration of the Troia site area, that includes the mausoleum under study. This will be supplemented with an open map, potentially sourced from \gls{OSM}\footnote{\url{https://www.openstreetmap.org/}}.
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\linewidth]{Images/tasks_byheritage_experience}
-    \caption{Ease of Task Execution according to Participants’ Experience with Technologies applied to \gls{CH}.} 
-    \label{fig:tasks_byheritage_experience}
-\end{figure}
+% \subsubsection{Backend Technologies}
+% \label{sec:backend} 
 
-The bar chart in Figure \ref{fig:tasks_byheritage_experience} demonstrates that users with greater experience in technologies applied to \gls{CH} generally found the tasks easier to execute, except for T7 – "Access a point of interest", and T8 – "Change the base (ground) plan".
+% The backend technology selected for this thesis is Node.js, an open-source, cross-platform JavaScript runtime environment. Node.js enables developers to create servers, web applications, command-line tools, and automation programs.
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\linewidth]{Images/presence_byVR_experience}
-    \caption{Participants’ reported Sense of Presence according to their \gls{VR} Experience.} 
-    \label{fig:presence_byVR_experience}
-\end{figure}
+% In this project, Node.js will be used to support the web server and to improve performance and scalability when handling repository data. Additionally, it will streamline the communication between the backend and the database repository.
 
 
-In Figure \ref{fig:presence_byVR_experience}, a bar graph illustrates the Sense of Presence results from the \gls{PQ}, organized by participants’ \gls{VR} experience. 
-Remarkably, users with no previous \gls{VR} experience reported, in various questions (Q2, Q3, Q5, and Q8), a stronger sense of presence than those proficient.
+% \subsection{Unity Engine}
+% \label{sec:unity_description} 
 
-\FloatBarrier
-\section{Discussion}
-\label{sec:eval_discussion}
+% Unity is a cross-platform engine that provides a robust environment for developing \gls{2D} and \gls{3D} applications. 
+% Its component-based architecture simplifies \gls{3D} development by allowing developers to define object behaviors through scripts in \glspl{VE}.
+% Despite not being open-source, Unity offers a community forum and repositories where developers can access resources, and adapt them for their projects.
+% Additionally, the Unity Learn\footnote{\url{https://learn.unity.com/}} platform provides free tutorials, simplifying the learning process.
 
-Overall, the results obtained of the User Analysis were balanced, showing a generally younger age group with higher education levels. Professional backgrounds were well distributed, with a larger proportion in Computer Science and Engineering, and Conservation and Restoration.
-Most participants had at least some prior experience with \gls{VR} and in using digital technologies applied to \gls{CH}. The tasks were generally completed with ease, as showed in Figure \ref{fig:diffculty}. In addition, the \gls{PQ} results indicated a good median sense of presence among participants, and the \gls{UEQ} reflected a very positive overall user experience as demonstrated by the mean.
-In Section \ref{sec:comparison}, participants with specialist knowledge in Conservation and Restoration, and Archaeology showed slightly higher average scores on statements related to their field, compared to others. As expected, prior experience with \gls{VR} and in technologies associated with \gls{CH} helped participants solve the tasks.
-Finally, the sense of presence was generally stronger when participants were previously engaged with \gls{VR}, although there were some exceptions for certain \gls{PQ} items.
+% Unity will be a fundamental technology for supporting the \gls{VR} development of this project. Its integration enables users an immersive experience by visualizing several \gls{3D} data types, including excavation and glass artefacts metadata. 
+% Additionally, C\# programming language within Unity facilitates the management of game objects and user interactions in the \gls{VE}.
 
-\subsection{Improvements After User Testing}
-\label{sec:improvements}
 
-Some minor improvements were made following user testing. These mainly concerned the \gls{UI} and small implementation bugs:
+% \subsection{Database Repository}
+% \label{sec:repos}
 
-\begin{itemize}
- \item Enabled the possibility to activate or deactivate the model throughout the entire experience, rather than only the first time. Previously, the collider component that allowed this functionality was deactivated after the user entered the tomb.
- \item Allowed teleportation to the tomb icon even when the menu panel was open. Those were interfering, so previously, the teleportation was only possible when the panel was closed.
- \item Added a legend when selecting the correct option in the main menu to guide users.
- \item Simplified slider interaction: it is no longer necessary to cross the arms to move the slider. When grabbing the object with the right controller, the bar now correctly repositions on the corresponding side.
- \item Original Glass Texture Improvements: Adjusted parameters for object ID 2676. Enhanced the realism of the texture by adding a slight blue tint, as experts indicated that these Roman glasses tended to have a bluish hue.
- \item Tomb Interaction: Improved the definition of the tomb limits, increasing the coordinate precision on both sides.
-\end{itemize}
+% There are several alternatives for storage management systems, but the options are more limited when it comes to geographical
+% database systems.
+
+% For this project, organizing the data in a relational database is more appropriate due to its flexibility and consistency.
+% The most common databases for such applications include PostGIS, extension for PostgreSQL, MySQL\footnote{\url{https://www.mysql.com/}} and Oracle.
+% All three databases databases support spatial data types, allowing to store and manage geographic objects, representing them with points, lines, or polygons, and performing geospatial queries.
+% Among these, PostGIS is widely used for spatial data storage, geometry processing, and efficient geospatial querying.
+% Oracle supports advanced spatial features and 3D features but has a commercial license. On the other hand, MySQL is open-source and more suitable for small-to-medium-scale projects.
+
+% PostgreSQL database was chosen for this thesis because of its high performance and flexibility in managing spatial data. All geographic data, artefacts metadata, and excavation details will be stored within this system.
+
+
+% \subsection{Photogrammetry Tools}
+% \label{sec:photogrammetry_tool} 
+
+% The software that will be used to process digital images and generate \gls{3D} object models is \textit{Agisoft Metashape}\footnote{\url{https://www.agisoft.com/}}.
+% This software performs photogrammetric processing of digital images to generate \gls{3D} spatial data, which can be applied in various fields such as \gls{GIS} applications, \gls{CH} documentation, visual effects production, and indirect measurements of objects of diverse scales. 
+% By stitching together photographs, \textit{Agisoft Metashape} captures the geometry, texture, and visual appearance of physical objects or environments.
+% Other alternatives for photogrammetry softwares are Pix4D\footnote{\url{https://www.pix4d.com/}}, RealityCapture\footnote{\url{https://www.capturingreality.com/}} and DroneDeploy\footnote{\url{https://www.dronedeploy.com/}}
+
+% There are some already built models of the artefacts provided by Troia archaeologists, there will be done a selection and evaluation of the greatest possibilities.
+
+
+% \section{System Architecture}
+% \label{sec:architecture}
+
+% This section includes an overview of the system architecture. The communication flow between the layers will be conducted by a REST \gls{API}.
+% REST \glspl{API} with Node.js connects components in microservices architectures\footnote{\url{https://www.ibm.com/think/topics/rest-apis}}.
+% This service was selected due to its flexibility and lightweight solution. 
+
+% \begin{figure}[h!]
+% \centering
+% \includegraphics[width=1.0\linewidth]{system_architecture2}
+% \caption{System Architecture Overview}
+% \label{fig:architecture}
+% \end{figure}
+% \FloatBarrier
+
+% \section{Usability Tests}
+% \label{sec:usability_tests}
+
+% The Usability Tests will be conducted both remotely and presencially throughout the implementation process, specifically the \gls{HMD} interactions will be done in person.
+% Investigators from \gls{VICARTE} will participate in these tests with valuable feedback to improve the platform, while providing input on their archeology necessities. Their collaboration will contribute to a more useful, accurate, and user-friendly platform.
+
+% \section{Previous Work}
+% \label{sec:previous_work}
+
+% During the curricular internship, a platform was developed using React\footnote{\url{https://react.dev/}} and TailwindCSS for the web layer, with C\# and ASP.NET for the application layer, and MongoDB\footnote{\url{https://www.mongodb.com/}} for data storage. Communication between these three components was handled through direct requests to the web server, which forwarded \gls{CRUD} operations and interacted with the database.  
+% Additionally, the Database Systems and Cloud Computation Systems master's course provided hands-on experience in various storage methodologies and introduced different technologies and alternative solutions for data management.
+
+% This section explains the various experiments carried out during the preparation phase.
+
+% \subsection{Web \gls{GIS}}
+% \label{sec:gis_previous} 
+
+% To further develop expertise in \gls{GIS}, enrollment was made in the master's GeoWeb course taught by the thesis adviser, Armanda Rodrigues. During this course, was developed a Web \gls{3D} application designed to provide an interactive map for visualizing and analyzing demographic data, key infrastructure locations, and other notable European datasets. Although this project did not focus on archaeological data, it introduced and enriched the understanding of GIS concepts, map interaction, and geospatial analysis while exposing new technologies.
+
+% The application leveraged PostGIS, a PostgreSQL extension that supports spatial operations.
+% Additionally, frameworks like Leaflet were used for map rendering, visualization, and user interaction. For the base map, \gls{OSM} was integrated, offering a customizable and versatile visualization. This project serves as a preparatory stage for my thesis, specifically for the \gls{GIS} component, in which I will develop an interactive map of the Troia site.
+
+% \section{Data Structure Proposal}
+% \label{sec:data_strucutre}
+
+% A preliminary database structure has been proposed and analysed for artefacts storage management.  
+% It incorporates the key characteristics of each object to ensure structured organization and availability.
+
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=0.7\textwidth]{data_structure}
+%     \caption{Proposed Data Structure for Managing Artifacts Data.}
+%     \label{fig:data_strucutre}
+% \end{figure}
+% \FloatBarrier
+
+% \subsection{Photogrammetry}
+% \label{sec:photogrammetry_previous} 
+
+% During the preparation, a photogrammetric experiment was conducted by the student using the \textit{Agisoft Metashape} environment. A total of 143 images were collected during the excavation campaign by the restoration department of NOVA for analysis. 
+% Based on these images, a \gls{3D} model was generated from the photogrammetric survey and subsequently imported into the \textit{Sketchfab} viewer for intuitive interaction.
+% Within the grave where the deceased was buried, three open triangular areas were identified, containing the precious artefacts of the defunct, as shown in Figure~\ref{fig:model3} below.
+
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=0.7\textwidth]{model3}
+%     \caption{\gls{3D} Model Imported into Sketchfab for Visualization.}
+%     \label{fig:model3}
+% \end{figure}
+% \FloatBarrier
+
+% \subsection{Unity}
+% \label{sec:unity} 
+
+% To reproduce the visualization of the \gls{3D} models on the map, a simulation was created in Unity, as presented in Figure \ref{fig:overlay}. The goal was to overlay the map with the \gls{3D} excavation model.
+% To achieve this, the illustrated map was placed as the ground surface, with the excavation model positioned above it. The ultimate objective is to apply this approach to the artefacts found within the three triangular areas of the grave.
+
+% This experiment simulates an intended interactive and dynamic experience, allowing users to explore the map and objects through interactive layers while using an \gls{HMD}.
+
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=0.7\textwidth]{overlay_test}
+%     \caption{Overlay \gls{3D} Excavation Model with a Map Representation.}
+%     \label{fig:overlay}
+% \end{figure}
+% \FloatBarrier
+
+
+% \section{Work Plan}
+% \label{cha:work_plan}
+
+% This section contains the planned progress, organized into distinct tasks, each with a description. Some tasks will be developed in parallel. 
+% Additionally, a Gantt chart is presented in Figure \ref{fig:gantt_chart} to illustrate the timeline for each task.
+
+% \begin{itemize}
+%     \item \textbf{Mockup Development}: This task focuses on developing a mockup that includes map visualization within a \gls{VE}, along with the associated functionalities and \gls{3D} models visualization.
+%     \item \textbf{\gls{VE} Development}: This phase involves creating an immersive environment where users can navigate, and select objects, followed by the implementation of interactive functionalities with \gls{3D} models of the artefacts. These interactions include applying filters, zooming, and scaling. Initially, the development will focus on a simulation with a single object.
+%     \item \textbf{\gls{GIS} Implementation}: This task comprises the creation of a map that allows user interaction with \gls{POI} represented by markers, integrating layers, and providing functionalities as outlined in Section \ref{sec:requirements}. Although the \gls{GIS} and \gls{VR} tools are developed in parallel, it may be possible to transfer from the map to the immersive environment through user interaction (e.g., clicking on a location on the map to display its \gls{3D} model), or the other way around.
+%     \item \textbf{Database Creation for Repository}: In this phase, a database will be established to store significant data, including artefact and excavation metadata. The structure will initially focus on a single object, as proposed in Section \ref{sec:data_strucutre}. The database will be continuously updated over several weeks to data loading and modifications.
+%     \item \textbf{System Evaluation \& Testing}: This task involves testing functionalities, usability, and performance, with participation from VICARTE investigators. Following the conclusion of the testing phase, the system evaluation process will begin with user questionnaires, leading to potential improvements based on the feedback received.  
+%     \item \textbf{Documentation}: The dissertation report will be developed during the whole process.
+% \end{itemize}
+
+% % \begin{figure}[h!]
+% %     \centering
+% %     \includegraphics[width=1.0\linewidth]{Gantt_chart}
+% %     \caption{Gantt Chart Representation of the Work Plan.}
+% %     \label{fig:gantt_chart}
+% %   \end{figure}
+% %   \FloatBarrier
+
+
+% %   \begin{figure}[h!]
+% %     \centering
+% %     \includegraphics[width=1.0\linewidth]{gantt_chartt}
+% %     \caption{Gantt Chart Representation of the Work Plan.}
+% %     \label{fig:gantt_chart}
+% %   \end{figure}
+% %   \FloatBarrier
+
+%   \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=1.0\linewidth]{gantt_chartt2}
+%     \caption{Gantt Chart Representation of the Work Plan.}
+%     \label{fig:gantt_chart}
+%   \end{figure}
+%   \FloatBarrier
+
 
