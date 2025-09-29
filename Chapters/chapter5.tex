@@ -184,6 +184,7 @@ To acquire the desired data retrieval, only three data structures were required:
 This implementation retrieves all the IDs of the available artifacts, to fulfill the requirement of the user to view the desired object's textual and image information.  
 The artifacts returned from the database are stored in a list structure, which is then iterated to populate the dropdown \texttt{options} list, as illustrated in Listing~\ref{lst:artifact_ids}.
 
+\newpage
 \begin{lstlisting}[language=C++, caption={Method used to load artifact IDs and define as options in the Dropdown.}, label={lst:artifact_ids}]
       IEnumerator GetOptionsIds(string url)
     {
@@ -223,6 +224,7 @@ The \emph{dimensions} field is a nested JSON structure containing \emph{height},
 
 Finally, a formatted string is created to display the object's details in the \gls{UI} panel.
 
+\newpage
 \begin{lstlisting}[language=C++,label={lst:get_data}, caption={Method used to load object data from the database.}]
       IEnumerator GetData(string url)
     {
@@ -231,17 +233,15 @@ Finally, a formatted string is created to display the object's details in the \g
 
         if (www.result == UnityWebRequest.Result.Success)
         {
-             artifact = JsonUtility.FromJson<Artifact>(www.downloadHandler.text);
+            artifact = JsonUtility.FromJson<Artifact>(www.downloadHandler.text);
 
             string displayText = "<b>Object Details:</b>\n\n";
-
             string material = artifact.material.Replace("{", "").Replace("}", "");
 
              displayText += $"ID: {artifact.id} | Name: {artifact.name} \nMaterial: {material} | Epoch: {artifact.epoch} \nProvenance: {artifact.provenance}" +
                          $"\nDimensions: {artifact.dimensions.height} x {artifact.dimensions.width} cm, Weight: {Mathf.Round(artifact.dimensions.weight * 10.0f) * 0.1f} g";
 
             resultText.text = displayText;
-
             GetImages(artifact.id, artifact.images_path_b_interv);
         }
         ...
@@ -252,9 +252,9 @@ Finally, a formatted string is created to display the object's details in the \g
 
 The \texttt{GetImages} method iterates over the array of image paths retrieved from the "object\_intervention" table. The array passed to this method may be either "images\_path\_b\_interv", containing the object images before intervention, or "images\_path\_a\_interv", after the intervention.
 For each image, a component is created and positioned appropriately within the gallery.
-
 The implementation of this process is presented in Listing \ref{lst:artifact_images}.
 
+\newpage
 \begin{lstlisting}[language=C++, caption={Method used to load artifact images and to display them in the Images Gallery.}, label={lst:artifact_images}]
       private void GetImages(int id, string[] images_path)
     {
@@ -353,6 +353,9 @@ The menu can be opened or closed with the trigger button of the right controller
 Additionally, to select an option, the user points at it with the ray and selects it using the right controller’s select button. To detect which menu option is being targeted, a \textbf{Raycast} operation is performed based on the current position of the right controller ray, as illustrated in Listing \ref{lst:menu_raycast}.
 
 Currently, the menu contains only one functional option, represented by a menu icon. This option performs a single action: activating or deactivating the \textbf{Panel \gls{UI}} menu.
+
+
+\newpage
 
 \begin{lstlisting}[language=C++, caption={Method used to acquire the position that was pointed at by the controller ray.}, label={lst:menu_raycast}]
     public Vector2 GetPosition(Vector2 anchoredPosition, Transform controllerTransform)
@@ -496,6 +499,7 @@ and adjustments to \textbf{specular}, \textbf{diffuse}, and \textbf{environment 
 These calculations were performed independently for each component, as illustrated in Listing~\ref{lst:lighting_glass}, before being aggregated into the final \texttt{finalColor}. 
 This shader enabled a more faithful representation of the object's original appearance.
 
+\newpage
 \begin{lstlisting}[language=HLSL, caption={Partial Fragment shader for blending original and restored textures.}, label={lst:shader_blend}]
         half4 frag(Varyings IN) : SV_Target
         {
@@ -568,7 +572,7 @@ The fragment shader logic for the glowing outline is presented in Listing~\ref{l
 It computes the Fresnel term with the Outline Power attribute, and applies a \texttt{smoothstep()} to achieve a soft personalized outline.  
 This mechanism ensures that the objects are easily identifiable. 
 
-
+\newpage
 \begin{lstlisting}[language=C++, caption={Partial class with Outline Color changed when the object is Hovered.}, label={lst:outline_color}]
     public class GlowingObject : MonoBehaviour
 {
@@ -685,8 +689,39 @@ Both continuous movement and snap turning can also be performed physically, with
 The overall movement system is managed by the \emph{Character Controller} component, which also ensures accurate collision detection. In particular, the collider associated with the user interacts with the collider of the funerary enclosure, preventing the user from passing through walls and thereby preserving realism in the experience.
 
 Further refinements and a dynamic management of movement behavior were introduced in the script "CustomMovement", where two key methods were implemented within Unity’s default \texttt{Update()} function.
-The first method continuously updates the center of the character controller to reflect the user’s current position during locomotion. 
-The second manages custom movement behaviors by dynamically controlling gravity. Depending on the context, gravity may either be applied or disabled. When active, it influences the user’s velocity over time, and its intensity can be adjusted dynamically.
+The first method (Listing \ref{lst:recenter}) continuously updates the center of the character controller to reflect the user’s current position during locomotion. 
+The second (Listing \ref{lst:gravity}) manages custom movement behaviors by dynamically controlling gravity with \texttt{velocityY}. 
+Depending on the context, gravity may either be applied or disabled. When active, it influences the user’s velocity over time, and its intensity can be adjusted dynamically (\texttt{gravityMultiplier}).
+
+\begin{lstlisting}[language=C++, caption={Recenter user position method.}, label={lst:recenter}]
+void UpdateCharacterHeight()
+{
+    Vector3 center = transform.InverseTransformPoint(origin.Camera.transform.position);
+    character.center = new Vector3(center.x, center.y, center.z);
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=C++, caption={Apply costum gravity method.}, label={lst:gravity}]
+  private void ApplyCustomGravity()
+  {
+      Vector3 current = origin.Camera.transform.localPosition;
+      Vector3 delta = current - previousCamPos;  // movement since last frame
+      velocityY = delta.y;
+
+      if (character.isGrounded) //check if user is currently touching the ground plan
+      {
+          velocityY = 0f;
+      }
+      else
+      {
+          velocityY += Physics.gravity.y * Time.deltaTime* gravityMultiplier; // Apply custom gravity 
+      }
+      Vector3 move = new Vector3(delta.x, velocityY, delta.z);
+      character.Move(move * Time.deltaTime); // update user movement
+      previousCamPos = current; // update previous camera position for next frame
+  }
+\end{lstlisting}
 
 \subsubsection{Tomb Navigation Logic}
 \label{sec:tomb_logic}
@@ -717,9 +752,37 @@ The first approach used a collider placed inside the tomb. When the user collide
 
 This, in the end, caused conflicts because the interior collider overlapped with the collider responsible for activating the funerary enclosure.
 
-To handle this issue, the limits of the tomb were defined manually. With this method, the plane disappears when the user enters that space and reappears once the user exits it.
+To handle this issue, the limits of the tomb (coordinates x, y, and z) were defined manually. With this method, shown in Listing \ref{lst:plan_removal}, the plane disappears when the user enters that space and reappears once the user exits it.
 In Figure \ref{fig:tomb_outside}, the outside view of the tomb is depicted. As illustrated, the plane is disabled, providing full visibility of the tomb’s interior.
 
+
+\begin{lstlisting}[language=C++, caption={Plan Removal approach in Update method().}, label={lst:plan_removal}]
+ void Update()
+ {
+     if (excavation_model.activeSelf) //check if funerary model is active
+     {
+         if (camara.position.x >= x_min && camara.position.x <= x_max && camara.position.z <= z_max && camara.position.z >= z_min && camara.position.y <= y_max && camara.position.y >= y_min)
+         {
+            if(toggle_UI.firstactive) //deactivate the plan if inside the tomb area
+                 plane.SetActive(false);
+            else plane2.SetActive(false);
+
+            if(camara.position.y <= plane.transform.position.y + 0.4f) 
+                 mausoleu.SetActive(false); //disable mausoleum collider so the user can fall inside the tomb without colliding
+             isInsideTomb = true;
+         }
+         else
+         {
+             if (toggle_UI.firstactive) //reactivate the plan if outside the tomb area
+                 plane.SetActive(true);
+             else
+                 plane2.SetActive(true);
+             isInsideTomb = false;
+             mausoleu.SetActive(true); //reactivate mausoleum collider 
+         }
+     }
+ }
+\end{lstlisting}
 \subsection*{Vertical Descend}
 
 Another challenge was ensuring that users could navigate naturally within the tomb while maintaining clear visibility of objects and architectural details inside. Standard gravity alone was insufficient, as it did not allow reliable interaction with objects located in triangular areas.
@@ -727,11 +790,35 @@ To address this, the "TombNavigation" script was developed, introducing controll
 
 Initially, a Raycasting approach was tested, directing rays toward the front and the floor of the tomb. When a collision was detected, the user’s position was adjusted and lowered by a few centimeters. Although functional, this method is unreliable, as it heavily depends on the user’s viewing direction, extracted from the camera position.
 
-The final implementation instead defined the tomb interior using axis-based boundaries. When the user entered this delimited area, they were automatically displaced downward. Upon exiting, the user’s position was restored to its correct height, ensuring they did not remain unnaturally below the expected level. This approach allows the user to enter and exit the tomb by simply walking.
+The final implementation instead defined the tomb interior using axis-based boundaries (x, y, and z coordinates). 
+When the user entered this delimited area, they were automatically replaced downward with the \texttt{new\_y} factor. Upon exiting, the user’s position was restored to its correct height (\texttt{camPosbefore}), ensuring they did not remain unnaturally below the expected level. 
+This approach, respresented in Listing \ref{lst:vertical_descend} allows the user to enter and exit the tomb by simply walking.
 
 During development, two alternative exit mechanisms, a block and a ladder, were added. However, these were later deactivated, as they were unnecessary with the finalized gravity-based solution and occupied additional space in the relatively small tomb environment. Nevertheless, both alternatives remain available for reactivation if required in the future.
 
+\begin{lstlisting}[language=C++, caption={Vertical Descend approach in Update method().}, label={lst:vertical_descend}]
+void Update()
+{
+    var camara = Camera.main.transform;
+    if (!isInside && cam.transform.localPosition.y != new_y)
+    {
+        camPosbefore = cam.transform.localPosition; //position before entering the tomb
+    }
+    if (!plane.activeSelf && camara.position.x >= x_min && camara.position.x <= x_max && camara.position.z <= z_max && camara.position.z >= z_min && camara.position.y <= y_max && camara.position.y >= y_min) //check if position inside the tomb
+    {
+        isInside = true;
+        mausoleu_collider.SetActive(false); //deactivate funerary collider
+        cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, new_y, cam.transform.localPosition.z); //user replaced to a lower position
+    }
+    else
+    {
+        isInside = false;
+        mausoleu_collider.SetActive(true);
+        cam.transform.localPosition = camPosbefore;
+    }
+}
 
+\end{lstlisting}
 %Essential Stages/Steps
 \subsection{Key Techniques}
 This section describes the main techniques implemented during the development process. 
@@ -747,6 +834,7 @@ This adjustment was necessary due to warnings of potential collision issues aris
 Therefore, the number of faces was reduced from 1.9 million to approximately 100 thousand, preserving the essential level of detail while improving efficiency.
 
 \subsubsection{Generating the Glass Texture}
+\label{sec:glass_texture}
 The process of generating the glass texture consisted of two phases.  
 
 First, the material was modeled in Blender using a node-based shader structure. The desired glass effect was achieved by combining the \texttt{Glossy BSDF} and \texttt{Refraction BSDF} nodes. It also received a \texttt{Fresnel} node as input\footnote{\url{https://docs.blender.org/manual/en/latest/render/shader_nodes/index.html}}. This structure is represented in Figure~\ref{fig:glass_texture}.  

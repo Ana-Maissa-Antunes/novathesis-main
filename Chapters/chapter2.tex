@@ -17,29 +17,23 @@ Subsequently, Section \ref{sec:interaction_visualization} explores \glspl{VE}, f
 Section \ref{sec:data} presents diverse \gls{3D} extracting methodologies.
 Section \ref{sec:geographic_information_system} examines the role of \glspl{GIS} in applications involving map integration, particularly in the context of archaeological sites. 
 The last two sections address important standards, and documentation principles (Section \ref{sub:standart}) to consider when developing heritage applications, as well as a significant European Union initiative (Section \ref{sec:ch_cloud}).
-%applications
-%concerns
-%focused on
-%immersive
-%covering
 
 \section{Digital Heritage Foundations}
 \label{sec:digital_heritage_foundation}
 
 This section covers the fundamental concepts for integrating digital tools to visualize and preserve artefacts during archaeological studies.
 
-\subsection{\gls{DCH}}
+\subsection{Digital Cultural Heritage \gls{DCH}}
 \label{sec:digital_heritage}
 
-\gls{CH} includes monuments, sites, landscapes, skills, practices, knowledge and expressions of human creativity~\cite{eu_cultural_heritage}. Collections preserved and managed by public and private bodies - such as museums, libraries and archives - and film heritage are also part of CH. It enriches the lives of people, constitutes a driving force for the cultural and creative sectors, and plays a role in creating and enhancing Europe's social capital.
-\gls{CH} can be tangible (castles, museums, works of art), intangible (songs, traditions, etc.), or
-digital (born-digital and digitised). In this thesis we will reproduce tangible objects, and represent them in \gls{3D} models digitally.
-While policymaking in this area is primarily the responsibility of member states, regional and local authorities, the \gls{EU} is committed to safeguarding and enhancing Europe's \gls{CH}. It does so through a number of policy areas and programmes.
+\gls{CH} includes monuments, sites, landscapes, skills, practices, knowledge, and expressions of human creativity~\cite{eu_cultural_heritage}. Collections preserved and managed by public and private bodies - such as museums, libraries and archives - and film heritage are also part of \gls{CH}. 
+As a fundamental legacy, \gls{CH} engages people and contributes to the enrichment of society. It can take tangible forms, such as monuments or artworks; intangible forms, such as songs and traditions; or digital forms, whether born-digital or digitised.
 
+In this thesis, tangible objects were digitally reproduced and represented as \gls{3D} models.
 
-Digital technologies provide new opportunities to preserve cultural content and to make \gls{CH} more accessible to all audiences~\cite{eu_digital_heritage}. Museums and cultural organisations that embrace technology are able to offer innovative visitor experiences, as well as let the public access exhibitions remotely and view material that is not on display.
+Digital technologies offer new possibilities to preserve cultural content and to make \gls{CH} more accessible to all audiences~\cite{eu_digital_heritage}. Museums and cultural organisations that embrace technology are able to offer innovative visitor experiences, as well as let the public access exhibitions remotely and view material that is not on display.
 The \gls{EU} funds an extensive list of projects combining tecnology and art.
-Europeana\footnote{\url{https://www.europeana.eu/}} is a European digital platform to empower \gls{CH} in its digital transformation. It supports thousands of European museums, archives and libraries to offer free access to digitalised versions of artworks, books and music.
+Europeana\footnote{\url{https://www.europeana.eu/}} is a European digital platform that provides free access to digitised cultural heritage collections from museums, libraries, and archives, supporting research, education, and facilitating public engagement.
 
 
 \begin{figure}[h!]
@@ -50,18 +44,16 @@ Europeana\footnote{\url{https://www.europeana.eu/}} is a European digital platfo
 \end{figure}
 \FloatBarrier
 
-The visualization of \gls{CH} collections (process illustrated in \ref{fig:ch_data}) can involve two classes of data: the data constituting the digital cultural object, and
-the accompanying metadata, as exemplified below in the Figure \ref{fig:ch_objects}~\cite{Windhager2019Visualization}.
+The visualization of \gls{CH} collections (process illustrated in Figure \ref{fig:ch_data}) can involve two classes of data: the data constituting the digital cultural object, and
+the accompanying metadata~\cite{Windhager2019Visualization}.
 The metadata can describe a broad diversity of information associated
-with \gls{CH} objects, therefore, to systematically classify different types of metadata, it is essential to adopt a unified metadata model. 
+with \gls{CH} objects, as represented in Figure \ref{fig:ch_objects}.
+Furthermore, digital \gls{CH} collections are employed by a wide range of users, including researchers, archaeologists, humanities students, and members of the general public.
+
+Therefore, to systematically classify different types of metadata, it is essential to adopt a unified metadata model. 
 Among several standardization initiatives, the \gls{EDM}\footnote{\url{https://pro.europeana.eu/page/edm-documentation}} is one of the most mature efforts. 
 The \gls{EDM} reuses several existing Semantic Web vocabularies, such as the metadata set of the \gls{DCMI}\footnote{\url{https://www.dublincore.org/}}, and the
 \gls{CIDOC-CRM}\footnote{\url{https://cidoc-crm.org/}} from the \gls{CIDOC} of the International Council of Museums\footnote{\url{https://icom.museum/}}. 
-Additionally, the target groups of digital CH collections are very diverse, from museum curators to humanities scholars and from
-highly interested enthusiasts to members of the general public— \gls{CH} collections can provide useful and interesting information for all of them. 
-%Consequently, many different categorizations of users exist with respect to domain expertise,
-%  technical expertise, and motivation of use. There are two significant classes of users, namely experts and casual users. Experts encompass all people with a professional 
-% or scientific interest in CH data, whereas casual users are lookin for personally meaningful information in everyday settings.
 
 
 \begin{figure}[h!]
@@ -100,35 +92,19 @@ The \gls{DT} consists of three components: physical product in a real monitored
 space, data and information connections, and the corresponding virtual product
 in virtual space~\cite{grieves2017digital}.
 
-
-The potential application of the \gls{DT} for heritage is its realistic
+A potential application of the \gls{DT} technology for heritage is its accurate
 representation in the form of an intelligent and semantically enriched \gls{3D} model \gls{HBIM}.
 First defined in 2009, HBIM is “a novel solution whereby interactive parametric objects representing architectural elements are constructed from historic data, these elements are accurately mapped onto a point cloud or image-based survey”~\cite{article_hbim}.
 This is a powerful tool capable of managing information collected and modeled,
 improving its availability and accessibility.
-%  According to Nagakura et al. (2015), having a digital model of historical
-%  heritage is a cheaper tool to allow building investigations because, unlike other
-%  areas of study, there is no way to take buildings to laboratories or store them in
-%  museums galleries like other historical artefacts.
-Additionally, the use of digital scanning technologies to survey the current state of historic
-buildings, such as photogrammetry and laser scanning, expedites the process
-of generating a digital model.
+Digital scanning technologies, including photogrammetry and laser scanning, are employed to capture detailed \gls{3D} representations. In the context of historic buildings, they facilitate the assessment of current conditions and expedite the generation of corresponding \gls{3D} digital models.
 
-% Initially mostly applied in astronautics and aerospace area (Grieves and Vickers,
-% 2016), recent progress in IoT (Internet of Things) infrastructures and the development of low-cost
-% and reliable sensors has led specialists in building physics to consider such technologies to support
-% monitoring strategies for the preservation of heritage sites. 
-Implementing \gls{DT} for the management and preservation of \gls{CH} assets requires adopting a collaborative integrated approach and a strong
-interplay among heritage recorders, conservation experts and information and communications technology specialists.
-In addition to the modelling of information related to heritage sites, open standards should
-be adopted for the identification of risks, damage and possible treatments to enable the awareness
-of \gls{DT} with respect to their interrelationship and to ensure interoperability among the information
-systems of multiple organization and institutions. Before developing preventive conservation strategies, a
-good understanding of the heritage site and its context, including the assessment of its multiple values,
-is necessary. In this regard, the complex management of information related to the documentation
-of heritage places involves critical reflection on the adoption of an appropriate \gls{HIS}. The need for \gls{3D} visualization in \gls{GIS} to enable better
-visualization and analysis of complex issues related to elements of significance has led researchers
-in the field to progressively consider \gls{HBIM} as a relevant alternative~\cite{jouan2020digital}.
+Implementing a \gls{DT} for the management and preservation of \gls{CH} assets requires adopting a collaborative integrated approach and fostering strong interplay among heritage recorders, conservation experts, and information and communications technology specialists. 
+Additionally, the adoption of open standards to document risk management and potential interventions is essential, ensuring interoperability across diverse information systems and enhancing understanding of the interrelationships within the \gls{DT}.
+Developing effective preventive conservation strategies require a in-depth understanding of the heritage site and its context, and value.
+Proper management of the information collected during documentation needs thoughtful selection of an appropriate \gls{HIS}.
+\gls{GIS} is often used to represent complex cultural heritage data through \gls{3D} visualization. 
+In this context, researchers have increasingly regarded \gls{HBIM} as a valuable alternative.~\cite{jouan2020digital}.
 
 
 \section{Interaction and Visualization Tecnologies}
@@ -163,8 +139,6 @@ multiple uses.
 \FloatBarrier
 
 
-
-
 Figure \ref{fig:human_interaction} above contains a set of \gls{SVIFT} interactors, including buttons, menus, and tabs
 that can be grabbed and moved (or bestow the grab and move ability to another object), constraint maintainers 
 (e.g., keeping the manipulated object on a particular plane), and selectors. The image on the left is using a 
@@ -179,9 +153,7 @@ This section presents the possible user interactions with \glspl{VE}, achieved t
 \subsubsection{Input Devices}
 \label{sec:input_devices}
 
-Common \gls{VE} input devices include \gls{6-DOF} trackers\footnote{\url{https://www.ar.rocks/glossary/6dof-tracking}} as exemplified in Figure \ref{fig:input_device}, continuous posture-recognition gloves, discrete 
-event gloves, pen-like devices, simple button devices, and special-purpose devices such as the 
-Spaceball or force-feedback joysticks. 
+Common \gls{VE} input devices include \gls{6-DOF} trackers\footnote{\url{https://www.ar.rocks/glossary/6dof-tracking}} as exemplified in Figure \ref{fig:input_device}, gloves capable of recognizing continuous postures or discrete events, pen-like, simple button devices, as well as specialized tools such as the Spaceball or joysticks with force-feedback.
 
 In the next paragraphs, I will describe four common available VE task categories.
 
@@ -190,26 +162,18 @@ Most selection techniques can be categorized based on how an object is indicated
 by touching it with a virtual hand, pointing at it, occluding it, encapsulating it within a volume, or 
 selecting it indirectly.
 
-Manipulation refers broadly to the  modification of 
-attributes of the selected object. Attributes may include position, orientation, scale, shape, color, 
-or texture. For the most part, research has mainly considered the manipulation of the  position 
-and orientation of rigid objects, although some special-purpose applications include object deformation or scaling. Object manipulation tasks have importance in such applications as design, 
-prototyping, simulation, and entertainment, all of which may require environments that can be 
-modified by the user. The design space for manipulation techniques is quite large. To provide a simple overview of the 
+Manipulation can be understood as the modification of an object’s attributes, such as its identifier, name, position, scale, or texture. These tasks are particularly significant in fields like design, prototyping, simulation, and entertainment, where environments frequently need to be adjusted by the user.
+The design space for manipulation techniques is quite large. To provide a simple overview of the 
 techniques already developed in the design space, three categories are presented in the following—
 virtual hand, proxy, and indirect. 
 
 Travel, also called viewpoint motion control, is the most ubiquitous and common \gls{VE} interaction 
-task—simply the movement of the user within the environment. Travel and wayfinding make up the task of navigation. 
+task. Consists simply of the user's movement inside the environment. Travel and wayfinding make up the task of navigation. 
 Most travel techniques can be categorized as physical locomotion, steering, automated, or manual manipulation. 
-Many of the other interactions found in VE applications fall under the heading of system control. 
+Many of the other interactions found in \gls{VE} applications fall under the heading of system control. 
 
-System Control includes commands, mode changes, and other modifications of system state. 
-Often, system control tasks are composites of the other universal tasks. For example, choosing
-a menu item is a selection task, whereas dragging an object to a trash can for deletion is a 
-manipulation task. The categories of system control techniques include graphical 
-menus, voice commands, gestures, and tools.
-
+System control involves operations such as executing commands, changing modes, or modifying the system state. 
+The categories of system control techniques include virtual menus, voice commands, tools, and gesture-based interactions.
 
 \begin{figure}[h!]
     \centering
@@ -224,41 +188,42 @@ menus, voice commands, gestures, and tools.
 
 The three common \gls{VE} display devices are \glspl{HMD}, as illustrated in Figure \ref{fig:HMDs}, \glspl{SID} (fully or 
 semisurrounding displays, such as the \gls{CAVE}\footnote{\url{https://steantycip.com/vr-cave/}}) (Figure \ref{fig:HMD1}), and single-screen stereo displays, such as the Responsive Workbench\footnote{\url{https://graphics.stanford.edu/projects/RWB/}}. 
-These display types have very different characteristics, and interaction with these displays is likely to be extremely different as well, as shown in Figure \ref{fig:display}. \glspl{HMD} and fully surrounding \glspl{SID} provide the ability to view the entire \gls{VE} by physically turning. Semisurrounding \glspl{SID} require the use of virtual rotations, so applications intended for such 
-displays should be designed in a manner to minimize these less-desirable rotations. \glspl{HMD} that have a narrow \gls{FOV} require extensive head rotation in order for the user to see the entire environment. 
+The user interaction with these last displays is very different, as shown in Figure \ref{fig:display}. \glspl{HMD} and fully surrounding \glspl{SID} provide the ability to view the entire \gls{VE} by physically turning. 
+Since semisurrounding \glspl{SID} rely on virtual rotations, applications for these displays should be designed to minimize the occurrence of such undesirable movements. 
+\glspl{HMD} that have a narrow \gls{FOV} require extensive head rotation in order for the user to see the entire environment. 
 
 %These active stereoscopic glasses are augmented with a constellation of reflective balls that clips onto the frame. The reflective balls work with video tracking that calculates the position of the glasses by triangulating on arrangement of the reflections.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\linewidth]{HMD1}
+    \includegraphics[width=0.55\linewidth]{HMD1}
     \caption{Stereoscopic glasses augmented with a constellation of reflective balls~\cite{SHERMAN2019258}.} 
     \label{fig:HMD1}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.25\linewidth]{display}
+    \includegraphics[width=0.35\linewidth]{display}
     \caption{Dual-screen fishtank stereo-capable display~\cite{SHERMAN2019258}.} 
     \label{fig:display}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.35\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth]{HMD2}
         \caption{Microsoft HoloLens 2~\cite{headset_article}.}
         \label{fig:HM}
     \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.35\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth]{HMD3}
         \caption{HTC Vive~\cite{SHERMAN2019258}.}
         \label{fig:y1}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.35\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth]{HMD4}
         \caption{Meta Quest 3~\cite{article}.}
@@ -316,8 +281,9 @@ structure using photographs or digital images~\cite{Baqersad2017Photogrammetry}.
 
 Concerning the object(s) of interest and the camera position(s), we distinguish
 between terrestrial and aerial photogrammetry~\cite{linder2016digital}.
-In aerial photogrammetry, images are acquired via overhead shots from an aircraft, providing topographic maps and land use details. In terrestrial photogrammetry, images are obtained at locations near or on the surface of
-the earth and provide detailed dimensional information of an object. When the object size and the camera-to-object 
+Aerial photogrammetry involves capturing images from an aircraft in overhead views, which are then used to generate topographic maps. 
+By contrast, terrestrial photogrammetry captures images from positions on or near the Earth’s surface, enabling the extraction of precise details about objects.
+When the object size and the camera-to-object 
 distance are both less than 100 meters, terrestrial photogrammetry is further defined as close-range photogrammetry. A fundamental technique in photogrammetry for creating accurate \gls{3D} models is Stereoscopic Viewing. 
 By capturing two or more images photos of the same object but taken from different positions, it is possible to calculate the \gls{3D} coordinates of any point which is represented in both photos~\cite{linder2016digital}. 
 %This method is instrumental in reconstructing object geometries with high precision and is widely applied in topographic mapping, structural analysis, and cultural heritage documentation.  
@@ -326,12 +292,7 @@ Multi-image photogrammetry is an advanced technique that combines large groups o
 the images into specialized software that automatically detects and matches correlated features. This step can be highly time-consuming and demand computer power for large datasets. 
 Once matching points are identified, the software calculates their spatial relationships, producing a sparse \gls{3D} point cloud that outlines the subject’s shape, as shown in Figure \ref{fig:photo2}. 
 Finally, the software refines this sparse model by reanalyzing the images to generate a much denser point cloud, similar to those produced by laser scanners.
-% In photogrammetry the most used model is the central projection.
-%It is a geometric procedure that transforms a 3D entity into a 2D reality and it occurs when you have an object, 
-%a projection centre and a projection plane oriented in any way with respect to the projected object.
-%This projection is then produced because a series of straight lines (or projecting rays) connect the 
-%points of the object with the projection centre and, intersecting the projection plane, generate the image points, that are the points projections.
-%~\cite{aicardi2018recent}
+
 
 \begin{figure}[h!]
     \centering
@@ -346,7 +307,6 @@ The most valuable application of multi-image photogrammetry
 may lie in its ability to facilitate community engagement in archaeological documentation.
 This approach enables the efficient creation of interactive \gls{3D} models, allowing the public to engage with heritage sites
 in a more immersive way than traditional static representations such as site plans and sectional drawings. 
-%In the "Previous Work", a close-range photogrammetry technique was used to generate the \gls{3D} excavation model, as detailed in section \ref{sec:photogrammetry_previous}.
 
 \subsection{Light Detection And Ranging (\gls{lidar})}
 \label{sec:lidar}
@@ -405,14 +365,14 @@ To fix scar parts or gaps, a mathematical technique called surface spline patche
 \section{Geospatial Data and Systems}
 \label{sec:geographic_information_system}
 
-A \acrfull{GIS} is a computer system for capturing, storing, checking, and displaying data related to positions on Earth’s 
-surface~\cite{natgeo_2024}. By relating seemingly unrelated data integrated by geographical location, \glspl{GIS} can help individuals and organizations understand spatial patterns and relationships.
+A \acrfull{GIS} is a computer-based system designed to manage, analyse, and represent geographical information. 
+This system typically integrates geographically referenced data with an associated database repository, allowing users to visualize and explore data and comprehend spatial patterns integrated based on location.~\cite{natgeo_2024}
 
 In the context of \gls{GIS} and geospatial data, two of the most prominent community initiatives are the \gls{OGC}\footnote{\url{https://www.ogc.org/}} and the \gls{OSGeo}\footnote{\url{https://www.osgeo.org/}}.  
 The \gls{OGC} is an international voluntary consensus standards organization, constituting more than 450 strong united organizations (such as Esri\footnote{\url{https://www.esri.com/}}, Nasa\footnote{\url{https://www.nasa.gov/}}). The consortium publishes open standards that ensure interoperability between diverse \gls{GIS}\footnote{\url{https://ogcapi.ogc.org/}}.
 The \gls{OSGeo} is an organization that promotes global adoption of open geospatial technology through an open philosophy and community driven development. 
-For this project, the standards established by the \gls{OGC} and the open resources provided by \gls{OSGeo} are particularly relevant. 
-These resources enable the creation of data from public geographic databases, supporting the development of interactive maps and ensuring the interoperability of geospatial data.
+%For this project, the standards established by the \gls{OGC} and the open resources provided by \gls{OSGeo} are particularly relevant. 
+%These resources enable the creation of data from public geographic databases, supporting the development of interactive maps and ensuring the interoperability of geospatial data.
 
 The first subsection provides an overview of geospatial data and its usage, while the following section explores its applications in archaeology.
 
@@ -442,19 +402,16 @@ A map of just the water pumps or incidences of cholera would have been of little
 \label{sub:gis_archeology}
 
 The application of \gls{GIS} in archaeology has brought about a transformative shift, equipping archaeologists with powerful tools to collect, analyze, 
-and visualize geospatial data from archaeological sites~\cite{yao2023overview}. Since 2000, archaeologists began employing \gls{GIS} for more complex spatial analyses, including landscape analysis and site distribution 
-patterns. Additionally, the development of \gls{3D} \gls{GIS} technology enabled archaeologists to reconstruct ancient sites in virtual environments, offering a 
-better understanding and visualization of archaeological site structures and layouts.
+and visualize geospatial data from archaeological sites~\cite{yao2023overview}. 
+Since 2000, \gls{GIS} has been employed for complex spatial analyses, including landscape analysis and site distribution patterns. 
+The development of the \gls{3D} \gls{GIS} technology allowed the reconstruction of ancient \gls{CH} sites in \glspl{VE}, thereby providing engaging experiences while visualizing heritage monuments at archaeological sites.
 
 A key technology that complements \gls{GIS} in archaeology is \gls{lidar}. 
 The employment of \gls{lidar} has been successful as an archaeological surveying tool for locating and identifying
 sites, sometimes in very remote and difficult to access locations~\cite{article_lidar}. For example, the recent, and highly publicized, 
 discovery of what is believed to be the Mayan site of Ciudad Blanca in Honduras~\cite{Tolley2012}.
 
-\gls{GIS} also serves as an invaluable platform for the comprehensive management of \gls{CH} resources. It excels in handling a wide array of
-unstructured data related to \gls{CH}, allowing for a more organized and efficient approach to preservation efforts. One significant 
-application of \gls{GIS} is the inventorying of \gls{CH} sites, including archaeological, architectural, and historical locations. Traditional recording methods often face limitations in terms of speed and accuracy when
-it comes to gathering and assessing current situation data.
+\gls{GIS} can be employed for the management of \gls{CH} resources, providing efficient handling of \gls{CH} data. A key application of GIS is the documentation of \gls{CH} sites, including, for example, georeferenced data from points of interest within archaeological sites. This approach enhances the preservation of \gls{CH} findings while allowing the associated data to be accessed and updated as needed.
 
 With advancements in \gls{3D} graphics, high-resolution rendering, artificial intelligence, and \gls{3D} printing, those methodologies have progressively found widespread application in the preventive protection and restoration of cultural artefacts. 
 In archaeology, \gls{GIS} is essential for managing spatial data, often integrating spatial databases, such as PostgreSQL\footnote{\url{https://www.postgresql.org/}}/PostGIS\footnote{\url{https://postgis.net/}} or Oracle Spatial\footnote{\url{https://www.oracle.com/database/spatial-database}} for efficient data storage and querying.
@@ -471,11 +428,10 @@ Safety standards ensure the health and safety of product users. Finally, termino
 technical terminology is used in a consistent and rigorous manner, thus preventing confusion and 
 ambiguity in scientific and technical reports and specifications.
 
-International standards and ontologies for data encoding are crucial
-to speed up interoperability and the process of integration~\cite{eide2008encoding}. \gls{CIDOC-CRM}, which is created to capture the richness typical of CH
-information, fully fits our needs: its classes and properties
-work perfectly to capture the concepts underlying database structures, providing a high level of data integration.
-
+% International standards and ontologies for data encoding are crucial
+% to speed up interoperability and the process of integration~\cite{eide2008encoding}. \gls{CIDOC-CRM}, which is created to capture the richness typical of CH
+% information, fully fits our needs: its classes and properties
+% work perfectly to capture the concepts underlying database structures, providing a high level of data integration.
 In the subsections below, the first presents a commonly used model with aggregated standards, followed by a significant European organization in \gls{CH} preservation.
 
 \subsection{\glsentryshort{CIDOC} Conceptual Reference Model} 
@@ -505,8 +461,8 @@ Although the \gls{CIDOC-CRM} model provides a common, standardized framework for
 
 The \gls{ECCCH}\footnote{\label{myfootnote}\url{https://www.echoes-eccch.eu/}} is a European Union initiative 
 to create a shared digital infrastructure that connects \gls{CH} institutions and professionals across the \gls{EU}.
-The \gls{ECCCH} aims to add a digital dimension to \gls{CH} preservation, conservation, restoration, and enhancement 
-by providing cutting-edge technology for artefact digitisation and artwork research. 
+The \gls{ECCCH} introduces a digital dimension to the preservation, conservation, restoration, and enhancement of \gls{CH}. 
+It provides access to data from all over Europe, supports research, and pretends to increase the value of \gls{CH} through digital representations of \gls{CH} artefacts.
 In Portugal, the \gls{ICOM}\footnote{\url{https://icom-portugal.org/}} is a beneficiary of the initiative, while \gls{CRUSOE}\footnote{\url{https://redcrusoe.com/}} is an \gls{ECCCH} association partner. \gls{CRUSOE} is a university association comprising institutions from both Portugal and Spain.
 While \gls{ICOM} Portugal and \gls{CRUSOE} represent the participants in Portugal, the \gls{ECCCH} also includes other 14 countries' beneficiaries, affiliated entities and/or associated partners across Europe that actively support those \gls{CH} sectors enumerated above.
 

@@ -12,14 +12,14 @@
 \label{cha:user_evaluation}
 \setlength{\parskip}{0pt} 
 
-This chapter introduces the user evaluation conducted in the scope of this dissertation. 
+This chapter describes the user evaluation conducted in the scope of this dissertation. 
 Section~\ref{sec:protocol} describes the methodology and procedures adopted for the evaluation, while Section~\ref{sec:results} presents the results obtained from the questionnaires, including a description of each type of questionnaire used and its intended purpose.
 
-User testing was conducted in person with several groups of participants. \gls{VICARTE} experts, archaeologists (including the director of the Roman Ruins of Troia), and regular users provided more experienced and comprehensive feedback.
+User testing was conducted in person with several groups of participants. \gls{VICARTE} experts, archaeologists (including the director of the Roman Ruins of Troia), and regular users. This combination enabled comprehensive feedback.
 To differentiate and collect statistics from these groups independently, a question was added to the form to filter participants by professional specialty.
-In this context, testing with experts was particularly relevant, considering these archaeologists had visited the site and examined the real objects. They contributed with their expertise in evaluating aspects such as the original glass texture generated REF and the tomb’s \gls{3D} model REF.
+In this context, testing with experts was particularly relevant, as these archaeologists were familiar with the site and had examined the actual objects. They contributed with their expertise in evaluating aspects such as the original glass texture generated (Section \ref{sec:glass_texture}) and the tomb’s \gls{3D} model (Section \ref{sec:build_model}).
 
-In total, 28 tests were carried out in presence: 16 with standard users, 3 with archaeologists, and 9 with \gls{VICARTE} members, including conservation and restoration specialists. The last group provided essential technical feedback in this field, as they were directly involved in interventions with the real objects.
+In total, 28 tests were carried out in person: 16 tests were executed with standard users, 3 with archaeologists, and 9 with \gls{VICARTE} members, including conservation and restoration specialists. The last group provided essential technical feedback in this field, as they were directly involved in interventions with the real objects.
 The remaining users contributed a broader perspective on the usability of the \gls{VE}. Colleagues with prior \gls{VR} experience offered more informed insights, while standard users provided suggestions from a regular user’s perspective.
 
 %In total were made twenty-eight tests, sixtheen texts with standart users, three tests with archaeologists, and with \gls{VICARTE} members, including conservation and restoration specialists, nine tests were conducted. %These allowed them to analyze and provide essential technical feedback in this field, people who made interventions in the real objects.
@@ -36,12 +36,13 @@ of the developed environment, as well as the sense of presence
 %REF 
 and the overall experience. 
 %REF.
-The users had to answer a set of questions provided through Google Forms, divided into four sections. 
+The users answered a set of questions provided through Google Forms questionnaire, divided into four sections. 
 
-First, it was given a brief context of the project and the structure of the test.
-Before using the headset, participants completed a personal questionnaire for statistical user analysis. 
-Subsequently, it was time to make use of the \gls{HMD} and its right and left controllers.
-The usage of the controllers and main buttons was explained. Then, the users were asked to complete a set of predefined tasks for the experience, which were:
+First, a brief introduction of the project was presented, followed by an explanation of the test structure.
+Before using the headset, the participants completed a personal questionnaire for statistical user analysis. 
+Prior to the test, the usage of the controllers and main buttons was explained. 
+Subsequently, the participants put on the \gls{HMD} and used the right and left controllers. 
+Then, the users were asked to complete a set of predefined tasks for the experience, which were:
 
 \begin{enumerate}
 \item{Try walking in continuous motion and/or teleporting in the environment.}
@@ -59,20 +60,12 @@ The usage of the controllers and main buttons was explained. Then, the users wer
 \item{In the black panel in front of you, change the ground plane by selecting the "Toggle Layer" option and explore.}
 \end{enumerate}
 
-While the users were wearing the \gls{HMD} and controllers in their hands, as displayed in Figure \ref{fig:user}, the tasks were repeated to them, since the goal was not to evaluate memory, but usability.
+After completing the tasks, users evaluated the experience through three segments. The first measured task success and the perception of key functionalities. 
+The second assessed the sense of presence in the environment, and the third evaluated the overall experience. 
 
-During the tasks phase, time was measured for each user while interacting with the \gls{VR} environment, and using the headset. 
-As shown in Table \ref{table:times}, the average time spent was around 10 minutes, with the exception of faster users and three cases where the application had to be restarted after users fell out of the environment, which increased the experience time.
+All these questions, including the initial user profile and statistical analysis, as well as the segments addressing task difficulty, sense of presence, and overall experience, were part of the user questionnaire, whose full structure is presented in Appendix \ref{app:questionnaire}.
 
-\subsection{User Testing Setup}
-\label{sec:setup}
-
-The "Meta Horizon" app was employed to manage the headset. Through the app, with the "Cast" option activated, it was possible to view on the phone exactly what the user was viewing in real-time. 
-With this feature, users were guided to perform the intended tasks and receive immediate assistance if any issues arose. 
-
-After the initial setup with a USB connection, an \textbf{Android build} was generated in Unity, producing an \emph{.apk} file that allowed the application to run natively on the headset without requiring a cable. 
-This provided greater flexibility during the evaluation. 
-The \emph{Meta Quest Developer Hub} application was then used to transfer the \emph{.apk} file to the headset.
+While the users were wearing the \gls{HMD} and controllers in their hands, as displayed in Figure \ref{fig:user}, the set of tasks to perform was repeated to them, since the goal was not to evaluate memory, but usability.
 
 \begin{figure}[h!]
     \centering
@@ -81,26 +74,39 @@ The \emph{Meta Quest Developer Hub} application was then used to transfer the \e
     \label{fig:user}
 \end{figure}
 
-\begin{table}[h!]
-    \caption{Registered Times spent by each Participant to Execute the provided Tasks.} 
-    \centering
-    \includegraphics[width=0.25\linewidth]{Users/time_users}
-    \label{table:times}
-\end{table}
+During the experience, the time each user spent interacting with the \gls{VR} environment was recorded.
+As shown in Figure \ref{fig:times}, the average duration to complete all tasks was around 10 minutes, with the exception of faster users and three cases where the application had to be restarted after users fell out of the environment, which increased the experience time.
+The exact completion times for each participant are presented in the Appendix \ref{app:table_times}.
 
-Finally, the users evaluated the experience through three separate sections. The first measured task success and the perception of key functionalities.
-The following section evaluated the sense of presence in the environment. The third and final section assessed the overall experience within the environment.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Users/times}
+    \caption{Registered Times spent by each Participant to Execute the provided Tasks.} 
+    \label{fig:times}
+\end{figure}
+
+\subsection{User Testing Setup}
+\label{sec:setup}
+To prepare the \gls{VR} environment for user testing, \textbf{Android build} was generated in Unity, producing an \emph{.apk} file that allowed the application to run natively on the headset without requiring a cable. 
+This provided increased flexibility during the evaluation. 
+The \emph{Meta Quest Developer Hub} application was then used to transfer the \emph{.apk} file to the headset.
+
+Prior to the evaluation, the headset was configured and the "Meta Horizon"\footnote{\url{https://horizon.meta.com/}} mobile application was initialized to manage the headset. 
+It provides access to the headset, including storage management, device settings, and the ability to cast the headset's view to a smartphone.
+By activating the "Cast" option, the researcher could mirror exactly what the user was seeing on the headset.
+This setup allowed users to be guided through the intended tasks and to receive immediate assistance if any issues arose.
 
 \section{Tests Results}
 \label{sec:results}
+This section is organized into three subsections to present and analyze the results. 
+The first subsection, "User Analysis," presents statistical information about the participants. 
+The second, "Tasks Difficulty and Feedback," reports their perceptions after completing the tasks. 
+In addition, the \gls{PQ} and \gls{UEQ} were employed to evaluate the sense of presence and overall experience. 
+Finally, the subsection "Participants Profile Comparison" provides graphical representations highlighting relevant relationships between the users and their responses after performing the tasks.
 
-Starting with the subsection "User Analysis", which presents statistical information about the participants, followed by "Tasks Difficulty and Feedback", which reports their perceptions after completing the tasks.
-In addition, the \gls{PQ} and \gls{UEQ} are employed to evaluate the overall experience and sensation. Finally, the subsection "Graphics Comparison" provides graphical representations that highlight relevant relationships between the users and their responses after performing the tasks.
 \subsection{User Analysis}
-
-This set of questions was designed to collect information on users' characteristics, enabling the identification of statistical differences and supporting the interpretation of the evaluation results. 
-It includes demographic data such as age, gender, and education, along with information on professional or academic background.
-In addition, it assesses prior experience with \gls{VR}, and digital technologies applied to \gls{CH}.
+This questionnaire was designed to collect information on users' characteristics, enabling the identification of statistical differences and supporting the interpretation of the evaluation results. It collects demographic data, including age, gender, and education, along with information on participants' professional or academic background. 
+In addition, this set of questions assesses prior experience with \gls{VR} and digital technologies applied to \gls{CH}.
 %video games, \gls{3D} environments,
 
 \begin{figure}[h!]
@@ -112,7 +118,7 @@ In addition, it assesses prior experience with \gls{VR}, and digital technologie
 
 The bar plot in Figure \ref{fig:age} illustrates the distribution of participants across age groups. A decreasing trend of users can be observed with increasing age. Notably, the majority of participants, 86\%, are younger than 45 years old.
 %As shown in Table X, and as expected, users specialists in conservation and restoration, or archaeology are predominantly represented in the age groups above 25 years.
-We can conclude that we have a good age range despite a smaller sample of older people.
+%We can conclude that we have a good age range despite a smaller sample of older people.
 
 \begin{figure}[h!]
     \centering
@@ -121,7 +127,7 @@ We can conclude that we have a good age range despite a smaller sample of older 
     \label{fig:gender}
 \end{figure}
 
-There is a diversified gender distribution as we can see in Figure \ref{fig:gender}.
+There is a balanced gender distribution as we can see in Figure \ref{fig:gender}.
 
 \begin{figure}[h!]
     \centering
@@ -143,7 +149,7 @@ The distribution indicates a predominance of higher education (bachelor, master,
 
 In Figure \ref{fig:background}, a horizontal bar plot illustrates the distribution of participants’ technical backgrounds. 
 The areas are ordered in descending frequency, with priority given to those most relevant for this thesis. 
-This results in a meaningful sample, comprising mainly technology developers, specialists in conservation and restoration, and archaeologists working in contexts comparable to the site under study.
+This results in a meaningful sample, comprising mainly technology developers, specialists in conservation and restoration, and archaeologists working in contexts related to the site under study.
 
 \begin{figure}[h!]
     \centering
@@ -152,7 +158,7 @@ This results in a meaningful sample, comprising mainly technology developers, sp
     \label{fig:VR_experience}
 \end{figure}
 
-As illustrated in Figure \ref{fig:VR_experience}, it is evident that the majority of the participants have prior experience with \gls{VR}, while only a small portion are experts.
+As illustrated in Figure \ref{fig:VR_experience}, it is evident that the majority of the participants have prior experience with \gls{VR}, while only a small portion consider themselves experts.
 
 \begin{figure}[h!]
   \centering
@@ -178,7 +184,7 @@ As illustrated in Figure \ref{fig:VR_experience}, it is evident that the majorit
 %In this case, the most important thing for evaluation is the use, which will be who will actually use the developed system, while the developers are useful to give more technical feedback, or suggestions for improvements in terms of efficiency, for example.
 The two distributions in Figure \ref{fig:hertiage_techs} show a clear disparity between participants' experiences in using and developing digital heritage technologies. Most participants (19) report having some experience as users, generally clustering around moderate levels (ratings 1–2). 
 In contrast, almost all participants (18) report no development experience.
-For evaluation purposes, the key factor is the intended use of the system, as this determines who will actually engage with it. Developers remain valuable mainly for offering technical feedback and suggestions for improvements, such as efficiency.
+For evaluation purposes, the key factor is the intended use of the system. Developers remain valuable mainly for offering technical feedback and suggestions for improvements, such as efficiency.
 
 
 % \begin{figure}[h!]
@@ -254,7 +260,7 @@ Questions addressing less important topics, such as sounds during the experience
     \label{fig:PQ}
 \end{figure}
 
-It is represented in Figure \ref{fig:PQ} the participants’ sense of presence during this evaluation.%experience.
+Figure \ref{fig:PQ} represents the participants’ sense of presence during this evaluation.
 
 It is interesting to note that Q6 – "How proficient in moving and interacting with the virtual environment did you feel at the end of the experience?" – shows that quartiles 1, 2, and 3 coincide at the value 4. 
 This indicates a very strong consensus among participants, with at least 50\% reporting good navigation and understanding of the environment after the experience, reflected in a median score of 4 out of 5. 
@@ -264,20 +270,12 @@ Overall, most participants rated their proficiency as 4, showing strong agreemen
 
 The overall user experience was measured using the Portuguese version of the User Experience Questionnaire\footnote{\url{https://www.ueq-online.org/}}, constructed by Laugwitz et al. \cite{inproceedings}, and translated by Cota et al. \cite{article_t}.
 
-The UEQ-S is the short version of the User Experience Questionnaire (UEQ), comprising a list of eight items selected from the original twenty-six. \cite{article_ueq}. These items are grouped into two meta-dimensions, illustrated in Figure \ref{fig:scale}: pragmatic quality and hedonic quality, each containing four items.
+The UEQ-S is the short version of the User Experience Questionnaire (UEQ), comprising a list of eight items selected from the original twenty-six. \cite{article_ueq}. These items are grouped into two meta-dimensions, found in Annex \ref{ann:quality_dimensions}: pragmatic quality and hedonic quality, each containing four items.
 In addition, the mean value across all items is reported as an overall \gls{UX} score.
 The questionnaire is structured around pairs of contrasting attributes that may describe the system. Participants provide their evaluation on a seven-point scale, where each circle represents a gradation between the two opposites.
 %is based on
 
 %These pairs address five factors: Attractiveness, Perspicuity, Dependability, Efficiency, Novelty, and Stimulation.  
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.9\linewidth]{Images/scale}
-    \caption{Grouping of the two quality attributes \cite{article_sca}.} 
-    \label{fig:scale}
-\end{figure}
-
 
 \begin{figure}[h!]
     \centering
@@ -307,9 +305,8 @@ On a scale from -3 to 3, Figure \ref{fig:UEQ1} illustrates the mean responses of
 We can conclude that there is a good average, especially in the Hedonic Quality.  
 The y-axis shows the list of \gls{UEQ} items, with participants grouped by scale dimension: Pragmatic or Hedonic Quality.  
 Table \ref{table:table_UEQ} supports this graphic with this and more relevant information of the \gls{UEQ} used.
-\FloatBarrier
 
-\subsection{Graphics Comparison}
+\subsection{Participants Profile Comparison}
 \label{sec:comparison}
 
 \begin{figure}[h!]
@@ -370,8 +367,8 @@ Remarkably, users with no previous \gls{VR} experience reported, in various ques
 
 Overall, the results obtained of the User Analysis were balanced, showing a generally younger age group with higher education levels. Professional backgrounds were well distributed, with a larger proportion in Computer Science and Engineering, and Conservation and Restoration.
 Most participants had at least some prior experience with \gls{VR} and in using digital technologies applied to \gls{CH}. The tasks were generally completed with ease, as showed in Figure \ref{fig:diffculty}. In addition, the \gls{PQ} results indicated a good median sense of presence among participants, and the \gls{UEQ} reflected a very positive overall user experience as demonstrated by the mean.
-In Section \ref{sec:comparison}, participants with specialist knowledge in Conservation and Restoration, and Archaeology showed slightly higher average scores on statements related to their field, compared to others. As expected, prior experience with \gls{VR} and in technologies associated with \gls{CH} helped participants solve the tasks.
-Finally, the sense of presence was generally stronger when participants were previously engaged with \gls{VR}, although there were some exceptions for certain \gls{PQ} items.
+In Section \ref{sec:comparison}, participants with specialist knowledge in Conservation and Restoration and Archaeology showed slightly higher average scores on statements related to their field, compared to others. As expected, prior experience with \gls{VR} and in technologies associated with \gls{CH} helped participants solve the tasks.
+Finally, the sense of presence was generally stronger when participants had previously engaged with \gls{VR}, although there were some exceptions for certain \gls{PQ} items.
 
 \subsection{Improvements After User Testing}
 \label{sec:improvements}
