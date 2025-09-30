@@ -12,8 +12,8 @@
 \label{cha:fundamental_concepts}
 
 This chapter introduces key concepts related to this thesis. Section \ref{sec:digital_heritage_foundation}
-provides background of relevant digital aspects in \gls{CH}.
-Subsequently, Section \ref{sec:interaction_visualization} explores \glspl{VE}, focusing on user interaction and visualization. 
+provides background of relevant digital aspects in Cultural Heritage (\gls{CH}).
+Subsequently, Section \ref{sec:interaction_visualization} explores Virtual Environments (\glspl{VE}), focusing on user interaction and visualization. 
 Section \ref{sec:data} presents diverse \gls{3D} extracting methodologies.
 Section \ref{sec:geographic_information_system} examines the role of \glspl{GIS} in applications involving map integration, particularly in the context of archaeological sites. 
 The last two sections address important standards, and documentation principles (Section \ref{sub:standart}) to consider when developing heritage applications, as well as a significant European Union initiative (Section \ref{sec:ch_cloud}).
@@ -186,7 +186,7 @@ The categories of system control techniques include virtual menus, voice command
 \subsubsection{Output Devices}
 \label{sec:output_devices}
 
-The three common \gls{VE} display devices are \glspl{HMD}, as illustrated in Figure \ref{fig:HMDs}, \glspl{SID} (fully or 
+The three common \gls{VE} display devices are Head-Mounted Displays (\glspl{HMD}), as illustrated in Figure \ref{fig:HMDs}, \glspl{SID} (fully or 
 semisurrounding displays, such as the \gls{CAVE}\footnote{\url{https://steantycip.com/vr-cave/}}) (Figure \ref{fig:HMD1}), and single-screen stereo displays, such as the Responsive Workbench\footnote{\url{https://graphics.stanford.edu/projects/RWB/}}. 
 The user interaction with these last displays is very different, as shown in Figure \ref{fig:display}. \glspl{HMD} and fully surrounding \glspl{SID} provide the ability to view the entire \gls{VE} by physically turning. 
 Since semisurrounding \glspl{SID} rely on virtual rotations, applications for these displays should be designed to minimize the occurrence of such undesirable movements. 
@@ -411,7 +411,7 @@ The employment of \gls{lidar} has been successful as an archaeological surveying
 sites, sometimes in very remote and difficult to access locations~\cite{article_lidar}. For example, the recent, and highly publicized, 
 discovery of what is believed to be the Mayan site of Ciudad Blanca in Honduras~\cite{Tolley2012}.
 
-\gls{GIS} can be employed for the management of \gls{CH} resources, providing efficient handling of \gls{CH} data. A key application of GIS is the documentation of \gls{CH} sites, including, for example, georeferenced data from points of interest within archaeological sites. This approach enhances the preservation of \gls{CH} findings while allowing the associated data to be accessed and updated as needed.
+\gls{GIS} can be employed for the management of \gls{CH} resources, providing efficient handling of \gls{CH} data. A key application of GIS is the documentation of \gls{CH} sites, including, for example, georeferenced data from Points of Interest (\gls{POI}) within archaeological sites. This approach enhances the preservation of \gls{CH} findings while allowing the associated data to be accessed and updated as needed.
 
 With advancements in \gls{3D} graphics, high-resolution rendering, artificial intelligence, and \gls{3D} printing, those methodologies have progressively found widespread application in the preventive protection and restoration of cultural artefacts. 
 In archaeology, \gls{GIS} is essential for managing spatial data, often integrating spatial databases, such as PostgreSQL\footnote{\url{https://www.postgresql.org/}}/PostGIS\footnote{\url{https://postgis.net/}} or Oracle Spatial\footnote{\url{https://www.oracle.com/database/spatial-database}} for efficient data storage and querying.
@@ -485,7 +485,7 @@ This dissertation is strongly grounded in the concept of \gls{DCH}, understood a
 Within this context, the \gls{DT} emerges as a highly relevant paradigm, offering a dynamic way to mirror physical artefacts and environments. 
 
 Interaction and visualization techniques, such as ray-based selection and menu-driven interface (Figure \ref{fig:human_interaction}), were essential to user engagement. These techniques allowed users to manipulate objects, navigate menus, and interact with the \gls{VE} intuitively. While manipulation was limited to rotation and positioning, excluding transformations such as scaling or zooming, the implemented interactions ensured that users could meaningfully engage with the artefacts.
-These interaction techniques depended directly on the input/output devices employed. Controllers served as the primary input device, supporting the four \gls{VE} task categories outlined in Section \ref{sec:input_devices}: selection, manipulation, travel, and system control. For example, selection was used both to grasp artefacts and to interact with \gls{UI} elements; travel was enabled through teleportation and continuous locomotion; and system control allowed users to position objects in the environment when released. 
+These interaction techniques depended directly on the input/output devices employed. Controllers served as the primary input device, supporting the four \gls{VE} task categories outlined in Section \ref{sec:input_devices}: selection, manipulation, travel, and system control. For example, selection was used both to grasp artefacts and to interact with User Interface (\gls{UI}) elements; travel was enabled through teleportation and continuous locomotion; and system control allowed users to position objects in the environment when released. 
 The \emph{Meta Quest 3} headset, regarding the ones studied in this chapter, was the modern output device used, with a high-quality immersive display crucial for user testing.
 
 Photogrammetry was applied to generate \gls{3D} models of glass artefacts and the funerary enclosure. Although \gls{lidar} scanning was not explored due to time constraints, it remains a possibility for future developments. Artefact reconstruction also played a significant role, with specialists producing \gls{2D} documentation of interventions such as cleaning and restoration. These reconstructed elements can be explored in digital analysis.

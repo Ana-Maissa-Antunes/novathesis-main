@@ -37,13 +37,13 @@ A focus on the interaction with \gls{3D} models, which are integrated into a \gl
 \end{itemize}
 
 \subsection*{\gls{VR} Environment}
-\gls{VR} functionalities to provide an intuitive \gls{UX}, enabling interaction with the \gls{VE} through the use of \glspl{HMD}.
+\gls{VR} functionalities to provide an intuitive \gls{UX}, enabling interaction with the \gls{VE} through the use of Head-Mounted Displays (\glspl{HMD}).
 \begin{itemize}
     \item \textbf{Immersive Experience:} \gls{VR} allows users to immerse in a virtual tomb visit, enabling interaction with glass relics.
     \item \textbf{Device Accessibility:} Primarily user-friendly and enabling haptic interaction, while supporting \gls{VR} glasses as an emerging display option.
     \item \textbf{Localization \& Wayfinding:} 
     \begin{itemize}
-        \item \textbf{\gls{POI}:} Use colors, text, visual markers, or direction arrows to emphasize and guide users to historically significant locations.
+        \item \textbf{Points of Interest (\gls{POI}):} Use colors, text, visual markers, or direction arrows to emphasize and guide users to historically significant locations.
     \end{itemize}
    % \item \textbf{Multilingual Support:} Provide language options to ensure accessibility for an international audience.
 \end{itemize}
@@ -69,7 +69,7 @@ Its component-based architecture simplifies \gls{3D} development by allowing dev
 Unity also offers a community forum and repositories available in \textbf{Unity Asset Store}\footnote{\url{https://assetstore.unity.com/}} where developers can access resources and adapt them for their projects.
 
 For this study, Unity was selected for developing the \gls{VR} environment. The C\# programming language used within Unity facilitates the management of game objects and user interactions in the \gls{VE}.
-Its integration enables users to have an immersive experience while interacting with the \gls{UI}, using the \gls{HMD}.
+Its integration enables users to have an immersive experience while interacting with the User Interface (\gls{UI}), using the \gls{HMD}.
 The headset device used for testing during the implementation and for user evaluation was \textbf{Meta Quest 3}.
 
 \subsubsection{Unity Packages and Plugins}
@@ -85,15 +85,15 @@ The following packages of Unity Asset Store were used to enhance the \gls{UI} an
 
 
 
-The \textbf{XR Plugin Management} package was used to simplify the integration and management of various XR plug-ins. 
-This package is primarily responsible for loading, initializing, configuring settings, and providing build support for XR features. 
+The \textbf{\gls{XR} Plugin Management} package was used to simplify the integration and management of various \gls{XR} plug-ins. 
+This package is primarily responsible for loading, initializing, configuring settings, and providing build support for \gls{XR} features. 
 It was used in conjunction with the OpenXR. \textbf{OpenXR} is an open-standard \gls{API} enabling cross-platform development, with a high-performance access to \gls{AR} and \gls{VR} platforms and devices. In this study, this plugin handles communication with the \gls{VR} headset.
 
-Diverse components of the \textbf{XR Interaction Toolkit}\footnote{\url{https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@3.0/manual/components.html}} were integrated and added to the Unity Inspector, abstracting much of the low-level complexity of \gls{VR} development. It enabled features such 
+Diverse components of the \textbf{\gls{XR} Interaction Toolkit}\footnote{\url{https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@3.0/manual/components.html}} were integrated and added to the Unity Inspector, abstracting much of the low-level complexity of \gls{VR} development. It enabled features such 
 as Object interaction (grab and release), Teleportation-based locomotion, \gls{UI} interaction, and Controller support.
-For interaction within the virtual scene, the \textbf{XR Near-far interactor} was added and provided a way to interact with the scene through the ray emitted from the controllers, and the \textbf{XR Grab Interactable} enabled direct manipulation of virtual objects through grabbing, holding, and releasing actions.
+For interaction within the virtual scene, the \textbf{\gls{XR} Near-far interactor} was added and provided a way to interact with the scene through the ray emitted from the controllers, and the \textbf{\gls{XR} Grab Interactable} enabled direct manipulation of virtual objects through grabbing, holding, and releasing actions.
 
-Its \textbf{XR Origin} structural component served as the root GameObject that encapsulated the main camera and controller setup. 
+Its \textbf{\gls{XR} Origin} structural component served as the root GameObject that encapsulated the main camera and controller setup. 
 It handled camera tracking based on the user's head movement and managed controller positioning and orientation. 
 Furthermore, to implement user movement within the \gls{VE}, a Locomotion System was added with the following components integrated: 
 

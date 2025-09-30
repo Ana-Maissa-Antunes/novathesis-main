@@ -14,13 +14,14 @@
 
 This chapter describes the user evaluation conducted in the scope of this dissertation. 
 Section~\ref{sec:protocol} describes the methodology and procedures adopted for the evaluation, while Section~\ref{sec:results} presents the results obtained from the questionnaires, including a description of each type of questionnaire used and its intended purpose.
+Finally, Section~\ref{sec:eval_discussion} provides a resume of the results and main conclusions from the evaluation, as well as the improvements implemented based on user feedback.
 
 User testing was conducted in person with several groups of participants. \gls{VICARTE} experts, archaeologists (including the director of the Roman Ruins of Troia), and regular users. This combination enabled comprehensive feedback.
 To differentiate and collect statistics from these groups independently, a question was added to the form to filter participants by professional specialty.
 In this context, testing with experts was particularly relevant, as these archaeologists were familiar with the site and had examined the actual objects. They contributed with their expertise in evaluating aspects such as the original glass texture generated (Section \ref{sec:glass_texture}) and the tomb’s \gls{3D} model (Section \ref{sec:build_model}).
 
 In total, 28 tests were carried out in person: 16 tests were executed with standard users, 3 with archaeologists, and 9 with \gls{VICARTE} members, including conservation and restoration specialists. The last group provided essential technical feedback in this field, as they were directly involved in interventions with the real objects.
-The remaining users contributed a broader perspective on the usability of the \gls{VE}. Colleagues with prior \gls{VR} experience offered more informed insights, while standard users provided suggestions from a regular user’s perspective.
+The remaining users contributed a broader perspective on the usability of the Virtual Environment (\gls{VE}). Colleagues with prior \gls{VR} experience offered more informed insights, while standard users provided suggestions from a regular user’s perspective.
 
 %In total were made twenty-eight tests, sixtheen texts with standart users, three tests with archaeologists, and with \gls{VICARTE} members, including conservation and restoration specialists, nine tests were conducted. %These allowed them to analyze and provide essential technical feedback in this field, people who made interventions in the real objects.
 
@@ -28,7 +29,7 @@ The remaining users contributed a broader perspective on the usability of the \g
 \section{Protocol}
 \label{sec:protocol}
 
-This section describes the protocol adopted for the user evaluation questionnaire, which was organized into three subsections of the user form, each with a brief description and the corresponding test results.
+This section describes the protocol adopted for the user evaluation questionnaire, which was organized into five subsections of the user form, each with a brief description and the corresponding test results.
 
 The tests were fundamental in evaluating the usability 
 %REF 
@@ -36,12 +37,12 @@ of the developed environment, as well as the sense of presence
 %REF 
 and the overall experience. 
 %REF.
-The users answered a set of questions provided through Google Forms questionnaire, divided into four sections. 
+%The users answered the set of questions provided through Google Forms questionnaire, divided into four elements. 
 
 First, a brief introduction of the project was presented, followed by an explanation of the test structure.
 Before using the headset, the participants completed a personal questionnaire for statistical user analysis. 
 Prior to the test, the usage of the controllers and main buttons was explained. 
-Subsequently, the participants put on the \gls{HMD} and used the right and left controllers. 
+Subsequently, the participants put on the Head-Mounted Display (\gls{HMD}) and used the right and left controllers. 
 Then, the users were asked to complete a set of predefined tasks for the experience, and were guided though this order:
 
 \begin{enumerate}
@@ -55,12 +56,12 @@ Then, the users were asked to complete a set of predefined tasks for the experie
 \item{Teleport to a Point of Interest by selecting one of the blue icons.}
 \item{Activate the main menu and select the visible icon.}
 \item{Close the main menu.}
-\item{In the panel in front of you, select the Object ID 21684 and view the displayed information.}
+\item{In the panel in front of you, select the Object \gls{ID} 21684 and view the displayed information.}
 \item{Walk to the blue panel and hover over the arrows to view object images after the intervention.}
 \item{In the black panel in front of you, change the ground plane by selecting the "Toggle Layer" option and explore.}
 \end{enumerate}
 
-After completing the tasks, users evaluated the experience through three segments. The first measured task success and the perception of key functionalities. 
+After completing the tasks, users evaluated the experience through three segments of a Google Form. The first measured task success and the perception of key functionalities. 
 The second assessed the sense of presence in the environment, and the third evaluated the overall experience. 
 
 All these questions, including the initial user profile and statistical analysis, as well as the segments addressing task difficulty, sense of presence, and overall experience, were part of the user questionnaire, whose full structure is presented in Appendix \ref{app:questionnaire}.
@@ -87,26 +88,26 @@ The exact completion times for each participant are presented in the Appendix \r
 
 \subsection{User Testing Setup}
 \label{sec:setup}
-To prepare the \gls{VR} environment for user testing, \textbf{Android build} was generated in Unity, producing an \emph{.apk} file that allowed the application to run natively on the headset without requiring a cable. 
-This provided increased flexibility during the evaluation. 
+To prepare the \gls{VR} environment for user testing, an \textbf{Android build} was generated in Unity, producing an \emph{.apk} file that allowed the application to run natively on the headset without requiring a cable. 
+This increased flexibility during the evaluation. 
 The \emph{Meta Quest Developer Hub} application was then used to transfer the \emph{.apk} file to the headset.
 
-Prior to the evaluation, the headset was configured and the "Meta Horizon"\footnote{\url{https://horizon.meta.com/}} mobile application was initialized to manage the headset. 
+Before the evaluation, the headset was configured, and the "Meta Horizon"\footnote{\url{https://horizon.meta.com/}} mobile application was initialized to manage the headset. 
 It provides access to the headset, including storage management, device settings, and the ability to cast the headset's view to a smartphone.
 By activating the "Cast" option, the researcher could mirror exactly what the user was seeing on the headset.
 This setup allowed users to be guided through the intended tasks and to receive immediate assistance if any issues arose.
 
 \section{Tests Results}
 \label{sec:results}
-This section is organized into three subsections to present and analyse the results. 
+This section is organized into five subsections to present and analyse the results. 
 The first subsection, "User Analysis," presents statistical information about the participants. 
 The second, "Tasks Difficulty and Feedback," reports their perceptions after completing the tasks. 
-In addition, the \gls{PQ} and \gls{UEQ} were employed to evaluate the sense of presence and overall experience. 
+In addition, the \gls{PQ} and User Experience Questionnaire (\gls{UEQ}) were employed to evaluate the sense of presence and overall experience. 
 Finally, the subsection "Participants Profile Comparison" provides graphical representations highlighting relevant relationships between the users and their responses after performing the tasks.
 
 \subsection{User Analysis}
-This questionnaire was designed to collect information on users' characteristics, enabling the identification of statistical differences and supporting the interpretation of the evaluation results. It collects demographic data, including age, gender, and education, along with information on participants' professional or academic background. 
-In addition, this set of questions assesses prior experience with \gls{VR} and digital technologies applied to \gls{CH}.
+This questionnaire component was designed to collect information on users' characteristics, enabling the identification of statistical differences and supporting the interpretation of the evaluation results. It collects demographic data, including age, gender, and education, along with information on participants' professional or academic background. 
+In addition, these questions assess prior experience with \gls{VR} and digital technologies applied to \gls{CH}.
 %video games, \gls{3D} environments,
 
 \begin{figure}[h!]
@@ -180,7 +181,7 @@ As illustrated in Figure \ref{fig:VR_experience}, it is evident that the majorit
 \end{figure}
 \FloatBarrier
 The two distributions in Figure \ref{fig:hertiage_techs} show a clear disparity between participants' experiences in using and developing digital heritage technologies. Most participants (19) report having some experience as users, generally clustering around moderate levels (ratings 1–2). 
-In contrast, almost all participants (18) report no development experience.
+In contrast, almost all participants (19) report no development experience.
 For evaluation purposes, the key factor is the intended use of the system. Developers remain valuable mainly for offering technical feedback and suggestions for improvements, such as efficiency.
 
 
@@ -238,16 +239,16 @@ This improvement is further explained in Section \ref{sec:improvements}.
 The statements used to evaluate the tasks-related experience are as follows:
 
 \begin{enumerate}[label=S\arabic* --]
-    \item Exploration inside the tomb was intuitive
-    \item Exploration outside the tomb was intuitive
-    \item Navigation to points of interest was clear and accessible
-    \item The slider was effective in showing object transformation over time
-    \item I clearly distinguish between the artifact's original and restored state
-    \item The information provided helped me better understand the artifact
-    \item The experience contributed to a better understanding of the site
-    \item The experience helped me better understand the presented artifacts
-    \item The experience provoked a sense of presence in the historical site
-    \item The tasks had a clear purpose and were easy to interpret
+    \item Exploration inside the tomb was intuitive.
+    \item Exploration outside the tomb was intuitive.
+    \item Navigation to points of interest was clear and accessible.
+    \item The slider was effective in showing object transformation over time.
+    \item I clearly distinguish between the artifact's original and restored state.
+    \item The information provided helped me better understand the artifact.
+    \item The experience contributed to a better understanding of the site.
+    \item The experience helped me better understand the presented artifacts.
+    \item The experience provoked a sense of presence in the historical site.
+    \item The tasks had a clear purpose and were easy to interpret.
 \end{enumerate}
 
 \begin{figure}[h!]
@@ -263,7 +264,7 @@ The results shown in Figure \ref{fig:overview} indicate a general agreement amon
 In particular, statements 4, 5, and 6 received the highest levels of agreement, regarding the effectiveness of the slider in displaying transformations and the engagement of the information provided about the objects.
 The median values of all statements range between 4 and 5, highlighting a very positive outcome.
 
-\subsection{Presence Questionnaire (PQ)}
+\subsection{Presence Questionnaire (\gls{PQ})}
 
 The evaluation of presence was conducted using the Portuguese validated version of the Presence Questionnaire, adapted by Vasconcelos-Raposo et al. \cite{Vasconcelos-Raposo03102021} was used, from which eleven items were removed 
 "in order to improve the validity of the constructs and their internal consistency."
@@ -271,7 +272,7 @@ The original Presence Questionnaire by Witmer et al. \cite{10.1162/1054746985656
 In the translated version, ten of the twenty-one validated and translated questions were selected, as they were considered the most relevant for this research. 
 Questions addressing less important topics, such as sounds during the experience, were excluded. This questionnaire section was applied using a 5-point Likert scale.
 
-The ten questions select are the folowing:
+The ten questions selected are the folowing:
 
 \begin{enumerate}[label=Q\arabic* --]
     \item How natural did your interactions with the environment seem?
@@ -296,7 +297,7 @@ The ten questions select are the folowing:
 
 Figure \ref{fig:PQ} represents the participants’ sense of presence during this evaluation.
 
-It is interesting to note that Q6 – "How proficient in moving and interacting with the virtual environment did you feel at the end of the experience?" – shows that quartiles 1, 2, and 3 coincide at the value 4. 
+It is interesting to note that question 6 shows that quartiles 1, 2, and 3 coincide at the value 4. 
 This indicates a very strong consensus among participants, with at least 50\% reporting good navigation and understanding of the environment after the experience, reflected in a median score of 4 out of 5. 
 Overall, most participants rated their proficiency as 4, showing strong agreement, with only a few outliers providing lower or higher ratings.
 
@@ -411,7 +412,7 @@ Some minor improvements were made following user testing. These mainly concerned
  \item Allowed teleportation to the tomb icon even when the menu panel was open. Those were interfering, so previously, the teleportation was only possible when the panel was closed.
  \item Added a legend when selecting the correct option in the main menu to guide users.
  \item Simplified slider interaction: it is no longer necessary to cross the arms to move the slider. When grabbing the object with the right controller, the bar now correctly repositions on the corresponding side.
- \item Original Glass Texture Improvements: Adjusted parameters for object ID 2676. Enhanced the realism of the texture by adding a slight blue tint, as experts indicated that these Roman glasses tended to have a bluish hue.
+ \item Original Glass Texture Improvements: Adjusted parameters for object \gls{ID} 2676. Enhanced the realism of the texture by adding a slight blue tint, as experts indicated that these Roman glasses tended to have a bluish hue.
  \item Tomb Interaction: Improved the definition of the tomb limits, increasing the coordinate precision on both sides.
 \end{itemize}
 

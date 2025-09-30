@@ -10,7 +10,7 @@
 \chapter{Implementation Details}
 \label{cha:system_implementation}
 This chapter begins in Section \ref{sec:communication} with an explanation of the implementation connecting Unity requests to the database.
-The implementation process of all functionalities developed within the \gls{VE} is defined in Section \ref{sec:implementation}.
+The implementation process of all functionalities developed within the Virtual Environment (\gls{VE}) is defined in Section \ref{sec:implementation}.
 Then, the three fundamental techniques are described in detail in Section \ref{sec:techniques}.
 Subsequently, Section \ref{sec:testing} clarifies the testing and debugging methodologies applied during the dissertation.
 Finally, Section \ref{sec:impl_discussion} resumes the implementation process.
@@ -28,14 +28,14 @@ Two main \gls{API} endpoints were implemented for this purpose:
 
 \begin{enumerate}
   \item \textbf{/GET (get-objects\_data)}
-  \\Retrieves a list of object IDs by querying the \textbf{"object"} table. These IDs are used to populate the dropdown menu options in the \gls{UI}.
+  \\Retrieves a list of object identification numbers (\glspl{ID}) by querying the \textbf{"object"} table. These \glspl{ID} are used to populate the dropdown menu options in the User Interface (\gls{UI}).
 
   \item \textbf{/GET (get-objects\_data/:id)}
-  \\Fetches detailed information for a specific object based on its ID. This request is triggered when a user selects an object ID from the dropdown menu in the \gls{UI}
-  Whenever the ID in the dropdown is changed, the system issues a new request for the corresponding ID, and the visualization panel and image gallery are updated accordingly.
+  \\Fetches detailed information for a specific object based on its \gls{ID}. This request is triggered when a user selects an object \gls{ID} from the dropdown menu in the \gls{UI}
+  Whenever the \gls{ID} in the dropdown is changed, the system issues a new request for the corresponding \gls{ID}, and the visualization panel and image gallery are updated accordingly.
 
     The representation of this endpoint is shown in Listing \ref{lst:api}. As illustrated in line 6, the query joins two tables, \textbf{"object"} and \textbf{"object\_intervention"}, to fetch simultaneously object data and images before and after interventions for display in the Image Gallery feature. 
-    This SQL query enables the system to retrieve all necessary information with a single request after the user selects an object ID, thereby improving efficiency and reducing the need for multiple requests.
+    This SQL query enables the system to retrieve all necessary information with a single request after the user selects an object \gls{ID}, thereby improving efficiency and reducing the need for multiple requests.
 
 \end{enumerate}
 
@@ -45,7 +45,7 @@ Two main \gls{API} endpoints were implemented for this purpose:
     const id = req.params.id;
 
     try {
-        // Query to the database: select all object data present in 'object' and 'object_intervention' tables by ID
+        // Query to the database: select all object data present in 'object' and 'object_intervention' tables         
         const result = await pool.query('SELECT * FROM object inner join object_intervention on object.id = object_intervention.object_id WHERE object.id = $1', [id]);
         res.json(result.rows[0]);
     } catch (error) {
@@ -102,34 +102,33 @@ To acquire the desired data retrieval, only three data structures were required:
 \subsubsection{Dropdown Options Retrieval}
 \label{sec:options}
 
-This implementation retrieves all the IDs of the available artefacts, to fulfill the requirement of the user to view the desired object's textual and image information.  
+This implementation retrieves all the \glspl{ID} of the available artefacts, to fulfill the requirement of the user to view the desired object's textual and image information.  
 The artefacts returned from the database are stored in a list structure, which is then iterated to populate the dropdown \texttt{options} list, as illustrated in Listing~\ref{lst:artifact_ids}.
 
-\begin{lstlisting}[language=C++, caption={Method used to load artefact IDs and define as options in the Dropdown.}, label={lst:artifact_ids},float] 
-      IEnumerator GetOptionsIds(string url)
+\begin{lstlisting}[language=C++, caption={Method used to load artefact \glspl{ID} and define as options in the Dropdown.}, label={lst:artifact_ids},float] 
+    IEnumerator GetOptionsIds(string url)
+{
+    // Send HTTP GET request to the given URL
+    UnityWebRequest www = UnityWebRequest.Get(url);
+    ...
+    if (www.result == UnityWebRequest.Result.Success)
     {
-        // Send HTTP GET request to the given URL
-        UnityWebRequest www = UnityWebRequest.Get(url);
+        ArtifactList artifactList = JsonUtility.FromJson<ArtifactList>(wrappedJson);
+        
+        List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
         ...
-        if (www.result == UnityWebRequest.Result.Success)
+        // Iterate through all artifacts and add their IDs to options List
+        foreach (Artifact artifact in artifactList.items)
         {
-            ...
-            ArtifactList artifactList = JsonUtility.FromJson<ArtifactList>(wrappedJson);
-            
-            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
-            ...
-            // Iterate through all artifacts and add their IDs to options List
-            foreach (Artifact artifact in artifactList.items)
-            {
-                string id = artifact.id.ToString();
-                options.Add(new TMP_Dropdown.OptionData("     " + id));
-            }
-            dropdown.AddOptions(options);
+            string id = artifact.id.ToString();
+            options.Add(new TMP_Dropdown.OptionData("     " + id));
         }
-        else{
-            Debug.LogError("Error: " + www.error);
-        }
+        dropdown.AddOptions(options);
     }
+    else{
+        Debug.LogError("Error: " + www.error);
+    }
+}
 \end{lstlisting}
 
 
@@ -145,26 +144,23 @@ The \emph{dimensions} field is a nested JSON structure containing \emph{height},
 Finally, a formatted string is created to display the object's details in the \gls{UI} panel functionality.
 
 \begin{lstlisting}[language=C++,label={lst:get_data}, caption={Method used to load object data from the database},float]
-      IEnumerator GetData(string url)
+    IEnumerator GetData(string url)
+{   
+    if (www.result == UnityWebRequest.Result.Success)
     {
-        UnityWebRequest www = UnityWebRequest.Get(url);
-        yield return www.SendWebRequest();
+        artifact = JsonUtility.FromJson<Artifact>(www.downloadHandler.text);
 
-        if (www.result == UnityWebRequest.Result.Success)
-        {
-            artifact = JsonUtility.FromJson<Artifact>(www.downloadHandler.text);
-
-            string displayText = "<b>Object Details:</b>\n\n";
-            string material = artifact.material.Replace("{", "").Replace("}", "");
-
-             displayText += $"ID: {artifact.id} | Name: {artifact.name} \nMaterial: {material} | Epoch: {artifact.epoch} \nProvenance: {artifact.provenance}" +
-                         $"\nDimensions: {artifact.dimensions.height} x {artifact.dimensions.width} cm, Weight: {Mathf.Round(artifact.dimensions.weight * 10.0f) * 0.1f} g";
-
-            resultText.text = displayText;
-            GetImages(artifact.id, artifact.images_path_b_interv);
-        }
-        ...
+        string displayText = "<b>Object Details:</b>\n\n";
+        // Build the final text with detailed artifact information
+            displayText += $"ID: {artifact.id} | Name: {artifact.name} \nMaterial: {artifact.material} | Epoch: {artifact.epoch} \nProvenance: {artifact.provenance}" +
+                        $"\nDimensions: {artifact.dimensions.height} x {artifact.dimensions.width} cm, Weight: {Mathf.Round(artifact.dimensions.weight * 10.0f) * 0.1f} g";
+        // Update the UI Panel with the artifact text details
+        resultText.text = displayText;
+        // Call the function to load images before intervention of the artifact
+        GetImages(artifact.id, artifact.images_path_b_interv);
     }
+    ...
+}
 \end{lstlisting}
 
 
@@ -173,7 +169,7 @@ Finally, a formatted string is created to display the object's details in the \g
 The initial step was to place the \gls{2D} map on the ground plane, using the 1-meter default grid scale of Unity to ensure the precise real-world dimensions. With this in place, it was only necessary to adjust the scale of the funerary enclosure to match its position on the map. It is also important to mention that the two objects in the environment were carefully measured using virtual rules.
 
 In the \gls{VE}, a set of functionalities was implemented. 
-They are described in this section, in the following order: the Main Menu in Section \ref{sec:main_menu}, the Panel \gls{UI} in Section \ref{sec:panel_UI}, and Points of Interest in Section \ref{sec:points_interest}. 
+They are described in this section, in the following order: the Main Menu in Section \ref{sec:main_menu}, the Panel \gls{UI} in Section \ref{sec:panel_UI}, and Points of Interest (\gls{POI}) in Section \ref{sec:points_interest}. 
 Furthermore, funerary interaction is described in Section \ref{sec:funerary_interaction}, and navigation logic in Sections \ref{sec:user_navigation} and \ref{sec:tomb_logic}.
 
 \subsection{Main Menu}
@@ -195,22 +191,22 @@ Currently, the menu contains only one functional option, represented by a menu i
 
 
 \begin{lstlisting}[language=C++, caption={Method used to acquire the position that was pointed at by the controller ray.}, label={lst:menu_raycast},float]
-    public Vector2 GetPosition(Vector2 anchoredPosition, Transform controllerTransform)
+public Vector2 GetPosition(Vector2 anchoredPosition, Transform controllerTransform)
+{
+    // Create a ray starting from the controller's position, pointing forward
+    Ray ray = new Ray(controllerTransform.position, controllerTransform.forward);
+    /Raycast to detect collisions with the main menu
+    if (Physics.Raycast(ray, out RaycastHit hit, 50f, LayerMask.GetMask("Default")))
     {
-        // Create a ray starting from the controller's position, pointing forward
-        Ray ray = new Ray(controllerTransform.position, controllerTransform.forward);
-        /Ray to detects collisions with the main menu
-        if (Physics.Raycast(ray, out RaycastHit hit, 50f, LayerMask.GetMask("Default")))
-        {
-            Vector3 screenPoint = Camera.main.WorldToScreenPoint(hit.point);
-            
-            // Return the point relative to the center of the screen
-            return new Vector2(
-                screenPoint.x - Screen.width / 2f,
-                screenPoint.y - Screen.height / 2f);
-        }
-        return Vector2.zero;
+        Vector3 screenPoint = Camera.main.WorldToScreenPoint(hit.point);
+        
+        // Return the point relative to the center of the screen
+        return new Vector2(
+            screenPoint.x - Screen.width / 2f,
+            screenPoint.y - Screen.height / 2f);
     }
+    return Vector2.zero;
+}
 \end{lstlisting}
 
 
@@ -226,7 +222,7 @@ Currently, the menu contains only one functional option, represented by a menu i
 
 The \gls{UI} includes a canvas where users can interact with and explore object data, as shown in the left panel of Figure \ref{fig:main_panel}. 
 
-In this example, the object ID selected from the dropdown menu is "21684," and the textual data associated with this object is displayed in the right panel. 
+In this example, the object \gls{ID} selected from the dropdown menu is "21684," and the textual data associated with this object is displayed in the right panel. 
 This panel is initially empty and populates with the relevant object details after a selection is made. 
 
 The \gls{UI} contains three interactive elements: the "Toggle Layer" and "Mausoleum Profile" checkboxes, and the "Dropdown Menu".
@@ -254,9 +250,9 @@ The user can at any time toggle the view in the checkbox to view the pretended p
 
 The second element, the \textbf{Funerary Enclosure Profile}, demonstrated in Figure \ref{fig:mausoleum_profile}, works similarly. However, in this case, it opens a profile image of the mausoleum wall, displaying the different material types and layers of construction.
 
-The third element, the \textbf{Dropdown Menu}, allows the user to select an object by its identification number (ID).
+The third element, the \textbf{Dropdown Menu}, allows the user to select an object by its \gls{ID}.
 Once selected, the corresponding textual data and intervention images (Image Gallery) are retrieved from the database.
-The Image Gallery is displayed on the left, while the right side presents the textual data corresponding to the selected Object ID.
+The Image Gallery is displayed on the left, while the right side presents the textual data corresponding to the selected Object \gls{ID}.
 
 \subsubsection{Image Gallery}
 \label{sec:image_gallery}
@@ -278,44 +274,37 @@ For each image, a component is created and positioned appropriately within the g
 The process is presented in Listing \ref{lst:artefacts_images}.
 
 \begin{lstlisting}[language=C++, caption={Method used to load artefact images and to display them in the Images Gallery.}, label={lst:artefacts_images},float]
-      private void GetImages(int id, string[] images_path)
+    private void GetImages(int id, string[] images_path)
+{
+    if (images_path.Length != 0)
     {
-        if (images_path.Length != 0)
+        changeView.SetActive(true);// Enable the Image Gallery switching images
+        for (int x = 0; x < images_path.Length; x++) // Loop through all image paths
         {
-            changeView.SetActive(true);
-            for (int x = 0; x < images_path.Length; x++)
-            {
-                var imagePath = images_path[x];
+            var imagePath = images_path[x]; // Get the current image path
 
-                if (x > images_path.Length / 2) {height = 0;}
-                else if (x == images_path.Length / 2) { x_pos = 1.5f; height = 0; }
-                else { height = 1; }
+            // Load the image stored in the Resources folder
+            Sprite sprite = Resources.Load<Sprite>("Images/" + imagePath);
+            if (sprite != null)
+            {   // Create a new GameObject for each image
+                GameObject newImgObj = new GameObject("Image_" + imagePath, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+                newImgObj.transform.SetParent(imageParent, false); 
+                
+                // Configure the Gallery size and position
+                RectTransform rectTransform = newImgObj.GetComponent<RectTransform>();
+                rectTransform.sizeDelta = new Vector2(1, 1);
+                rectTransform.localPosition = new Vector3(x_pos++, height, 0);
 
-                Sprite sprite = Resources.Load<Sprite>("Images/" + imagePath);
-                if (sprite != null)
-                {
-                    GameObject newImgObj = new GameObject("Image_" + imagePath, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
-                    newImgObj.transform.SetParent(imageParent, false);
-
-                    RectTransform rectTransform = newImgObj.GetComponent<RectTransform>();
-                    rectTransform.sizeDelta = new Vector2(1, 1);
-                    rectTransform.localPosition = new Vector3(x_pos++, height, 0);
-
-                    Image imgComponent = newImgObj.GetComponent<Image>();
-                    imgComponent.sprite = sprite;
-                }
+                Image imgComponent = newImgObj.GetComponent<Image>();
+                imgComponent.sprite = sprite; // Assign the loaded image sprite 
                 ...
             }
-            x_pos = 1.5f;
-        }
-        else
-        {
-            Debug.LogWarning("Couldn't load Images for Object ID" + id);
-        }
-    }
+        }            
+    } ...
+}
 \end{lstlisting}
 
-\subsection{Points of Interest}
+\subsection{Points of Interest (\gls{POI})}
 \label{sec:points_interest}
 
 \begin{figure}[h!]
@@ -325,7 +314,7 @@ The process is presented in Listing \ref{lst:artefacts_images}.
     \label{fig:points_interest}
 \end{figure}
 
-Diverse points of interest were placed in key areas across the plane.
+Diverse \gls{POI} were placed in key areas across the plane.
 
 Users can teleport directly to a point of interest by selecting a blue anchor (implemented with the default \emph{Teleportation Anchor} component) within the plan. These points are designed to draw the user’s attention to notable features or artefacts, with the most relevant point for the current study located inside the tomb within the funerary enclosure.
 Figure \ref{fig:points_interest} illustrates one of these anchors.
@@ -348,7 +337,7 @@ This section describes object interaction, starting with the Slider in Section \
 
 The Object Slider was designed as an interactive feature within the \gls{VE}, allowing users to visualize an object's transformation over time, from its original condition to its current, restored state. 
 
-This functionality is illustrated in Figure \ref{fig:object_slider}, where the user holds the object with the left controller while manipulating the slider, named “Original Texture,” with the right controller. 
+This functionality is illustrated in Figure \ref{fig:object_slider}, where the user holds the object with the left controller while manipulating the slider, named "Original Texture", with the right controller. 
 The texture initially displayed corresponds to the post-excavation state, and as the user moves the slider to the right, it gradually transitions to the original glass texture.
 The goal was to provide an immersive experience, creating the sensation of traveling back in time to observe the physical changes the object has undergone throughout the years.
 
@@ -382,45 +371,50 @@ These calculations were performed independently for each component, as illustrat
 This shader enabled a more faithful representation of the object's original appearance.
 
 \begin{lstlisting}[language=HLSL, caption={Partial Fragment shader for blending original and restored textures.}, label={lst:shader_blend},float]
-        half4 frag(Varyings IN) : SV_Target
-        {
-            half4 decayAlbedo = SAMPLE_TEXTURE2D(_DecayTex, sampler_DecayTex, IN.uv);
-            half4 restoredAlbedo = SAMPLE_TEXTURE2D(_RestoredTex, sampler_RestoredTex, IN.uv);
+half4 frag(Varyings IN) : SV_Target
+{
+    // Read the decay (original) texture restored texture at the UV coordinates
+    half4 decayAlbedo = SAMPLE_TEXTURE2D(_DecayTex, sampler_DecayTex, IN.uv);
+    half4 restoredAlbedo = SAMPLE_TEXTURE2D(_RestoredTex, sampler_RestoredTex, IN.uv);
 
-            float3 normalWS = normalize(IN.worldNormal);
-            float3 viewDirWS = normalize(IN.viewDirWS);
+    // Normalize the world-space normal and view direction vectors
+    float3 normalWS = normalize(IN.worldNormal);
+    float3 viewDirWS = normalize(IN.viewDirWS);
 
-            float fresnel = CalculateFresnel(normalWS, viewDirWS, _FresnelPower);
+    float fresnel = CalculateFresnel(normalWS, viewDirWS, _FresnelPower);
 
-            half3 finalAlbedo = lerp(decayAlbedo.rgb, restoredAlbedo.rgb, _BlendFactor);
-            half finalAlpha = lerp(decayAlbedo.a, restoredAlbedo.a, _BlendFactor);
-            half finalSmoothness = lerp(_GlassSmoothness, _RestoredSmoothness, _BlendFactor);
-            ... Populate Data...
-            
-            half3 glasslitColor = CalculateGlassLighting(surfaceData, inputData, fresnel);            
-            half enhancedAlpha = lerp(finalAlpha, finalAlpha * 0.5, fresnel * 0.5);
-            
-            return half4(glasslitColor, enhancedAlpha);
-        }
+    // Blend attributes between decay and restored textures
+    half3 finalAlbedo = lerp(decayAlbedo.rgb, restoredAlbedo.rgb, _BlendFactor);
+    half finalAlpha = lerp(decayAlbedo.a, restoredAlbedo.a, _BlendFactor);
+    half finalSmoothness = lerp(_GlassSmoothness, _RestoredSmoothness, _BlendFactor);
+    ... Populate Data...
+    
+    half3 glasslitColor = CalculateGlassLighting(surfaceData, inputData, fresnel);            
+    half enhancedAlpha = lerp(finalAlpha, finalAlpha * 0.5, fresnel * 0.5);
+    
+    // Return final color and alpha for the pixel
+    return half4(glasslitColor, enhancedAlpha); 
+}
 \end{lstlisting}
 
 
 \begin{lstlisting}[language=C++, caption={Lighting Glass Texture Partial Calculation.}, label={lst:lighting_glass},float]
-  float3 CalculateGlassLighting(SurfaceData surfaceData, InputData inputData, float fresnel)
-  {
-      Light mainLight = GetMainLight(inputData.shadowCoord, inputData.positionWS, inputData.shadowMask);
-      ...
-      float3 specular = specularTerm * mainLight.color * _SpecularColor.rgb * surfaceData.smoothness;
-      ...
-      float3 diffuse = lerp((surfaceData.albedo * mainLight.color * NdotL * 0.1),surfaceData.albedo, _BlendFactor);
-      ...     
-      float3 environmentReflection = GlossyEnvironmentReflection(reflectionVector, 
-          inputData.positionWS, surfaceData.smoothness, 1.0) * _ReflectionIntensity;
+float3 CalculateGlassLighting(SurfaceData surfaceData, InputData inputData, float fresnel)
+{
+    // Compute independent calculations of main lighting, specular, defuse, and environment reflection.
+    Light mainLight = GetMainLight(inputData.shadowCoord, inputData.positionWS, inputData.shadowMask);
+    ...
+    float3 specular = specularTerm * mainLight.color * _SpecularColor.rgb * surfaceData.smoothness;
+    ...
+    float3 diffuse = lerp((surfaceData.albedo * mainLight.color * NdotL * 0.1),surfaceData.albedo, _BlendFactor);
+    ...     
+    float3 environmentReflection = GlossyEnvironmentReflection(reflectionVector, 
+        inputData.positionWS, surfaceData.smoothness, 1.0) * _ReflectionIntensity;
 
-      float3 finalColor = diffuse + (specular + environmentReflection * fresnel);
-      
-      return finalColor;
-  }
+    //Combine lighting contributions to produce the final color
+    float3 finalColor = diffuse + (specular + environmentReflection * fresnel);
+    return finalColor;
+}
 \end{lstlisting}
 
 \subsubsection{Object Outline}
@@ -436,7 +430,7 @@ This shader enabled a more faithful representation of the object's original appe
 
 This functionality was implemented to improve the visibility of objects within the tomb and to distinguish them from the surrounding funerary ground.  
 It essentially consists of an outline shader and a complementary script that manages its parameters. 
-The shader highlights objects when targeted with the controller ray, as illustrated in Figure~\ref{fig:outline_object}
+The shader highlights objects when targeted with the controller ray, as illustrated in Figure~\ref{fig:outline_object}.
 
 The shader includes the following input parameters: \emph{Outline Color}, \emph{Outline Width}, \emph{Outline Power}, and \emph{Outline Softness}.  
 Similar to the shader described for the Object Slider functionality in Section~\ref{sec:object_slider}, this shader also relies on the Fresnel effect to control outline intensity and appearance.  
@@ -453,11 +447,9 @@ This mechanism ensures that the objects are easily identifiable.
 \begin{lstlisting}[language=C++, caption={Partial class with Outline Color changed when the object is Hovered.}, label={lst:outline_color},float]
     public class GlowingObject : MonoBehaviour
 {
-    private MeshRenderer meshRenderer;
-    private bool select = false;
-    Color Yellow = new Color(65, 65, 0, 1);
-    Color Blue = new Color(0, 59, 49, 1);
+    // Colors used for the outline: Yellow for default, Blue when hovered
     ...
+    // Called to change outline color when the user starts hovering the object
     public void OnHoverEnter()
     {
         meshRenderer.materials[1].SetColor("_OutlineColor", Blue);
@@ -465,6 +457,7 @@ This mechanism ensures that the objects are easily identifiable.
 
     public void OnHoverExit()
     {
+        // Restore the default outline color
         if(!select)
             meshRenderer.materials[1].SetColor("_OutlineColor", Yellow);
     }
@@ -474,19 +467,21 @@ This mechanism ensures that the objects are easily identifiable.
 
 
 \begin{lstlisting}[language=HLSL, caption={Partial Fragment shader for creating an outline effect to the object.}, label={lst:outline_effect},float]
-        float4 frag(v2f i) : SV_Target
-        {
-            float3 N = normalize(i.normalWS);
-            float3 V = normalize(i.viewDirWS);
+float4 frag(v2f i) : SV_Target
+{
+    // Normalize the world-space normal (N) and view (V) direction vectors
+    ...
+    float fresnel = pow(1.0 - saturate(dot(N, V)), _OutlinePower);
 
-            float fresnel = pow(1.0 - saturate(dot(N, V)), _OutlinePower);
+        // Define the inner and outer thresholds based on width and softness
+    float edge1 = 1.0 - _OutlineWidth;
+    float edge2 = edge1 + _OutlineSoftness;
 
-            float edge1 = 1.0 - _OutlineWidth;
-            float edge2 = edge1 + _OutlineSoftness;
-            float outlineFactor = smoothstep(edge1, edge2, fresnel);
+    //Interpolate the outline factor between edge1 and edge2
+    float outlineFactor = smoothstep(edge1, edge2, fresnel);
 
-            return _OutlineColor * outlineFactor;
-        }
+    return _OutlineColor * outlineFactor;
+}
 \end{lstlisting}
 
 \subsubsection{Grab and Release Object}
@@ -504,34 +499,35 @@ The colliders that might interfere during grabbing are reactivated upon release,
 During \texttt{OnGrab}, and as illustrated in Figure \ref{fig:object_slider}, the object slider is repositioned depending on whether the object is grabbed with the left or right controller, controlled by the \texttt{CompareTag} method.
 
 \begin{lstlisting}[language=C++, caption={Partial Fragment of objects onGrab and onRelease events.}, label={lst:grab_release},float]
-     
-    private void OnGrab(SelectEnterEventArgs args)
+private void OnGrab(SelectEnterEventArgs args)
+{
+    transform.localScale = zoomScale; // Zoom the object 
+    // Disable all colliders 
+    args.interactableObject.colliders.ForEach(collider =>{collider.enabled = false;});
+    ...
+    var interactor = args.interactorObject.transform;
+    // Adjust the slider bar position based on the controller
+    if (interactor.CompareTag("left")) 
     {
-        transform.localScale = zoomScale;
-        args.interactableObject.colliders.ForEach(collider => { collider.enabled = false; });
-        ...
-        var interactor = args.interactorObject.transform;
-        if (interactor.CompareTag("left")) 
-        {
-            follow.targetOffset = new Vector3(sliderRightxPos, follow.targetOffset.y, follow.targetOffset.z);
-        }
-        else if (interactor.CompareTag("right")) 
-        {
-            follow.targetOffset = new Vector3(sliderLeftxPos, follow.targetOffset.y, follow.targetOffset.z);
-        }
+        follow.targetOffset = new Vector3(sliderRightxPos, follow.targetOffset.y, follow.targetOffset.z);
     }
+    else if (interactor.CompareTag("right")) 
+    {
+        follow.targetOffset = new Vector3(sliderLeftxPos, follow.targetOffset.y, follow.targetOffset.z);
+    }
+}
+private void OnRelease(SelectExitEventArgs args)
+{
+    transform.localScale = originalScale; // Restore the original scale
 
-    private void OnRelease(SelectExitEventArgs args)
+    // Re-enable all colliders except if the user is inside the tomb
+    args.interactableObject.colliders.ForEach(collider =>{collider.enabled = true;});
+    if (r.isInsideTomb) 
     {
-        transform.localScale = originalScale;
-        args.interactableObject.colliders.ForEach(collider => { collider.enabled = true; });
-        ...
-        if (r.isInsideTomb)
-        {
-            StartCoroutine(DisableColliderRoutine(5f));
-        }
-        ...
+        StartCoroutine(DisableColliderRoutine(5f));
     }
+    ...
+}
 \end{lstlisting}
 
 
@@ -558,7 +554,7 @@ An exception occurs when the user is inside the tomb. In this case, the funerary
 The user can navigate in the environment with the controllers. 
 These allow two modes of movement: continuous walking, which simulates real-world locomotion, and teleportation, providing a faster way to reposition within the scene.
 
-There are two types of teleportation available in the environment. The first allows the user to teleport freely to any position on the environment’s ground plane (default \emph{Teleportation Area} component). The second restricts teleportation to specific points of interest, marked with blue icons (anchors).
+There are two types of teleportation available in the environment. The first allows the user to teleport freely to any position on the environment’s ground plane (default \emph{Teleportation Area} component). The second restricts teleportation to specific \gls{POI}, marked with blue icons (anchors).
 
 In addition to locomotion, users can switch their perspective inside the environment, using the controllers, moving laterally with the right joystick.
 Both continuous movement and snap turning can also be performed physically, without controllers, within the limits of the real-world space.
@@ -572,32 +568,33 @@ Depending on the context, gravity may either be applied or disabled. When active
 
 \begin{lstlisting}[language=C++, caption={Recenter user position method.}, label={lst:recenter},float]
 void UpdateCharacterHeight()
-{
+{    // Calculate camera position from world to local space
     Vector3 center = transform.InverseTransformPoint(origin.Camera.transform.position);
+    // Update the character controller's center 
     character.center = new Vector3(center.x, center.y, center.z);
 }
 \end{lstlisting}
 
 
 \begin{lstlisting}[language=C++, caption={Apply costum gravity method.}, label={lst:gravity},float]
-  private void ApplyCustomGravity()
-  {
-      Vector3 current = origin.Camera.transform.localPosition;
-      Vector3 delta = current - previousCamPos;  // movement since last frame
-      velocityY = delta.y;
+private void ApplyCustomGravity()
+{
+    Vector3 current = origin.Camera.transform.localPosition;
+    Vector3 delta = current - previousCamPos;  // Movement since last frame
+    velocityY = delta.y;
 
-      if (character.isGrounded) //check if user is currently touching the ground plan
-      {
-          velocityY = 0f;
-      }
-      else
-      {
-          velocityY += Physics.gravity.y * Time.deltaTime* gravityMultiplier; // Apply custom gravity 
-      }
-      Vector3 move = new Vector3(delta.x, velocityY, delta.z);
-      character.Move(move * Time.deltaTime); // update user movement
-      previousCamPos = current; // update previous camera position for next frame
-  }
+    if (character.isGrounded) // Check if user is currently touching the ground plan
+    {
+        velocityY = 0f;
+    }
+    else
+    {   // Apply custom gravity 
+        velocityY += Physics.gravity.y * Time.deltaTime* gravityMultiplier;
+    }
+    Vector3 move = new Vector3(delta.x, velocityY, delta.z);
+    character.Move(move * Time.deltaTime); // update user movement
+    previousCamPos = current; // update previous camera position for next frame
+}
 \end{lstlisting}
 
 \subsection{Tomb Navigation Logic}
@@ -636,26 +633,26 @@ In Figure \ref{fig:tomb_outside}, the outside view of the tomb is depicted. As i
 \begin{lstlisting}[language=C++, caption={Plan Removal approach in Update method().}, label={lst:plan_removal},float]
  void Update()
  {
-     if (excavation_model.activeSelf) //check if funerary model is active
+     if (excavation_model.activeSelf) // Check if funerary model is active
      {
          if (camara.position.x >= x_min && camara.position.x <= x_max && camara.position.z <= z_max && camara.position.z >= z_min && camara.position.y <= y_max && camara.position.y >= y_min)
          {
-            if(toggle_UI.firstactive) //deactivate the plan if inside the tomb area
+            if(toggle_UI.firstactive) // Deactivate the plan if inside the tomb area
                  plane.SetActive(false);
             else plane2.SetActive(false);
 
             if(camara.position.y <= plane.transform.position.y + 0.4f) 
-                 mausoleu.SetActive(false); //disable mausoleum collider so the user can fall inside the tomb without colliding
+                 mausoleu.SetActive(false); //Disable mausoleum/funerary collider so the user can fall inside the tomb without colliding
              isInsideTomb = true;
          }
          else
          {
-             if (toggle_UI.firstactive) //reactivate the plan if outside the tomb area
+             if (toggle_UI.firstactive) // Reactivate the plan if outside the tomb area
                  plane.SetActive(true);
              else
                  plane2.SetActive(true);
              isInsideTomb = false;
-             mausoleu.SetActive(true); //reactivate mausoleum collider 
+             mausoleu.SetActive(true); // Reactivate mausoleum collider 
          }
      }
  }
@@ -679,28 +676,27 @@ void Update()
     var camara = Camera.main.transform;
     if (!isInside && cam.transform.localPosition.y != new_y)
     {
-        camPosbefore = cam.transform.localPosition; //position before entering the tomb
+        camPosbefore = cam.transform.localPosition; // Position before entering the tomb
     }
     if (!plane.activeSelf && camara.position.x >= x_min && camara.position.x <= x_max && camara.position.z <= z_max && camara.position.z >= z_min && camara.position.y <= y_max && camara.position.y >= y_min) //check if position inside the tomb
     {
         isInside = true;
-        mausoleu_collider.SetActive(false); //deactivate funerary collider
-        cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, new_y, cam.transform.localPosition.z); //user replaced to a lower position
+        mausoleu_collider.SetActive(false); // Deactivate funerary collider
+        cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, new_y, cam.transform.localPosition.z); //User replaced to a lower position
     }
     else
     {
         isInside = false;
-        mausoleu_collider.SetActive(true);
-        cam.transform.localPosition = camPosbefore;
+        mausoleu_collider.SetActive(true); // Reactivate the funerary/mausoleum collider
+        cam.transform.localPosition = camPosbefore;  // Reset the user's position
     }
 }
-
 \end{lstlisting}
 %Essential Stages/Steps
 \section{Key Techniques}
 \label{sec:techniques}
 This section describes the main techniques implemented during the development process. 
-The first two techniques focus on optimizing \gls{UX} and improving system performance by significantly reducing the complexity of the funerary model, while preserving essential detail. 
+The first two techniques focus on optimizing User Experience (\gls{UX}) and improving system performance by significantly reducing the complexity of the funerary model, while preserving essential detail. 
 The last two techniques detail the methodologies used to generate the glass material and the funerary \gls{3D} model.
 \subsection{Light Technique}
 There is a main directional light that illuminates the entire environment, simulating reality. 
@@ -744,7 +740,7 @@ The final glass texture exemplifying one object is illustrated in Figure \ref{fi
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{Implementation/glass_1}
-    \caption{Glass Texture of Object with ID 21684.}
+    \caption{Glass Texture of Object with \gls{ID} 21684.}
     \label{fig:glass1}
 \end{figure}
 
@@ -777,33 +773,24 @@ Finally, the model was exported in \texttt{.obj} format, and grouped with \textt
 \section{Testing and Debugging}
 \label{sec:testing}
 
-One of the most relevant features during the development phase on controller support was the \textbf{XR Device Simulator} included in XR Interaction Toolkit. 
-This utility allowed for testing \gls{VR} interactions without the need for a physical \gls{HMD}. 
+One of the most relevant features during the development phase on controller support was the \textbf{\gls{XR} Device Simulator} included in \gls{XR} Interaction Toolkit. 
+This utility allowed for testing \gls{VR} interactions without the need for a physical Head-Mounted Display (\gls{HMD}). 
 It simulated input from \gls{VR} controllers using a standard mouse and keyboard. 
-Despite its usefulness along this dissertation, it's important to note that certain interactions did not behave identically compared to testing with the actual headset.
+Despite its usefulness in this dissertation, it's important to note that certain interactions did not behave identically compared to testing with the actual headset.
 
-During the development, the functionalities within the environment were tested in real-time using the \emph{MetaLink} app. However, when connected via Wi-Fi, the environment did not load correctly. This issue was resolved by employing a wired connection.
-
-Additionally, debugging was performed with the Visual Studio debugger and Android Debug Bridge (adb). 
-This second tool enabled a in-depth troubleshooting and the identification of issues in the interaction with the headset by accessing detailed system logs through the \texttt{adb logcat} command. The logs proved useful for tracing errors and understanding their source during testing.
-
+During development, the functionalities within the environment were tested in real-time using the \emph{MetaLink} app. However, when connected via Wi-Fi, the environment did not load correctly. This issue was solved using a wired connection.
+Additionally, Debugging was performed with Visual Studio debugger and Android Debug Bridge (adb), which enabled in-depth troubleshooting and identification of headset interaction issues by accessing detailed system logs through the \texttt{adb logcat} command. The logs proved useful for tracing errors and understanding their source during testing.
 
 \section{Conclusions}
 \label{sec:impl_discussion}
+The implementation began with generating the funerary enclosure model, which was later integrated into the Unity environment. The model was positioned on the map, and functionalities such as \gls{3D} model visualization and map navigation were implemented according to the requirements outlined in Section \ref{sec:requirements}. Users can grab objects and interact with a panel menu that displays data retrieved from the database. A dedicated database stores significant artefact and excavation data, updated as development progresses. 
+For interaction inside the tomb, two glass objects were selected as the primary focus.
 
-The implementation began with the generation of the funerary enclosure model.
-Subsequently, the map was integrated into the Unity environment, initially empty.
-Then, the model of the funerary enclosure was positioned on the map.
-Following, the functionalities were implemented, such as \gls{3D} model visualization and map navigation, in accordance with the requirements outlined in Section \ref{sec:requirements}. 
-Users can also grab objects, and interact with panel menus that displayed data retrieved from the database. 
-A database was created to store significant data, including artefact and excavation data, with updates during development when needed. For interaction inside the tomb, two glass objects were chosen as the primary focus.
-
-To enable communication between Unity and the database, a backend was implemented. Unity sent requests to the backend, which then queried the database and returned the requested information. 
-A \emph{dropdown menu} was created in the \gls{VE} to fulfill requirement "Contextual Overlay", allowing the user to select an artefact ID and access the corresponding textual and visual data. 
-Two request types were defined: (i) retrieval of all available ID from the "object" table, and (ii) retrieval of associated textual and image data, combining information from the "object" and "object\_intervention" tables.
-For the layer toggle requirement, a photograph of the actual site was integrated, providing a stronger sense of presence for the user. Perspective switching was supported through photographs provided by specialists of the funerary enclosure architecture materials. 
-
-The artefact reconstruction requirement was simplified: instead of reconstructing fragmented models, an illustration of the original object texture was simulated through the \emph{Object Slider} functionality.
-As a result, users could enter the tomb and experience an immersive interaction with two glass relics, fulfilling the requirements of the \gls{VR} environment. Additional points of interest were distributed across the map to enrich the user experience.
-
-Each functionality was tested individually, which was useful for correcting errors. After implementation, system testing evaluated the usability of the functionalities implemented to accomplish these requirements.
+To enable communication between Unity and the database, a backend \gls{API} was implemented. Unity sends requests to the backend, which then queries the database and returns the requested information. 
+A \emph{dropdown menu} was created in the \gls{VE} to fulfill the "Contextual Overlay" requirement, allowing users to select an artefact \gls{ID} and access the corresponding textual and visual data. 
+This feature is supported by two request types: (i) retrieval of all available \glspl{ID} from the "object" table, and (ii) retrieval of associated textual and image data, by combining information from the "object" and "object\_intervention" tables.
+The layer toggle functionality integrates a photograph of the actual site, providing a stronger sense of presence for the user. The perspective switching feature utilizes an image of the funerary enclosure wall materials.
+For artefact reconstruction, a simplified approach was adopted: instead of reconstructing fragmented models, the system simulates the original object texture through the \emph{Object Slider} functionality.
+The resulting implementation enables users to enter the tomb and experience an immersive interaction with two glass relics. Additional \gls{POI} were distributed across the map, enhancing the user experience.
+Finally, each functionality was tested individually, which facilitated the identification and correction of errors during development.
+%After implementation, system testing evaluated the usability of the functionalities implemented to accomplish these requirements.Persp
