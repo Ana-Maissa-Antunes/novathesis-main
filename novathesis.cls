@@ -636,7 +636,7 @@
 \newdata{dissertationstringfont}
 
 \newdata{copyrighttextstring}
-\newdata{acknowledgmentsstring}
+%\newdata{acknowledgmentsstring}
 
 \newdata{majorfield}
 \newdata{minorfield}
@@ -2567,12 +2567,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Copyright page
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\ntprintacknowledgementsblock}[1][\scriptsize]{%
-    \NTRunHook{acknowledgementsblock/pre}%
-    \noindent\parbox{\linewidth}{%
-    \vspace*{2.5ex}\footnoterule#1\theacknowledgmentsstring(\@LANG@MAIN)}
-    \NTRunHook{acknowledgementsblock/post}%
-}
 
 \newcommand*{\ntprintcopyright}{%
   \iftoggle{/novathesis/print/copyright}{%
@@ -2583,7 +2577,6 @@
         \NTRunHook{copyright/pre}%
         \ntprintcopyrightpage%
         \NTRunHook{copyright/post}%
-        \ntprintacknowledgementsblock%
         \clearforchapter%
       \endgroup
     }{}%

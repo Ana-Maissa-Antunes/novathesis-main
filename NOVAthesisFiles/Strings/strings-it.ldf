@@ -109,4 +109,3 @@
 
 \copyrighttextstring(it)={La \theschool(\@LANG@COPYRIGHT)\ e \theuniversity(\@LANG@COPYRIGHT)\ hanno il diritto perpetuo e senza limiti geografici, di archiviare e pubblicare questa tesi attraverso esemplari stampati in formato cartaceo o digitale, o attraverso qualsiasi altro mezzo consciuto o che possa essere inventato, e di disseminare tramite repositori scientifici e permettere la sua copia e distribuzione per scopi non commerciali, didattici o di ricerca, a patto che sia dato credito all'autore e editore.}
 
-\acknowledgmentsstring(it)={Questo documento é stato creato usando (pdf/Xe/Lua)\LaTeX\ e il modello \href{https://github.com/joaomlourenco/novathesis}{NOVAthesis} (v\novathesisversion)~\@ntcite{novathesis-manual}.}

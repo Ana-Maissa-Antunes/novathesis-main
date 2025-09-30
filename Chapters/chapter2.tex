@@ -23,7 +23,7 @@ The last two sections address important standards, and documentation principles 
 
 This section covers the fundamental concepts for integrating digital tools to visualize and preserve artefacts during archaeological studies.
 
-\subsection{Digital Cultural Heritage \gls{DCH}}
+\subsection{Digital Cultural Heritage (\gls{DCH})}
 \label{sec:digital_heritage}
 
 \gls{CH} includes monuments, sites, landscapes, skills, practices, knowledge, and expressions of human creativity~\cite{eu_cultural_heritage}. Collections preserved and managed by public and private bodies - such as museums, libraries and archives - and film heritage are also part of \gls{CH}. 
@@ -291,7 +291,7 @@ By capturing two or more images photos of the same object but taken from differe
 Multi-image photogrammetry is an advanced technique that combines large groups of images to create detailed \gls{3D} models~\cite{mccarthy2014multi}. The process begins with image acquisition, followed by importing 
 the images into specialized software that automatically detects and matches correlated features. This step can be highly time-consuming and demand computer power for large datasets. 
 Once matching points are identified, the software calculates their spatial relationships, producing a sparse \gls{3D} point cloud that outlines the subject’s shape, as shown in Figure \ref{fig:photo2}. 
-Finally, the software refines this sparse model by reanalyzing the images to generate a much denser point cloud, similar to those produced by laser scanners.
+Finally, the software refines this sparse model by reanalysing the images to generate a much denser point cloud, similar to those produced by laser scanners.
 
 
 \begin{figure}[h!]
@@ -308,7 +308,7 @@ may lie in its ability to facilitate community engagement in archaeological docu
 This approach enables the efficient creation of interactive \gls{3D} models, allowing the public to engage with heritage sites
 in a more immersive way than traditional static representations such as site plans and sectional drawings. 
 
-\subsection{Light Detection And Ranging (\gls{lidar})}
+\subsection{Light Detection and Ranging (\gls{lidar})}
 \label{sec:lidar}
 
 \gls{lidar} sensors enable precise \gls{3D} sensing of objects and are widely used in metrology, environment monitoring, archaeology, and robotics~\cite{li2022progress}.
@@ -401,7 +401,7 @@ A map of just the water pumps or incidences of cholera would have been of little
 \subsection{GIS Applications in Archaeology}
 \label{sub:gis_archeology}
 
-The application of \gls{GIS} in archaeology has brought about a transformative shift, equipping archaeologists with powerful tools to collect, analyze, 
+The application of \gls{GIS} in archaeology has brought about a transformative shift, equipping archaeologists with powerful tools to collect, analyse, 
 and visualize geospatial data from archaeological sites~\cite{yao2023overview}. 
 Since 2000, \gls{GIS} has been employed for complex spatial analyses, including landscape analysis and site distribution patterns. 
 The development of the \gls{3D} \gls{GIS} technology allowed the reconstruction of ancient \gls{CH} sites in \glspl{VE}, thereby providing engaging experiences while visualizing heritage monuments at archaeological sites.
@@ -415,7 +415,7 @@ discovery of what is believed to be the Mayan site of Ciudad Blanca in Honduras~
 
 With advancements in \gls{3D} graphics, high-resolution rendering, artificial intelligence, and \gls{3D} printing, those methodologies have progressively found widespread application in the preventive protection and restoration of cultural artefacts. 
 In archaeology, \gls{GIS} is essential for managing spatial data, often integrating spatial databases, such as PostgreSQL\footnote{\url{https://www.postgresql.org/}}/PostGIS\footnote{\url{https://postgis.net/}} or Oracle Spatial\footnote{\url{https://www.oracle.com/database/spatial-database}} for efficient data storage and querying.
-Moreover, software such as ArcGIS Pro\footnote{\url{https://www.esri-portugal.pt/pt-pt/arcgis/produtos/arcgis-pro}} or QGIS\footnote{\url{https://qgis.org/}} is used to visualize, analyze, and interpret this data. These \glspl{GIS} process archaeological data following specific data standards and protocols.
+Moreover, software such as ArcGIS Pro\footnote{\url{https://www.esri-portugal.pt/pt-pt/arcgis/produtos/arcgis-pro}} or QGIS\footnote{\url{https://qgis.org/}} is used to visualize, analyse, and interpret this data. These \glspl{GIS} process archaeological data following specific data standards and protocols.
 
 \section{Heritage Metadata Standards and Documentation} 
 \label{sub:standart}
@@ -484,11 +484,11 @@ This includes the use of digital representations such as \gls{3D} models of glas
 This dissertation is strongly grounded in the concept of \gls{DCH}, understood as the digital representation of cultural assets in forms such as images, texts, and \gls{3D} models (Figure \ref{fig:ch_objects}). 
 Within this context, the \gls{DT} emerges as a highly relevant paradigm, offering a dynamic way to mirror physical artefacts and environments. 
 
-Interaction and visualization techniques, such as ray-based selection and menu-driven interface (Figure \ref{fig:human_interaction}), were essential to user engagement. These techniques allowed users to manipulate objects, navigate menus, and interact with the \gls{VE} intuitively. While manipulation was limited to rotation and positioning, excluding transformations such as scaling or zooming, the implemented interactions ensured that users could meaningfully engage with the artifacts.
+Interaction and visualization techniques, such as ray-based selection and menu-driven interface (Figure \ref{fig:human_interaction}), were essential to user engagement. These techniques allowed users to manipulate objects, navigate menus, and interact with the \gls{VE} intuitively. While manipulation was limited to rotation and positioning, excluding transformations such as scaling or zooming, the implemented interactions ensured that users could meaningfully engage with the artefacts.
 These interaction techniques depended directly on the input/output devices employed. Controllers served as the primary input device, supporting the four \gls{VE} task categories outlined in Section \ref{sec:input_devices}: selection, manipulation, travel, and system control. For example, selection was used both to grasp artefacts and to interact with \gls{UI} elements; travel was enabled through teleportation and continuous locomotion; and system control allowed users to position objects in the environment when released. 
 The \emph{Meta Quest 3} headset, regarding the ones studied in this chapter, was the modern output device used, with a high-quality immersive display crucial for user testing.
 
-Photogrammetry was applied to generate \gls{3D} models of glass artifacts and the funerary enclosure. Although \gls{lidar} scanning was not explored due to time constraints, it remains a possibility for future developments. Artefact reconstruction also played a significant role, with specialists producing \gls{2D} documentation of interventions such as cleaning and restoration. These reconstructed elements can be explored in digital analysis.
+Photogrammetry was applied to generate \gls{3D} models of glass artefacts and the funerary enclosure. Although \gls{lidar} scanning was not explored due to time constraints, it remains a possibility for future developments. Artefact reconstruction also played a significant role, with specialists producing \gls{2D} documentation of interventions such as cleaning and restoration. These reconstructed elements can be explored in digital analysis.
 
 The project integrated a database to organize object data, including identifiers, locations, functions, and conservation states. While geospatial data storage was prepared with Postgres' "location" table, it was not yet applied in practice due to time constraints. Nevertheless, the system was deliberately designed for scalability, ensuring compatibility with future enhancements. Standards and documentation, although only briefly considered, remain essential for ensuring the long-term sustainability of cultural heritage digitization.
 

@@ -42,7 +42,7 @@ First, a brief introduction of the project was presented, followed by an explana
 Before using the headset, the participants completed a personal questionnaire for statistical user analysis. 
 Prior to the test, the usage of the controllers and main buttons was explained. 
 Subsequently, the participants put on the \gls{HMD} and used the right and left controllers. 
-Then, the users were asked to complete a set of predefined tasks for the experience, which were:
+Then, the users were asked to complete a set of predefined tasks for the experience, and were guided though this order:
 
 \begin{enumerate}
 \item{Try walking in continuous motion and/or teleporting in the environment.}
@@ -98,7 +98,7 @@ This setup allowed users to be guided through the intended tasks and to receive 
 
 \section{Tests Results}
 \label{sec:results}
-This section is organized into three subsections to present and analyze the results. 
+This section is organized into three subsections to present and analyse the results. 
 The first subsection, "User Analysis," presents statistical information about the participants. 
 The second, "Tasks Difficulty and Feedback," reports their perceptions after completing the tasks. 
 In addition, the \gls{PQ} and \gls{UEQ} were employed to evaluate the sense of presence and overall experience. 
@@ -137,7 +137,7 @@ There is a balanced gender distribution as we can see in Figure \ref{fig:gender}
 \end{figure}
 
 In the pie chart of Figure \ref{fig:education}, the educational degrees of the participants is depicted. 
-The distribution indicates a predominance of higher education (bachelor, master, and doctorate degees), whereas only a small proportion of participants reported lower levels of education.
+The distribution indicates a predominance of higher education (bachelor, master, and doctorate degrees), whereas only a small proportion of participants reported lower levels of education.
 
 
 \begin{figure}[h!]
@@ -179,9 +179,6 @@ As illustrated in Figure \ref{fig:VR_experience}, it is evident that the majorit
      \label{fig:hertiage_techs}
 \end{figure}
 \FloatBarrier
-
-%From the two represented distributions represented in Figure \ref{fig:hertiage_techs} of using and developing techologies related to heritage, that they have opposite results. The majority of the participants have used these tecnologies, while only a small quantity has developed.
-%In this case, the most important thing for evaluation is the use, which will be who will actually use the developed system, while the developers are useful to give more technical feedback, or suggestions for improvements in terms of efficiency, for example.
 The two distributions in Figure \ref{fig:hertiage_techs} show a clear disparity between participants' experiences in using and developing digital heritage technologies. Most participants (19) report having some experience as users, generally clustering around moderate levels (ratings 1–2). 
 In contrast, almost all participants (18) report no development experience.
 For evaluation purposes, the key factor is the intended use of the system. Developers remain valuable mainly for offering technical feedback and suggestions for improvements, such as efficiency.
@@ -210,7 +207,20 @@ This segment of questions was answered immediately after the users completed the
 The first question in this section used a 5-point Likert scale to measure the perceived difficulty of each task, providing insights that may support future improvements or adjustments to the \gls{UI}.
 The second and final question in this section presented a list of ten statements, tailored to the evaluation of this environment, which users rated on a 5-point Likert scale according to their level of agreement.
 This helps to capture more specific perceptions regarding each relevant functionality and the overall experience within the environment.
-%\subsection{General Feedback}
+
+The tasks represented in the graph correspond to the specific actions evaluated:
+
+\begin{enumerate}[label=T\arabic* --]
+    \item Viewing object's textual information
+    \item Viewing the image gallery
+    \item Grabbing and manipulating artifact
+    \item Access to the main menu
+    \item View object original appearance
+    \item Move around the environment
+    \item Access a point of interest
+    \item Change the base (ground) plan
+\end{enumerate}
+
 
 \begin{figure}[h!]
     \centering
@@ -221,15 +231,24 @@ This helps to capture more specific perceptions regarding each relevant function
 
 Analyzing the graph in Figure \ref{fig:diffculty}, we can observe the overall ease of completing the tasks.
 The results indicate that the most difficult task was T4 – "Access to the main menu", likely because participants did not remember that it required pressing the back button on the right controller. 
-Task T5 – "View original appearance of the object with the slider", also presented difficulty, possibly due to the diffculty of interacting with the slider bar. 
+Task T5 – "View object original appearance" with the slider, also presented difficulty, possibly due to the diffculty of interacting with the slider bar. 
 It is important to note that this issue was later improved by making the entire slider bar visible and removing the need sometimes to cross the arms to move it. 
 This improvement is further explained in Section \ref{sec:improvements}.
 
-% The results demonstrate
-% It IS POSSIBLE TO OBSERVE
-%tHE RESULTS INDICATE
-%tHE VALUES DENOTE
-%SHOWS
+The statements used to evaluate the tasks-related experience are as follows:
+
+\begin{enumerate}[label=S\arabic* --]
+    \item Exploration inside the tomb was intuitive
+    \item Exploration outside the tomb was intuitive
+    \item Navigation to points of interest was clear and accessible
+    \item The slider was effective in showing object transformation over time
+    \item I clearly distinguish between the artifact's original and restored state
+    \item The information provided helped me better understand the artifact
+    \item The experience contributed to a better understanding of the site
+    \item The experience helped me better understand the presented artifacts
+    \item The experience provoked a sense of presence in the historical site
+    \item The tasks had a clear purpose and were easy to interpret
+\end{enumerate}
 
 \begin{figure}[h!]
     \centering
@@ -243,7 +262,6 @@ This improvement is further explained in Section \ref{sec:improvements}.
 The results shown in Figure \ref{fig:overview} indicate a general agreement among users with the statements concerning their interaction, exploration, and navigation within the environment.
 In particular, statements 4, 5, and 6 received the highest levels of agreement, regarding the effectiveness of the slider in displaying transformations and the engagement of the information provided about the objects.
 The median values of all statements range between 4 and 5, highlighting a very positive outcome.
-%highlighting ou which
 
 \subsection{Presence Questionnaire (PQ)}
 
@@ -252,6 +270,22 @@ The evaluation of presence was conducted using the Portuguese validated version 
 The original Presence Questionnaire by Witmer et al. \cite{10.1162/105474698565686} consists of thirty-two questions, covering four major factor categories: Control, Sensory, Distraction, and Realism.
 In the translated version, ten of the twenty-one validated and translated questions were selected, as they were considered the most relevant for this research. 
 Questions addressing less important topics, such as sounds during the experience, were excluded. This questionnaire section was applied using a 5-point Likert scale.
+
+The ten questions select are the folowing:
+
+\begin{enumerate}[label=Q\arabic* --]
+    \item How natural did your interactions with the environment seem?
+    \item How much did the visual aspects of the environment involve you?
+    \item How much did your experiences in the virtual environment seem consistent with your real world experiences?
+    \item How well could you actively survey or search the virtual environment using touch?
+    \item How involved were you in the virtual environment experience?
+    \item How proficient in moving and interacting with the virtual environment did you feel at the end of the experience?
+    \item How completely were your senses engaged in this experience?
+    \item Were there moments during the virtual environment experience when you felt completely focused on the task or environment?
+    \item How easily did you adjust to the control devices used to interact with the virtual environment?
+    \item Was the information provided through different senses in the virtual environment (e.g., vision, touch, hearing) consistent?
+\end{enumerate}
+
 
 \begin{figure}[h!]
     \centering
@@ -265,7 +299,7 @@ Figure \ref{fig:PQ} represents the participants’ sense of presence during this
 It is interesting to note that Q6 – "How proficient in moving and interacting with the virtual environment did you feel at the end of the experience?" – shows that quartiles 1, 2, and 3 coincide at the value 4. 
 This indicates a very strong consensus among participants, with at least 50\% reporting good navigation and understanding of the environment after the experience, reflected in a median score of 4 out of 5. 
 Overall, most participants rated their proficiency as 4, showing strong agreement, with only a few outliers providing lower or higher ratings.
-%adiciono questoes 5 e 8 que comprovam  sentimento de imersividade, sem outliers
+
 \subsection{User Experience Questionnaire (UEQ-S)}
 
 The overall user experience was measured using the Portuguese version of the User Experience Questionnaire\footnote{\url{https://www.ueq-online.org/}}, constructed by Laugwitz et al. \cite{inproceedings}, and translated by Cota et al. \cite{article_t}.
@@ -273,9 +307,6 @@ The overall user experience was measured using the Portuguese version of the Use
 The UEQ-S is the short version of the User Experience Questionnaire (UEQ), comprising a list of eight items selected from the original twenty-six. \cite{article_ueq}. These items are grouped into two meta-dimensions, found in Annex \ref{ann:quality_dimensions}: pragmatic quality and hedonic quality, each containing four items.
 In addition, the mean value across all items is reported as an overall \gls{UX} score.
 The questionnaire is structured around pairs of contrasting attributes that may describe the system. Participants provide their evaluation on a seven-point scale, where each circle represents a gradation between the two opposites.
-%is based on
-
-%These pairs address five factors: Attractiveness, Perspicuity, Dependability, Efficiency, Novelty, and Stimulation.  
 
 \begin{figure}[h!]
     \centering
@@ -321,14 +352,14 @@ The statements correspond to the ones used on the y-axis of Figure \ref{fig:over
 Those are: 
 
 \begin{itemize}
-  \item S5 - I clearly distinguish between the artifact's original and restored state.
-  \item S6 - The information provided helped me better understand the artifact.
+  \item S5 - I clearly distinguish between the artefact's original and restored state.
+  \item S6 - The information provided helped me better understand the artefact.
   \item S7 - The experience contributed to a better understanding of the site.
-  \item S8 - The experience helped me better understand the presented artifacts.
+  \item S8 - The experience helped me better understand the presented artefacts.
   \item S9 - The experience provoked a sense of presence in the historical site.
 \end{itemize}
 
-In general, as represented above, specialists provided a better average score to the statements, except statement 5, presumably due to the greater critical demand of professionals who have direct experience with artifacts in the field of conservation and restoration.
+In general, as represented above, specialists provided a better average score to the statements, except statement 5, presumably due to the greater critical demand of professionals who have direct experience with artefacts in the field of conservation and restoration.
 
 \begin{figure}[h!]
      \centering
