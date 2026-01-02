@@ -60,9 +60,9 @@ The \textbf{UnityWebRequest} class was used to send HTTP requests to the Node.js
 
 To acquire the desired data retrieval, only three data structures were required:  
 \begin{enumerate}
-    \item \textbf{Artifact} – representing an individual artefact and containing all attributes from the \texttt{artifact} table described in Chapter \ref{cha:system_design}, Section \ref{sec:database}.  
-    \item \textbf{Dimensions} – a substructure of \textbf{Artifact}, storing three measurements: weight, height, and width.  
-    \item \textbf{Artifact List} – a collection of \textbf{Artifact} structures to manage multiple objects retrieved from the database.  
+    \item \textbf{Artefact} – representing an individual artefact and containing all attributes from the \texttt{artefact} table described in Chapter \ref{cha:system_design}, Section \ref{sec:database}.  
+    \item \textbf{Dimensions} – a substructure of \textbf{Artefact}, storing three measurements: weight, height, and width.  
+    \item \textbf{Artefact List} – a collection of \textbf{Artefact} structures to manage multiple objects retrieved from the database.  
 \end{enumerate}
 % The structures required to retrieve the desired object attributes are represented in Listing \ref{lst:structure}.
 
@@ -102,8 +102,8 @@ To acquire the desired data retrieval, only three data structures were required:
 \subsubsection{Dropdown Options Retrieval}
 \label{sec:options}
 
-This implementation retrieves all the \glspl{ID} of the available artefacts, to fulfill the requirement of the user to view the desired object's textual and image information.  
-The artefacts returned from the database are stored in a list structure, which is then iterated to populate the dropdown \texttt{options} list, as illustrated in Listing~\ref{lst:artifact_ids}.
+The dropdown options retrieval mechanism is responsible for retrieving the \glspl{ID} of all available artefacts from the database.
+These artefacts are stored in a list structure, which is then iterated to populate the dropdown \texttt{options} list, as illustrated in Listing~\ref{lst:artifact_ids}.
 
 \begin{lstlisting}[language=C++, caption={Method used to load artefact \glspl{ID} and define as options in the Dropdown.}, label={lst:artifact_ids},float] 
     IEnumerator GetOptionsIds(string url)
@@ -113,14 +113,14 @@ The artefacts returned from the database are stored in a list structure, which i
     ...
     if (www.result == UnityWebRequest.Result.Success)
     {
-        ArtifactList artifactList = JsonUtility.FromJson<ArtifactList>(wrappedJson);
+        ArtefactList artefactList = JsonUtility.FromJson<ArtefactList>(wrappedJson);
         
         List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
         ...
-        // Iterate through all artifacts and add their IDs to options List
-        foreach (Artifact artifact in artifactList.items)
+        // Iterate through all artefacts and add their IDs to options List
+        foreach (Artefact artefact in artefactList.items)
         {
-            string id = artifact.id.ToString();
+            string id = artefact.id.ToString();
             options.Add(new TMP_Dropdown.OptionData("     " + id));
         }
         dropdown.AddOptions(options);
@@ -137,7 +137,7 @@ The artefacts returned from the database are stored in a list structure, which i
 This method, shown in Listing \ref{lst:get_data}, retrieves all data of objects necessary to present in the \gls{VE}.  
 It sends a \texttt{GET} request to obtain the complete information, including images before and after objects intervention.  
 
-Additionally, textual data is retrieved. Once the request is successful, the JSON response is parsed into an \texttt{Artifact} object using Unity's \texttt{JsonUtility.FromJson<Artifact>()} method.  
+Additionally, textual data is retrieved. Once the request is successful, the JSON response is parsed into an \texttt{Artefact} object using Unity's \texttt{JsonUtility.FromJson<Artefact>()} method.  
 From this structure, the following relevant fields are extracted: \emph{id}, \emph{name}, \emph{material}, \emph{epoch}, \emph{provenance}, and \emph{dimensions}.  
 The \emph{dimensions} field is a nested JSON structure containing \emph{height}, \emph{width}, and \emph{weight}.  
 
@@ -148,16 +148,16 @@ Finally, a formatted string is created to display the object's details in the \g
 {   
     if (www.result == UnityWebRequest.Result.Success)
     {
-        artifact = JsonUtility.FromJson<Artifact>(www.downloadHandler.text);
+        artefact = JsonUtility.FromJson<Artefact>(www.downloadHandler.text);
 
         string displayText = "<b>Object Details:</b>\n\n";
-        // Build the final text with detailed artifact information
-            displayText += $"ID: {artifact.id} | Name: {artifact.name} \nMaterial: {artifact.material} | Epoch: {artifact.epoch} \nProvenance: {artifact.provenance}" +
-                        $"\nDimensions: {artifact.dimensions.height} x {artifact.dimensions.width} cm, Weight: {Mathf.Round(artifact.dimensions.weight * 10.0f) * 0.1f} g";
-        // Update the UI Panel with the artifact text details
+        // Build the final text with detailed artefact information
+            displayText += $"ID: {artefact.id} | Name: {artefact.name} \nMaterial: {artefact.material} | Epoch: {artefact.epoch} \nProvenance: {artefact.provenance}" +
+                        $"\nDimensions: {artefact.dimensions.height} x {artefact.dimensions.width} cm, Weight: {Mathf.Round(artefact.dimensions.weight * 10.0f) * 0.1f} g";
+        // Update the UI Panel with the artefact text details
         resultText.text = displayText;
-        // Call the function to load images before intervention of the artifact
-        GetImages(artifact.id, artifact.images_path_b_interv);
+        // Call the function to load images before intervention of the artefact
+        GetImages(artefact.id, artefact.images_path_b_interv);
     }
     ...
 }
@@ -405,9 +405,7 @@ float3 CalculateGlassLighting(SurfaceData surfaceData, InputData inputData, floa
     Light mainLight = GetMainLight(inputData.shadowCoord, inputData.positionWS, inputData.shadowMask);
     ...
     float3 specular = specularTerm * mainLight.color * _SpecularColor.rgb * surfaceData.smoothness;
-    ...
     float3 diffuse = lerp((surfaceData.albedo * mainLight.color * NdotL * 0.1),surfaceData.albedo, _BlendFactor);
-    ...     
     float3 environmentReflection = GlossyEnvironmentReflection(reflectionVector, 
         inputData.positionWS, surfaceData.smoothness, 1.0) * _ReflectionIntensity;
 
@@ -719,7 +717,7 @@ With these materials, a "Combined" texture was baked and imported to Unity as a 
 
  \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\linewidth]{Implementation/Glass_texture}
+    \includegraphics[width=0.76\linewidth]{Implementation/Glass_texture}
     \caption{Glass Material Nodes Blender.}
     \label{fig:glass_texture}    
 \end{figure}
@@ -745,13 +743,6 @@ The final glass texture exemplifying one object is illustrated in Figure \ref{fi
 \end{figure}
 
 
-% \begin{figure}[h!]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{Implementation/glass_2}
-%     \caption{Glass Texture of Object with ID 21676.}
-%     \label{fig:glass2}
-% \end{figure}
-
 \subsection{Generating the Funerary \gls{3D} Model}
 \label{sec:build_model}
 
@@ -765,14 +756,13 @@ Finally, the model was exported in \texttt{.obj} format, and grouped with \textt
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.7\textwidth]{model3}
+    \includegraphics[width=0.8\textwidth]{model3}
     \caption{\gls{3D} Model in Sketchfab.}
     \label{fig:model3}
 \end{figure}
 
 \section{Testing and Debugging}
 \label{sec:testing}
-
 One of the most relevant features during the development phase on controller support was the \textbf{\gls{XR} Device Simulator} included in \gls{XR} Interaction Toolkit. 
 This utility allowed for testing \gls{VR} interactions without the need for a physical Head-Mounted Display (\gls{HMD}). 
 It simulated input from \gls{VR} controllers using a standard mouse and keyboard. 

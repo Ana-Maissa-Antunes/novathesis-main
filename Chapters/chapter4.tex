@@ -9,14 +9,14 @@
 \typeout{NT FILE chapter4.tex}%
 \chapter{System Design}
 \label{cha:system_design}
-This chapter presents the overall design and conceptualization of the system developed. It begins in Section \ref{sec:requirements} with a description of the system requirements, followed by Section \ref{sec:tools} that introduces the technologies and tools adopted.
+This chapter presents the overall design and conceptualization of the system developed. It begins in Section \ref{sec:requirements} with a description of the implemented system requirements, followed by Section \ref{sec:tools} that introduces the technologies and tools adopted.
 Subsequently, an overview of the system architecture is analysed in Section \ref{sec:architecture} and the database structure is presented in Section \ref{sec:database}.
 Finally, it ends with a discussion of the implementation choices made, in Section \ref{sec:discussion_design}.
 
 \section{Requirements}
 \label{sec:requirements}
 
-This section describes the requirements of this dissertation, categorized into the following areas: Interactive Map, \gls{3D} Model Interaction, and Virtual Reality (\gls{VR}) environment.
+This section describes the implemented requirements of this dissertation, categorized into the following areas: Interactive Map, \gls{3D} Model Interaction, and Virtual Reality (\gls{VR}) environment.
 
 \subsection*{Interactive Map}
 A map of the Troia archaeological site to offer interactive functionalities.
@@ -29,7 +29,7 @@ A map of the Troia archaeological site to offer interactive functionalities.
 \subsection*{\gls{3D} Models \& Interaction}
 A focus on the interaction with \gls{3D} models, which are integrated into a \gls{VR} environment.
 \begin{itemize}
-    \item \textbf{Artifact Interaction:} Allows users to virtually manipulate the glass artefact models.
+    \item \textbf{Artefact Interaction:} Allows users to virtually manipulate the glass artefact models.
     \item \textbf{Contextual Overlay:} Display descriptive data about the artefact, such as its origin, period, and historical usage.
     \item \textbf{Reconstructed Models:} Showcase how artefacts would look originally (having in consideration characteristics such as: colourless glass, archaeological drawings and symmetry). 
     \item \textbf{3D Models Integration:} The user can zoom the map to visualize the perspective of a specific \gls{3D} model.
@@ -113,7 +113,7 @@ Each input action is activated as needed during runtime, offering adaptable inpu
 
 \subsection{Tools}
 \textbf{Blender}\footnote{\url{https://www.blender.org/}} is an open-source computer graphics software useful to a wide range of tasks, such as model, animate, create textures, materials. 
-This tool was used to create an aproximation of the original texture of the glass object. Originally transparent, translucent.
+This tool was used to create an approximation of the original texture of the glass object. Originally transparent, translucent.
 
 \textbf{GIMP}\footnote{\url{https://www.gimp.org/}}, an open-source cross-platform image editor, was used to edit the map draw for integration as ground in Unity (rotated and cropped).
 Additionally, GIMP was useful in editing the post-intervention object images. The object's images were cut out from their backgrounds, which were then replaced with a neutral grey. 
@@ -176,7 +176,7 @@ This deployment ensured that the server hosting the \gls{API} endpoints remained
 \section{Database Structure}
 \label{sec:database}
 
-The database consists of 11 tables that ensure the significant data of excavation and objects are stored. %All artefacts data, excavation details, and objects intervention data were stored within this repository.
+The database consists of 10 tables that ensure the significant data of excavation and objects are stored. %All artefacts data, excavation details, and objects intervention data were stored within this repository.
 The database model was designed considering future extensibility. Initially, it was structured to store significant data from the necropolis, including the funerary enclosure and tomb under study. The structure was generalized to improve scalability, flexibility to possibly include data, such as other tombs, associated objects, and aggregate the maximum information. 
 Throughout the thesis period, the database structure was continuously refined and restructured with new tables, relations, and data fields.
 

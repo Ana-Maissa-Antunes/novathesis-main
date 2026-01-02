@@ -107,7 +107,7 @@ Proper management of the information collected during documentation needs though
 In this context, researchers have increasingly regarded \gls{HBIM} as a valuable alternative.~\cite{jouan2020digital}.
 
 
-\section{Interaction and Visualization Tecnologies}
+\section{Interaction and Visualization Technologies}
 \label{sec:interaction_visualization}
 
 This section analyses virtual interactions from a technical perspective, and on the technologies used to create them.
@@ -140,7 +140,7 @@ multiple uses.
 
 
 Figure \ref{fig:human_interaction} above contains a set of \gls{SVIFT} interactors, including buttons, menus, and tabs
-that can be grabbed and moved (or bestow the grab and move ability to another object), constraint maintainers 
+that can be grabbed and moved (or grant the grab and move ability to another object), constraint maintainers 
 (e.g., keeping the manipulated object on a particular plane), and selectors. The image on the left is using a 
 ray selector interactor, while the figure on the right is using a poking selector.
 
@@ -155,23 +155,24 @@ This section presents the possible user interactions with \glspl{VE}, achieved t
 
 Common \gls{VE} input devices include \gls{6-DOF} trackers\footnote{\url{https://www.ar.rocks/glossary/6dof-tracking}} as exemplified in Figure \ref{fig:input_device}, gloves capable of recognizing continuous postures or discrete events, pen-like, simple button devices, as well as specialized tools such as the Spaceball or joysticks with force-feedback.
 
-In the next paragraphs, I will describe four common available VE task categories.
+The following paragraphs describe four common available \gls{VE} task categories.
 
-Selection is the process of specifying an object or set of objects for a particular action. 
+One fundamental interaction task is selection, which consists of specifying an object or set of objects for a particular action. 
 Most selection techniques can be categorized based on how an object is indicated, whether
 by touching it with a virtual hand, pointing at it, occluding it, encapsulating it within a volume, or 
 selecting it indirectly.
 
-Manipulation can be understood as the modification of an object’s attributes, such as its identifier, name, position, scale, or texture. These tasks are particularly significant in fields like design, prototyping, simulation, and entertainment, where environments frequently need to be adjusted by the user.
+Another important task is manipulation, understood as the modification of an object’s attributes, such as its identifier, name, position, scale, or texture. These tasks are particularly significant in fields like design, prototyping, simulation, and entertainment, where environments frequently need to be adjusted by the user.
 The design space for manipulation techniques is quite large. To provide a simple overview of the 
 techniques already developed in the design space, three categories are presented in the following—
 virtual hand, proxy, and indirect. 
 
-Travel, also called viewpoint motion control, is the most ubiquitous and common \gls{VE} interaction 
+A third major interaction task is travel, also called viewpoint motion control, and is the most ubiquitous \gls{VE} interaction 
 task. Consists simply of the user's movement inside the environment. Travel and wayfinding make up the task of navigation. 
 Most travel techniques can be categorized as physical locomotion, steering, automated, or manual manipulation. 
 Many of the other interactions found in \gls{VE} applications fall under the heading of system control. 
 
+In addition to these tasks, many other interactions found in \gls{VE} applications fall under the heading of system control.
 System control involves operations such as executing commands, changing modes, or modifying the system state. 
 The categories of system control techniques include virtual menus, voice commands, tools, and gesture-based interactions.
 
@@ -192,12 +193,11 @@ The user interaction with these last displays is very different, as shown in Fig
 Since semisurrounding \glspl{SID} rely on virtual rotations, applications for these displays should be designed to minimize the occurrence of such undesirable movements. 
 \glspl{HMD} that have a narrow \gls{FOV} require extensive head rotation in order for the user to see the entire environment. 
 
-%These active stereoscopic glasses are augmented with a constellation of reflective balls that clips onto the frame. The reflective balls work with video tracking that calculates the position of the glasses by triangulating on arrangement of the reflections.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.55\linewidth]{HMD1}
-    \caption{Stereoscopic glasses augmented with a constellation of reflective balls~\cite{SHERMAN2019258}.} 
+    \caption{\gls{CAVE} environment with multiple stereoscopic projection surfaces~\cite{SHERMAN2019258}.} 
     \label{fig:HMD1}
 \end{figure}
 
@@ -347,7 +347,7 @@ Different scanning techniques produce diverse types of scan outputs. For instanc
 
 \FloatBarrier
 
-\subsection{Artifacts Reconstruction}
+\subsection{Artefacts Reconstruction}
 \label{sec:reconstruction}
 
 Systems capable of automatically reconstructing objects from their fragments can greatly aid in the study of many civilizations~\cite{willis2008computational}.
@@ -445,7 +445,7 @@ Since 2006, \gls{CIDOC-CRM} has been recognized as an official ISO standard (\te
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\linewidth]{CIDOC_ISO21127}
-    \caption{Fundamental concepts of \texttt{ISO 21127}~\cite{doerr2007cidoc}}.
+    \caption{Fundamental concepts of \texttt{ISO 21127}~\cite{doerr2007cidoc}.}
     \label{fig:cidoc}
 \end{figure}
 
